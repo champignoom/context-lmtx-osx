@@ -1,0 +1,480 @@
+if not modules then modules = { } end modules ['lpdf-rul'] = {
+    version   = 1.001,
+    comment   = "companion to grph-rul.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- todo: split backend and pdf
+
+local tonumber, tostring, next, type = tonumber, tostring, next, type
+local concat, setmetatableindex = table.concat, table.setmetatableindex
+
+local attributes       = attributes
+local nodes            = nodes
+
+local bpfactor         = number.dimenfactors.bp
+
+local nuts             = nodes.nuts
+local ruleactions      = nuts.rules.ruleactions
+
+local getwhd           = nuts.getwhd
+
+local lefttoright_code = tex.directioncodes.lefttoright
+
+local mpcolor          = attributes.colors.mpcolor
+
+local trace_mp         = false  trackers.register("rules.mp", function(v) trace_mp = v end)
+
+local report_mp        = logs.reporter("rules","mp")
+
+local floor            = math.floor
+local getrandom        = utilities.randomizer.get
+local formatters       = string.formatters
+
+local setdimen         = tex.setdimen
+local isdimen          = tex.isdimen
+local setmacro         = tokens.setters.macro
+
+local codeinjections   = backends.registered.pdf.codeinjections
+
+local d_rule_width  = isdimen("d_rule_width")
+local d_rule_height = isdimen("d_rule_height")
+local d_rule_depth  = isdimen("d_rule_depth")
+local d_rule_h      = isdimen("d_rule_h")
+local d_rule_v      = isdimen("d_rule_v")
+local d_rule_line   = isdimen("d_rule_line")
+local d_rule_offset = isdimen("d_rule_offset")
+local d_rule_factor = isdimen("d_rule_factor")
+
+-- This is very pdf specific. Maybe move some to lpdf-rul.lua some day.
+
+local pdfprint ; pdfprint = function(...) pdfprint = lpdf.print return pdfprint(...) end
+
+do
+
+    local simplemetapost = metapost.simple
+    local cachesize      = 0
+    local maxcachesize   = 256*1024
+    local cachethreshold = 1024
+    local caching        = false -- otherwise random issues so we need a dedicated randomizer first
+
+ -- local maxcachesize   = 8*1024
+ -- local cachethreshold = 1024/2
+
+    local cache = setmetatableindex(function(t,k)
+        local v = simplemetapost("rulefun",k) -- w, h, d
+        cachesize = cachesize + #v
+        if cachesize > maxcachesize then
+         -- print("old",cachesize)
+            for k, v in next, t do
+                local n = #v
+                if n > cachethreshold then
+                    t[k] = nil
+                    cachesize = cachesize - n
+                end
+            end
+         -- print("new",cachesize)
+        end
+     -- print(cachesize,maxcachesize,cachethreshold,#v)
+        t[k] = v
+        return v
+    end)
+
+    local replacer = utilities.templates.replacer
+
+    -- todo: RuleColor -> just string ?
+    -- todo: fetch them instead fo push them
+
+--     local predefined = {
+--         ["fake:word"] = replacer [[
+-- FakeWord(%width%,%height%,%depth%,%line%,%color%);
+--         ]],
+--         ["fake:rule"] = replacer[[
+-- %initializations%
+-- FakeRule(%width%,%height%,%depth%,%line%,%color%);
+--         ]],
+--         ["fake:rest"] = replacer [[
+-- RuleDirection := "%direction%" ;
+-- RuleOption := "%option%" ;
+-- RuleWidth := %width% ;
+-- RuleHeight := %height% ;
+-- RuleDepth := %depth% ;
+-- RuleH := %h% ;
+-- RuleV := %v% ;
+-- RuleThickness := %line% ;
+-- RuleFactor := %factor% ;
+-- RuleOffset := %offset% ;
+-- def RuleColor = %color% enddef ;
+-- %data%;
+--         ]]
+--     }
+
+        local predefined = {
+        ["fake:word"] = replacer [[
+FakeWord(RuleWidth,RuleHeight,RuleDepth,RuleThickness,RuleColor);
+        ]],
+        ["fake:rule"] = replacer[[
+%initializations%
+FakeRule(RuleWidth,RuleHeight,RuleDepth,RuleThickness,RuleColor);
+        ]],
+        ["fake:rest"] = replacer [[
+%data%;
+        ]]
+    }
+
+    local initialized = false ;
+
+    local function rule_mp(p,h,v,i,n)
+        local name  = p.name or "fake:rest"
+        local ht    = p.height or 0
+        local dp    = p.depth  or 0
+        local total = ht + dp
+        local code  = (predefined[name] or predefined["fake:rest"]) {
+            data      = p.data or "",
+      -- -- width     = p.width * bpfactor,
+      -- -- height    = p.height * bpfactor,
+      -- -- depth     = p.depth * bpfactor,
+      --    width     = h * bpfactor,
+      --    height    = v * bpfactor * ht / total,
+      --    depth     = v * bpfactor * dp / total,
+      --    factor    = (p.factor or 0) * bpfactor, -- needs checking
+      --    offset    = p.offset or 0,
+      --    line      = (p.line or 65536) * bpfactor,
+      --    color     = mpcolor(p.ma,p.ca,p.ta),
+      --    option    = p.option or "",
+      --    direction = p.direction or lefttoright_code,
+      --    h         = h * bpfactor,
+      --    v         = v * bpfactor,
+        }
+        --
+        setdimen("d_rule_width", h)
+        setdimen("d_rule_height", v * ht / total)
+        setdimen("d_rule_depth", v * dp / total)
+        setdimen("d_rule_h", h)
+        setdimen("d_rule_v", v)
+        setdimen("d_rule_line", p.line or 65536)
+        setdimen("d_rule_offset", (p.offset or 0) * 65536)
+        setdimen("d_rule_factor", (p.factor or 0)) -- needs checking
+        setmacro("m_rule_option", p.option or "")
+        setmacro("m_rule_direction", p.direction or lefttoright_code)
+        setmacro("m_rule_color", mpcolor(p.ma,p.ca,p.ta))
+        --
+        if not initialized then
+            initialized = true
+            simplemetapost("rulefun",formatters["randomseed := %s;"](getrandom("rulefun",0,4095)))
+        end
+        -- we enable extensions but we could also consider to delegate colors
+        -- to the node finalizer
+        local pdf = caching and cache[code] or simplemetapost("rulefun",code,true)
+        if trace_mp then
+            report_mp("code: %s",code)
+            report_mp("pdf : %s",pdf)
+        end
+        if pdf and pdf ~= "" then
+            pdfprint("direct",pdf)
+        end
+    end
+
+    codeinjections.ruleactionmp = rule_mp
+
+end
+
+do
+
+    -- This is the old oval method that we keep it for compatibility reasons. Of
+    -- course one can use mp instead. It could be improved but at the cost of more
+    -- code than I'm willing to add for something hardly used.
+
+    local linemapping = {
+        [interfaces.variables.round] = "ltrb",
+        [ "0"] = "ltrb", ["ltrb"] = "ltrb", ["trbl"] = "ltrb", ["rblt"] = "ltrb", ["bltr"] = "ltrb",
+        --
+        ["1"] = "ltrb", ["2"] = "ltrb", ["3"] = "ltrb", ["4"] = "ltrb",
+        ["5"] = "ltrb", ["6"] = "ltrb", ["7"] = "ltrb", ["8"] = "ltrb",
+        --
+        [ "9"] = "lbr", ["lbr"] = "lbr", ["rbl"] = "lbr",
+        ["10"] = "tlb", ["tlb"] = "tlb", ["blt"] = "tlb",
+        ["11"] = "ltr", ["ltr"] = "ltr", ["rtl"] = "lrt",
+        ["12"] = "lbr", ["lbr"] = "lbr", ["rbl"] = "lbr",
+        --
+        ["13"] = "rt", ["rt"] = "rt", ["tr"] = "rt",
+        ["14"] = "rb", ["rb"] = "rb", ["br"] = "rb",
+        ["15"] = "bl", ["bl"] = "bl", ["lb"] = "bl",
+        ["16"] = "tl", ["tl"] = "tl", ["lt"] = "tl",
+        --
+        ["32"] = "lr", ["lr"] = "lr", ["rl"] = "lr",
+        ["33"] = "tb", ["tb"] = "tb", ["bt"] = "tb",
+        --
+        ["28"] = "l", ["l"] = "l",
+        ["29"] = "r", ["r"] = "r",
+        ["30"] = "b", ["b"] = "b",
+        ["31"] = "t", ["t"] = "t",
+    }
+
+    local roundmapping = {
+        [interfaces.variables.round] = "ltrb",
+        [ "0"] = "ltrb", ["ltrb"] = "ltrb", ["trbl"] = "ltrb", ["rblt"] = "ltrb", ["bltr"] = "ltrb",
+        --
+        [ "9"] = "lbr", ["lbr"] = "lbr", ["rbl"] = "lbr",
+        ["10"] = "tlb", ["tlb"] = "tlb", ["blt"] = "tlb",
+        ["11"] = "ltr", ["ltr"] = "ltr", ["rtl"] = "lrt",
+        ["12"] = "lbr", ["lbr"] = "lbr", ["rbl"] = "lbr",
+        --
+        ["13"] = "rt", ["rt"] = "rt", ["tr"] = "rt",
+        ["14"] = "rb", ["rb"] = "rb", ["br"] = "rb",
+        ["15"] = "bl", ["bl"] = "bl", ["lb"] = "bl",
+        ["16"] = "tl", ["tl"] = "tl", ["lt"] = "tl",
+        --
+        ["32"] = "lr", ["lr"] = "lr", ["rl"] = "lr",
+        ["33"] = "tb", ["tb"] = "tb", ["bt"] = "tb",
+        --
+        ["28"] = "l", ["l"] = "l",
+        ["29"] = "r", ["r"] = "r",
+        ["30"] = "b", ["b"] = "b",
+        ["31"] = "t", ["t"] = "t",
+    }
+
+    setmetatableindex(linemapping,function(t,k)
+        local v = tonumber(k)
+        if v then
+            v = tostring(v)
+        else
+            v = "ltrb"
+        end
+        t[k] = v
+        return v
+    end)
+
+    setmetatableindex(roundmapping,function(t,k)
+        local v = tonumber(k)
+        if v then
+            v = tostring(v)
+        else
+            v = "ltrb"
+        end
+        t[k] = v
+        return v
+    end)
+
+    local function round(p,kind,corner)
+        local width  = p.width or 0
+        local height = p.height or 0
+        local depth  = p.depth or 0
+        local radius = p.radius or 655360
+        local line   = (p.line or 65536) * bpfactor
+        local half   = line / 2
+        local xxmin  = 0
+        local xxmax  =  width * bpfactor
+        local yymax  = height * bpfactor
+        local yymin  = -depth * bpfactor
+        local xmin   = xxmin + half
+        local xmax   = xxmax - half
+        local ymax   = yymax - half
+        local ymin   = yymin + half
+        local list   = nil
+        if radius == 0 then
+            local method = linemapping[corner]
+            if method == "ltrb" then
+                list = {
+                    "q", line, "w", xmin, ymin, "m", xmax, ymin, "l", xmax, ymax, "l", xmin, ymax,
+                    kind == "fill" and "l h f Q" or "l h S Q"
+                }
+            elseif method == "l" then
+                list = { "q", line, "w", xmin, yymin, "m", xmin, yymax, "l S Q" }
+            elseif method == "r" then
+                list = { "q", line, "w", xmax, yymin, "m", xmax, yymax, "l S Q" }
+            elseif method == "b" then
+                list = { "q", line, "w", xxmin, ymin, "m", xxmax, ymin, "l S Q" }
+            elseif method == "t" then
+                list = { "q", line, "w", xxmin, ymax, "m", xxmax, ymax, "l S Q" }
+            elseif method == "lr" then
+                list = { "q", line, "w", xmin, yymin, "m", xmin, yymax, "l", xmax, yymin, "m", xmax, yymax, "l S Q" }
+            elseif method == "tb" then
+                list = { "q", line, "w", xxmin, ymin, "m", xxmax, ymin, "l", xxmin, ymax, "m", xxmax, ymax, "l S Q" }
+            elseif method == "lbr" then
+                list = { "q", line, "w", xmin, yymax, "m", xmin, ymin, "l", xmax, ymin, "l", xmax, yymax, "l S Q" }
+            elseif method == "tlb" then
+                list = { "q", line, "w", xxmax, ymax, "m", xmin, ymax, "l", xmin, ymin, "l", xxmax, ymin, "l S Q" }
+            elseif method == "ltr" then
+                list = { "q", line, "w", xmin, yymin, "m", xmin, ymax, "l", xmax, ymax, "l", xmax, yymin, "l S Q" }
+            elseif method == "lbr" then
+                list = { "q", line, "w", xxmin, ymax, "m", xmax, ymax, "l", xmax, ymin, "l", xxmin, ymin, "l S Q" }
+            elseif method == "rt" then
+                list = { "q", line, "w", xxmin, ymax, "m", xmax, ymax, "l", xmax, yymin, "l S Q" }
+            elseif method == "rb" then
+                list = { "q", line, "w", xmax, yymax, "m", xmax, ymin, "l", xxmin, ymin, "l S Q" }
+            elseif method == "bl" then
+                list = { "q", line, "w", xxmax, ymin, "m", xmin, ymin, "l", xmin, yymax, "l S Q" }
+            elseif method == "tl" then
+                list = { "q", line, "w", xmin, yymin, "m", xmin, ymax, "l", xxmax, ymax, "l S Q" }
+            else
+                return
+            end
+        else
+            local method = roundmapping[corner]
+            local done   = kind ~= "fill" and "h S Q" or "h f Q" -- todo
+            local full   = ( radius + half)
+            local xxxmin =            full  * bpfactor
+            local xxxmax = ( width  - full) * bpfactor
+            local yyymax = ( height - full) * bpfactor
+            local yyymin = (-depth  + full) * bpfactor
+            if xxxmin > xxxmax or yyymin > yyymax then
+                return
+            elseif method == "ltrb" then
+                list = {
+                    "q", line, "w", xxxmin, ymin, "m", xxxmax, ymin, "l", xmax, ymin, xmax, yyymin, "y", xmax, yyymax, "l", xmax, ymax, xxxmax, ymax, "y",
+                    xxxmin, ymax, "l", xmin, ymax, xmin, yyymax, "y", xmin, yyymin, "l", xmin, ymin, xxxmin, ymin, "y", done,
+                }
+            elseif method == "1" then -- ll lr
+                list = { "q", line, "w", xxxmin, ymin, "m", xxxmax, ymin, "l", xmax, ymin, xmax, yyymin, "y", xmax, ymax, "l", xmin, ymax, "l", xmin, yyymin, "l", xmin, ymin, xxxmin, ymin, "y", done }
+            elseif method == "2" then -- ll ul
+                list = { "q", line, "w", xxxmin, ymin, "m", xmax, ymin, "l", xmax, ymax, "l", xxxmin, ymax, "l", xmin, ymax, xmin, yyymax, "y", xmin, yyymin, "l", xmin, ymin, xxxmin, ymin, "y", done }
+            elseif method == "3" then -- ul ur
+                list = { "q", line, "w", xmin, ymin, "m", xmax, ymin, "l", xmax, yyymax, "l", xmax, ymax, xxxmax, ymax, "y", xxxmin, ymax, "l", xmin, ymax, xmin, yyymax, "y", xmin, ymin, "l", done }
+            elseif method == "4" then -- ur lr
+                list = { "q", line, "w", xmin, ymin, "m", xxxmax, ymin, "l", xmax, ymin, xmax, yyymin, "y", xmax, yyymax, "l", xmax, ymax, xxxmax, ymax, "y", xmin, ymax, "l", xmin, ymin, "l", done }
+            elseif method == "5" then -- ur
+                list = { "q", line, "w", xmin, ymin, "m", xmax, ymin, "l", xmax, yyymax, "l", xmax, ymax, xxxmax, ymax, "y", xmin, ymax, "l", xmin, ymin, "l", done }
+            elseif method == "6" then -- lr
+                list = { "q", line, "w", xmin, ymin, "m", xxxmax, ymin, "l", xmax, ymin, xmax, yyymin, "y", xmax, ymax, "l", xmin, ymax, "l", xmin, ymin, "l", done }
+            elseif method == "7" then -- ur
+                list = { "q", line, "w", xxxmin, ymin, "m", xmax, ymin, "l", xmax, ymax, "l", xmin, ymax, "l", xmin, yyymin, "l", xmin, ymin, xxxmin, ymin, "y", done } -- outlier
+            elseif method == "8" then -- ul
+                list = { "q", line, "w", xmin, ymin, "m", xmax, ymin, "l", xmax, ymax, "l", xxxmin, ymax, "l", xmin, ymax, xmin, yyymax, "y", xmin, ymin, "l", done }
+            elseif method == "lbr" then
+                list = { "q", line, "w", xmin, yymax, "m", xmin, yyymin, "l", xmin, ymin, xxxmin, ymin, "y", xxxmax, ymin, "l", xmax, ymin, xmax, yyymin, "y", xmax, yymax, "l S Q" }
+            elseif method == "tlb" then
+                list = { "q", line, "w", xxmax, ymax, "m", xxxmin, ymax, "l", xmin, ymax, xmin, yyymax, "y", xmin, yyymin, "l", xmin, ymin, xxxmin, ymin, "y", xxmax, ymin, "l S Q" }
+            elseif method == "ltr" then
+                list = { "q", line, "w", xmax, yymin, "m", xmax, yyymax, "l", xmax, ymax, xxxmax, ymax, "y", xxxmin, ymax, "l", xmin, ymax, xmin, yyymax, "y", xmin, yymin, "l S Q" }
+            elseif method == "lbr" then
+                list = { "q", line, "w", xxmin, ymax, "m", xxxmax, ymax, "l", xmax, ymax, xmax, yyymax, "y", xmax, yyymin, "l", xmax, ymin, xxxmax, ymin, "y", xxmin, ymin, "l S Q" }
+            elseif method == "lr" then
+                list = { "q", line, "w", xxxmin, ymin, "m", xmin, ymin, xmin, yyymin, "y", xmin, yyymax, "l", xmin, ymax, xxxmin, ymax, "y",
+                                         xxxmax, ymax, "m", xmax, ymax, xmax, yyymax, "y", xmax, yyymin, "l", xmax, ymin, xxxmax, ymin, "y S Q" }
+            elseif method == "tb" then
+                list = { "q", line, "w", xmax, yyymin, "m", xmax, ymin, xxxmax, ymin, "y", xxxmin, ymin, "l", xmin, ymin, xmin, yyymin, "y",
+                                         xmax, yyymax, "m", xmax, ymax, xxxmax, ymax, "y", xxxmin, ymax, "l", xmin, ymax, xmin, yyymax, "y S Q" }
+            elseif method == "rt" then
+                list = { "q", line, "w", xxmin, ymax, "m", xxxmax, ymax, "l", xmax, ymax, xmax, yyymax, "y", xmax, yymin, "l S Q" }
+            elseif method == "rb" then
+                list = { "q", line, "w", xmax, yymax, "m", xmax, yyymin, "l", xmax, ymin, xxxmax, ymin, "y", xxmin, ymin, "l S Q" }
+            elseif method == "bl" then
+                list = { "q", line, "w", xxmax, ymin, "m", xxxmin, ymin, "l", xmin, ymin, xmin, yyymin, "y", xmin, yymax, "l S Q" }
+            elseif method == "tl" then
+                list = { "q", line, "w", xmin, yymin, "m", xmin, yyymax, "l", xmin, ymax, xxxmin, ymax, "y", xxmax, ymax, "l S Q" }
+            elseif method == "17" then -- urx
+                list = { "q", line, "w", xxxmax, ymax, "m", xmax, ymax, xmax, yyymax, "y S Q" }
+            elseif method == "18" then -- lrt
+                list = { "q", line, "w", xmax, yyymin, "m", xmax, ymin, xxxmax, ymin, "y S Q" }
+            elseif method == "19" then -- llx
+                list = { "q", line, "w", xxxmin, ymin, "m", xmin, ymin, xmin, yyymin, "y S Q" }
+            elseif method == "20" then -- urx
+                list = { "q", line, "w", xmin, yyymax, "m", xmin, ymax, xxxmin, ymax, "y S Q" }
+            elseif method == "21" then -- ulx urx
+                list = { "q", line, "w", xmax, yyymax, "m", xmax, ymax, xxxmax, ymax, "y", xxxmin, ymax, "m", xmin, ymax, xmin, yyymax, "y S Q" }
+            elseif method == "22" then -- urt lrt
+                list = { "q", line, "w", xxxmax, ymax, "m", xmax, ymax, xmax, yyymax, "y", xmax, yyymin, "m", xmax, ymin, xxxmax, ymin, "y S Q" }
+            elseif method == "23" then -- llx lrx
+                list = { "q", line, "w", xmax, yyymin, "m", xmax, ymin, xxxmax, ymin, "y", xxxmin, ymin, "m", xmin, ymin, xmin, yyymin, "y S Q" }
+            elseif method == "24" then -- ulx llx
+                list = { "q", line, "w", xxxmin, ymin, "m", xmin, ymin, xmin, yyymin, "y", xmin, yyymax, "m", xmin, ymax, xxxmin, ymax, "y S Q" }
+            elseif method == "25" then -- llx lrx urx ulx
+                list = {
+                    "q", line, "w", xxxmax, ymax, "m", xmax, ymax, xmax, yyymax, "y", xmax, yyymin, "m", xmax, ymin, xxxmax, ymin, "y", xxxmin, ymin, "m",
+                    xmin, ymin, xmin, yyymin, "y", xmin, yyymax, "m", xmin, ymax, xxxmin, ymax, "y S Q",
+                }
+            elseif method == "26" then
+                list = { "q", line, "w", xmax, yyymin, "m", xmax, ymin, xxxmax, ymin, "y", xmin, yyymax, "m", xmin, ymax, xxxmin, ymax, "y S Q" }
+            elseif method == "27" then
+                list = { "q", line, "w", xxxmax, ymax, "m", xmax, ymax, xmax, yyymax, "y", xxxmin, ymin, "m", xmin, ymin, xmin, yyymin, "y S Q" }
+            elseif method == "l" then
+                list = { "q", line, "w", xxxmin, ymin, "m", xmin, ymin, xmin, yyymin, "y", xmin, yyymax, "l", xmin, ymax, xxxmin, ymax, "y S Q" }
+            elseif method == "r" then
+                list = { "q", line, "w", xxxmax, ymax, "m", xmax, ymax, xmax, yyymax, "y", xmax, yyymin, "l", xmax, ymin, xxxmax, ymin, "y S Q" }
+            elseif method == "b" then
+                list = { "q", line, "w", xmax, yyymin, "m", xmax, ymin, xxxmax, ymin, "y", xxxmin, ymin, "l", xmin, ymin, xmin, yyymin, "y S Q" }
+            elseif method == "t" then
+                list = { "q", line, "w", xmax, yyymax, "m", xmax, ymax, xxxmax, ymax, "y", xxxmin, ymax, "l", xmin, ymax, xmin, yyymax, "y S Q" }
+            else
+                return
+            end
+        end
+        pdfprint("direct",concat(list," "))
+    end
+
+    local f_rectangle = formatters["q %.6N w %.6N %.6N %.6N %.6N re %s Q"]
+    local f_baselined = formatters["q %.6N w %.6N %.6N %.6N %.6N re s %.6N %.6N m %.6N %.6N l s Q"]
+    local f_dashlined = formatters["q %.6N w %.6N %.6N %.6N %.6N re s [%.6N %.6N] 2 d %.6N %.6N m %.6N %.6N l s Q"]
+    local f_dashtwice = formatters["q %.6N w %.6N %.6N %.6N %.6N re s [%.6N %.6N] 2 d %.6N %.6N m %.6N %.6N l s %.6N %.6N m %.6N %.6N l s Q"]
+    local f_radtangle = formatters[
+[[q %.6N w %.6N %.6N m
+%.6N %.6N l %.6N %.6N %.6N %.6N y
+%.6N %.6N l %.6N %.6N %.6N %.6N y
+%.6N %.6N l %.6N %.6N %.6N %.6N y
+%.6N %.6N l %.6N %.6N %.6N %.6N y
+h %s Q]]
+        ]
+
+    local rule_any = function(p,h,v,i,n)
+        local corner = p.corner
+        if corner then
+            return round(p,i,corner)
+        else
+            local l = (p.line or 65536)*bpfactor
+            local r = p and (p.radius or 0)*bpfactor or 0
+            local w = h * bpfactor
+            local h = v * bpfactor
+            local m = nil
+            local t = i == "fill" and "f" or "s"
+            local o = l / 2
+            if r > 0 then
+                w = w - o
+                h = h - o
+                m = f_radtangle(l, r,o, w-r,o, w,o,w,r, w,h-r, w,h,w-r,h, r,h, o,h,o,h-r, o,r, o,o,r,o, t)
+            else
+                w = w - l
+                h = h - l
+                m = f_rectangle(l,o,o,w,h,t)
+            end
+            pdfprint("direct",m)
+        end
+    end
+
+    local function rule_box(p,h,v,i,n)
+        local w, h, d = getwhd(n)
+        local line = p.line or 65536
+        local l = line *bpfactor
+        local w = w * bpfactor
+        local h = h * bpfactor
+        local d = d * bpfactor
+        local o = l / 2
+        local u = p.double
+        if p.baseline ~= false and ((d >= 0 and h >= 0) or (d <= 0 and h <= 0)) then
+            local dashed = tonumber(p.dashed)
+            if dashed and dashed > 5*line then
+                dashed = dashed * bpfactor
+                local delta = (w - 2*dashed*floor(w/(2*dashed)))/2
+                if u then
+                    u = u * bpfactor
+                    pdfprint("direct",f_dashtwice(l,o,o,w-l,h+d-l,dashed,dashed,delta,d,w-delta,d,delta,d+u,w-delta,d+u))
+                else
+                    pdfprint("direct",f_dashlined(l,o,o,w-l,h+d-l,dashed,dashed,delta,d,w-delta,d))
+                end
+            else
+                pdfprint("direct",f_baselined(l,o,o,w-l,h+d-l,0,d,w,d))
+            end
+        else
+            pdfprint("direct",f_rectangle(l,o,o,w-l,h+d-l,"s"))
+        end
+    end
+
+    codeinjections.ruleactionfill   = rule_any
+    codeinjections.ruleactiondraw   = rule_any
+    codeinjections.ruleactionstroke = rule_any
+    codeinjections.ruleactionbox    = rule_box
+
+end
+
