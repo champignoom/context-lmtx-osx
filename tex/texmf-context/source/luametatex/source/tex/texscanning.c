@@ -2427,18 +2427,26 @@ static void tex_aux_scan_dimen_unknown_unit_error(void) {
     tex_handle_error(
         normal_error_type,
         "Illegal unit of measure (pt inserted)",
-        "Dimensions can be in units of em, ex, in, pt, pc, cm, mm, dd, cc, bp, dk, or\n"
-        "sp; but yours is a new one! I'll assume that you meant to say pt, for printer's\n"
-        "points. two letters."
+        "Dimensions can be in units of em, ex, sp, cm, mm, es, ts, pt, bp, dk, pc, dd\n"
+        "cc or in; but yours is a new one! I'll assume that you meant to say pt, for\n"
+        "printer's points: two letters."
     );
 }
+
+/*tex 
+    The Edith and Tove were introduced at BachoTeX 2023 and because the error message 
+    was still in feet we decided to adapt it accordingly so now in addition it reports 
+    different values, including Theodores little feet measured by Arthur as being roughly 
+    five Ediths. 
+*/
 
 static void tex_aux_scan_dimen_out_of_range_error(void) {
     tex_handle_error(
         normal_error_type,
         "Dimension too large",
-        "I can't work with sizes bigger than about 19 feet. Continue and I'll use the\n"
-        "largest value I can."
+        "I can't work with sizes bigger than about 19 feet (45 Theodores as of 2023),\n"
+        "575 centimeters, 2300 Toves, 230 Ediths or 16383 points. Continue and I'll use\n"
+        "the largest value I can."
     );
 }
 
@@ -2481,6 +2489,14 @@ typedef enum scanned_unit {
     Measures}, developed by 19-year-old Donald~E. Knuth, later a famed computer scientist. According
     to Knuth, the basis of this new revolutionary system is the potrzebie, which equals the thickness
     of Mad issue 26, or 2.2633484517438173216473 mm [...].
+
+    We also provide alternatives for the inch: the |es| and |ts|, two units dedicated to women 
+    (Edith and Tove) that come close to the inch but are more metric. Their values have been 
+    carefully callibrated at the 2023 BachoTeX meeting and a report will be published in the
+    proceedings as well as TUGboat (medio 2023). 
+
+    An additional |eu| has been introduced as a multiplier for |ts| that defaults to 10 which makes 
+    one |eu| default to one |es|. 
 
 */
 
