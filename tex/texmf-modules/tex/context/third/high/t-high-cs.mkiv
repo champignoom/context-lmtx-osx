@@ -1,0 +1,117 @@
+%D \module
+%D   [       file=t-high-cs,
+%D        version=2017.04.05,
+%D          title=\CONTEXT\ User Module,
+%D       subtitle=Syntax Highlighter for C\texthash,
+%D         author=Christoph Reller,
+%D           date=\currentdate,
+%D      copyright=Christoph Reller,
+%D          email=christoph.reller@gmail.com,
+%D        license=GNU General Public License]
+
+%C Copyright (C) 2017 Christoph Reller
+%C
+%C This program is free software: you can redistribute it and/or modify
+%C it under the terms of the GNU General Public License as published by
+%C the Free Software Foundation, either version 3 of the License, or
+%C any later version.
+%C
+%C This program is distributed in the hope that it will be useful,
+%C but WITHOUT ANY WARRANTY; without even the implied warranty of
+%C MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%C GNU General Public License for more details.
+%C
+%C You should have received a copy of the GNU General Public License
+%C along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+%M \usemodule[high-cs]
+
+%D \section{Usage}
+%D Example:
+%D
+%D \startCS
+%D #define Bla bla
+%D  #if Bla // comment
+%D #endif
+%D using System;
+%D using Even.More;
+%D
+%D [AttributeUsage(//comment
+%D     AttributeTargets.All,
+%D     Inherited = true)
+%D ]
+%D class Twinkle: Blink
+%D {
+%D   [CompilerGenerated]
+%D   public string Name { get; set; }
+%D
+%D   private void Make_It(object obj, ThisThat e)
+%D   {
+%D     try
+%D     {
+%D       this.Enabled = false;
+%D       int i = vec[0];
+%D
+%D       // comment
+%D       if (txtInput.Text.Equals(String.Empty) ||
+%D         txtOutput.Text.Equals(String.Empty))
+%D       {
+%D         MessageBox.Show(Resources.MsgNoFileSelected);
+%D         return;
+%D       }
+%D     }
+%D     catch (Exception ex)
+%D     {
+%D       MessageBox.Show(ex.Message);
+%D     }
+%D   }
+%D }
+%D \stopCS
+
+\registerctxluafile{t-high-common.lua}{1.0}
+\registerctxluafile{t-high-cs.lua}{1.0}
+
+\unprotect
+
+\definestartstop[CsSnippet][DefaultSnippet]
+
+\definestartstop[CsSnippetKeyword][
+  \c!color=darkgreen,
+  \c!style=]
+\definestartstop[CsSnippetType][
+  \c!color=darkgreen,
+  \c!style=]
+\definestartstop[CsSnippetOperator][
+  \c!color=darkcyan,
+  \c!style=]
+\definestartstop[CsSnippetIdent][
+  \c!color=middleblue,
+  \c!style=]
+\definestartstop[CsSnippetVariable][
+  \c!color=darkyellow,
+  \c!style=]
+\definestartstop[CsSnippetAttribute][
+  \c!color=middlemagenta,
+  \c!style=]
+\definestartstop[CsSnippetBoundary][
+  \c!color=darkgray,
+  \c!style=]
+\definestartstop[CsSnippetComment][
+  \c!color=middlegray,
+  \c!style=]
+\definestartstop[CsSnippetLiteral][
+  \c!color=middlered,
+  \c!style=]
+\definestartstop[CsSnippetImport][
+  \c!color=magenta,
+  \c!style=]
+\definestartstop[CsSnippetPreproc][
+  \c!color=middlemagenta,
+  \c!style=]
+\definestartstop[CsSnippetPreprocarg][
+  \c!color=middleyellow,
+  \c!style=]
+
+\definetyping[CS][\c!option=cs]
+
+\protect \endinput

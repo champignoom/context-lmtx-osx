@@ -1,0 +1,153 @@
+\usemodule[taspresent][style=rules,font=MyriadPro,size=17pt,stylecolor=red]
+
+\setvariables [taspresent]
+              [author={Groucho Marx},
+               title={Marriage the Chief Cause of Divorce}]
+
+% \usetypescriptfile[type-gtamacfonts]
+% \definetypeface[MyFace][ss][sans][optima][default][encoding=ec]
+% %\usetypescript[LucidaSans][ec]
+% \setupbodyfont[MyFace,ss,\Normalsize]
+
+% \usesymbols[lucidasans]
+% \setupsymbolset[LucidaSans]
+% \definesymbol[1][{\symbol[Check2]}]
+
+% \showframe
+
+% \traceexternalfigurestrue
+
+\starttext
+
+\Maketitle
+
+\Slidetitle{Text}
+
+\lecback
+
+Thus, I came to the conclusion that the designer of a new
+system must not only be the implementer and first
+large||scale user; the designer should also write the first
+user manual.
+
+The separation of any of these four components would have
+hurt \TeX\ significantly. If I had not participated fully in
+all these activities, literally hundreds of improvements
+would never have been made, because I would never have
+thought of them or perceived why they were important.
+
+But a system cannot be successful if it is too strongly
+influenced by a single person. Once the initial design is
+complete and fairly robust, the real test begins as people
+with many different viewpoints undertake their own
+experiments.
+
+\Slidetitle{Itemization}
+
+\startitemize[1]
+\item Thus, I came to the conclusion that the designer of a new
+	system  
+\item must not only be the implementer and first
+	large||scale user;  
+\item the designer should also write the first
+	user manual.
+\item The separation of any of these four components would have
+	hurt \TeX\ significantly. 
+\stopitemize
+
+\Slidetitle{Numbered Itemization}
+
+\startitemize[n]
+\item Thus, I came to the conclusion that the designer of a new
+	system  
+\item must not only be the implementer and first
+	large||scale user;  
+\item the designer should also write the first
+	user manual.
+\item The separation of any of these four components would have
+	hurt \TeX\ significantly. 
+\stopitemize
+
+\Slidetitle{Picture in Horizontal Mode}
+
+\PicHoriz[hor][height=\NormalHeight]
+
+\page
+
+\picback 
+
+\PicVert[vert][width=\NormalWidth]{Picture in \\ Vertical Mode}
+
+\page
+
+\CircVert[scale=22,x=23,y=25][vert][width=\NormalWidth]{Circle in \\ Vertical Mode}
+
+\page
+
+\ArrowVert[direction=90,x=7,y=23][vert][width=\NormalWidth]{Arrow in \\ Vertical Mode}
+
+\Slidetitle{Red Circle}
+
+\lecback
+
+\CircHoriz[scale=40,x=120,y=80][hor][height=\NormalHeight]
+
+\Slidetitle{Red Arrow}
+
+\ArrowHoriz[direction=135,x=105,y=15][hor][height=\NormalHeight]
+
+\Slidetitle{A MetaFun graphic}
+
+\placefigure[here]{none}{%
+\startMPcode
+pickup pencircle scaled 4pt ;
+draw unitsquare xyscaled (5cm,5cm) withcolor red ;
+\stopMPcode
+}
+
+\Slidetitle{Some Code Snippets}
+
+To set up a horizontal picture, simply type:
+
+\startTEX
+\PicHoriz[hor][height=\Normalheight]
+\stopTEX
+
+\blank[line]
+
+For vertical pictures:
+
+\startTEX
+\PicVert[vert][width=\NormalWidth]%
+{Text placed \\ opposite picture}
+\stopTEX
+
+\Slidetitle{Math}
+
+Since I know nothing about math, this example is copied from the wiki:
+
+\startformula
+ f(x) = \startmathcases
+   \NC x, \NC if $0 \le x \le \frac12$ \NR
+   \NC 1-x ,\NC if $\frac12 \le x \le 1$ \NR
+\stopmathcases
+\stopformula
+
+\Slidetitle{Your Own Ideas?}
+
+\null
+
+\vfill
+
+\midaligned{\tfd Go \color[red]{here!}}
+
+\vfill
+
+\page
+
+\stoptext
+
+%%% Local Variables: 
+%%% mode: context
+%%% TeX-master: t
+%%% End: 

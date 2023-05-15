@@ -1,0 +1,58 @@
+%D \module
+%D   [       file=math-sto,
+%D        version=2005.03.15,
+%D          title=\CONTEXT\ Math Macros,
+%D       subtitle=Lucida Specials,
+%D         author=Vit Zyka,
+%D           date=\currentdate,
+%D      copyright=\PRAGMA]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\unprotect
+
+\let\stfam\mcfam \let\hexstfam\hexmcfam
+
+\startmathcollection[storm]
+
+  \definemathcharacter [+] [bin]   [mr] ["2B]
+  \definemathcharacter [/] [bin]   [st] ["0F]
+  \definemathcharacter [=] [rel]   [mr] ["3D]
+  \definemathcharacter [:] [rel]   [st] ["3A]
+  \definemathcharacter [-] [rel]   [st] ["00]
+  \definemathcharacter [.] [punct] [st] ["2E]
+  \definemathcharacter [,] [punct] [st] ["2C]
+  \definemathcharacter [;] [punct] [st] ["3B]
+  \definemathcharacter [(] [open]  [st] ["28]
+  \definemathcharacter [)] [close] [st] ["29]
+  \definemathsymbol    [braceleft]    [open]  [st] ["7B]
+  \definemathsymbol    [braceright]   [close] [st] ["7D]
+  \definemathsymbol    [bracketleft]  [open]  [st] ["5B]
+  \definemathsymbol    [bracketright] [close] [st] ["5D]
+  \definemathcharacter [<] [rel] [st] ["3C]
+  \definemathcharacter [>] [rel] [st] ["3E]
+  \definemathsymbol    [leq] [rel] [st] ["04]
+  \definemathsymbol    [geq] [rel] [st] ["06]
+  \definemathsymbol    [neq] [rel] [st] ["05]
+  \definemathsymbol    [neg] [rel] [st] ["15]
+  \definemathsymbol    [pm]  [bin] [st] ["07]
+  \definemathsymbol    [times] [bin] [st] ["0E]
+  \definemathsymbol    [div]   [bin] [st] ["0F]
+  \definemathsymbol    [infty] [bin] [st] ["16]
+  \definemathsymbol    [onesuperior]   [ord] [st] ["01]
+  \definemathsymbol    [twosuperior]   [ord] [st] ["02]
+  \definemathsymbol    [threesuperior] [ord] [st] ["03]
+  \definemathsymbol    [onequarter]    [ord] [st] ["08]
+  \definemathsymbol    [onehalf]       [ord] [st] ["09]
+  \definemathsymbol    [threequarters] [ord] [st] ["0A]
+  \definemathsymbol    [fraction]      [ord] [st] ["0B]
+  \definemathsymbol    [dagger]        [ord] [st] ["A0]
+  \definemathsymbol    [ddagger]       [ord] [st] ["A1]
+  \definemathsymbol    [bullet]        [rel] [st] ["A2]
+%%   \definemathsymbol    [copyright]        [ord] [st] ["A6]
+
+\stopmathcollection
+
+\protect \endinput

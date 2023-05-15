@@ -1,0 +1,139 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\starttypescript [map] [solpera] [st1,st2]
+  \pdfmapline{=sslr8z SolperaOSF "StormL2Encoding ReEncodeFont" <storml2.enc <solpeosf.pfb}
+  \pdfmapline{=sslb8z SolperaOSF-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <solposfb.pfb}
+  \pdfmapline{=sslri8z SolperaOSF-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <solposfi.pfb}
+  \pdfmapline{=sslbi8z SolperaOSF-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <solosfbi.pfb}
+  \pdfmapline{=sslr8t SolperaOSF "StormT1Encoding ReEncodeFont" <stormt1.enc <solpeosf.pfb}
+  \pdfmapline{=sslb8t SolperaOSF-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <solposfb.pfb}
+  \pdfmapline{=sslri8t SolperaOSF-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <solposfi.pfb}
+  \pdfmapline{=sslbi8t SolperaOSF-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <solosfbi.pfb}
+  \pdfmapline{=sslr6s SolperaOSF "StormExEncoding ReEncodeFont" <stormex.enc <solpeosf.pfb}
+  \pdfmapline{=sslb6s SolperaOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <solposfb.pfb}
+  \pdfmapline{=sslri6s SolperaOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <solposfi.pfb}
+  \pdfmapline{=sslbi6s SolperaOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <solosfbi.pfb}
+\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [solpera] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		   [Solpera-Roman]
+  \definefontsynonym [SerifBold]	   [Solpera-Bold]
+  \definefontsynonym [SerifItalic]	   [Solpera-Italic]
+  \definefontsynonym [SerifBoldItalic]	   [Solpera-Bold-Italic]
+
+  \definefontsynonym [SerifExt]		   [Solpera-Roman-Ext]
+  \definefontsynonym [SerifBoldExt]	   [Solpera-Bold-Ext]
+  \definefontsynonym [SerifItalicExt]	   [Solpera-Italic-Ext]
+  \definefontsynonym [SerifBoldItalicExt]  [Solpera-Bold-Italic-Ext]
+  \definefontsynonym [SerifSlantedExt]	   [Solpera-Italic-Ext]
+  \definefontsynonym [SerifBoldSlantedExt] [Solpera-Bold-Italic-Ext]
+
+  \definefontsynonym [SerifRegular]	[Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [solpera] [st1]
+  \definefontsynonym [Solpera-Roman]            [sslr8t]  [encoding=st1]
+  \definefontsynonym [Solpera-Bold]             [sslb8t]  [encoding=st1]
+  \definefontsynonym [Solpera-Italic]           [sslri8t] [encoding=st1]
+  \definefontsynonym [Solpera-Bold-Italic]      [sslbi8t] [encoding=st1]
+
+  \definefontsynonym [Solpera-Roman-Ext]        [sslr6s]  [encoding=st3]
+  \definefontsynonym [Solpera-Bold-Ext]         [sslb6s]  [encoding=st3]
+  \definefontsynonym [Solpera-Italic-Ext]       [sslri6s] [encoding=st3]
+  \definefontsynonym [Solpera-Bold-Italic-Ext]  [sslbi6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [solpera] [st2]
+  \definefontsynonym [Solpera-Roman]            [sslr8z]  [encoding=st2]
+  \definefontsynonym [Solpera-Bold]             [sslb8z]  [encoding=st2]
+  \definefontsynonym [Solpera-Italic]           [sslri8z] [encoding=st2]
+  \definefontsynonym [Solpera-Bold-Italic]      [sslbi8z] [encoding=st2]
+
+  \definefontsynonym [Solpera-Roman-Ext]        [sslr6s]  [encoding=st3]
+  \definefontsynonym [Solpera-Bold-Ext]         [sslb6s]  [encoding=st3]
+  \definefontsynonym [Solpera-Italic-Ext]       [sslri6s] [encoding=st3]
+  \definefontsynonym [Solpera-Bold-Italic-Ext]  [sslbi6s] [encoding=st3]
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [solpera] [name]
+  \definefontsynonym [MathRoman]        [Solpera-Math-Letters]
+  \definefontsynonym [MathItalic]       [Solpera-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Solpera-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [solpera] [st1]
+  \definefontsynonym [Solpera-Math-Letters]         [sslr8t]  [encoding=st1]
+  \definefontsynonym [Solpera-Math-Letters-Italic]  [sslri8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Solpera-Math-Storm]           [sslr6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [solpera] [st2]
+  \definefontsynonym [Solpera-Math-Letters]         [sslr8z]  [encoding=st2]
+  \definefontsynonym [Solpera-Math-Letters-Italic]  [sslri8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Solpera-Math-Storm]           [sslr6s]  [encoding=st3]
+\stoptypescript
+
+% bold
+\starttypescript [boldmath] [solpera] [name]
+  \definefontsynonym [MathRoman]        [Solpera-MathBold-Letters]
+  \definefontsynonym [MathItalic]       [Solpera-MathBold-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMathBold-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Solpera-MathBold-Storm]
+\stoptypescript
+
+\starttypescript [boldmath] [solpera] [st1]
+  \definefontsynonym [Solpera-MathBold-Letters]       [sslb8t]  [encoding=st1]
+  \definefontsynonym [Solpera-MathBold-Letters-Italic][sslbi8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols] [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]   [cmex10]
+  \definefontsynonym [Solpera-MathBold-Storm]         [sslb6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [solpera] [st2]
+  \definefontsynonym [Solpera-MathBold-Letters]       [sslb8z]  [encoding=st2]
+  \definefontsynonym [Solpera-MathBold-Letters-Italic][sslbi8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols] [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]   [cmex10]
+  \definefontsynonym [Solpera-MathBold-Storm]         [sslb6s]  [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [solpera] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [Solpera] [st1,st2]
+  \definetypeface [Solpera] [rm] [serif] [solpera] [default] [encoding=\typescripttwo]
+  \definetypeface [Solpera] [mm] [math] [solpera] [storm]   [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [solpera] [storm] [encoding=\typescripttwo]
+  \definetypeface [Solpera] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection
+\endinput
+
+% end of type-ssolpera.tex

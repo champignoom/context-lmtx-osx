@@ -1,0 +1,243 @@
+%D \module
+%D   [      file=t-bluegray,
+%D        version=2007.07.17, 
+%D          title=\CONTEXT\ Style File,
+%D       subtitle=Presentation Module bluegray,
+%D         author=Thomas A. Schmitz,
+%D           date=\currentdate,
+%D      copyright={Thomas A. Schmitz}]
+%C
+%C Copyright 2007 Thomas A. Schmitz.
+%C This file may be distributed under the GNU General Public License v. 2.0.
+
+%D This file provides the \quotation{bluegray} style for the presentation
+%D module. It is loaded at runtime. 
+
+\writestatus{loading}{module bluegray}
+
+\startmodule[bluegray]
+
+\unprotect
+
+%D The taspresentation module provides a skeleton into which different styles
+%D can be hooked. It uses a number of variables and macros which have to be set
+%D beforehand. Some parts are optional. We begin with the necessary definitions:
+
+%D We start colors:
+
+\setupcolors[state=start]
+
+%D These macros are used for placing figures/pictures:
+
+\define\NormalHeight{\textheight}
+\define\NormalWidth{.476\textwidth}
+\define\PictureFrameHeight{\textheight}
+\define\PictureFrameWidth{.476\textwidth}
+
+%D The page layout:
+
+\setuplayout [width=fit,
+              margin=1.5cm,
+              height=fit,
+              header=11mm, 
+              footer=0cm, 
+              topspace=15mm, 
+              backspace=2cm,
+              location=singlesided]
+
+%D The macro for typesetting the Slidetitle; this is adapted from a sample
+%D document that Brooks Moses published on the wiki:
+
+\definelayer[slidetitle]
+    [width=\paperwidth,
+    height=\paperheight,
+    x=20mm,
+    y=12mm]
+
+\define[1]\Slidetitle{\page\setlayer[slidetitle]%
+     {\framed[frame=off,height=1.5cm,width=\textwidth,offset=0pt,align=middle,top=\vss,bottom=\vss]{\switchtobodyfont[\Titlesize]#1}}}
+
+%D The macro \tex{Maketitle} produces a default title page with the author, the
+%D title of the presentation, and the date. Using it is not mandatory.
+
+\define\Maketitle{%
+\titback
+\null
+\vfill
+\midaligned{\switchtobodyfont[\Titlesize]\getvariable{taspresent}{title}}
+\blank[2*line]
+\midaligned{\getvariable{taspresent}{author}}
+\blank[3*line]
+\midaligned{\currentdate}
+\vfill
+\null}
+
+%D The following parts are optional; if you don't use backgrounds and are
+%D content with CONTEXT's default itemization, you don't have to set these
+%D macros. 
+
+%D We define our colors:
+
+\definecolor [a]	       [s=.88]
+\definecolor [Item]            [s=0]
+\definecolor [One]             [r=.5,g=0,b=.5]
+\definecolor [Two] 	       [b=1]
+\definecolor [Three]           [g=1,b=1]
+\definecolor [Four]            [g=1]
+\definecolor [Five]            [r=1,g=1]
+\definecolor [Six]             [r=1]
+
+%D In a first attempt to avhieve the rainbow effect, I produced the rainbow
+%D background with asymptote and then converted it to a pdf file which was then
+%D used as a background. In that case, it was necessary to instruct \CONTEXT\
+%D to look in the default \TeX\ input paths for figures. The background spans
+%D the entire height of the page and the width of the text area; the gray
+%D background was then calculated so that the two stripes at the top and at the
+%D bottom were left unfilled so the rainbow background would then be visible.
+%D Here is the code:
+
+%\setupexternalfigures[location={global}]
+
+%\defineoverlay[rainb][{\externalfigure[rainbow.pdf][width=1.05\textwidth,height=1.4\textheight]}] 
+
+% \startuniqueMPgraphic{gray}
+% StartPage ;
+% pair zf[] ;
+% path gr[] ;
+% numeric a; a = 2cm ;
+% numeric b; b = 0.8cm ;
+% z.f1 = ulcorner Page shifted (a,0) ;
+% z.f2 = urcorner Page shifted (-a,0) ;
+% z.f3 = lrcorner Page shifted (-a,0) ;
+% z.f4 = llcorner Page shifted (a,0) ;
+% z.f5 = z.f1 shifted (0,-b) ;
+% z.f6 = z.f2 shifted (0,-b) ;
+% z.f7 = z.f3 shifted (0,b) ;
+% z.f8 = z.f4 shifted (0,b) ;
+% z.f9 = z.f5 shifted (0,-b) ;
+% z.f10 = z.f6 shifted (0,-b) ;
+% z.f11 = z.f7 shifted (0,b) ;
+% z.f12 = z.f8 shifted (0,b) ;
+% gr[1] = ulcorner Page -- urcorner Page -- lrcorner Page -- llcorner Page -- z.f8 -- z.f7 -- z.f6 -- z.f5 -- z.f4 -- llcorner Page -- cycle ;
+% gr[2] = z.f9 -- z.f10 -- z.f11 -- z.f12 -- cycle ;
+% gr[2] := gr[2] enlarged (.5cm,0cm) ;
+% fill gr[1] withcolor \MPcolor{a} ;
+% fill gr[2] withcolor \MPcolor{a} ;
+% StopPage ;
+% \stopuniqueMPgraphic
+
+%D However, it seemed more portable to let Metapost calculate the background.
+%D The rainbow effect takes some lines of code, but it's not too bad:
+
+\startuniqueMPgraphic{gray}
+StartPage ;
+pair zf[] ;
+fill Page withcolor \MPcolor{a} ;
+path gr[] ;
+numeric a; a = 2cm ;
+numeric b; b = 0.4cm ;
+numeric c; c = 0.7cm ;
+z.f1 = ulcorner Page shifted (a,-c) ;
+z.f2 = urcorner Page shifted (-a,-c) ;
+z.f3 = z.f2 shifted (0,-b) ;
+z.f4 = z.f1 shifted (0,-b) ;
+gr[1] = z.f1 -- z.f2 ;
+gr[2] = z.f4 -- z.f3 ;
+z.f5 = point .2 along gr[1] ;
+z.f6 = point .2 along gr[2] ;
+z.f7 = point .4 along gr[1] ;
+z.f8 = point .4 along gr[2] ;
+z.f9 = point .6 along gr[1] ;
+z.f10 = point .6 along gr[2] ;
+z.f11 = point .8 along gr[1] ;
+z.f12 = point .8 along gr[2] ;
+gr[3] = z.f1 -- z.f5 -- z.f6 -- z.f4 -- cycle ;
+gr[4] = z.f7 -- z.f5 -- z.f6 -- z.f8 -- cycle ;
+gr[4] := gr[4] enlarged (.02cm,0) ;
+gr[5] = z.f9 -- z.f7 -- z.f8 -- z.f10 -- cycle ;
+gr[5] := gr[5] enlarged (.02cm,0) ;
+gr[6] = z.f11 -- z.f9 -- z.f10 -- z.f12 -- cycle ;
+gr[6] := gr[6] enlarged (.02cm,0) ;
+gr[7] = z.f11 -- z.f2 -- z.f3 -- z.f12 -- cycle ;
+linear_shade(gr[3],0,\MPcolor{One},\MPcolor{Two}) ;
+linear_shade(gr[4],0,\MPcolor{Two},\MPcolor{Three}) ;
+linear_shade(gr[5],0,\MPcolor{Three},\MPcolor{Four}) ;
+linear_shade(gr[6],0,\MPcolor{Four},\MPcolor{Five}) ;
+linear_shade(gr[7],0,\MPcolor{Five},\MPcolor{Six}) ;
+z.f21 = llcorner Page shifted (a,c) ;
+z.f22 = lrcorner Page shifted (-a,c) ;
+z.f23 = z.f22 shifted (0,b) ;
+z.f24 = z.f21 shifted (0,b) ;
+gr[21] = z.f21 -- z.f22 ;
+gr[22] = z.f24 -- z.f23 ;
+z.f25 = point .2 along gr[21] ;
+z.f26 = point .2 along gr[22] ;
+z.f27 = point .4 along gr[21] ;
+z.f28 = point .4 along gr[22] ;
+z.f29 = point .6 along gr[21] ;
+z.f30 = point .6 along gr[22] ;
+z.f31 = point .8 along gr[21] ;
+z.f32 = point .8 along gr[22] ;
+gr[23] = z.f21 -- z.f25 -- z.f26 -- z.f24 -- cycle ;
+gr[24] = z.f27 -- z.f25 -- z.f26 -- z.f28 -- cycle ;
+gr[24] := gr[24] enlarged (.02cm,0) ;
+gr[25] = z.f29 -- z.f27 -- z.f28 -- z.f30 -- cycle ;
+gr[25] := gr[25] enlarged (.02cm,0) ;
+gr[26] = z.f31 -- z.f29 -- z.f30 -- z.f32 -- cycle ;
+gr[26] := gr[26] enlarged (.02cm,0) ;
+gr[27] = z.f31 -- z.f22 -- z.f23 -- z.f32 -- cycle ;
+linear_shade(gr[23],0,\MPcolor{One},\MPcolor{Two}) ;
+linear_shade(gr[24],0,\MPcolor{Two},\MPcolor{Three}) ;
+linear_shade(gr[25],0,\MPcolor{Three},\MPcolor{Four}) ;
+linear_shade(gr[26],0,\MPcolor{Four},\MPcolor{Five}) ;
+linear_shade(gr[27],0,\MPcolor{Five},\MPcolor{Six}) ;
+StopPage ;
+\stopuniqueMPgraphic
+
+\startuseMPgraphic{progress}
+StartPage
+path p[] ;
+p[1] := unitsquare xyscaled(MakeupWidth,.4cm) shifted (2cm,0.7cm) ;
+numeric i; i = (PageNumber - 1)/(NOfPages - 1) ;
+p[2] = ulcorner p[1] -- urcorner p[1] ;
+p[3] = llcorner p[1] -- lrcorner p[1] ;
+pair o[] ;
+o[1] := point i along p[2] ;
+o[2] := point i along p[3] ;
+p[4] = o[1] -- o[2] ;
+p[4] := p[4] enlarged (0,-1pt) ;
+pickup pensquare scaled 2pt ;
+draw p[4] ;
+StopPage
+\stopuseMPgraphic
+
+%D We define these backgrounds as overlays:
+
+\defineoverlay[graybg]
+[\useMPgraphic{gray}]
+
+\defineoverlay[bar]
+[\useMPgraphic{progress}]
+
+%D These are shortcuts to switch backgrounds:
+
+\define\lecback{\setuplayout[header=11mm]\setupbackgrounds[page][background={graybg,bar,slidetitle}]}
+\define\titback{\setuplayout[header=0mm]\setupbackgrounds[page][background={graybg}]}
+\define\picback{\setuplayout[header=0mm]\setupbackgrounds[page][background={graybg,bar}]}
+\define\noback{\setupbackgrounds[page][background=nobackground]}
+
+%D We use combinations for placing vertical pictures and text side by side, and
+%D we want a distance of 1.1 cm between both.
+
+\setupcombinations[distance=1.1cm]
+
+%D The symbol for the first level of itemizations. 
+
+\definesymbol[1][\useMPgraphic{ItSquare}]
+\setupitemize[1][inmargin]
+
+\protect
+\stopmodule
+
+\endinput
+

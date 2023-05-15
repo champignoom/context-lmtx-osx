@@ -1,0 +1,82 @@
+% Extra characters from fonts by Storm Type Foundry
+% Encoding suggested by Petr Olsak, Jun 2001
+%
+/StormEx3Encoding [ % Designed for Monarchia swash characters
+% 0x00 
+  /minus /onesuperior /twosuperior /threesuperior
+  /lessequal /notequal /greaterequal /plusminus
+  /onequarter /onehalf /threequarters /fraction
+  /degree /brokenbar /multiply /divide 
+% 0x10
+ /summation /Omegagreek /pi /mu 
+ /Delta /logicalnot /infinity /radical 
+ /ordfeminine /ordmasculine /gravecmb /acutecmb 
+ /fi.swash /fl.swash /brevecmb /ringcmb
+% 0x20 (ASCII begins)
+ /nbspace /exclam /quotedbl /g.swash1
+ /g.swash2 /germandbls.swash /longs.swash /ffi.swash
+ /ffl.swash /tz /ch.swash /ck.swash
+ /comma /hyphen /period /slash
+% 0x30
+ /zero /one /two /three /four /five /six /seven
+ /eight /nine /colon /semicolon 
+ /less /equal /greater /question
+% 0x40
+ /at /A /B /C /D /E /F /G /H /I /J /K /L /M /N /O
+% 0x50
+ /P /Q /R /S /T /U /V /W
+ /X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore
+% 0x60
+ /quoteleft /a.swash /b.swash /c 
+ /d.swash /e.swash /f.swash /gswash 
+ /h.swash /i.swash /j /k.swash 
+ /l.swash /m.swash /n.swash /o
+% 0x70
+ /p.swash /q.swash /r /s.swash /t.swash /u.swash /v /w
+ /x /y.swash /z.swash /braceleft /bar /braceright /asciitilde
+ /periodcentered % ASCII ends
+% 0x80
+ /ct /st /ft.swash /longst
+ /longs /lozenge /florin /dmacron 
+ /Euro /franc /.notdef /.notdef
+ /Tbar /Tcommaaccent /Umacron /Ubreve 
+% 0x90
+ /Eth /Thorn /Ydieresis /Rcedilla
+ /Scircumflex /Ucircumflex /Uogonek /Utilde
+ /Ncommaaccent /Gacute /Gbreve /Jcircumflex
+ /IJ /Idot /Lcedilla /Ldotaccent
+% 0xA0
+ /dagger /daggerdbl /bullet /paragraph
+ /ellipsis /trademark /copyright /registered
+ /cent /yen /.notdef /.notdef
+ /tbar /tcommaaccent /umacron /ubreve 
+% 0xD0
+ /eth /thorn /ydieresis /rcedilla
+ /scircumflex /ucircumflex /uogonek /utilde
+ /ncommaaccent /gacute /gbreve /jcircumflex
+  /ij /.notdef /lcedilla /ldotaccent
+% 0xC0
+ /Wcircumflex /Edotaccent /Ycircumflex /Atilde 
+ /Amacron /Aring /Ccircumflex /Cdotaccent
+ /Egrave /Ebreve /Ecircumflex /Emacron
+ /Igrave /Itilde /Imacron /Idieresis
+% 0xD0
+ /Iogonek /Ntilde /Ograve /Omacron
+ /Obreve /Otilde /Ncedilla /Kcedilla
+ /Oslash /Ugrave /Gcircumflex /Gdotaccent
+ /Gcedilla /Scommaaccent /Hcircumflex /Hbar
+% 0xE0
+ /wcircumflex /edotaccent /ycircumflex /atilde 
+ /amacron /aring /ccircumflex /cdotaccent
+ /egrave /ebreve /ecircumflex /emacron
+ /igrave /itilde /imacron /idieresis
+% 0xF0
+ /iogonek /ntilde /ograve /omacron
+ /obreve /otilde /ncedilla /kcedilla
+ /oslash /ugrave /gcircumflex /gdotaccent
+ /gcedilla /scommaaccent /hcircumflex /hbar
+] def
+
+
+
+

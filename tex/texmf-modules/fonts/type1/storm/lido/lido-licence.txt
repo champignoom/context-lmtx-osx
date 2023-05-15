@@ -1,0 +1,24 @@
+LIDO STF is probably the first freeware font useful in text setting,
+which comes in the munber of six styles. Here is a story of Lido STF
+
+This font family is freeware. Storm Type Foundry(STF) provides it
+free of charge for non-commercial use in households, in education,
+for private scholars, et al.
+
+Before installation you must agree with the conditions of License
+Agreement given below. Clause 6 of this Agreement, however, does not
+apply to free font software.
+Additional Licenses for more than five computers as well as other STF
+fonts, are available at: http://www.stormtype.com/
+The Lido STF fonts are freeware, but not a public domain. This means
+that it continues to be protected by all copyrights.
+
+You can free distribute Lido STF fonts under the condition that they
+will be always kept in the original folder or archive file together
+with all its appendices. You agree to keep this document enclosed
+with Lido STF fonts during mailing, sending or taking them anywhere.
+
+VERY STRICTLY FORBIDDEN IS ANY DISTRIBUTION OF THESE FONTS TOGETHER
+WITH ANY KIND OF THIRD-PARTY PRODUCTS, EITHER FOR NON-PROFIT OR
+COMMERCIAL PURPOSE.
+

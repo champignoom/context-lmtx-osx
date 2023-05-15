@@ -1,0 +1,496 @@
+%&latex
+
+\setupcolors[state=start]
+
+\setupbodyfontenvironment[default][em=italic]
+
+\definetype[typeTEX][option=color]
+\setuptype[option=TEX]
+
+%\setuphead[subsection][page=yes]
+
+\define[1]\MyStyle{\color[blue]{\bf #1}}
+
+\starttext
+
+\section{Introduction}
+
+The modules in the {\tt taspresent} directory aim to provide an
+easy|-|to|-|use, consistent interface for writing simple presentations in
+\CONTEXT. I had the idea to write this module when I was preparing my own
+presentations with \CONTEXT. I wanted to be able to achieve visually
+different results without changing my source files, so I wrote different
+styles that followed the same logic and provided the same macros. When I
+created this module, I had the following requirements in mind:
+
+\startitemize
+\item Most of the styles that are provided are rather sober in
+  appearance. I use them for my university lectures in the humanities. They
+  provide a nice but not too distracting background and a lot of space for
+  presentations with large amounts of text.
+\item The module is meant for presentations which will be shown with the
+  help of a digital projector. Hence, they have no interactive elements
+  (such as buttons) and no tools for navigation (such as a table of
+  contents). 
+\item The module allows for user configurability. It comes with several
+  predefined styles and some predefined font options. The modular structure
+  makes it easy to add further styles.
+\item Picture placement and changing backgrounds is made easy by predefined
+  macros.
+\stopitemize
+
+The module provides a simple, basic structure; I think it will be best suited
+for beginners or intermediate users of \CONTEXT. It is definitely not meant
+to compete with Hans's fuller and fancier presentation modules, and it
+offers much less than the \LaTeX\ {\tt beamer} package. On the other hand,
+it is much easier to use; you should be able to write your first
+presentation after spending five minutes with this manual.
+
+\section{Installation}
+
+Installation is easy: just put the files {\tt t-<something>} into a
+directory where \TeX\ can see them. For \CONTEXT\ third|-|party modules,
+the canonical place would be in one of your {\tt TEXMF} trees, under {\tt
+  tex/context/third}. If you want to keep things tidy, place them in a
+subdirectory {\tt taspresent}. If you just unzip the archive {\tt
+  taspresent.zip} in a {\tt TEXMF} directory, things will be moved to the
+right place automatically. On many \TeX|-|systems, you will have to run
+{\tt texhash} after installing new files. To doublecheck whether the system
+finds your files, run {\tt kpsewhich t-taspresent.tex} from the command
+line; if all goes well, this should return the position of the file you
+have just installed.
+
+\section{Setting up the Module}
+
+To use the module, you put this line into your source file:
+
+\startTEX
+\usemodule[taspresent][style=,font=,size=,stylecolor=,stylebottom=]
+\stopTEX
+
+The values for the different keys will be explained in the following
+sections. 
+
+\section{The {\tt style} Key}
+
+There are ten options for the {\tt style} key:
+
+\subsection{\MyStyle{blackblue}}
+
+This style was inspired by the \quotation{Copenhagen} theme of the \LaTeX\
+{\tt beamer} package. The narrow blue and black stripes at the top and the
+bottom of the slides display the date and slidenumber (top) and the title
+and author of the presentation. 
+
+\placefigure[here]{The \MyStyle{blackblue}
+  style}{\externalfigure[blackblue][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{bluegray}}
+
+The colors of this style are very subdued and quiet; the interesting thing
+is the pagenumber on the border of the margin and text area; this detail
+was inspired by Hans's \quotation{split} style ({\tt pre-14}).
+
+\placefigure[here]{The \MyStyle{bluegray}
+  style}{\externalfigure[bluegray][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{bluestripe}}
+
+This theme is inspired by the \quotation{Berkeley} style of the \LaTeX\
+{\tt beamer} package. Apart from the blue sidebars, it has no ornaments. 
+
+\placefigure[here]{The \MyStyle{bluestripe}
+  style}{\externalfigure[bluestripe][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{darkshade}}
+
+The only ornament to this style is the dark shaded background; it has two
+style colors, {\tt stylecolor=blue} and {\tt stylecolor=green}; if you feel
+really adventurous, try {\tt stylecolor=bluered}! It uses \CONTEXT's {\tt
+  interactionbar} mechanism to show the progress of the presentation. It
+provides much space for text.
+
+\placefigure[here]{The \MyStyle{darkshade}
+  style with {\tt stylecolor=blue}}{\externalfigure[blueshade][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{doubleframe}}
+
+This style was inspired by Hans's \quotation{green} style ({\tt s-pre-02}). It
+has a thick blue frame around the entire slide area and a thinner frame around
+the text area. The style has two options for the bottom area: {\tt
+stylebottom=stripe} will display a shaded blue area which will grow with each
+slide; {\tt stylebottom=square} displays a row of blue squares at the bottom
+which also measure the presentation's progress.  
+
+\placefigure[here]{The \MyStyle{doubleframe}
+style with the {\tt stylebottom=stripe} option}{\externalfigure[blueframe][width=\textwidth]}
+
+\page
+
+\placefigure[here]{The \MyStyle{doubleframe}
+style with the {\tt stylebottom=square} option}{\externalfigure[squareframe][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{doubleshade}}
+
+Similar to the \MyStyle{blueshade} style, but there is a differently shaded
+area on the left with a progress meter. 
+
+\placefigure[here]{The \MyStyle{doubleshade}
+  style}{\externalfigure[doubleshade][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{embossed}}
+
+Spread the word, don't be shy! Show your pride in using \CONTEXT. The color
+theme will probably look familiar; I copied it from the {\tt enattab}
+manual. 
+
+\placefigure[here]{The \MyStyle{embossed}
+  style}{\externalfigure[embossed][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{graybeams}}
+
+This design is inspired by the {\tt husky} theme for the \LaTeX\ package {\tt
+powerdot}, created by Jack Stalnaker.
+
+\placefigure[here]{The \MyStyle{graybeams}
+  style}{\externalfigure[graybeams][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{graysquare}}
+
+This minimalistic design is inspired by a presentation Taco gave at EuroTeX
+2006.
+
+\placefigure[here]{The \MyStyle{graysquare}
+  style}{\externalfigure[graysquare][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{greenblue}}
+
+This style has cool colors and lots of white space; it is probably best suited
+for presentations with relatively little text.
+
+\placefigure[here]{The \MyStyle{greenblue}
+  style}{\externalfigure[greenblue][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{horizontalblue}}
+
+A sober style with an emphasis on horizontal lines, inspired by {\tt
+  beamer}'s \quotation{Szeged} theme. 
+
+\placefigure[here]{The \MyStyle{horizontalblue}
+  style}{\externalfigure[horizontalblue][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{lightblue}}
+
+This style emphasizes the title with its lively colors; the text area is
+delimited by a light blue, shaded margin. 
+
+\placefigure[here]{The \MyStyle{lightblue}
+  style}{\externalfigure[lightblue][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{narrowstripe}}
+
+A variation on the \MyStyle{bluestripe} style, with shaded narrow
+stripes. This style comes with two color options, which you set with the
+{\tt stylecolor} key; {\tt stylecolor=red}, {\tt stylecolor=green}, or {\tt
+  stylecolor=blue}.
+
+\placefigure[here]{The \MyStyle{narrowblue}
+style with {\tt stylecolor=blue}}{\externalfigure[narrowblue][width=\textwidth]}
+
+% \page
+% 
+% \subsection{\MyStyle{narrowred}}
+% 
+% Like the \MyStyle{narrowblue} style, but with a red theme color.
+% 
+% \placefigure[here]{The \MyStyle{narrowred}
+%   style}{\externalfigure[narrowred][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{quadblue}}
+
+This style is inspired by the colors and corporate look of my
+university. It is very sober and offers much space for text and
+images. There is a rough progress meter built into the blue quadrangles. 
+
+\placefigure[here]{The \MyStyle{quadblue}
+  style}{\externalfigure[quadblue][width=\textwidth]}
+
+\page
+
+
+\subsection{\MyStyle{rainbowstripe}}
+
+A colorful style for daring presenters. The black line which marks the
+progress is reminiscent of absorption lines in star spectra, so this style
+may be apt for astrophysical presentations?
+
+\placefigure[here]{The \MyStyle{rainbowstripe}
+  style}{\externalfigure[rainbowstripes][width=\textwidth]}
+
+\page
+
+\subsection{\MyStyle{redframe}}
+
+This style is inspired by the screen version of the Metafun manual. Watch
+the small gray circles at the bottom!
+
+\placefigure[here]{The \MyStyle{redframe}
+  style}{\externalfigure[redframe][width=\textwidth]}
+
+\subsection{Customization}
+
+The style parameter allows easy customization. If you want to develop your
+own theme, I would suggest copying one of the style files to another name,
+say {\tt MyStyle.tex}, and modifying it to your heart's content: you can
+change the colors or define a different background altogether, think of a
+different way of displaying titles, different margins, etc. Just be sure to
+define all the macros that are needed. After producing your own style,
+again, copy it to a place where \TeX\ can find it (such as the same
+directory where the source of your presentation resides) and instruct the
+module to use your file:
+
+\startTEX
+\usemodule[taspresent][style=MyStyle,font=Times,size=17pt]
+\stopTEX
+
+\section{The {\tt font} Key}
+
+There is a number of predefined fonts which can be selected by setting the
+{\tt font} key. 
+
+\starttabulate[|l|p|]
+\NC {\tt LatinModern}     \NC typesets in LatinModern Serif\NC \NR
+\NC {\tt LatinModernSans} \NC typesets in LatinModern Sans\NC \NR
+\NC {\tt Times}           \NC the free clone of TimesNew Roman\NC \NR
+\NC {\tt Helvetica}       \NC the free clone of Helvetica\NC \NR
+\NC {\tt Pagella}         \NC the tex-gyre clone of Palatino; this will
+only work if you have the tex-gyre fonts installed\NC \NR
+\stoptabulate
+
+In addition, there is a value {\tt User}; this will not set a font but
+allow you to provide your own settings. If you set your own font, please
+remember to select the bodyfont at \typeTEX{\Normalsize} and to give your setup
+commands {\em after} loading the module (or \TeX\ will not know what
+\typeTEX{\Normalsize} means and complain about an \quotation{undefined control
+  sequence}). For example, for the samples included here, I have used my own
+typescript which defines the Adobe MyriadPro font:
+
+\startTEX
+\usetypescriptfile[type-myriadpro]
+\usetypescript[MyriadPro] [texnansi]
+\setupbodyfont[MyMyriadPro,ss,\Normalsize]
+\stopTEX
+
+\section{The {\tt size} Key}
+
+This selects the font size for the main text and defines a corresponding
+size for titles.
+
+\placefigure[here]{Text and title sizes}
+{\setupTABLE[column][width=3cm,align=middle]
+\bTABLE
+\bTR \bTD Value \eTD \bTD Normalsize \eTD \bTD Titlesize \eTD \eTR
+\bTR \bTD 16pt \eTD \bTD 16pt \eTD \bTD 25pt \eTD \eTR
+\bTR \bTD 17pt \eTD \bTD 17pt \eTD \bTD 27pt \eTD \eTR
+\bTR \bTD 18pt \eTD \bTD 18pt \eTD \bTD 28pt \eTD \eTR
+\bTR \bTD 19pt \eTD \bTD 19pt \eTD \bTD 30pt \eTD \eTR
+\bTR \bTD 20pt \eTD \bTD 20pt \eTD \bTD 30pt \eTD \eTR
+\bTR \bTD 21pt \eTD \bTD 21pt \eTD \bTD 30pt \eTD \eTR
+\eTABLE}
+
+\section{Macros}
+
+The module provides some macros to facilitate the preparation of
+presentations. 
+
+\subsection{\typeTEX{\setvariables}}
+
+Begin your presentation by setting the name of the author(s) and the title
+with this macro:
+
+\startTEX
+  
+\setvariables [taspresent]
+              [author={Groucho Marx},
+               title={Marriage the Chief Cause of Divorce}]
+\stopTEX
+
+\subsection{\typeTEX{\Maketitle}}
+
+This macro will produce a title page with the author and the title of the
+presentation; the look is of course determined by the style of your
+presentation. 
+
+\placefigure[here]{A Title Page}{\externalfigure[titlepage][width=\textwidth]}
+
+\subsection{\typeTEX{\Slidetitle{}}}
+
+As the name suggests, this macro typesets its argument as the title of the
+slide. What the title looks like is determined by the selected presentation
+style. 
+
+\subsection{\typeTEX{\PicHoriz}}
+
+This macro facilitates the placement of landscape images. It takes two
+arguments:
+
+\startTEX
+\PicHoriz[image][height=\NormalHeight]
+\stopTEX
+
+The first argument is the name of the image you want to place; the second
+argument determines the size. If your picture is not too broad, a height of
+\typeTEX{\NormalHeight} will make it fill up the entire text area. If your
+picture is too broad, you should set \typeTEX{width=\textwidth}. 
+
+\placefigure[here]{Placement of a horizontal picture}{\externalfigure[horizontal][width=\textwidth]}
+
+\page
+
+\subsection{\typeTEX{\PicVert}}
+
+This macro facilitates the placement of portrait images. It takes three
+arguments:
+
+\startTEX
+\PicVert[image][width=\NormalWidth]{Text \\ to go \\ with the picture}
+\stopTEX
+
+Again, the first argument is the name of the image you want to place; the
+second argument determines the size. If your picture is not too high, a
+width of \typeTEX{\NormalWidth} will make it fill up the entire left half
+of the text area. If your picture is too hight, you should set
+\typeTEX{height=\textheight}. The third argument is the text that will be
+placed opposite the picture. 
+
+\placefigure[here]{Placement of a vertical picture}{\externalfigure[vertical][width=\textwidth]}
+
+\page
+
+\subsection{\typeTEX{\CircHoriz}}
+
+This command works exactly like \typeTEX{\PicHoriz}, but takes an
+additional (third) argument. It places a red circle on top of the picture;
+the placement and size of this circle is determined by this third argument: 
+
+\startTEX
+\CircHoriz[scale=40,x=120,y=80][image][height=\NormalHeight]
+\stopTEX
+
+The {\tt scale} key sets the diameter of the circle (in mm), {\tt x}
+and {\tt y} set horizontal and vertical position. You will probably
+have to fiddle with these keys to get the circle exactly where you want
+it. 
+
+
+\placefigure[here]{A picture with a red circle}{\externalfigure[circle][width=\textwidth]}
+
+\page
+
+\subsection{\typeTEX{\ArrowHoriz}}
+
+This command works exactly like \typeTEX{\PicHoriz}, but takes an
+additional (third) argument. It places a red arrow on top of the picture;
+the direction and size of this arrow is determined by this third argument: 
+
+\startTEX
+\CircHoriz[direction=135,x=120,y=80][image][height=\NormalHeight]
+\stopTEX
+
+The {\tt direction} key sets the direction into which the arrowhead points,
+{\tt x} and {\tt y} set its horizontal and vertical position. You will
+probably have to fiddle with these keys to get the circle exactly where you
+want it.
+
+\placefigure[here]{A picture with a red arrow}{\externalfigure[arrow][width=\textwidth]}
+
+\page
+
+\subsection{\typeTEX{\CircVert} and \typeTEX{ArrowVert}}
+
+Of course, there are also circles and arrows for \quotation{vertical}
+pictures; again, the first argument is the position of the circle/arrow: 
+
+\startTEX
+\CircVert[scale=22,x=23,y=25]%
+[vert]%
+[width=\NormalWidth]%
+{Circle in \\ Vertical Mode}
+
+\ArrowVert[direction=90,x=7,y=23]%
+[vert]%
+[width=\NormalWidth]%
+{Arrow in \\ Vertical Mode}
+\stopTEX
+
+\placefigure[here]{Vertical picture with red circle}{\externalfigure[circvert][width=\textwidth]}
+
+\placefigure[here]{Vertical picture with red arrow}{\externalfigure[arrvert][width=\textwidth]}
+
+\subsection{Background}
+
+Some of the styles provide up to three backgrounds: for titles, for slides
+with vertical image, and for normal slides with text or horizontal
+images. Switching the backgrounds also adjusts parameters like margins or
+headers, where this is necessary. There are three commands for setting the
+background for title slides, \quotation{horizontal} slides and
+\quotation{vertical} slides respectively:
+
+\startTEX
+\titback
+\lecback
+\picback
+\stopTEX
+
+\section{Handouts}
+
+The easiest way to make handouts from your slides is post|-|processing the
+pdf|-|file of your presentation. If you want to make the handouts from the
+slides such as they appear, just run this command in the directory where
+your slides are located (of course, put the name of your own presentation
+where you see {\tt demo.pdf} in the example; the entire command has to go
+in one long line):
+
+{\tt texmfstart texexec --pdfcombine --combination='2*3' --nobanner
+
+ --result=handout demo.pdf}
+
+This way, you will get a handout with six slides typeset in two columns per
+page. 
+
+If you prefer to have the handouts without the colored background, typeset
+your presentation and leave the {\em style} key unset; that way, you will
+get a default version without backgrounds and fancy frames.
+
+\stoptext
+
+%%% Local Variables: 
+%%% mode: context
+%%% TeX-master: t
+%%% End: 

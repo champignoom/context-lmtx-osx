@@ -1,0 +1,163 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\doifdefinedelse{stormmapdefined}
+  {}
+  {\let\stormmapdefined\empty \loadmapfile[storm]}
+%\starttypescript [map] [serapion] [st1,st2]
+%  \loadmapfile[storm]
+%\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [serapion] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		   [Serapion-Roman]
+  \definefontsynonym [SerifBold]	   [Serapion-Bold]
+  \definefontsynonym [SerifItalic]	   [Serapion-Italic]
+  \definefontsynonym [SerifBoldItalic]	   [Serapion-Bold-Italic]
+
+  \definefontsynonym [SerifOS]	           [Serapion-OS]
+  \definefontsynonym [SerifBoldOS]	   [Serapion-Bold-OS]
+  \definefontsynonym [SerifItalicOS]	   [Serapion-Italic-OS]
+  \definefontsynonym [SerifBoldItalicOS]   [Serapion-Bold-Italic-OS]
+
+  \definefontsynonym [SerifExt]		   [Serapion-Roman-Ext]
+  \definefontsynonym [SerifBoldExt]	   [Serapion-Bold-Ext]
+  \definefontsynonym [SerifItalicExt]	   [Serapion-Italic-Ext]
+  \definefontsynonym [SerifBoldItalicExt]  [Serapion-Bold-Italic-Ext]
+  \definefontsynonym [SerifSlantedExt]	   [Serapion-Italic-Ext]
+  \definefontsynonym [SerifBoldSlantedExt] [Serapion-Bold-Italic-Ext]
+  \definefontsynonym [SerifOSExt]          [Serapion-OS-Ext]
+  \definefontsynonym [SerifBoldOSExt]      [Serapion-Bold-OS-Ext]
+  \definefontsynonym [SerifItalicOSExt]    [Serapion-Italic-OS-Ext]
+  \definefontsynonym [SerifBoldItalicOSExt][Serapion-Bold-Italic-OS-Ext]
+
+  \definefontsynonym [SerifRegular]	[Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+  \definefontsynonym [SerifRegularOS]	[SerifOS]
+  \definefontsynonym [SerifRegularOSExt][SerifOSExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+  \definefontvariant [Serif] [os] [OS]
+\stoptypescript
+
+\starttypescript [serif] [serapion] [st1]
+  \definefontsynonym [Serapion-Roman]            [ssrr8t]  [encoding=st1]
+  \definefontsynonym [Serapion-Bold]             [ssrb8t]  [encoding=st1]
+  \definefontsynonym [Serapion-Italic]           [ssrri8t] [encoding=st1]
+  \definefontsynonym [Serapion-Bold-Italic]      [ssrbi8t] [encoding=st1]
+
+%  \definefontsynonym [Serapion-OS]               []  [encoding=st1]
+%  \definefontsynonym [Serapion-Bold-OS]          []  [encoding=st1]
+%  \definefontsynonym [Serapion-Italic-OS]        []  [encoding=st1]
+%  \definefontsynonym [Serapion-Bold-Italic-OS]   [] [encoding=st1]
+
+  \definefontsynonym [Serapion-Roman-Ext]        [ssrr6s]  [encoding=st3]
+  \definefontsynonym [Serapion-Bold-Ext]         [ssrb6s]  [encoding=st3]
+  \definefontsynonym [Serapion-Italic-Ext]       [ssrri6s] [encoding=st3]
+  \definefontsynonym [Serapion-Bold-Italic-Ext]  [ssrbi6s] [encoding=st3]
+
+%  \definefontsynonym [Serapion-OS-Ext]            []  [encoding=st3]
+%  \definefontsynonym [Serapion-Bold-OS-Ext]       []  [encoding=st3]
+%  \definefontsynonym [Serapion-Italic-OS-Ext]     []  [encoding=st3]
+%  \definefontsynonym [Serapion-Bold-Italic-OS-Ext][] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [serapion] [st2]
+  \definefontsynonym [Serapion-Roman]            [ssrr8z]  [encoding=st2]
+  \definefontsynonym [Serapion-Bold]             [ssrb8z]  [encoding=st2]
+  \definefontsynonym [Serapion-Italic]           [ssrri8z] [encoding=st2]
+  \definefontsynonym [Serapion-Bold-Italic]      [ssrbi8z] [encoding=st2]
+
+%  \definefontsynonym [Serapion-OS]               []  [encoding=st2]
+%  \definefontsynonym [Serapion-Bold-OS]          []  [encoding=st2]
+%  \definefontsynonym [Serapion-Italic-OS]        []  [encoding=st2]
+%  \definefontsynonym [Serapion-Bold-Italic-OS]   [] [encoding=st2]
+
+  \definefontsynonym [Serapion-Roman-Ext]        [ssrr6s]  [encoding=st3]
+  \definefontsynonym [Serapion-Bold-Ext]         [ssrb6s]  [encoding=st3]
+  \definefontsynonym [Serapion-Italic-Ext]       [ssrri6s] [encoding=st3]
+  \definefontsynonym [Serapion-Bold-Italic-Ext]  [ssrbi6s] [encoding=st3]
+
+%  \definefontsynonym [Serapion-OS-Ext]            []  [encoding=st3]
+%  \definefontsynonym [Serapion-Bold-OS-Ext]       []  [encoding=st3]
+%  \definefontsynonym [Serapion-Italic-OS-Ext]     []  [encoding=st3]
+%  \definefontsynonym [Serapion-Bold-Italic-OS-Ext][] [encoding=st3]
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [serapion] [name]
+  \definefontsynonym [MathRoman]        [Serapion-Math-Letters]
+  \definefontsynonym [MathItalic]       [Serapion-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Serapion-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [serapion] [st1]
+  \definefontsynonym [Serapion-Math-Letters]        [ssrr8t]  [encoding=st1]
+  \definefontsynonym [Serapion-Math-Letters-Italic] [ssrri8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Serapion-Math-Storm]          [ssrr6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [serapion] [st2]
+  \definefontsynonym [Serapion-Math-Letters]        [ssrr8z]  [encoding=st2]
+  \definefontsynonym [Serapion-Math-Letters-Italic] [ssrri8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Serapion-Math-Storm]          [ssrr6s]  [encoding=st3]
+\stoptypescript
+
+% bold
+\starttypescript [boldmath] [serapion] [name]
+  \definefontsynonym [MathRoman]        [Serapion-MathBold-Letters]
+  \definefontsynonym [MathItalic]       [Serapion-MathBold-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMathBold-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Serapion-MathBold-Storm]
+\stoptypescript
+
+\starttypescript [boldmath] [serapion] [st1]
+  \definefontsynonym [Serapion-MathBold-Letters]        [ssrb8t]  [encoding=st1]
+  \definefontsynonym [Serapion-MathBold-Letters-Italic] [ssrbi8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [Serapion-MathBold-Storm]          [ssrb6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [serapion] [st2]
+  \definefontsynonym [Serapion-MathBold-Letters]        [ssrb8z]  [encoding=st2]
+  \definefontsynonym [Serapion-MathBold-Letters-Italic] [ssrbi8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [Serapion-MathBold-Storm]          [ssrb6s]  [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [serapion] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [Serapion] [st1,st2]
+  \definetypeface [Serapion] [rm] [serif] [serapion] [default] [encoding=\typescripttwo]
+  \definetypeface [Serapion] [mm] [math] [serapion] [storm]   [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [serapion] [storm] [encoding=\typescripttwo]
+  \definetypeface [Serapion] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection
+\endinput
+
+% end of type-sserapion.tex

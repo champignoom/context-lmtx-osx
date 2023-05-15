@@ -1,0 +1,96 @@
+%D \module
+%D   [       file=t-high-vbnet,
+%D        version=2017.04.05,
+%D          title=\CONTEXT\ User Module,
+%D       subtitle=Syntax Highlighter for Visual Basic .NET,
+%D         author=Christoph Reller,
+%D           date=\currentdate,
+%D      copyright=Christoph Reller,
+%D          email=christoph.reller@gmail.com,
+%D        license=GNU General Public License]
+
+%C Copyright (C) 2017 Christoph Reller
+%C
+%C This program is free software: you can redistribute it and/or modify
+%C it under the terms of the GNU General Public License as published by
+%C the Free Software Foundation, either version 3 of the License, or
+%C any later version.
+%C
+%C This program is distributed in the hope that it will be useful,
+%C but WITHOUT ANY WARRANTY; without even the implied warranty of
+%C MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%C GNU General Public License for more details.
+%C
+%C You should have received a copy of the GNU General Public License
+%C along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+%M \usemodule[high-vbnet]
+
+%D \section{Usage}
+%D Example:
+%D
+%D \startVBNET
+%D Imports sys = System.s
+%D
+%D #Const c = func(a < b)
+%D ' comment
+%D Char a = "Somethïng spécial"
+%D
+%D Class [class]
+%D   Shared Sub [shared](ByVal [boolean] As Boolean)
+%D     If [boolean] Then
+%D       Console.WriteLine("true") 'comment
+%D     Else
+%D       Console.WriteLine("false")
+%D     End If
+%D   End Sub
+%D End Class
+%D
+%D Module [module]
+%D   Sub Main()
+%D     [class].[shared](True)
+%D   End Sub
+%D End Module
+%D \stopVBNET
+
+\registerctxluafile{t-high-common.lua}{1.0}
+\registerctxluafile{t-high-vbnet.lua}{1.0}
+
+\unprotect
+
+\definestartstop[VbSnippet][DefaultSnippet]
+
+\definestartstop[VbSnippetIdent][
+  \c!color=blue,
+  \c!style=]
+\definestartstop[VbSnippetKeyword][
+  \c!color=middlegreen,
+  \c!style=]
+\definestartstop[VbSnippetType][
+  \c!color=middlegreen,
+  \c!style=]
+\definestartstop[VbSnippetVariable][
+  \c!color=middleyellow,
+  \c!style=]
+\definestartstop[VbSnippetImport][
+  \c!color=magenta,
+  \c!style=]
+\definestartstop[VbSnippetDirective][
+  \c!color=middlemagenta,
+  \c!style=]
+\definestartstop[VbSnippetOperator][
+  \c!color=darkmagenta,
+  \c!style=]
+\definestartstop[VbSnippetBoundary][
+  \c!color=darkgray,
+  \c!style=]
+\definestartstop[VbSnippetComment][
+  \c!color=middlegray,
+  \c!style=]
+\definestartstop[VbSnippetLiteral][
+  \c!color=darkred,
+  \c!style=]
+
+\definetyping[VBNET][\c!option=vbnet]
+
+\protect \endinput

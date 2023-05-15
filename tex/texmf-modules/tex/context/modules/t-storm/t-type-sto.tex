@@ -1,0 +1,69 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+
+\starttypescript [serif] [caps] [size]
+  \definebodyfont
+    [4pt,5pt,6pt,7pt,8pt,9pt,10pt,11pt,12pt,14.4pt,17.3pt]
+    [rm]
+    [tf=Serif           sa 1,
+     bf=SerifBold       sa 1,
+     it=SerifItalic     sa 1,
+     bi=SerifBoldItalic sa 1,
+     sc=SerifCaps       sa 1,
+     bc=SerifBoldCaps   sa 1,
+     ic=SerifItalicCaps sa 1,
+     bic=SerifBoldItalicCaps sa 1]
+\stoptypescript
+
+\starttypescript [serif] [caps-medium] [size]
+  \definebodyfont
+    [4pt,5pt,6pt,7pt,8pt,9pt,10pt,11pt,12pt,14.4pt,17.3pt]
+    [rm]
+    [tf=Serif             sa 1,
+     bf=SerifBold         sa 1,
+     it=SerifItalic       sa 1,
+     bi=SerifBoldItalic   sa 1,
+     sc=SerifCaps         sa 1,
+     bc=SerifBoldCaps     sa 1,
+     mf=SerifMedium       sa 1,
+     mi=SerifMediumItalic sa 1]
+\stoptypescript
+
+%\starttypescript [serif] [cond] [size]
+%  \definebodyfont
+%    [4pt,5pt,6pt,7pt,8pt,9pt,10pt,11pt,12pt,14.4pt,17.3pt]
+%    [rm]
+%    [tf=Serif           sa 1,
+%     bf=SerifBold       sa 1,
+%     it=SerifItalic     sa 1,
+%     bi=SerifBoldItalic sa 1,
+%     tfc=SerifCond      sa 1,
+%     bfc=SerifBoldCond  sa 1]
+%\stoptypescript
+
+%\definealternativestyle[orn] [\orn] [\orn]
+\starttypescript [serif] [ornam] [size]
+  \definebodyfont
+    [4pt,5pt,6pt,7pt,8pt,9pt,10pt,11pt,12pt,14.4pt,17.3pt]
+    [rm]
+    [tf=Serif           sa 1,
+     bf=SerifBold       sa 1,
+     it=SerifItalic     sa 1,
+     bi=SerifBoldItalic sa 1,
+     sy=SerifOrnament   sa 1]
+\stoptypescript
+
+% --- math
+\starttypescript [math,boldmath] [storm] [size]
+  \definebodyfont
+    [4pt,5pt,6pt,7pt,8pt,9pt,10pt,11pt,12pt,14.4pt,17.3pt]
+    [mm]
+    [mr=MathRoman mo 1,
+     mi=MathItalic mo 1,
+     sy=MathSymbol mo 1,
+     ex=MathExtension mo 1,
+     mc=MathStorm mo 1]
+\stoptypescript
+
+\endinput

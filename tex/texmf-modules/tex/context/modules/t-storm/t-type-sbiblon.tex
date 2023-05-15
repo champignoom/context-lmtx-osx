@@ -1,0 +1,155 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\doifdefinedelse{stormmapdefined}
+  {}
+  {\let\stormmapdefined\empty \loadmapfile[storm]}
+%\starttypescript [map] [biblon] [st1,st2]
+%  \loadmapfile[storm]
+%\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [biblon] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		     [Biblon-Roman]
+  \definefontsynonym [SerifBold]	     [Biblon-Bold]
+  \definefontsynonym [SerifItalic]	     [Biblon-Italic]
+  \definefontsynonym [SerifBoldItalic]	     [Biblon-Bold-Italic]
+  \definefontsynonym [SerifCaps]	     [Biblon-Caps]
+  \definefontsynonym [SerifBoldCaps]	     [Biblon-Bold-Caps]
+  \definefontsynonym [SerifItalicCaps]	     [Biblon-Italic-Caps]
+  \definefontsynonym [SerifBoldItalicCaps]   [Biblon-Bold-Italic-Caps]
+
+  \definefontsynonym [SerifExt]		     [Biblon-Roman-Ext]
+  \definefontsynonym [SerifBoldExt]	     [Biblon-Bold-Ext]
+  \definefontsynonym [SerifItalicExt]	     [Biblon-Italic-Ext]
+  \definefontsynonym [SerifBoldItalicExt]    [Biblon-Bold-Italic-Ext]
+  \definefontsynonym [SerifSlantedExt]	     [Biblon-Italic-Ext]
+  \definefontsynonym [SerifBoldSlantedExt]   [Biblon-Bold-Italic-Ext]
+  \definefontsynonym [SerifCapsExt]          [Biblon-Caps-Ext]
+  \definefontsynonym [SerifBoldCapsExt]      [Biblon-Bold-Caps-Ext]
+  \definefontsynonym [SerifItalicCapsExt]    [Biblon-Italic-Caps-Ext]
+  \definefontsynonym [SerifBoldItalicCapsExt][Biblon-Bold-Italic-Caps-Ext]
+
+  \definefontsynonym [SerifRegular]	[Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [biblon] [st1]
+  \definefontsynonym [Biblon-Roman]               [sbbr8t]   [encoding=st1]
+  \definefontsynonym [Biblon-Bold]                [sbbb8t]   [encoding=st1]
+  \definefontsynonym [Biblon-Italic]              [sbbri8t]  [encoding=st1]
+  \definefontsynonym [Biblon-Bold-Italic]         [sbbbi8t]  [encoding=st1]
+  \definefontsynonym [Biblon-Caps]                [sbbrc8t]  [encoding=st1]
+  \definefontsynonym [Biblon-Bold-Caps]           [sbbbc8t]  [encoding=st1]
+  \definefontsynonym [Biblon-Italic-Caps]         [sbbric8t] [encoding=st1]
+  \definefontsynonym [Biblon-Bold-Italic-Caps]    [sbbbic8t] [encoding=st1]
+
+  \definefontsynonym [Biblon-Roman-Ext]           [sbbr6s]   [encoding=st3]
+  \definefontsynonym [Biblon-Bold-Ext]            [sbbb6s]   [encoding=st3]
+  \definefontsynonym [Biblon-Italic-Ext]          [sbbri6s]  [encoding=st3]
+  \definefontsynonym [Biblon-Bold-Italic-Ext]     [sbbbi6s]  [encoding=st3]
+  \definefontsynonym [Biblon-Caps-Ext]            [sbbrc6s]  [encoding=st3]
+  \definefontsynonym [Biblon-Bold-Caps-Ext]       [sbbbc6s]  [encoding=st3]
+  \definefontsynonym [Biblon-Italic-Caps-Ext]     [sbbric6s] [encoding=st3]
+  \definefontsynonym [Biblon-Bold-Italic-Caps-Ext][sbbbic6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [biblon] [st2]
+  \definefontsynonym [Biblon-Roman]               [sbbr8z]   [encoding=st2]
+  \definefontsynonym [Biblon-Bold]                [sbbb8z]   [encoding=st2]
+  \definefontsynonym [Biblon-Italic]              [sbbri8z]  [encoding=st2]
+  \definefontsynonym [Biblon-Bold-Italic]         [sbbbi8z]  [encoding=st2]
+  \definefontsynonym [Biblon-Caps]                [sbbrc8z]  [encoding=st2]
+  \definefontsynonym [Biblon-Bold-Caps]           [sbbbc8z]  [encoding=st2]
+  \definefontsynonym [Biblon-Italic-Caps]         [sbbric8z] [encoding=st2]
+  \definefontsynonym [Biblon-Bold-Italic-Caps]    [sbbbic8z] [encoding=st2]
+
+  \definefontsynonym [Biblon-Roman-Ext]           [sbbr6s]   [encoding=st3]
+  \definefontsynonym [Biblon-Bold-Ext]            [sbbb6s]   [encoding=st3]
+  \definefontsynonym [Biblon-Italic-Ext]          [sbbri6s]  [encoding=st3]
+  \definefontsynonym [Biblon-Bold-Italic-Ext]     [sbbbi6s]  [encoding=st3]
+  \definefontsynonym [Biblon-Caps-Ext]            [sbbrc6s]  [encoding=st3]
+  \definefontsynonym [Biblon-Bold-Caps-Ext]       [sbbbc6s]  [encoding=st3]
+  \definefontsynonym [Biblon-Italic-Caps-Ext]     [sbbric6s] [encoding=st3]
+  \definefontsynonym [Biblon-Bold-Italic-Caps-Ext][sbbbic6s] [encoding=st3]
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [biblon] [name]
+  \definefontsynonym [MathRoman]        [Biblon-Math-Letters]
+  \definefontsynonym [MathItalic]       [Biblon-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Biblon-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [biblon] [st1]
+  \definefontsynonym [Biblon-Math-Letters]          [sbbr8t]  [encoding=st1]
+  \definefontsynonym [Biblon-Math-Letters-Italic]   [sbbri8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Biblon-Math-Storm]            [sbbr6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [biblon] [st2]
+  \definefontsynonym [Biblon-Math-Letters]          [sbbr8z]  [encoding=st2]
+  \definefontsynonym [Biblon-Math-Letters-Italic]   [sbbri8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Biblon-Math-Storm]            [sbbr6s] [encoding=st3]
+\stoptypescript
+
+% bold
+\starttypescript [boldmath] [biblon] [name]
+  \definefontsynonym [MathRoman]        [Biblon-MathBold-Letters]
+  \definefontsynonym [MathItalic]       [Biblon-MathBold-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMathBold-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Biblon-MathBold-Storm]
+\stoptypescript
+
+\starttypescript [boldmath] [biblon] [st1]
+  \definefontsynonym [Biblon-MathBold-Letters]        [sbbb8t]  [encoding=st1]
+  \definefontsynonym [Biblon-MathBold-Letters-Italic] [sbbbi8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols] [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]   [cmex10]
+  \definefontsynonym [Biblon-MathBold-Storm]          [sbbb6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [biblon] [st2]
+  \definefontsynonym [Biblon-MathBold-Letters]        [sbbb8z]  [encoding=st2]
+  \definefontsynonym [Biblon-MathBold-Letters-Italic] [sbbbi8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols] [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]   [cmex10]
+  \definefontsynonym [Biblon-MathBold-Storm]          [sbbb6s]  [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [biblon] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [Biblon] [st1,st2]
+  \definetypeface [Biblon] [rm] [serif] [biblon] [caps] [encoding=\typescripttwo]
+  \definetypeface [Biblon] [mm] [math] [biblon] [storm]   [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [biblon] [storm] [encoding=\typescripttwo]
+  \definetypeface [Biblon] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection 
+\endinput
+
+% end of type-sbiblon.tex

@@ -1,0 +1,147 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\doifdefinedelse{stormmapdefined}
+  {}
+  {\let\stormmapdefined\empty \loadmapfile[storm]}
+%\starttypescript [map] [regentII] [st1,st2]
+%  \loadmapfile[storm]
+%\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [regentII] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		     [RegentII-Roman]
+  \definefontsynonym [SerifBold]	     [RegentII-Bold]
+  \definefontsynonym [SerifItalic]	     [RegentII-Italic]
+  \definefontsynonym [SerifBoldItalic]	     [RegentII-Bold-Italic]
+  \definefontsynonym [SerifCaps]	     [RegentII-Caps]
+  \definefontsynonym [SerifBoldCaps]	     [RegentII-Bold-Caps]
+  \definefontsynonym [SerifItalicCaps]	     [RegentII-Italic-Caps]
+  \definefontsynonym [SerifBoldItalicCaps]   [RegentII-Bold-Italic-Caps]
+
+  \definefontsynonym [SerifExt]		     [RegentII-Roman-Ext]
+  \definefontsynonym [SerifBoldExt]	     [RegentII-Bold-Ext]
+  \definefontsynonym [SerifItalicExt]	     [RegentII-Italic-Ext]
+  \definefontsynonym [SerifBoldItalicExt]    [RegentII-Bold-Italic-Ext]
+  \definefontsynonym [SerifSlantedExt]	     [RegentII-Italic-Ext]
+  \definefontsynonym [SerifBoldSlantedExt]   [RegentII-Bold-Italic-Ext]
+  \definefontsynonym [SerifCapsExt]          [RegentII-Caps-Ext]
+  \definefontsynonym [SerifBoldCapsExt]      [RegentII-Bold-Caps-Ext]
+  \definefontsynonym [SerifItalicCapsExt]    [RegentII-Italic-Caps-Ext]
+  \definefontsynonym [SerifBoldItalicCapsExt][RegentII-Bold-Italic-Caps-Ext]
+
+  \definefontsynonym [SerifRegular]	[Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [regentII] [st1]
+  \definefontsynonym [RegentII-Roman]            []  [encoding=st1]
+  \definefontsynonym [RegentII-Bold]             []  [encoding=st1]
+  \definefontsynonym [RegentII-Italic]           [] [encoding=st1]
+  \definefontsynonym [RegentII-Bold-Italic]      [] [encoding=st1]
+  \definefontsynonym [RegentII-Caps]             []  [encoding=st1]
+  \definefontsynonym [RegentII-Bold-Caps]        []  [encoding=st1]
+  \definefontsynonym [RegentII-Italic-Caps]      []  [encoding=st1]
+  \definefontsynonym [RegentII-Bold-Italic-Caps] [] [encoding=st1]
+
+  \definefontsynonym [RegentII-Roman-Ext]           []  [encoding=st3]
+  \definefontsynonym [RegentII-Bold-Ext]            []  [encoding=st3]
+  \definefontsynonym [RegentII-Italic-Ext]          [] [encoding=st3]
+  \definefontsynonym [RegentII-Bold-Italic-Ext]     [] [encoding=st3]
+  \definefontsynonym [RegentII-Caps-Ext]            []  [encoding=st3]
+  \definefontsynonym [RegentII-Bold-Caps-Ext]       []  [encoding=st3]
+  \definefontsynonym [RegentII-Italic-Caps-Ext]     []  [encoding=st3]
+  \definefontsynonym [RegentII-Bold-Italic-Caps-Ext][] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [regentII] [st2]
+  \definefontsynonym [RegentII-Roman]            []  [encoding=st2]
+  \definefontsynonym [RegentII-Bold]             []  [encoding=st2]
+  \definefontsynonym [RegentII-Italic]           [] [encoding=st2]
+  \definefontsynonym [RegentII-Bold-Italic]      [] [encoding=st2]
+  \definefontsynonym [RegentII-Caps]             []  [encoding=st2]
+  \definefontsynonym [RegentII-Bold-Caps]        []  [encoding=st2]
+  \definefontsynonym [RegentII-Italic-Caps]      []  [encoding=st2]
+  \definefontsynonym [RegentII-Bold-Italic-Caps] [] [encoding=st2]
+
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [regentII] [name]
+  \definefontsynonym [MathRoman]        [RegentII-Math-Letters]
+  \definefontsynonym [MathItalic]       [RegentII-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [RegentII-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [regentII] [st1]
+  \definefontsynonym [RegentII-Math-Letters]        []  [encoding=st1]
+  \definefontsynonym [RegentII-Math-Letters-Italic] [] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [RegentII-Math-Storm]          []  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [regentII] [st2]
+  \definefontsynonym [RegentII-Math-Letters]        []  [encoding=st2]
+  \definefontsynonym [RegentII-Math-Letters-Italic] [] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [RegentII-Math-Storm]          []  [encoding=st3]
+\stoptypescript
+
+% bold
+\starttypescript [boldmath] [regentII] [name]
+  \definefontsynonym [MathRoman]        [RegentII-MathBold-Letters]
+  \definefontsynonym [MathItalic]       [RegentII-MathBold-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMathBold-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [RegentII-MathBold-Storm]
+\stoptypescript
+
+\starttypescript [boldmath] [regentII] [st1]
+  \definefontsynonym [RegentII-MathBold-Letters]       []  [encoding=st1]
+  \definefontsynonym [RegentII-MathBold-Letters-Italic][] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols]  [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]    [cmex10]
+  \definefontsynonym [RegentII-MathBold-Storm]         []  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [regentII] [st2]
+  \definefontsynonym [RegentII-MathBold-Letters]       []  [encoding=st2]
+  \definefontsynonym [RegentII-MathBold-Letters-Italic][] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols]  [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]    [cmex10]
+  \definefontsynonym [RegentII-MathBold-Storm]         []  [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [regentII] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [RegentII] [st1,st2]
+  \definetypeface [RegentII] [rm] [serif] [regentII] [caps] [encoding=\typescripttwo]
+  \definetypeface [RegentII] [mm] [math] [regentII] [storm]   [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [regentII] [storm] [encoding=\typescripttwo]
+  \definetypeface [RegentII] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection
+\endinput
+
+% end of type-sregentII.tex

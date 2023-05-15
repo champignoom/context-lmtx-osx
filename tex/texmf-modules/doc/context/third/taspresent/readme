@@ -1,0 +1,136 @@
+Module for projector-based presentations
+-----------------------------------------
+
+This directory provides a module to produce presentations with ConTeXt. It
+contains the following files:
+
+doc/taspresent/readme (this file)
+doc/taspresent/demo.tex
+doc/taspresent/hor.jpg
+doc/taspresent/taspresent-manual.pdf
+doc/taspresent/vert.jpg
+texmf/tex/context/third/taspresent/rainbow.pdf
+texmf/tex/context/third/taspresent/t-blackblue.tex
+texmf/tex/context/third/taspresent/t-bluegray.tex
+texmf/tex/context/third/taspresent/t-bluestripe.tex
+texmf/tex/context/third/taspresent/t-darkshade.tex
+texmf/tex/context/third/taspresent/t-doubleframe.tex
+texmf/tex/context/third/taspresent/t-doubleshade.tex
+texmf/tex/context/third/taspresent/t-embossed.tex
+texmf/tex/context/third/taspresent/t-graybeams.tex
+texmf/tex/context/third/taspresent/t-graysquare.tex
+texmf/tex/context/third/taspresent/t-greenblue.tex
+texmf/tex/context/third/taspresent/t-horizontalblue.tex
+texmf/tex/context/third/taspresent/t-lightblue.tex
+texmf/tex/context/third/taspresent/t-narrowstripe.tex
+texmf/tex/context/third/taspresent/t-quadblue.tex
+texmf/tex/context/third/taspresent/t-rainbowstripe.tex
+texmf/tex/context/third/taspresent/t-redframe.tex
+texmf/tex/context/third/taspresent/t-taspresent.tex
+
+The two images hor.jpg and vert.jpg are copyright 2007 Patrick Gundlach and are
+published under the GNU General Public License v. 2.0. All other files are
+copyright 2007 by Thomas A. Schmitz; they are published under the GNU General
+Public License v. 2.0.
+
+
+Installation
+------------
+
+Simply move the module files t-* into a place where TeX can find them. The
+canonical location would be $TEXMF/tex/context/third, where you can create a
+subdiretory "presentations" to keep everything together. On most systems, you
+will have to run texhash after installing new packages. If you want to test the
+module before actually installing it, just leave everything in the original
+directory and typeset the demo file.
+
+
+Use
+---
+
+A full manual is included, Here is a very short version for the impatient:
+
+To use the module, include this line in your file:
+
+\usemodule[taspresent]
+[style=doubleframe,font=Helvetica,size=17pt,stylecolor=blue,stylebottom=sqaure]
+
+For the "style" parameter, there are currently sixteen options:
+
+blackblue
+bluegray
+bluestripe
+darkshade
+doubleframe
+doubleshade
+embossed
+graybeams
+graysquare
+greenblue
+horizontalblue
+lightblue
+narrowstripe
+quadblue
+rainbowstripe
+redframe
+
+This will modify the background of your slides and the placement of certain
+elements. 
+
+For the "font" parameter, there are currently five options:
+
+LatinModern     [typesets in LatinModern Serif]
+LatinModernSans [typesets in LatinModern Sans]
+Times           [the free clone of TimesNew Roman]
+Helvetica       [the free clone of Helvetica]
+Pagella         [the tex-gyre clone of Palatino; only if you have the tex-gyre 
+                fonts installed]
+User            [this does not set a font; provide your own definitions]
+
+If you want to use your own typescripts, remember to use the bodyfont at
+\Normalsize like so:
+
+\usetypescriptfile[type-mytypescript]
+\usetypescript[myfont][ec]
+\setupbodyfont[MyFont,\Normalsize]
+
+And of course, invoke the typescript after the \usemodule part!
+
+The "size" can be set to 16pt, 17pt, 18pt, 19pt, 20pt, or 21pt ; the default is
+17pt for text and 27pt for titles.
+
+The easiest way to see what the module does and which macros it provides is
+looking at (and typesetting) the included file "demo.tex" with different
+options. If you want to know more about the way in which the module is set up,
+typeset the source of the different source files with the command texmfstart
+texexec --module. The source is annotated, so you should be able to see how it
+works even if you don't have too much experience with ConTeXt.
+
+Defining your own styles is easy: have a look at the style files which are
+included. Certain macros have to be defined. Roll your own definitions for
+these macros and for the background, write them into a file whatever.tex and
+use this new style by setting it as the value to the "style" key like so:
+\usemodule[taspresent][font=Times,size=17pt,style=whatever]
+
+
+Revision History
+----------------
+
+2008-08-11
+
+- Added still more styles;
+- cleaned up syntax for placing pictures and circles/arrows.
+
+2007-08-08
+- Added some new styles;
+- added the \setvariables and \Maketitle macros;
+- added the "stylecolor" and "stylebottom" options;
+- arrows and circles for vertical pictures.
+
+2007-07-24
+- Added new commands for arrows and circles in vertical pictures;
+- made syntax for picture placement more conform to ConTeXt use;
+- easier syntax for adding custom styles (suggestion by Peter Münster).
+
+2007-07-22
+Initial release

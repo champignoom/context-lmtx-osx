@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands" 
+              name="context"
+              language="en" 
+              version="2013-03-27 23:12:17+0100">
+
+  <cd:command name="setupletterspace" file="t-letterspace.mkvi">
+    <cd:sequence>
+      <cd:string value="setupletterspace"/>
+    </cd:sequence>
+    <cd:arguments>
+      <cd:keywords n="1" optional="yes">
+        <cd:constant type="cd:name"/>
+      </cd:keywords>
+      <cd:assignments n="2" list="yes" optional="no">
+        <cd:parameter name="factor">
+          <!-- Can’t inherit from “\setupcharacterkerning” because cont-en.xml
+            still lacks that entry. -->
+          <cd:constant type="cd:number" default=".125"/>
+        </cd:parameter>
+        <cd:parameter name="spaceskip">
+          <cd:constant type="cd:dimension" default=".33em"/>
+        </cd:parameter>
+        <cd:parameter name="suppresskern">
+          <cd:constant type="no" default="no"/>
+          <cd:constant type="yes"/>
+        </cd:parameter>
+      </cd:assignments>
+    </cd:arguments>
+  </cd:command>
+
+  <cd:command name="defineletterspace" file="t-letterspace.tex">
+      <cd:sequence>
+          <cd:string value="defineletterspace"/>
+      </cd:sequence>
+      <cd:arguments>
+          <cd:keywords n="1" optional="no">
+              <cd:constant type="cd:name"/>
+          </cd:keywords>
+          <cd:assignments n="2" list="yes" optional="yes">
+              <cd:inherit name="setupletterspace" n="2"/>
+          </cd:assignments>
+      </cd:arguments>
+  </cd:command>
+  
+  <cd:command name="letterspace" generated="yes" file="t-letterspace.mkvi">
+    <cd:sequence>
+      <cd:variable value="letterspace"/>
+    </cd:sequence>
+    <cd:arguments>
+      <cd:assignments n="1" list="yes" optional="yes">
+        <cd:inherit name="setupletterspace"/>
+      </cd:assignments>
+      <cd:content n="2" optional="yes"/>
+    </cd:arguments>
+  </cd:command>
+
+  <cd:command name="letterspace" generated="yes" type="environment" file="t-letterspace.mkvi">
+    <cd:sequence>
+      <cd:variable value="letterspace"/>
+    </cd:sequence>
+    <cd:arguments>
+      <cd:assignments n="1" list="yes" optional="yes">
+        <cd:inherit name="setupletterspace"/>
+      </cd:assignments>
+    </cd:arguments>
+  </cd:command>
+
+</cd:interface>

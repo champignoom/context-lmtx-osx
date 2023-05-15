@@ -1,0 +1,517 @@
+%D \module
+%D   [      file=t-rsteps,
+%D        version=2006.01.12,
+%D          title=\CONTEXT\ User Module,
+%D       subtitle=Raw steps for slides,
+%D         author=David Munger,
+%D           date=\currentdate,
+%D      copyright={David Munger}]
+
+%D Thanks to Otared Kavian whose work inspired this module,
+%D and who contributed to its development.
+
+% Raw steps module for slides in ConTeXt
+% Copyright (C) 2004, 2005  David Munger
+
+% This program is free software; you can redistribute it and/or
+% modify it under the terms of the GNU General Public License
+% as published by the Free Software Foundation; either version 2
+% of the License, or (at your option) any later version.
+
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+
+% You should have received a copy of the GNU General Public License
+% along with this program; if not, write to the Free Software
+% Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ChangeLog
+%
+% 2006-01-12  David Munger <mungerd@users.sourceforge.net>
+% 	* New macro \StepsRegisterNumber to make numbers stick from
+% 	  step to step
+% 	* Fixed section numbering bug
+% 	* Fixed table of contents bug
+%
+% 2006-01-10  David Munger <mungerd@users.sourceforge.net>
+% 	* Fix bug for step > 10 (thanks to Mojca Miklavec)
+% 	* New macro \OnSteps (thanks to Taco Hoekwater)
+%
+% 2005-04-11  David Munger <mungerd@users.sourceforge.net>
+%	* Add \disablediscretionaries in \StopSteps defs
+%
+% 2005-06-12  David Munger <mungerd@users.sourceforge.net>
+%	* Add support for subpage numbers (requested by Peter Münster)
+%       * Make slide title optional (requested by Peter Münster)
+%       * New optional argument for section type (Subject, Topic, etc.)
+%       * Removed extra-space after \FromStep (Peter Münster)
+%       * Global option for 'reserve' (requested by Peter Münster)
+%       * Global option for 'defaultsection'
+%
+% 2005-09-22 David Munger <mungerd@users.sourceforge.net>
+%	* Workaround for \starttyping (requested by Peter Münster and
+%	  solved by Christopher Creutzig)
+%	* Fix spacing of framedtext steps@frame
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% steps for slides
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\unprotect
+
+\setupsubpagenumber[state=stop]
+
+\definecolor [highlightcolor] [blue]
+
+
+\def\CurrentStepNumber{\steps@currentnumber}
+
+\def\SetupSteps{\dosingleempty\doSetupSteps}
+ % reserve = yes, *no*
+ % defaultsection = *Subject*, subject, chapter, ...
+ % state = *start*, stop
+
+
+% Former definition:
+% \def\StartSteps{\dodoubleempty\doStartSteps} % \StopSteps
+
+% Workaround for \starttyping
+\bgroup
+\catcode`\^^M=\active
+\gdef\StartSteps{\begingroup\obeylines\let^^M^^J%
+  \relax\dodoubleempty\doStartSteps}
+\egroup
+
+\def\OnSteps{\dodoubleempty\doOnSteps}
+
+\def\HighlightSteps[#1]#2{%
+  \let\steps@stepcolor\empty%
+  \OnSteps[#1]{\global\let\steps@stepcolor\highlightcolor}%
+  {\steps@stepcolor #2}}
+
+
+
+% alternate stepping commands
+
+\def\NextStep{\steps@stopnextstep\steps@startnextstep}
+\def\AllSteps{\steps@stopnextstep\steps@startnextstep[all]}
+
+\def\OnlyStep[#1]{\OnSteps[#1]}
+
+\def\FromStep[#1]{\OnSteps[#1-...]}
+
+\def\AfterStep[#1]{%
+  \let\steps@tmpcounter\zerocount%
+  \increment(\steps@tmpcounter,#1+1)%
+  \OnSteps[\steps@tmpcounter-...]}
+  
+\def\UntilStep[#1]{%
+  \let\steps@tmpcounter\zerocount%
+  \increment(\steps@tmpcounter,#1-1)%
+  \OnSteps[...-\steps@tmpcounter]}
+
+
+% Numbering
+
+\def\StepsRegisterNumber[#1]	{\addtocommalist{#1}\steps@numbers@list}
+\def\StepsUnregisterNumber[#1]	{\removefromcommalist{#1}\steps@numbers@list}
+\def\StepsRegisteredNumbers	{\steps@numbers@list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% internal macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter\steps@currentnumber
+\newcounter\steps@autocounter	% computed from \NextStep
+\newcounter\steps@totalnumber
+\newcounter\steps@tmpcounter
+\newcounter\steps@stepaa
+\newcounter\steps@stepbb
+
+\newif\ifUseSteps
+
+\def\doSetupSteps[#1]{%
+  \getparameters[steps@option@][#1]%
+  \doifelse{\steps@option@state}{start}%
+    {\UseStepstrue}%
+    {\UseStepsfalse}%
+  \doifelse{\steps@option@reserve}{yes}%
+    {\let\steps@dostepdefault=\steps@dostepreserve}%
+    {\let\steps@dostepdefault=\steps@dostepnoreserve}}
+
+
+\long\def\doStartSteps[#1][#2]#3\StopSteps{%
+  \ifsecondargument
+    \gdef\steps@sectiontype{#1}%
+    \def\steps@sectiontitle{#2}%
+  \else\iffirstargument
+    \gdef\steps@sectiontype{\steps@option@defaultsection}%
+    \def\steps@sectiontitle{#1}%
+  \else
+    \gdef\steps@sectiontype{}%
+    \def\steps@sectiontitle{}%
+  \fi\fi
+  \xdef\steps@makesectionhead{%
+     \noexpand\csname\steps@sectiontype\endcsname{\steps@sectiontitle}\par}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % store buffer
+  \setbuffer[steps@buffer]%
+    \unprotect\steps@startnextstep\protect
+    #3
+    \unprotect\steps@stopnextstep\protect
+  \endbuffer
+  \endgroup
+  \begingroup
+  \let\steps@totalnumber\zerocountervalue\increment\steps@totalnumber
+  \let\steps@currentnumber\zerocountervalue\increment\steps@currentnumber
+  \ifUseSteps
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % backup section number and list state
+    \ifx\steps@sectiontype\empty\else
+      \determineheadnumber[\steps@sectiontype]% sets \currentheadnumber
+      \xdef\steps@sectionnumber{\currentheadnumber}%
+      \xdef\steps@oldliststate{\??li#1\c!state}%
+    \fi
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Save registered numbers
+    \steps@numbers@save
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \page
+    \setupsubpagenumber[state=stop]%
+    \setupsubpagenumber[state=start,way=bytext]%
+    \loop
+      \let\steps@autocounter\zerocount
+      \setuppagenumber[state=keep]%
+      \ifx\steps@sectiontype\empty
+        % skip page
+	\page
+      \else
+	% make section title
+	\ifx\steps@sectionnumber\empty\else
+	  \setupheadnumber[\steps@sectiontype][\steps@sectionnumber]%
+	\fi
+	\steps@makesectionhead
+	\setuplist[\steps@sectiontype][state=stop]%
+      \fi
+      \getbuffer[steps@buffer]%
+      \steps@updatenumber\steps@autocounter
+    \ifnum\steps@currentnumber<\steps@totalnumber % \loop
+      \increment\steps@currentnumber
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      % Restore registered numbers (but not after last step)
+      \steps@numbers@restore
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \repeat % \loop
+    \setuplist[\steps@sectiontype][state=\steps@oldliststate]%
+    \setuppagenumber[state=start]%
+    \page
+    \setupsubpagenumber[state=stop]%
+  \else % \ifUseSteps
+    \ifx\steps@sectiontype\empty
+      % skip page
+      \page
+    \else
+      % make section title
+      \steps@makesectionhead
+    \fi
+    \getbuffer[steps@buffer]%
+  \fi % \ifUseSteps
+  \endgroup}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \OnSteps implementation
+
+\long\def\doOnSteps[#1][#2]#3{%
+  \begingroup
+  \def\processitem##1{\dodoOnSteps{##1}{#2}{#3}}%
+  \processcommalist[#1]\processitem
+  \endgroup}
+
+\long\def\dodoOnSteps#1#2#3{%
+  \doifinstringelse{-}{#1}%
+    % item with dash
+    {\splitstring#1\at-\to\steps@stepa\and\steps@stepb%
+     % process lower bound
+     \doifinsetelse{\steps@stepa}{first,...}
+       {\def\steps@conda{0=0}}%
+       {\let\steps@stepaa\zerocount%
+	\increment(\steps@stepaa,\steps@stepa-1)%
+	\def\steps@conda{\steps@currentnumber>\steps@stepaa}%
+	% update maximum step number of current slide
+	\steps@updatenumber{\steps@stepa}}%
+     % process upper bound
+     \doifinsetelse{\steps@stepb}{last,...}
+       {\def\steps@condb{0=0}}%
+       {\let\steps@stepbb\zerocount%
+	\increment(\steps@stepbb,\steps@stepb+1)%
+	\def\steps@condb{\steps@currentnumber<\steps@stepbb}%
+	% update maximum step number of current slide
+	\steps@updatenumber{\steps@stepb}}%
+    }%
+    % item without dash
+    {\def\steps@conda{\steps@currentnumber=#1}%
+     \def\steps@condb{0=0}%
+     \steps@updatenumber{#1}}%
+  % call dostep
+  \steps@dostep{#2}{#3}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \NextStep implementation
+
+\def\steps@startnextstep{\dosingleempty\steps@dostartnextstep}
+
+\def\steps@dostartnextstep[#1]{%
+  \def\steps@hide{no}%
+  \iffirstargument\else
+    \increment\steps@autocounter
+    \ifUseSteps
+      \ifnum\steps@autocounter>\steps@currentnumber
+	\def\steps@hide{yes}%
+      \fi
+    \fi
+  \fi
+  \starthidden}
+
+\def\steps@stopnextstep{\stophidden}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% update maximum step number of current slide
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\steps@updatenumber#1{\ifnum\steps@totalnumber<#1
+  \doglobal\let\steps@totalnumber\zerocount
+  \doglobal\increment(\steps@totalnumber,#1)\fi}
+
+\defineframedtext
+  [steps@frame]
+  [offset=overlay,width=broad,height=fit,frame=off,
+   before={},after={}]
+
+\def\starthidden{\startsteps@frame[empty=\steps@hide]}
+\def\stophidden{\stopsteps@frame}
+
+
+\long\def\steps@dostep#1#2{%
+  \processallactionsinset
+    [#1]
+    [reserve=>\let\steps@next=\steps@dostepreserve,
+     noreserve=>\let\steps@next=\steps@dostepnoreserve,
+     \s!default=>\let\steps@next=\steps@dostepdefault]%
+  \steps@next{#2}}
+
+\long\def\steps@dostepreserve#1{%
+  \def\steps@hide{no}%
+  \ifUseSteps
+    \ifnum\steps@conda
+      \ifnum\steps@condb\else
+	\def\steps@hide{yes}%
+      \fi
+    \else
+      \def\steps@hide{yes}%
+    \fi
+  \fi
+  \strut
+  \ifmmode\@EA\mframed\else\@EA\framed\fi
+  [empty=\steps@hide,frame=off,offset=overlay]{#1}%
+  \ifmmode\;\fi}
+
+\long\def\steps@dostepnoreserve#1{%
+  \def\steps@next{#1\ifmmode\;\fi}%
+  \ifUseSteps
+    \ifnum\steps@conda
+      \ifnum\steps@condb\else
+	\def\steps@next{\relax}%
+      \fi
+    \else
+      \def\steps@next{\relax}%
+    \fi
+  \fi\steps@next}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% numbers
+
+\let\steps@numbers@list\empty
+
+
+\let\steps@numbers@realrawreference=\rawreference
+
+\def\steps@numbers@rawreference#1#2#3{%
+  \doifemptyelse{#2}
+    {\steps@numbers@realrawreference{#1}{#2}{#3}}
+    {% make sure there are no duplicate references
+     \rawdoifinsetelse{#2}{\steps@numbers@refs}%
+       {}%
+       {% the following check is due to preprocessing in
+	% \@@dostartdescription
+	\iftrialtypesetting\else
+	  \doifnot{\steps@hide}{yes} % FIXME: might a bad hack
+	    {\steps@numbers@realrawreference{#1}{#2}{#3}%
+	     \doglobal\addtocommalist{#2}\steps@numbers@refs}
+	\fi}
+     % set the -Step suffixed reference
+     \steps@numbers@realrawreference{#1}{#2-Step\CurrentStepNumber}{#3}}}
+
+
+%% For debugging purposes:
+% \let\steps@numbers@realincrementnumber=\incrementnumber
+% \def\incrementnumber[#1]{%
+%   \steps@numbers@realincrementnumber[#1]%
+%   \writestatus{RawSteps}{incrementnumber #1}}
+
+
+\def\steps@numbers@save{%
+  \let\steps@numbers@refs\empty
+  \let\rawreference=\steps@numbers@rawreference
+  \processcommacommand[\steps@numbers@list]\steps@numbers@saveone}
+\def\steps@numbers@restore{%
+  \processcommacommand[\steps@numbers@list]\steps@numbers@restoreone}
+
+\def\steps@numbers@saveone#1{\savenumber[#1]}
+\def\steps@numbers@restoreone#1{\restorenumber[#1]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\protect
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% defaults
+
+\SetupSteps[reserve=no,defaultsection=Subject,state=start]
+% \StepsRegisterNumber[section]
+\StepsRegisterNumber[formula]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\doifnotmode{demo}{\endinput}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% usage example
+% partly contributed by: Otared Kavian
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usemodule [pre-original]
+\usemodule [rsteps]
+
+
+% interaction menu example:
+% page number with alphabetic subpage number
+\startinteractionmenu[bottom]
+  \placelist[chapter] [alternative=bottom,criterium=all,pagenumber=no]
+  \\
+  \pagenumber{\characters\subpagenumber}/\lastpagenumber
+\stopinteractionmenu
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% setup examples
+%
+% \SetupSteps[defaultsection=page]
+% \SetupSteps[defaultsection=subject]
+% \SetupSteps[reserve=yes]
+% \SetupSteps[reserve=yes,defaultsection=subject]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setupcolors[state=start]
+\SetupSteps[defaultsection=Subject]
+
+
+\starttext
+
+\startstandardmakeup
+  \bfc Raw Steps Module
+  \blank[big]
+  \tfb Usage Examples
+\stopstandardmakeup
+
+
+\StartSteps [Simple stepping (step \noexpand\CurrentStepNumber)]
+
+  First step.
+  \NextStep
+  Second step.
+  \NextStep
+  Third step.
+  \AllSteps
+  All steps.
+  
+\StopSteps
+
+
+\StartSteps[Fancy stepping (step \noexpand\CurrentStepNumber)]
+  
+  \startitemize
+  \OnSteps[1-3,5]{\item Steps 1, 2, 3 and 5.}
+  \OnSteps[2-...]{\item From step 2.}
+  \OnSteps[3]    {\item Step 3.}
+  \OnSteps[...-4]{\item Up to step 4.}
+  \stopitemize
+  
+\StopSteps
+
+
+\StartSteps[Highlighting (step \noexpand\CurrentStepNumber)]
+
+  \startitemize
+  \item \HighlightSteps[1,4]	{Step 1.}
+  \item \HighlightSteps[2]	{Step 2.}
+  \item \HighlightSteps[3]	{Step 3.}
+  \item \HighlightSteps[4]	{Start over from Step 1.}
+  \stopitemize
+  
+\StopSteps
+
+
+\StartSteps[Equations]
+
+  \placeformula[eq:divu]
+  \startformula
+    \vec\nabla\cdot\vec u = 0
+  \stopformula
+  
+  \placeformula[eq:NS]
+  \startformula
+    \frac{D\vec u}{Dt} =
+      \OnSteps[2-...][reserve]{-{\red \frac1\rho \vec\nabla p}}
+      \OnSteps[3-...][reserve]{+\;{\green \vec g}}
+      \OnSteps[4-...][reserve]{+\;{\blue \frac1\rho \vec\nabla\cdot S}}
+  \stopformula
+
+  Incompressibility (\in{eq.}[eq:divu]).
+
+  Momentum transport (\in{eq.}[eq:NS]):
+  \startitemize
+  \OnSteps[2-...]{\item {\red   Pressure gradient}}
+  \OnSteps[3-...]{\item {\green	Gravity}}
+  \OnSteps[4-...]{\item {\blue	Stress (viscous, turbulent, Maxwell)}}
+  \stopitemize
+
+\StopSteps
+
+
+\stoptext

@@ -1,0 +1,83 @@
+%D \module
+%D   [       file=t-high-ini,
+%D        version=2017.04.05,
+%D          title=\CONTEXT\ User Module,
+%D       subtitle=Syntax Highlighter for INI Files,
+%D         author=Christoph Reller,
+%D           date=\currentdate,
+%D      copyright=Christoph Reller,
+%D          email=christoph.reller@gmail.com,
+%D        license=GNU General Public License]
+
+%C Copyright (C) 2017 Christoph Reller
+%C
+%C This program is free software: you can redistribute it and/or modify
+%C it under the terms of the GNU General Public License as published by
+%C the Free Software Foundation, either version 3 of the License, or
+%C any later version.
+%C
+%C This program is distributed in the hope that it will be useful,
+%C but WITHOUT ANY WARRANTY; without even the implied warranty of
+%C MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%C GNU General Public License for more details.
+%C
+%C You should have received a copy of the GNU General Public License
+%C along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+%M \usemodule[high-ini]
+
+%D \section{Usage}
+%D Example:
+%D
+%D \startINI
+%D [Section]
+%D [
+%D   OtherSection
+%D ]
+%D Key=Value
+%D ; Only entire comment lines allowed
+%D Key2=
+%D Key3=-a "Hello World" -b C:\Path\To\something
+%D Key4 = anotherValue
+%D Key‹more›.‹even more›=‹something else›
+%D -a continued "on a second line" -b
+%D key=Val=ue
+%D
+%D [ThirdSection]
+%D \stopINI
+%D
+%D Incomplete INI of the form \type{key=value} is supported:
+%D
+%D \startINI
+%D key=value value
+%D \stopINI
+
+\registerctxluafile{t-high-common.lua}{1.0}
+\registerctxluafile{t-high-ini.lua}{1.0}
+
+\unprotect
+
+\definestartstop[IniSnippet][DefaultSnippet]
+
+\definestartstop[IniSnippetBoundary][
+  \c!color=darkgray,
+  \c!style=]
+\definestartstop[IniSnippetSection][
+  \c!color=darkblue,
+  \c!style=]
+\definestartstop[IniSnippetKey][
+  \c!color=darkgreen,
+  \c!style=]
+\definestartstop[IniSnippetValue][
+  \c!color=darkred,
+  \c!style=]
+\definestartstop[IniSnippetEqual][
+  \c!color=darkyellow,
+  \c!style=]
+\definestartstop[IniSnippetComment][
+  \c!color=darkgray,
+  \c!style=]
+
+\definetyping[INI][\c!option=ini]
+
+\protect \endinput

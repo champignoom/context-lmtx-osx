@@ -1,0 +1,97 @@
+%D \module
+%D   [       file=t-high-java,
+%D        version=2017.04.05,
+%D          title=\CONTEXT\ User Module,
+%D          title=Syntax Highlighter for Java,
+%D         author=Christoph Reller,
+%D           date=\currentdate,
+%D      copyright=Christoph Reller,
+%D          email=christoph.reller@gmail.com,
+%D        license=GNU General Public License]
+
+%C Copyright (C) 2017 Christoph Reller
+%C
+%C This program is free software: you can redistribute it and/or modify
+%C it under the terms of the GNU General Public License as published by
+%C the Free Software Foundation, either version 3 of the License, or
+%C any later version.
+%C
+%C This program is distributed in the hope that it will be useful,
+%C but WITHOUT ANY WARRANTY; without even the implied warranty of
+%C MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%C GNU General Public License for more details.
+%C
+%C You should have received a copy of the GNU General Public License
+%C along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+%M \usemodule[high-java]
+
+%D \section{Usage}
+%D Example:
+%D \startJAVA
+%D package /* comment*/ something.com.A.B_C;
+%D import java.io.IOException;
+%D
+%D @SuppressLint("NewApi")
+%D public class AnyThing extends SomeThing {
+%D
+%D   AnotherThing aThing; /* comment
+%D                           over two lines */
+%D   int i;
+%D
+%D   @Override
+%D   protected void doSomething(Thing theThing) {
+%D     super.doSomething(theThing);
+%D     setThat(A.b.c_d); // comment
+%D     Thing localThing = (Thing) findMore(theThing);
+%D
+%D     // comment
+%D     Boolean state = theThing
+%D       .thisIsAVeryLongMethod(getSomethingElse());
+%D     if (state == false) {
+%D     }
+%D }
+%D \stopJAVA
+
+
+\registerctxluafile{t-high-common.lua}{1.0}
+\registerctxluafile{t-high-java.lua}{1.0}
+
+\unprotect
+
+\definestartstop[JavaSnippet][DefaultSnippet]
+
+\definestartstop[JavaSnippetKeyword][
+  \c!color=darkgreen,
+  \c!style=]
+\definestartstop[JavaSnippetType][
+  \c!color=darkgreen,
+  \c!style=]
+\definestartstop[JavaSnippetOperator][
+  \c!color=darkcyan,
+  \c!style=]
+\definestartstop[JavaSnippetIdent][
+  \c!color=middleblue,
+  \c!style=]
+\definestartstop[JavaSnippetVariable][
+  \c!color=darkyellow,
+  \c!style=]
+\definestartstop[JavaSnippetAnnotation][
+  \c!color=middlemagenta,
+  \c!style=]
+\definestartstop[JavaSnippetBoundary][
+  \c!color=darkgray,
+  \c!style=]
+\definestartstop[JavaSnippetComment][
+  \c!color=middlegray,
+  \c!style=]
+\definestartstop[JavaSnippetLiteral][
+  \c!color=middlered,
+  \c!style=]
+\definestartstop[JavaSnippetPackage][
+  \c!color=magenta,
+  \c!style=]
+
+\definetyping[JAVA][\c!option=java]
+
+\protect \endinput

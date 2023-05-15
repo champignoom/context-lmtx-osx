@@ -1,0 +1,873 @@
+\usemodule [letterspace]
+
+\defineletterspace [largecaps]
+\setupletterspace  [largecaps] [
+  factor=.2,
+  spaceskip=.3em,
+  suppresskern=yes,
+]
+
+\defineletterspace [mediumcaps]
+\setupletterspace  [mediumcaps] [
+  factor=.25,
+  spaceskip=.5em,
+  suppresskern=yes,
+]
+
+\defineletterspace [smallcaps]
+\setupletterspace  [smallcaps] [
+  factor=.05,
+  spaceskip=.25em,
+  suppresskern=yes,
+]
+
+\defineletterspace [textemph]
+\setupletterspace  [textemph] [
+  factor=.125,
+  spaceskip=.33em,
+  suppresskern=no,
+]
+
+\defineletterspace [slightly]
+\setupletterspace  [slightly] [
+  factor=.075,
+  spaceskip=.33em,
+  suppresskern=no,
+]
+
+\let\te\textemph
+\unexpanded\def\name#1{\smallcaps{\sc#1}}
+
+\defineletterspace [ugly]
+\setupletterspace  [ugly] [
+  factor=.4,
+  spaceskip=1em,
+  suppresskern=no,
+]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font Setups                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definefontfeature [default] [default] [
+  protrusion=quality,
+  expansion=quality,
+  mode=node,
+  script=latn,
+  onum=yes,
+  dlig=yes,
+  liga=yes,
+  kern=yes,
+]
+
+\definefontfeature [kerning] [kern=yes]%
+
+\usetypescript [modern]
+\usetypescript [antykwa-poltawskiego]
+\setupbodyfont [antykwa-poltawskiego,10pt]
+
+\usetypescript [serif] [hz] [highquality]
+\setupalign    [hanging,hz]
+
+\setupbodyfontenvironment [default] [em=italic]
+
+\definehighlight[quote][style=italic]
+\def\uprightslash{\bgroup\tf/\egroup}
+\def\uprightomiss{\bgroup\tf[\dots]\egroup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Presenting the Interface                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usemodule  [int-load]
+\loadsetups [t-letterspace.xml]
+
+\define\beautifyshowsetups{%
+  \unexpanded\def\setupnumfont  {\rm}%
+  \unexpanded\def\setuptxtfont  {\rm}%
+  \unexpanded\def\setupintfont  {\rm\sc\Word}%
+  \unexpanded\def\setupvarfont  {\rm\it}%
+  \unexpanded\def\setupoptfont  {\rm\it}%
+  \unexpanded\def\setupalwcolor {gutenred}%
+  \unexpanded\def\setupoptcolor {gutenred}%
+  \defineframedtext [setuptext] [
+    frame=off,
+    background=color,
+    backgroundcolor=gray:2,
+    width=\hsize,
+    height=fit,
+    align=right,
+    offset=0.75em,
+  ]%
+}
+
+\let\Oldshowsetup\showsetup
+
+\define[1]\showsetup{% hurray for diversity
+  \bgroup\beautifyshowsetups%
+    \Oldshowsetup{#1}%
+  \egroup%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Paper                                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definepapersize[LHS][
+  width=160mm,
+  height=239mm,
+]
+
+\setuppapersize[LHS][LHS]
+
+%\showframe
+\setuplayout [
+    width=122mm,
+    %textheight=199mm, % ca. 47 rows * 12pt
+    height=224mm, % text height should end up at ca. 47 rows * 12pt
+    %height=fit,
+    %
+    topspace=14mm,
+    header=12pt,
+    headerdistance=4mm,
+    top=00mm,
+    %
+    bottomspace=0mm,
+    footer=23mm,
+    bottom=0mm,
+    footerdistance=0mm,
+    %
+    backspace=16mm,
+    leftedge=0mm,
+    leftedgedistance=0mm,
+    leftmargin=16mm,
+    leftmargindistance=1em,
+    %
+    rightmargin=20mm,
+    rightmargindistance=2mm,
+    rightedge=0mm,
+    rightedgedistance=0mm,
+]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Interaction                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setupcolor[dem]
+
+\definecolor [gutenred] [x=bf221f] % rubrication from digitized_Göttingen Gutenberg bible
+
+\setupinteraction[%
+  state=start,
+  color=gutenred,
+  contrastcolor=gutenred,
+  style=,
+  focus=standard,
+  title={Letterspace Module},
+  subtitle={Bringing Flow into Horizontal Spacing},
+  author={Philipp Gesang},
+  keyword={ConTeXt, LuaTeX, letterspacing, horizontal glue},
+]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Headings                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defineletterspace [LSchapter]
+\defineletterspace [LSsection]
+\defineletterspace [LSsubsection]
+\setupletterspace  [LSchapter]    [factor=.1,  spaceskip=.33em,suppresskern=yes]
+\setupletterspace  [LSsection]    [factor=.15, spaceskip=.40em,suppresskern=yes]
+\setupletterspace  [LSsubsection] [factor=.125,spaceskip=.33em]
+
+\def   \fontchapter#1{\setupbodyfont[11pt]\WORD\LSchapter{#1}}
+\def   \fontsection#1{\setupbodyfont[11pt]\word\sc\LSsection{#1}}
+\def\fontsubsection#1{\setupbodyfont[11pt]\LSsubsection{#1}}
+
+\def   \Chapterheadfontcmd{\fontchapter}
+\def   \Sectionheadfontcmd{\fontsection}
+\def\Subsectionheadfontcmd{\fontsubsection}
+
+\setuphead [chapter] [
+  align=middle,
+  footer=text,
+  grid=yes,
+  header=empty,
+  number=no,
+  page=yes,
+  style=,
+  textcommand=\Chapterheadfontcmd,
+  before={\startlinecorrection\blank[3*line,force]},
+  after={\stoplinecorrection\blank[line,force]},
+]
+
+\definetext [text] [footer] [pagenumber]
+
+\setuphead [section] [
+  align=middle,
+  number=no,
+  page=no,
+  style=,
+  textcommand=\Sectionheadfontcmd,
+  before={\blank[line]},
+  after={\blank[line]},
+]
+
+\setuphead [subsection] [
+  align=middle,
+  number=no,
+  page=no,
+  style=,
+  textcommand=\Subsectionheadfontcmd,
+  before={\blank[line]},
+  after={\blank[line]},
+]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ToC                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def   \tocfontchapter#1{\WORD\LSchapter{#1}}
+\def   \tocfontsection#1{\slightly{#1}}
+\def\tocfontsubsection#1{\LSsubsection{#1}}
+
+\setuplist [chapter] [
+  before={\blank[2*line]},
+  alternative=c,
+  textcommand=\tocfontchapter,
+  interaction=text,
+]
+
+\setuplist [section] [
+  before=\blank,
+  alternative=b,
+  interaction=text,
+  margin=2em,
+  numberstyle=,
+  textcommand=\tocfontsection,
+  textstyle=,
+]
+
+\setuplist [subsection] [
+  alternative=b,
+  interaction=text,
+  margin=3em,
+  textcommand=\tocfontsubsection,
+]
+
+\setuplistalternative[c] [
+  stretch=.5em,
+  command=\hskip.5em\phglistdots\hskip.5em\relax,
+]
+
+\def\phglistdots{\gleaders\hbox to 1em{\hss.\hss}\hfill}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Captions                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setupcaptions[
+  location=bottom,
+  headstyle=\tfx\italic,
+  way=bytext,
+  prefixsegments=none,
+  style={\setupinterlinespace[9pt]\tfx},
+]
+
+\setupcaption [figure] [way=bytext]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bib: Setups                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setuppublications [
+  alternative=ssa,
+  refcommand=authoryear,
+  %sorttype=bbl,
+  sort=author,
+  numbering=yes,
+  autohang=yes,
+]
+
+\setuppublicationlist [
+  artauthor=\invertedauthor,
+]
+
+\setupcite [authoryear] [compress=no]
+
+%%% Used in bibliography formatting.
+\definestartstop [bibindent] [
+  before={\startnarrower[left]%
+          \setupindenting[-\leftskip,yes,first]%
+          \clubpenalty-9000%
+          \widowpenalty-9000%
+          },
+  after=\stopnarrower,
+]
+
+\unexpanded\def\ctay#1{\cite[authoryear][#1]}
+% \unexpanded\def#1{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bib: Entries                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\startpublication [
+  k=mt,
+  t=book,
+  a={Bodoni},
+  y=1818,
+  n=1,
+  s={Manuale},
+]
+  \author[]{Giambattista}[]{}{Bodoni}
+  \pubyear{1818}
+  \title{Manuale Tipografico, 2~vols}
+  \city{Parma}
+\stoppublication
+
+\startpublication [
+  k=bh,
+  t=book,
+  a={Bringhurst},
+  y=2008,
+  n=2,
+  s={Elements},
+]
+  \author[]{Robert}[]{}{Bringhurst}
+  \pubyear{2008}
+  \title{The Elements of Typographic Style}
+  \edition{3.2}
+  \city{Point Roberts WA, Vancouver}
+\stoppublication
+
+\startpublication [
+  k=lhs2,
+  t=book,
+  a={Hofmann/Szantyr},
+  y=1965,
+  n=3,
+  s={LHS},
+]
+  \author[]{Johann Baptist}[]{}{Hofmann}
+  \author[]{Anton}[]{}{Szantyr}
+  \pubyear{1965}
+  \title{Lateinische Syntax und Stilistik}
+  \city{München}
+\stoppublication
+
+\startpublication[
+  k=roemer,
+  t=article,
+  a={Roemer},
+  y=2011,
+  n=4,
+  s={Gewichten},
+]
+  \artauthor[]{Christine}[]{}{Roemer}
+  \pubyear{2011}
+  \arttitle{Gewichten -- Wichtiges und Unwichtiges mit \LATEX\ markieren}
+  \journal{Die \TEX nische Komödie}
+  \volume{2011:1}
+  \pages{6--16}
+\stoppublication
+
+\startpublication [
+  k=lt,
+  t=book,
+  a={{Willberg/Forssman}},
+  y=1997,
+  n=5,
+  s={Lesetypographie},
+]
+  \author[]{Hans Peter}[]{}{Willberg}
+  \author[]{Friedrich}[]{}{Forssmann}
+  \pubyear{1997}
+  \title{Lesetypographie}
+  \city{Mainz}
+\stoppublication
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Misc                                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clubpenalty  -7000
+\widowpenalty -7000
+
+\def\etc{{\italic\letterampersand}c}
+
+\setupindenting [yes,next,medium]
+
+\useURL [leibnizausgabe] [http://www.leibniz-edition.de/Baende/] [] [\name{Leibniz}-Edition]
+\useURL [soulpackage] [http://ctan.larsko.net/macros/latex/contrib/soul/] [] [soul]
+
+\pdfcompresslevel9
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Makeup for Front Matter                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definemakeup [FM] [standard]
+\setupmakeup [FM] [
+  width=125mm,
+  height=172.506mm,
+  location=middle,
+]
+
+\setupheadertexts [] [] [] []
+\setuppagenumbering [state=stop,location=]
+
+\starttext
+
+\startfrontmatter
+\setuplayout [width=middle]
+\startFMmakeup
+  \raggedcenter
+  \vfill
+  {\tfc\italic The}\par
+  \vfill
+  {\tfd\WORD\largecaps{Letterspace Module}}\par
+  \vfill
+  {\tfc\italic for {\CONTEXT} MkIV}\par
+  \vfill
+  {\tfa\sc \mediumcaps{A Contribution to Horizontal Movement}}\par
+  \vfill
+\stopFMmakeup
+\stopfrontmatter
+
+\page
+
+\useURL [phg-mail] [phg42.2a@gmail.com]         [] []
+\useURL [phg-bibu] [https://bitbucket.org/phg/] [] []
+\startstandardmakeup
+  \vfill\raggedright\tfx
+  © 2011--2013 {\italic Philipp Gesang}, Radebeul\par
+  The latest Version can be found at \from [phg-bibu].\par
+  Mail bugs and fixes or complaints and suggestions to \from
+  [phg-mail].\par
+\stopstandardmakeup
+
+\page [odd]
+\startbodymatter
+
+\setuppagenumber [number=1]
+\setuppagenumbering [
+  state=start,
+  alternative=doublesided,
+  location={right,header},
+]
+
+\title{Content}
+
+\placelist[chapter,section][criterium=all]
+
+\setupheadertexts
+  [{\tfx\getmarking[chapter]}] [{\pagenumber}]
+  [{\pagenumber}]              [{\tfx\getmarking[chapter]}]
+
+\startchapter[title=Introduction]
+
+Robert \name{Bringhurst} quotes Frederick \name{Goudy}’s famous
+dictum on the topic of letterspacing: \quote{A man who would
+letterspace lowercase would steal sheep.}\footnote{%
+  \ctay{bh}, p.~31.
+}
+Likewise other judgements:
+\quote{Letter spacing is a form of markup particularly hard
+to handle, that only master typographers should get involved
+with.}\footnote{%
+  \ctay{lt}, p.~126.
+}
+And another:
+\quote{Letter spacing is disapproved of in the same way as of
+capitals \uprightomiss~.}\footnote{\ctay{roemer}, p.~10.}
+This module is partly a reaction on the excellent article the
+last quotation was taken from, and partly the endeavour of a
+convinced \CONTEXT\ user and letter spacer to replace a number of
+kludges already in use with something more consistent.
+To be sure, those warnings are grounded in facts and they should
+seriously be taken into account before one resorts to
+letterspacing.
+
+Before the advent of \LUATEX\ the implementation of proper letter
+spacing in *\TEX\ proved to be extremely difficult.
+For instance, the \from [soulpackage] package provides some means
+but at the same time severely limits the content passed to
+macros.
+Nevertheless there are magnificent examples of letterspacing done
+right, like the \from [leibnizausgabe] by the
+\name{Leibniz}-Archiv in Hanover that has been typeset with
+\smallcaps{EDMAC} and \PDFTEX.
+Nowadays the Lua node library removes the technical restrictions
+and thus leaves the task of correct letterspacing to the user.
+The \te{Letterspace} module for \CONTEXT\ was designed to collect
+everything necessary to achieve this and to make it accessible
+from one place.
+
+\stopchapter
+
+\startchapter[title=Commands]
+
+Technically, the \te{Letterspace} module doesn’t do anything
+fancy; it just maps some existing \CONTEXT\ macros into a single
+setup and lets you define and configure your own derivatives of
+it.
+The module is supposed to be loaded the regular way: somewhere
+before \type{\starttext} should be the line
+\starttyping
+\usemodule [letterspace]
+\stoptyping
+\noindentation-- That’s all.
+
+\startsection[title=Default Letterspace Command]
+Initially one letterspace command is already defined and
+configured, as well as a letterspacing environment.
+They are now ready for use in running text.
+
+%\definecolor [prettyone]   [r=.6,g=.6,b=.6]  % red
+%\definecolor [prettytwo]   [r=.0,g=.6,b=.6]  % green
+%\definecolor [prettythree] [r=.6,g=.6,b=.6]  % blue
+%\definecolor [prettyfour]  [r=.6,g=.6,b=.6]  % yellow
+
+%\startTEX
+\starttyping
+\usemodule [letterspace]
+\starttext
+
+\startlines
+  uides ut \letterspace{alta} stet \letterspace{niue} candidum
+  Soracte
+\stoplines
+
+\startletterspace
+  \startlines
+    hac {\italic ait} in Thebas, hac me iubet ardua uirtus
+    ire, Menoeceo qua lubrica sanguine turris.
+    experiar quid sacra iuuent, an falsus Apollo.
+  \stoplines
+\stopletterspace
+
+\stoptext
+\stoptyping
+%\stopTEX
+
+\showsetup{letterspace}
+\showsetup{startletterspace}
+\stopsection
+
+\startsection[title=Defining and Customizing Letterspace Commands]
+
+The \te{Letterspace} module allows the letterspacing to be
+adjusted via \te{three} parameters.
+The \type{factor} determines the value by which the
+\te{intra}word spacing (between letters) will be extended.
+\type{spaceskip} specifies a dimension for the \te{inter}word
+spacing and, if applicable, the surrounding spaces.
+\type{suppresskern} allows for disabling the letter kerning which
+can improve the spacing of capitals (see below,
+\at{p.}[suppresskern]).
+
+The following lines reconfigure the predefined
+\type{\letterspace} macro to behave in an extreme fashion.
+\starttyping
+\setupletterspace [
+  factor=2,       % default: 0.125
+  spaceskip=2em,  % default: 0.5em
+]
+
+\letterspace{vapula!}
+\stoptyping
+\showsetup{setupletterspace}
+
+The recommended alternative to constantly readjusting the base
+command is to define separate macros for different purposes.
+
+\starttyping
+\defineletterspace [LSbighead]
+\defineletterspace [LSemphasis]
+\defineletterspace [LSsmcp]
+
+\setupletterspace [LSbighead]
+  [factor=.2,   spaceskip=.7em, suppresskern=yes]
+\setupletterspace [LSemphasis]
+  [factor=.111, spaceskip=.4em, suppresskern=no,]
+\setupletterspace [LSsmcp]
+  [factor=.06,  spaceskip=.4em, suppresskern=no,]
+
+\LSbighead{\bf\WORD This is a candidate for sectioning, innit?}
+\blank [line]
+
+\startlines
+  terrarum delicta nec exsaturabile \LSsmcp{\sc Diris}
+  \LSemphasis{ingenium mortale} queror, quonam usque nocentum
+  exigar in poenas! taedet saeuire corusco
+  fulmine.
+\stoplines
+\stoptyping
+
+These macros can subsequently accessed from whatever markup
+element requires letterspacing: section titles, front matter
+makeup, emphasis etc.
+
+\showsetup{defineletterspace}
+
+\stopsection
+\stopchapter
+
+\startchapter[title=Applications]
+
+\startsection[title=Precautions]
+
+\te{Letterspacing} is a dynamic property of a string of text, as
+opposed to static font properties that are e.g. italics or slant.
+In principle, when applying a letterspacing to text, the current
+font is not merely pushed back in favor of another font.
+Instead, the way of typesetting the same font is modified by
+certain parameters; in the case of the \te{Letterspace} module
+these are the \te{kerning} and the \te{interword space}.
+Therefore it exclusively depends on the correct adjustment of said
+parameters whether the letterspacing will achieve its purpose or
+not.
+On the other hand, external factors like harmonizing different
+typefaces, the font’s design size \etc. are ruled out as possible
+influences, which can be a great advantage if for example a font
+happens to lack a matching italic face for emphasizing.
+
+\placefigure [left] {Letterspaced greek small capitals after an
+                     initial in \ctay{mt}, vol.~2.} {%
+  \externalfigure [bodoni-mt-2-4.jpeg] [width=.45\hsize]%
+}
+Due to its flexibility and because it poses relatively small
+demands on the typesetting environment, thoughtless letterspacing
+may easily ruin a product.
+Moderate values don’t express how important a particular emphasis
+is to the author? Just \ugly{widen the spacing} and no reader
+will ever skip over your message \dots.
+Sure, everybody will get the cue, though the appearance of the
+highlighted text, the paragraph, and possibly the whole page will
+certainly be spoilt.
+Granted, from this perspective letterspacing might appear to be
+too dangerous a tool, only begging for misuse.
+But this judgement is premature as letterspacing has in fact a
+long tradition and was employed in many outstanding examples of
+typography.
+Apart from its seductive versatility there are no objections
+against letterspacing on a general level, as long as it is
+carefully utilized.
+
+Letterspacing has two prevailing uses: ({\it1}) for emphases and
+({\it2}) for spacing capital letters, which is especially
+valuable in display situations like for instance the front matter
+of books or section headings.
+Both come with a set of peculiarities that the typesetter must
+consider in order to figure out the appropriate values for the
+interword and letter spacings.
+
+\stopsection
+
+\startsection[title=Emphasis]
+Documents that require many levels of different emphases are
+among the primary targets of letterspacing.
+For example, in linguistics an author might wish to distinguish
+({\it1}) names of cited authors, ({\it2}) ordinary text emphasis,
+({\it3}) inline quoted passages, and ({\it4}) word forms or
+etymological roots.
+To be sure, this can be accomplished with a mapping like
+  {\it1}: small capitals,
+  {\it2}: italics,
+  {\it3}: quotation marks, and
+  {\it4}: a slanted face.
+But \te{quotation marks} are hard to keep track of, if the enveloped
+text exceeds a certain length; also, they disencourage skimming
+because the reader always has to check whether the point that
+caught his eye might belong to a quotation instead of the main
+text.
+In various fonts -- mainly sans serif -- \te{slant} cannot easily
+be told apart from italics, thus defeating the very purpose of
+emphasis, in other fonts it might not be available at all.
+\te{Bold face} might seem to be an obvious alternative but even
+semi bold weights cause text to stand out from the surrounding
+paragraph, diverting the readers attention away from its normal
+trail along successive lines.
+Besides, the more a text is intermingled with different weights,
+the closer it resembles the look of a dictionary.\footnote{%
+  \ctay{lt}, p.~122 distinguish \te{active} from \te{integrated}
+  markup.
+  Semi bold and underling belong to the former, italics and slant
+  to the latter.
+  As the effect of letter spacing heavily depends on the
+  environment, it may count as active when used as the only means
+  of emphasis.
+  However, in a “colorful” product with many different layers of
+  emphasis it might not stick out as much among the others and
+  thus count as integrated (cf. p.~126).%
+}
+
+\placefigure [left] {Letterspaced italics along normal ones in \ctay{lhs2}} {%
+  \externalfigure [lhs-2-128.jpeg] [width=.5\hsize]%
+}
+\indentation After these deliberations the validity of
+\te{letterspacing,} including lower case, as a means of emphasis
+is already half established.
+It beats slant with respect to availability and differentiating
+effect.
+It is preferable over quotation marks because the emphasized
+passage clearly differs from the main font style.
+Finally, it triumphs over weight switching as the result is very
+close to the mean overall distribution of ink within the text
+body.
+In the previous graduation of emphasis levels an alternative
+involving letter spacing could be as follows:
+  {\it1}: small caps,
+  {\it2}: letterspaced text font,
+  {\it3}: italics, and
+  {\it4}: letterspaced italics or slants.
+Here another convenient feature of letterspacing becomes
+apparent: as it is basically a different method of typesetting
+the same font it can theoretically be applied on any typeface and
+weight.
+It follows, that in the foregoing mapping, parts of longer
+(italic) quotations may be emphasized as well:
+  \quote{%
+    regum timendorum in proprios greges {\uprightslash}
+    reges in ipsos imperium est \te{Iouis} {\uprightslash}
+    \te{clari} Giganteo triumpho {\uprightslash}
+    cuncta supercilio \te{mouentis.}%
+  }
+However, substituting rule {\it2} for {\it3}, the resulting
+mapping will be less satisfactory.
+As quotations are prone to extending over multiple lines, whereas
+normal emphasis rarely spans more than two words, spacing out
+the former might lead to the unbalanced appearance of paragraphs.
+So best avoid letterspacing in cases where the object possibly
+encompasses entire sentences.
+
+Caution is necessary concerning \te{punctuation} adjacient to the
+letterspaced passage.
+In contrast to italicized or bold emphasis where an immediately
+succeeding punctuation sign is best typeset in the surrounding
+main face (e.g. “et {\it tu}, Brute?”), letter spacing may
+require the sign to be typeset as part of the emphasis.
+The reason for this consists partly in the larger interword
+spacing that extends onto the surrounding spaces, and partly also
+on the letterspacing itself which would be disrupted by a
+tighter-spaced character.
+(Bad: \te{O Tite}, tute, \te{Tati}, tibi tanta, \te{tyranne}, tulisti;
+good: \te{O Tite,} tute, \te{Tati,} tibi tanta, \te{tyranne,} tulisti.)
+
+\stopsection
+
+\startsection[title=Capital Spacing]
+\startbuffer [display:capitals]
+  \start%
+  \setupbodyfont [11pt]%
+  \startframed[
+    align=middle,
+    background=color,
+    backgroundcolor=gray:2,
+    offset=1em,
+    frame=off,
+  ]
+    \def\teststring{mispavayatsim}%
+    \bf%
+    {\colored[gray:7]{\WORD\teststring}}\par
+    {\colored[gray:8]{\subff{kerning}\WORD\teststring}}\par
+    {\colored[gray:9]{\largecaps{\WORD\teststring}}}\par
+  \stopframed
+  \stop%
+\stopbuffer
+
+\starthanging[location=right]{\getbuffer [display:capitals]}
+Another natural use of letter spacing is to space out capitals and
+small caps, whose legibility suffers with increasing markup
+length.
+The appearance of capitals can be influenced in various ways, as
+demonstrated in the illustration to the left.
+In the first row, no modification is applied and the capitals are
+placed with full kerning.
+Row number two has the kerning removed and thus the distance between
+letters increases.
+The final row, as the second, lacks kerning and adds
+20\,\letterpercent\ letter spacing.
+\stophanging
+
+As is apparent from the example, the difference in spacing
+particularly influences the outcome.
+The {\WORD unmodified text} in the first row is packed too
+tightly, whereas disabling the kerning results in irregular
+widening of the {\subff{kerning}\WORD previously kerned} letters
+near the center.
+In the third row the sequence looks much better because of
+additional \mediumcaps{\WORD letterspacing.}
+With some fonts \smallcaps{\sc small capitals} profit from additional
+spacing as well, as employed in the section headings of this
+document.\reference[suppresskern]{}
+The \te{Letterspace} module provides a switch \type{suppresskern}
+that, if set to {\it yes}, will disable kerning during
+letterspacing.
+This option is meant for the special treatment of capitalization
+but depending on the font it might equally help when dealing with
+emphasis as well.
+\placefigure [middle] {Letterspaced capitals constitute a title
+                       page in \ctay{mt}, vol.~1.} {%
+  \externalfigure [bodoni-mt-1-front.jpeg] [width=.75\hsize]%
+}
+
+\stopsection
+\stopchapter
+\stopbodymatter
+
+\startchapter[title=License]
+
+Copyright 2011--2013 \te{Philipp Gesang}. All rights reserved.
+
+Redistribution and use in source and binary forms, with or
+without modification, are permitted provided that the following
+conditions are met:
+
+\startitemize[n]
+  \item Redistributions of source code must retain the above
+    copyright notice, this list of conditions and the following
+    disclaimer.
+  \item Redistributions in binary form must reproduce the
+    above copyright notice, this list of conditions and the
+    following disclaimer in the documentation and/or other
+    materials provided with the distribution.
+\stopitemize
+
+\begingroup
+\setuptolerance [horizontal,stretch]
+\startalignment [right]
+\noindentation\startsmallcaps
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
+  HOLDER “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES,
+  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+\stopsmallcaps\endgraf
+\stopalignment
+\endgroup
+
+\stopchapter
+
+\startchapter[title=References]
+
+\startbibindent
+  \placepublications[criterium=all]
+\stopbibindent
+
+\stopchapter
+
+\stoptext

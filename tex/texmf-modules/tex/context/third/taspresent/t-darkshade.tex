@@ -1,0 +1,165 @@
+%D \module
+%D   [      file=t-darkshade,
+%D        version=2007.07.17, 
+%D          title=\CONTEXT\ Style File,
+%D       subtitle=Presentation Module darkshade,
+%D         author=Thomas A. Schmitz,
+%D           date=\currentdate,
+%D      copyright={Thomas A. Schmitz}]
+%C
+%C Copyright 2007 Thomas A. Schmitz.
+%C This file may be distributed under the GNU General Public License v. 2.0.
+
+%D This file provides the \quotation{darkshade} style for the presentation
+%D module. It is loaded at runtime. 
+
+\writestatus{loading}{module darkshade}
+
+\startmodule[darkshade]
+
+\unprotect
+
+%D The taspresentation module provides a skeleton into which different styles
+%D can be hooked. It uses a number of variables and macros which have to be set
+%D beforehand. Some parts are optional. We begin with the necessary definitions:
+
+%D We start colors; textcolor is white:
+
+\setupcolors[state=start,textcolor=white]
+
+%D The darkshade module has parameters of its own; we set them up and use
+%D them:
+
+\setupmodule[color=blue]
+
+\processaction[\currentmoduleparameter{color}]
+	[        blue=>\def\colormode{bluemode},
+                green=>\def\colormode{greenmode},
+              bluered=>\def\colormode{blueredmode},
+           \v!unknown=>\def\colormode{bluemode},
+           \v!default=>\def\colormode{bluemode}]
+
+\enablemode[\colormode]
+
+%D These macros are used for placing figures/pictures:
+
+\define\NormalHeight{.83\textheight}
+\define\NormalWidth{.476\textwidth}
+\define\PictureFrameHeight{.83\textheight}
+\define\PictureFrameWidth{.476\textwidth}
+
+%D The page layout:
+
+\setuplayout [width=fit,
+              margin=1.5cm,
+              leftmargindistance=0pt,
+              rightmargindistance=0pt,
+              height=fit, 
+              header=0pt, 
+              footer=5pt, 
+              topspace=.8cm, 
+              backspace=1.5cm,
+              bottomspace=.8cm,
+              bottom=12pt,
+              location=singlesided]
+
+%D The macro for typesetting the Slidetitle:
+
+\define[1]\Slidetitle{\page\midaligned{\switchtobodyfont[\Titlesize]#1}\blank[0.75cm]}
+
+%D The macro \tex{Maketitle} produces a default title page with the author, the
+%D title of the presentation, and the date. Using it is not mandatory.
+
+\define\Maketitle{%
+\titback
+\null
+\vfill
+\midaligned{\switchtobodyfont[\Titlesize]\getvariable{taspresent}{title}}
+\blank[2*line]
+\midaligned{\getvariable{taspresent}{author}}
+\blank[3*line]
+\midaligned{\currentdate}
+\vfill
+\null}
+
+%D The following parts are optional; if you don't use backgrounds and are
+%D content with CONTEXT's default itemization, you don't have to set these
+%D macros. 
+
+%D We define our colors:
+
+\startmode[blueredmode]
+\definecolor [InteractionColor] [b=.2]
+\definecolor [ContrastColor]    [b=.8]
+\definecolor [One]              [s=.6]
+\definecolor [Item]             [s=1]
+\definecolor [a]                [r=0.5,g=0,b=0]
+\definecolor [b]                [r=0,g=0,b=0.5]
+\stopmode
+
+
+\startmode[bluemode]
+\definecolor [InteractionColor] [b=.2]
+\definecolor [ContrastColor]    [b=.8]
+\definecolor [One]              [s=.6]
+\definecolor [Item]             [s=1]
+\definecolor [a]                [r=0,g=0,b=1]
+\definecolor [b]                [r=0,g=0,b=0.05]
+\stopmode
+
+\startmode[greenmode]
+\definecolor [InteractionColor] [s=.2]
+\definecolor [ContrastColor]    [s=.5]
+\definecolor [One]              [s=.6]
+\definecolor [Item]             [s=1]
+\definecolor [a]                [r=0,g=.8,b=0]
+\definecolor [b]                [r=0,g=0.05,b=0]
+\stopmode
+
+%D We let Metapost calculate the background:
+
+\startuniqueMPgraphic{LinearShade}
+path p ;
+p := unitsquare xscaled \overlaywidth yscaled \overlayheight ;
+linear_shade(p,6,\MPcolor{a},\MPcolor{b}) ;
+\stopuniqueMPgraphic
+
+%D We define these backgrounds as overlays:
+
+\defineoverlay
+[lecbackground]
+[\useMPgraphic{LinearShade}]
+
+%D These are shortcuts to switch backgrounds:
+
+\define\lecback{\setupbackgrounds[page][background=lecbackground]\setupinteractionbar[state=start]}
+\define\titback{\setupbackgrounds[page][background=lecbackground]\setupinteractionbar[state=stop]}
+\define\picback{\setupbackgrounds[page][background=lecbackground]\setupinteractionbar[state=start]}
+\define\noback{\setupbackgrounds[page][background=lecbackground]}
+
+\setupbackgrounds[page][background=lecbackground] 
+
+%D The symbol for the first level of itemizations. 
+
+\definesymbol[1][\useMPgraphic{ItSquare}]
+
+%D The \quotation{darkshade} style uses \CONTEXT's interactionbar:
+
+\setupsubpagenumber[way=bytext,state=start]
+
+\setupinteraction
+  [page=yes,
+   color=InteractionColor,
+   contrastcolor=ContrastColor,
+   menu=on,
+   state=start]
+
+\startinteractionmenu[bottom]
+{\interactionbar[alternative=f,width=\makeupwidth,height=1ex]}
+\stopinteractionmenu
+
+\protect
+\stopmodule
+
+\endinput
+

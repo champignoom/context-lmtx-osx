@@ -1,0 +1,54 @@
+%
+% GFSDidot
+%
+\loadmapfile[gfsdidot.map]
+
+\usetypescriptfile[type-buy]
+
+\starttypescript [serif] [gfsdidot] [texnansi,ec]
+  \definefontsynonym [GFSDidot-Roman]          [\typescriptthree-LIGA-KERN-ONUM-PNUM-GFSDidot]  [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Bold]           [\typescriptthree-LIGA-KERN-GFSDidot-Bold]  [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Italic]         [\typescriptthree-LIGA-KERN-GFSDidot-Italic]  [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Bold-Italic]    [\typescriptthree-LIGA-KERN-GFSDidot-BoldItalic] [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Roman-SmallCaps][\typescriptthree-LIGA-KERN-SMCP-LNUM-GFSDidot]  [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Roman-OSF]      [\typescriptthree-LIGA-KERN-SMCP-LNUM-GFSDidot]   [encoding=\typescriptthree]
+\stoptypescript
+
+\starttypescript [serif] [gfsdidot] [name]
+  \usetypescript[serif][fallback]
+  \definefontsynonym [Serif]           [GFSDidot-Roman]
+  \definefontsynonym [SerifItalic]     [GFSDidot-Italic]
+  \definefontsynonym [SerifBold]       [GFSDidot-Bold]
+  \definefontsynonym [SerifBoldItalic] [GFSDidot-Bold-Italic]
+  \definefontsynonym [SerifCaps]       [GFSDidot-Roman-SmallCaps]
+  \definefontsynonym [OldStyle]        [GFSDidot-Roman-OSF]
+\stoptypescript
+
+\starttypescript [GFSDidot] [texnansi,ec]
+  \definetypeface [MyGFSDidot] [rm] [serif] [gfsdidot] [default] [encoding=\typescripttwo]
+\stoptypescript 
+
+
+\starttypescript [serif] [gfsdidotlf] [texnansi,ec]
+  \definefontsynonym [GFSDidot-Roman]          [\typescriptthree-LIGA-KERN-GFSDidot]  [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Bold]           [\typescriptthree-LIGA-KERN-GFSDidot-Bold]  [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Italic]         [\typescriptthree-LIGA-KERN-GFSDidot-Italic]  [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Bold-Italic]    [\typescriptthree-LIGA-KERN-GFSDidot-BoldItalic] [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Roman-SmallCaps][\typescriptthree-LIGA-KERN-ONUM-PNUM-SMCP-GFSDidot]  [encoding=\typescriptthree]
+  \definefontsynonym [GFSDidot-Roman-OSF]      [\typescriptthree-LIGA-KERN-ONUM-PNUM-SMCP-GFSDidot]   [encoding=\typescriptthree]
+ 
+  \stoptypescript
+
+\starttypescript [serif] [gfsdidotlf] [name]
+  \usetypescript[serif][fallback]
+  \definefontsynonym [Serif]           [GFSDidot-Roman]
+  \definefontsynonym [SerifItalic]     [GFSDidot-Italic]
+  \definefontsynonym [SerifBold]       [GFSDidot-Bold]
+  \definefontsynonym [SerifBoldItalic] [GFSDidot-Bold-Italic]
+  \definefontsynonym [SerifCaps]       [GFSDidot-Roman-SmallCaps]
+  \definefontsynonym [OldStyle]        [GFSDidot-Roman-OSF]
+\stoptypescript
+
+\starttypescript [GFSDidotlf] [texnansi,ec]
+  \definetypeface [MyGFSDidotlf] [rm] [serif] [gfsdidotlf] [default] [encoding=\typescripttwo]
+\stoptypescript 

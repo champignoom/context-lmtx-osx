@@ -1,0 +1,85 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\doifdefinedelse{stormmapdefined}
+  {}
+  {\let\stormmapdefined\empty \loadmapfile[storm]}
+%\starttypescript [map] [libcziowes] [st1,st2]
+%  \loadmapfile[storm]
+%\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [libcziowes] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		   [Libcziowes-Roman]
+
+  \definefontsynonym [SerifExt]		   [Libcziowes-Roman-Ext]
+
+  \definefontsynonym [SerifRegular]	[Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [libcziowes] [st1]
+  \definefontsynonym [Libcziowes-Roman]     [slwr8t]  [encoding=st1]
+
+  \definefontsynonym [Libcziowes-Roman-Ext] [slwr6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [libcziowes] [st2]
+  \definefontsynonym [Libcziowes-Roman]     [slwr8z]  [encoding=st2]
+
+  \definefontsynonym [Libcziowes-Roman-Ext] [slwr6s]  [encoding=st3]
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [libcziowes] [name]
+  \definefontsynonym [MathRoman]        [Libcziowes-Math-Letters]
+  \definefontsynonym [MathItalic]       [Libcziowes-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Libcziowes-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [libcziowes] [st1]
+  \definefontsynonym [Libcziowes-Math-Letters]       [slwr8t] [encoding=st1]
+  \definefontsynonym [Libcziowes-Math-Letters-Italic][slwr8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]    [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension]  [cmex10]
+  \definefontsynonym [Libcziowes-Math-Storm]         [slwr6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [libcziowes] [st2]
+  \definefontsynonym [Libcziowes-Math-Letters]       [slwr8z] [encoding=st2]
+  \definefontsynonym [Libcziowes-Math-Letters-Italic][slwr8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]    [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension]  [cmex10]
+  \definefontsynonym [Libcziowes-Math-Storm]         [slwr6s] [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [libcziowes] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [Libcziowes] [st1,st2]
+  \definetypeface [Libcziowes] [rm] [serif] [libcziowes] [default] [encoding=\typescripttwo]
+  \definetypeface [Libcziowes] [mm] [math] [libcziowes] [storm]   [encoding=\typescripttwo]
+  \definetypeface [Libcziowes] [tt] [mono] [libcziowes] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection
+\endinput
+
+% end of type-slibcziowes.tex

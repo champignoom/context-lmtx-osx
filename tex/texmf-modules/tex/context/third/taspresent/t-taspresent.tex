@@ -1,0 +1,684 @@
+%D \module
+%D   [      file=t-taspresent,
+%D        version=2007.07.15, 
+%D          title=\CONTEXT\ Style File,
+%D       subtitle=Presentation Module taspresent,
+%D         author=Thomas A. Schmitz,
+%D           date=\currentdate,
+%D      copyright={Thomas A. Schmitz}]
+%C
+%C Copyright 2007 Thomas A. Schmitz.
+%C This file may be distributed under the GNU General Public License v. 2.0.
+
+%D This module is meant to facilitate writing presentations in \CONTEXT. It
+%D provides a consistent interface and macros; there are different styles
+%D which give different output. The module has been written for
+%D projector||based presentations, so elements which are typical for screen
+%D presentations (such as interactive hyperlinks or tables of contents) are not
+%D included. The module is meant for an academic environment, specifically in
+%D the humanities. Hence, it has the following characteristics:
+%D
+%D \startitemize 
+%D
+%D \item The look is rather sober. In academia, presentations are not meant to
+%D showcase fancy \TeX\ effects; nothing should divert the audience's attention
+%D from the content.
+%D
+%D \item The module is written for slides which exhibit text and/or images.
+%D From my own experience with \TeX||based presentations, I have provided a
+%D setup for horizontal (landscape) pictures and for vertical (portrait)
+%D pictures, which are accompanied by an area for explanatory text.
+%D
+%D \item A simple switch in the module setup command will produce different
+%D output. 
+%D
+%D \item It is easy to customize the module or to add more styles.
+%D
+%D \stopitemize
+%D
+%D The macros are commented rather extensively to give users (especially users
+%D relatively new to \CONTEXT) the chance to unserstand the mechanisms and
+%D create their own styles. Of course, I did not invent this code on my own. My
+%D thanks are due, as always, to Hans Hagen, whose presentation modules in the
+%D \CONTEXT\ core have been a wonderful source of inspiration, and to Mojca
+%D Miklavec, who provided help with Metapost. 
+
+\writestatus{loading}{module taspresent}
+
+\startmodule[taspresent]
+
+\unprotect
+
+%D First, we provide default setups for the module. These setups will be used
+%D to choose the different styles; user input will overwrite the defaults. The
+%D different styles are defined in additional modules which will be called in
+%D turn.
+
+\setupmodule[style=doubleframe,font=LatinModernSans,size=17pt,stylecolor=blue,stylebottom=square]
+
+%D We collect author and title of the presentation in variables in the
+%D namespace {\tt taspresent}; they will be used to typeset the title page and
+%D in some headers and footers. The defaults are empty. 
+
+\setvariables [taspresent] [  author=]
+\setvariables [taspresent] [   title=]
+
+%D The fontsize is set via the \type{size}||key; it will be used in
+%D numerous setup||commands. We use the \tex{processaction} mechanism to define
+%D our \tex{Normalsize} and \tex{Titlesize}. 
+ 
+
+\processaction[\currentmoduleparameter{size}]
+	[       16pt=>\def\Normalsize{16pt}\def\Titlesize{25pt},
+       		17pt=>\def\Normalsize{17pt}\def\Titlesize{27pt},
+       		18pt=>\def\Normalsize{18pt}\def\Titlesize{28pt},
+       		19pt=>\def\Normalsize{19pt}\def\Titlesize{30pt},
+       		20pt=>\def\Normalsize{20pt}\def\Titlesize{30pt},
+       		21pt=>\def\Normalsize{21pt}\def\Titlesize{30pt},
+	  \v!unknown=>\def\Normalsize{17pt}\def\Titlesize{27pt},
+          \v!default=>\def\Normalsize{17pt}\def\Titlesize{27pt}]
+ 
+%D Next, we define the different styles. The fallback is a style without
+%D background which is defined in the module itself; it is included as a
+%D \type{mode}. All other styles are defined in external files which are
+%D called in turn.
+
+\beginOLDTEX 
+\setupencoding[default=ec]
+\endOLDTEX
+
+\def\DefMode{\enablemode[defaultmode]}
+
+\processaction[\currentmoduleparameter{stylebottom}]
+	[      square=>\def\modbottom{square},
+	       stripe=>\def\modbottom{stripe},
+	   \v!unknown=>\def\modbottom{square},
+           \v!default=>\def\modbottom{square}]
+
+\processaction[\currentmoduleparameter{stylecolor}]
+	[        red=>\def\modcolor{red},
+	        blue=>\def\modcolor{blue},
+               green=>\def\modcolor{green},
+             bluered=>\def\modcolor{bluered},
+	  \v!unknown=>\def\modcolor{blue},
+          \v!default=>\def\modcolor{blue}]
+
+\processaction[\currentmoduleparameter{style}]
+	[  blackblue=>{\usemodule[blackblue]},
+	        bonn=>{\usemodule[bonn]},
+            bluegray=>{\usemodule[bluegray][color=\modcolor]},
+          bluestripe=>{\usemodule[bluestripe]},
+           bluewhite=>{\usemodule[bluewhite]},
+	   darkshade=>{\usemodule[darkshade][color=\modcolor]},
+	 doubleframe=>{\usemodule[doubleframe][bottom=\modbottom]},
+         doubleshade=>{\usemodule[doubleshade]},
+	    embossed=>{\usemodule[embossed]},
+           graybeams=>{\usemodule[graybeams]},
+          graysquare=>{\usemodule[graysquare]},
+           greenblue=>{\usemodule[greenblue]},
+      horizontalblue=>{\usemodule[horizontalblue]},
+           lightblue=>{\usemodule[lightblue]},
+            quadblue=>{\usemodule[quadblue]},
+       rainbowstripe=>{\usemodule[rainbowstripe]},
+	superellipse=>{\usemodule[superellipse]},
+	  titleframe=>{\usemodule[titleframe]},
+        narrowstripe=>{\usemodule[narrowstripe][color=\modcolor]},
+	    redframe=>{\usemodule[redframe]},
+          \v!unknown=>\doiffileelse{\currentmoduleparameter{style}}{\input \currentmoduleparameter{style}}{\DefMode},
+          \v!default=>\DefMode]
+
+%D We set up the bodyfont
+
+\processaction[\currentmoduleparameter{font}]
+	[ LatinModern=>\def\fontmode{latinmodern},
+      LatinModernSans=>\def\fontmode{latinmodernsans},
+	      Pagella=>\def\fontmode{pagella},
+                Times=>\def\fontmode{times},
+	    MyriadPro=>\def\fontmode{myriadpro},
+	    Helvetica=>\def\fontmode{helvetica},
+                 User=>\def\fontmode{},
+           \v!unknown=>\def\fontmode{latinmodernsans},
+           \v!default=>\def\fontmode{latinmodernsans}]
+
+\enablemode[\fontmode]
+
+%D We begin by setting up the tolerance. Presentations have relatively dense
+%D lines, we do not care about underfull lines, but allow emergeny stretch.
+
+\setuptolerance[verytolerant,stretch] 
+
+\setupbodyfontenvironment[default][em=italic] 
+
+%D Next, the page layout. S6 has the ratio of a usual computer screen. We do
+%D not want page numbers, but we sometimes want to use the pagenumbering
+%D mechanism, so we make sure pages are counted, but the numbers are not
+%D displayed. As for the page layout: most of the numbers have been reached by
+%D trial and error; I have just taken what seemed to produce the best output.
+
+\setuppapersize[S6][S6]
+
+\setuppagenumbering[location=]
+
+\startmode[defaultmode]
+\setupcolors[state=start]
+\stopmode
+
+\startmode[defaultmode]
+\setuplayout [width=fit,
+              margin=0.6cm,
+              height=fit, 
+              header=0.15cm, 
+              footer=1.35cm, 
+	      footerdistance=0.5cm,
+              topspace=0.5cm, 
+              backspace=1cm,
+              location=singlesided]
+\stopmode
+
+%D The bodyfont needs to be defined so \CONTEXT\ can calculate size switches,
+%D math formulas, etc.
+
+\starttypescript [serif] [default] [size] 
+\definebodyfont [14pt,15pt,16pt,17pt,20pt,25pt,\Normalsize,\Titlesize] [rm] [default] 
+\stoptypescript
+
+\starttypescript [sans] [default] [size] 
+\definebodyfont [14pt,15pt,16pt,17pt,20pt,25pt,\Normalsize,\Titlesize] [ss] [default] 
+\stoptypescript
+
+%D Modes define which font will be used.
+
+\definebodyfontenvironment[\Normalsize]
+\definebodyfontenvironment[\Titlesize]
+
+\startmode[latinmodern]
+\setupbodyfont[\Normalsize]
+\stopmode
+
+\startmode[latinmodernsans]
+\setupbodyfont[ss,\Normalsize]
+\stopmode
+
+\beginLUATEX
+\usetypescriptfile[type-otf]
+
+\startmode[helvetica]
+\usetypescript[times]
+\setupbodyfont[times,ss,\Normalsize]
+\stopmode
+
+\startmode[pagella]
+\usetypescript[palatino]
+\setupbodyfont[palatino,\Normalsize]
+\stopmode
+
+\startmode[times]
+\usetypescript[times]
+\setupbodyfont[times,\Normalsize]
+\stopmode
+\endLUATEX
+
+\beginOLDTEX
+\startmode[helvetica]
+\definetypeface [SlideFace] [rm] [serif] [times] [default]
+\definetypeface [SlideFace] [ss] [sans] [helvetica] [default] [rscale=.9]
+\definetypeface [SlideFace] [tt] [mono] [courier] [default] [rscale=1.1]
+\setupbodyfont[SlideFace,ss,\Normalsize]
+\stopmode
+
+\startmode[times]
+\definetypeface [SlideFace] [rm] [serif] [times] [default]
+\definetypeface [SlideFace] [ss] [sans] [helvetica] [default] [rscale=.9]
+\definetypeface [SlideFace] [tt] [mono] [courier] [default] [rscale=1.1]
+\setupbodyfont[SlideFace,\Normalsize]
+\stopmode
+
+\startmode[pagella]
+\definebodyfontenvironment[\Normalsize]
+\usetypescriptfile[type-gyr]
+\definetypeface [SlideFace] [rm] [serif] [palatino] [default] [encoding=texnansi]
+\definetypeface [SlideFace] [tt] [mono]  [modern]   [default] [encoding=texnansi]
+\setupbodyfont[SlideFace,\Normalsize]
+\stopmode
+
+\startmode[myriadpro]
+\usetypescriptfile[type-myriadpro]
+\usetypescript[MyriadPro] [texnansi]
+\setupbodyfont[MyMyriadPro,ss,\Normalsize]
+\stopmode
+\endOLDTEX
+
+\beginXETEX
+\startmode[times]
+\starttypescript [serif] [sliter]
+  \definefontsynonym [Termes-Roman]          [file:texgyretermes-regular]
+  \definefontsynonym [Termes-Bold]           [file:texgyretermes-bold]
+  \definefontsynonym [Termes-Italic]         [file:texgyretermes-italic]
+  \definefontsynonym [Termes-Bold-Italic]    [file:texgyretermes-bolditalic]
+  \stoptypescript
+
+\starttypescript [serif] [sliter] [name]
+  \definefontsynonym [Serif]           [Termes-Roman] [features=default]
+  \definefontsynonym [SerifItalic]     [Termes-Italic] [features=default]
+  \definefontsynonym [SerifBold]       [Termes-Bold] [features=default]
+  \definefontsynonym [SerifBoldItalic] [Termes-Bold-Italic] [features=default]
+  \definefontsynonym [SerifCaps]       [Serif]
+  \definefontsynonym [OldStyle]       [Serif]
+\stoptypescript
+\definetypeface [SlideFace] [rm] [serif] [sliter] [default]
+\setupbodyfont[SlideFace,\Normalsize]
+\stopmode
+
+\startmode[helvetica]
+\starttypescript [sans] [slihe]
+  \definefontsynonym [Helvetica-Roman]          [file:texgyreheros-regular]
+  \definefontsynonym [Helvetica-Bold]           [file:texgyreheros-bold]
+  \definefontsynonym [Helvetica-Italic]         [file:texgyreheros-italic]
+  \definefontsynonym [Helvetica-Bold-Italic]    [file:texgyreheros-bolditalic]
+  \stoptypescript
+
+\starttypescript [sans] [slihe] [name]
+  \definefontsynonym [Sans]           [Helvetica-Roman] [features=default]
+  \definefontsynonym [SansItalic]     [Helvetica-Italic] [features=default]
+  \definefontsynonym [SansBold]       [Helvetica-Bold] [features=default]
+  \definefontsynonym [SansBoldItalic] [Helvetica-Bold-Italic] [features=default]
+  \definefontsynonym [SansCaps]       [Sans]
+  \definefontsynonym [OldStyle]       [Sans]
+\stoptypescript
+\definetypeface [SlideFace] [rm] [sans] [slihe] [default]
+\setupbodyfont[SlideFace,ss,\Normalsize]
+\stopmode
+
+\startmode[pagella]
+\definebodyfontenvironment[\Normalsize]
+\starttypescript [serif] [slipa]
+  \definefontsynonym [Pagella-Roman]          [file:texgyrepagella-regular]
+  \definefontsynonym [Pagella-Bold]           [file:texgyrepagella-bold]
+  \definefontsynonym [Pagella-Italic]         [file:texgyrepagella-italic]
+  \definefontsynonym [Pagella-Bold-Italic]    [file:texgyrepagella-bolditalic]
+  \stoptypescript
+
+\starttypescript [serif] [slipa] [name]
+  \definefontsynonym [Serif]           [Pagella-Roman] [features=default]
+  \definefontsynonym [SerifItalic]     [Pagella-Italic] [features=default]
+  \definefontsynonym [SerifBold]       [Pagella-Bold] [features=default]
+  \definefontsynonym [SerifBoldItalic] [Pagella-Bold-Italic] [features=default]
+  \definefontsynonym [SerifCaps]       [Serif]
+  \definefontsynonym [OldStyle]       [Serif]
+\stoptypescript
+\definetypeface [SlideFace] [rm] [serif] [slipa] [default]
+\setupbodyfont[SlideFace,\Normalsize]
+\stopmode
+
+\startmode[myriadpro]
+\usetypescriptfile[type-myriadpro]
+\usetypescript[MyriadPro]
+\setupbodyfont[MyMyriadPro,\Normalsize]
+
+\endXETEX
+
+%D This is a definition for Metapost pictures and \tex{sometxt} which I use in
+%D my own presentations.
+
+\def\MyFramedText#1%
+{\framed[offset=.5ex,frame=off,width=0.5cm]{#1}}
+\definetextext[MF]{\MyFramedText}
+
+%D For code snippets, we want colored output.
+
+\definetype[typeTEX][option=color]
+
+%D We define a \quotation{normal} height and width for images.
+
+\startmode[defaultmode]
+\define\NormalHeight{.83\textheight}
+\define\NormalWidth{.476\textwidth}
+\define\PictureFrameHeight{.83\textheight}
+\define\PictureFrameWidth{.476\textwidth}
+\stopmode
+
+%D This is a small square which will be used for \tex{itemize}; it will be
+%D placed in the margin. 
+
+\startuniqueMPgraphic{ItTriangle}
+fill (0,0) -- (0,0.4cm) -- (0.6cm,0.2cm) -- cycle withcolor \MPcolor{Item} ;
+\stopuniqueMPgraphic
+
+\startuniqueMPgraphic{ItSquare}
+fill unitsquare xyscaled(0.4cm,0.4cm) withcolor \MPcolor{Item} ;
+\stopuniqueMPgraphic
+
+%D I had thought about this method for including pictures, but in the end
+%D decided against it. 
+
+\definefloat[MyMargin]
+	    [figure]
+
+\setupfloat[MyMargin]
+	   [leftmargindistance=-0.5cm,
+	    default={left,none,high}]
+
+\defineparagraphs[ShowPictures][n=2,distance=1cm]
+\setupparagraphs[ShowPictures][1][width=.5\textwidth]
+
+%D The code for red circles and arrows which can be placed on top of a picture.
+%D I use them quite often in my presentations. Again, they are Metapost
+%D graphics which are then used as overlays. 
+
+\setupMPvariables[CircleSomething][scale=20,x=3,y=3]
+\startuseMPgraphic{CircleSomething}{scale,x,y}
+picture bboxpicture ;
+draw unitsquare xyscaled (OverlayWidth,OverlayHeight) ;
+bboxpicture := currentpicture ;
+currentpicture := nullpicture ;
+for i=1 upto 18:
+ 	pickup pencircle scaled (i*0.333pt) ;
+ 	draw fullcircle scaled \MPvar{scale}mm shifted (\MPvar{x}mm + 1.5mm,\MPvar{y}mm - 1.5mm) withcolor transparent (1,0.025,black) ;
+ endfor ;
+pickup pencircle scaled 5pt ;
+draw fullcircle scaled \MPvar{scale}mm shifted (\MPvar{x}mm,\MPvar{y}mm) withcolor red ;
+setbounds currentpicture to boundingbox bboxpicture;
+\stopuseMPgraphic
+
+%D This code has been contributed by Wolfgang Schuster and Peter Rolf. It puts
+%D a transparent gray layer over the picture, with one round area being
+%D completely transparent. This looks very neat for emphasizing areas of a
+%D picture.
+
+\setupMPvariables[GraySomething][opacity=30,scale=20,x=10,y=10]
+\startuseMPgraphic{GraySomething}{opacity,scale,x,y}
+op := \MPvar{opacity}/100 ;
+path p, q ;
+p := unitsquare xyscaled(OverlayWidth,OverlayHeight) ;
+q := fullcircle scaled \MPvar{scale}mm shifted (\MPvar{x}mm,\MPvar{y}mm) ;
+fill p--reverse q--cycle withcolor transparent (1,op,black) ;
+\stopuseMPgraphic
+
+%D The next macro allows users a simple interface for placing an image with a
+%D red circle on top. The macro \tex{CircHoriz} takes three arguments: the size
+%D and placement of the red circle, which are given as variables in the form
+%D \type{[scale=,xshift,yshift]}, the name of the picture, and the size for the
+%D picture. 
+
+\def\CircHoriz{\dotripleargument\doCircHoriz}
+\def\doCircHoriz[#1][#2][#3]{%
+\defineoverlay[Red_Circle][\useMPgraphic{CircleSomething}{#1}]
+\midaligned{\framed[frame=off,width=\textwidth,height=\PictureFrameHeight,align=middle,top=\vss,bottom=\vss,strut=no,offset=0pt,background={foreground,Red_Circle}]{\externalfigure[#2][#3]}}}
+
+%D This macro makes use of the gray layer; again, it takes three arguments:
+%D opacity, scale and placement of the transparent circle (the rest of the
+%D image is transparent gray), name of the picture, size of picture.
+
+\def\GrayHoriz{\dotripleargument\doGrayHoriz}
+\def\doGrayHoriz[#1][#2][#3]{%
+\defineoverlay[Gray_Background][\useMPgraphic{GraySomething}{#1}]
+\framed[frame=off,width=\textwidth,height=\textheight,align=middle,top=\vss,bottom=\vss,strut=no,offset=0pt]{\framed[frame=off,width=fit,height=fit,strut=no,offset=0pt,background={foreground,Gray_Background}]{\externalfigure[#2][#3]}}}
+
+
+\def\CircVert{\dotripleargument\doCircVert}
+\def\doCircVert[#1][#2][#3]#4{%
+\defineoverlay[Red_Circle][\useMPgraphic{CircleSomething}{#1}]%
+\startcombination%
+\framed[frame=off,height=\textheight,width=\PictureFrameWidth,top=\vss,bottom=\vss,align=middle,strut=no,offset=0pt,background={foreground,Red_Circle}]{\externalfigure[#2][#3]}{}%
+\framed[frame=off,height=\textheight,width=\PictureFrameWidth,top=\vss,bottom=\vss,align=middle,strut=no]{#4}{}%
+\stopcombination%
+}
+
+\setupMPvariables[ArrowSomething][direction=45,x=20,y=20]
+\startuseMPgraphic{ArrowSomething}{direction,x,y}
+picture bboxpicture ;
+draw unitsquare xyscaled (OverlayWidth,OverlayHeight) withcolor blue ;
+z1 = (\MPvar{x}mm,\MPvar{y}mm) ;
+z2 = z1 + 2.5cm*dir(\MPvar{direction}) ;
+z3 = z1 shifted (1.5mm,-1.5mm) ;
+z4 = z2 shifted (1.5mm,-1.5mm) ;
+bboxpicture := currentpicture ;
+currentpicture := nullpicture ;
+for i=1 upto 18:
+	ahlength := (i*0.833pt) ;
+	pickup pencircle scaled (i*0.277pt) ;
+	drawarrow z4--z3 withcolor transparent (1,0.025,black) ;
+endfor ;
+ahlength := 15pt ;
+pickup pencircle scaled 5pt ;
+drawarrow z2--z1 withcolor red;
+setbounds currentpicture to boundingbox bboxpicture;
+\stopuseMPgraphic
+
+%D The code for inclusion of a red arrow is similar: again, it takes three
+%D arguments: the placement and direction of the arrow given in the form
+%D \type{[direction=45,x=20,y=20]}, the name of the picture, and the size of
+%D the picture.
+
+\def\ArrowHoriz{\dotripleargument\doArrowHoriz}
+\def\doArrowHoriz[#1][#2][#3]{%
+\defineoverlay[Red_Arrow][\useMPgraphic{ArrowSomething}{#1}]
+\midaligned{\framed[frame=off,width=\textwidth,height=\PictureFrameHeight,align=middle,top=\vss,bottom=\vss,strut=no,offset=0pt,background={foreground,Red_Arrow}]{\externalfigure[#2][#3]}}}
+
+\def\ArrowVert{\dotripleargument\doArrowVert}
+\def\doArrowVert[#1][#2][#3]#4{%
+\defineoverlay[Red_Arrow][\useMPgraphic{ArrowSomething}{#1}]%
+\startcombination%
+\framed[frame=off,height=\textheight,width=\PictureFrameWidth,top=\vss,bottom=\vss,align=middle,strut=no,offset=0pt,background={foreground,Red_Arrow}]{\externalfigure[#2][#3]}{}%
+\framed[frame=off,height=\textheight,width=\PictureFrameWidth,top=\vss,bottom=\vss,align=middle,strut=no]{#4}{}%
+\stopcombination%
+}
+
+\beginLUATEX
+\define{\married}%
+{\getglyph{name:TeXGyreHeros-Regular}{\char"26AD}}
+
+\define{\hanky}%
+{\getglyph{name:TeXGyreHeros-Regular}{\char"26AE}}
+\endLUATEX
+
+\beginOLDTEX 
+\loadmapfile[ts1-lm.map]
+
+\startencoding[comp]
+\definecharacter textmarried 109
+\definecharacter texthanky 126
+\stopencoding
+
+\definefontsynonym[l@tinss][ts1-lmss10][encoding=comp]
+\definefont[tsf@nt][l@tinss sa 1.4]
+
+\def\married{\begingroup\tsf@nt\textmarried\endgroup}
+\def\hanky{\begingroup\tsf@nt\texthanky\endgroup}
+\endOLDTEX
+
+%D Now the real user macros. \tex{Slidetitle}: well, the name says it all. Ths
+%D argument is typeset as the title, but the implementation and the result
+%D (alignment, size, distance to text, color etc.) vary from module to module. 
+
+\startmode[defaultmode]
+\define[1]\Slidetitle{\page\midaligned{\switchtobodyfont[\Titlesize]#1}\blank[0.75cm]}
+\stopmode
+
+%D The macro \tex{Maketitle} produces a default title page with the author, the
+%D title of the presentation, and the date. Using it is not mandatory.
+
+\startmode[defaultmode]
+\define\Maketitle{%
+\titback
+\null
+\vfill
+\midaligned{\switchtobodyfont[\Titlesize]\getvariable{taspresent}{title}}
+\blank[2*line]
+\midaligned{\getvariable{taspresent}{author}}
+\blank[3*line]
+\midaligned{\currentdate}
+\vfill
+\null}
+\stopmode
+
+%D The macros for placing horizontal and vertical pictures. They take a similar
+%D form to the inclusion of arrows and circles. The macro for horizontal
+%D pictures \tex{PicHoriz} takes two arguments: the name of the picture and its
+%D size in the form \type{height=} or \type{width=}; the macro for vertical
+%D pictures \tex{PicVert} takes three arguments: the name of the picture, its
+%D size, and the text which will be placed opposite the picture.
+
+\def\PicHoriz{\dodoubleargument\doPicHoriz}
+\def\doPicHoriz[#1][#2]{%
+\framed[frame=off,width=\textwidth,height=\PictureFrameHeight,align=middle,top=\vss,bottom=\vss,strut=no,offset=0pt]{\externalfigure[#1][#2]}}
+
+\def\PicVert{\dodoubleargument\doPicVert}
+\def\doPicVert[#1][#2]#3{\startcombination%
+\framed[frame=off,height=\textheight,width=\PictureFrameWidth,top=\vss,bottom=\vss,align=middle,strut=no,offset=0pt]{\externalfigure[#1][#2]}{}%
+\framed[frame=off,height=\textheight,width=\PictureFrameWidth,top=\vss,bottom=\vss,align=middle,strut=no]{#3}{}%
+\stopcombination}
+
+%D finally, a few macros for switching the background. 
+
+\startmode[defaultmode]
+\define\lecback{\relax}
+\define\titback{\relax}
+\define\picback{\relax}
+\define\noback{\relax}
+\stopmode
+
+%D The rest is the demo section. 
+
+\protect
+\stopmodule
+
+\doifnotmode{demo}{\endinput}
+
+\setvariables [taspresent]
+              [author={Groucho Marx},
+               title={Marriage the Chief Cause of Divorce}]
+
+\starttext
+
+\Maketitle
+
+\Slidetitle{Text}
+
+\lecback
+
+Thus, I came to the conclusion that the designer of a new
+system must not only be the implementer and first
+large||scale user; the designer should also write the first
+user manual.
+
+The separation of any of these four components would have
+hurt \TeX\ significantly. If I had not participated fully in
+all these activities, literally hundreds of improvements
+would never have been made, because I would never have
+thought of them or perceived why they were important.
+
+But a system cannot be successful if it is too strongly
+influenced by a single person. Once the initial design is
+complete and fairly robust, the real test begins as people
+with many different viewpoints undertake their own
+experiments.
+
+\Slidetitle{Itemization}
+
+\startitemize[1]
+\item Thus, I came to the conclusion that the designer of a new
+	system  
+\item must not only be the implementer and first
+	large||scale user;  
+\item the designer should also write the first
+	user manual.
+\item The separation of any of these four components would have
+	hurt \TeX\ significantly. 
+\stopitemize
+
+\Slidetitle{Numbered Itemization}
+
+\startitemize[n]
+\item Thus, I came to the conclusion that the designer of a new
+	system  
+\item must not only be the implementer and first
+	large||scale user;  
+\item the designer should also write the first
+	user manual.
+\item The separation of any of these four components would have
+	hurt \TeX\ significantly. 
+\stopitemize
+
+\Slidetitle{Picture in Horizontal Mode}
+
+\PicHoriz[hor][height=\NormalHeight]
+
+\page
+
+\picback 
+
+\PicVert[vert][width=\NormalWidth]{Picture in \\ Vertical Mode}
+
+\page
+
+\CircVert[scale=22,x=23,y=25][vert][width=\NormalWidth]{Circle in \\ Vertical Mode}
+
+\page
+
+\ArrowVert[direction=90,x=7,y=23][vert][width=\NormalWidth]{Arrow in \\ Vertical Mode}
+
+\Slidetitle{Red Circle}
+
+\lecback
+
+\CircHoriz[scale=40,x=120,y=80][hor][height=\NormalHeight]
+
+\Slidetitle{Red Arrow}
+
+\ArrowHoriz[direction=135,x=105,y=15][hor][height=\NormalHeight]
+
+\Slidetitle{A MetaFun graphic}
+
+\placefigure[here]{none}{%
+\startMPcode
+pickup pencircle scaled 4pt ;
+draw unitsquare xyscaled (5cm,5cm) withcolor red ;
+\stopMPcode
+}
+
+\Slidetitle{Some Code Snippets}
+
+To set up a horizontal picture, simply type:
+
+\startTEX
+\PicHoriz[hor][height=\Normalheight]
+\stopTEX
+
+\blank[line]
+
+For vertical pictures:
+
+\startTEX
+\PicVert[vert][width=\NormalWidth]%
+{Text placed \\ opposite picture}
+\stopTEX
+
+\Slidetitle{Math}
+
+Since I know nothing about math, this example is copied from the wiki:
+
+\startformula
+ f(x) = \startmathcases
+   \NC x, \NC if $0 \le x \le \frac12$ \NR
+   \NC 1-x ,\NC if $\frac12 \le x \le 1$ \NR
+\stopmathcases
+\stopformula
+
+\Slidetitle{Your Own Ideas?}
+
+\null
+
+\vfill
+
+\midaligned{\tfd Go \color[red]{here!}}
+
+\vfill
+
+\null
+
+\page
+
+\null
+
+\stoptext

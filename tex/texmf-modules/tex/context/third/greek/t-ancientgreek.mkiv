@@ -1,0 +1,409 @@
+%D \module
+%D   [       file=t-ancientgreek,
+%D        version=2008.01.05,
+%D          title=Ancient Greek,
+%D       subtitle=Publications,
+%D         author=Thomas A. Schmitz, Taco Hoekwater
+%D           date=\currentdate,
+%D      copyright=Thomas A. Schmitz]
+%C
+%C This program is free software; you can redistribute it and/or modify it under
+%C the terms of the GNU General Public License as published by the Free Software
+%C Foundation; either version 2 of the License, or (at your option) any later
+%C version.
+
+%D Module t-ancientgreek providing method for polytonic Greek input in
+%D \CONTEXT.
+
+\writestatus{loading}{module ancientgreek}
+
+\startmodule[ancientgreek]
+
+\unprotect
+
+%D The new mechanism for modules allows setting values. We need to provide
+%D default setups for fonts and scaling. The \tex{setupgreek} command is not
+%D needed any longer; we now set these values when we call the module in this
+%D form:
+%D \starttyping
+%D \usemodule[ancientgreek][font=KadmosNew,scale=1.2,altfont=BosporosNew,altscale=1]
+%D \stoptyping
+
+\setupmodule[scale=1,font=GreekDidot,altfont=GreekGentiumAlt,altscale=1]
+
+%D We load the typescript file that contains all definitions for Greek fonts.
+
+\usetypescriptfile[type-agr.tex]
+
+%D Mkiv allows defining a fallback font for characters missing in the current
+%D font. We take a few symbols from TeXGyre termes and from the metric font:
+
+\definefontfallback [GreekFallback] [file:metre] [0x230A-0x230B] [force=no,check=no]
+\definefontfallback [GreekFallback] [name:texgyretermesregular] [0x2329-0x232A,0x27E6-0x27E7,0x007C,0x2026,0x0323] [force=no,check=no]
+
+%D We now define the bodyfont for our font and our altfont:
+
+\starttypescript[greek]
+\definetypeface[greek][rm][serif][\currentmoduleparameter{font}][default][rscale=\currentmoduleparameter{scale},fallbacks=GreekFallback,features=fea-\currentmoduleparameter{font}]
+\stoptypescript
+\usetypescript[greek]
+
+\starttypescript[altgreek]
+\definetypeface[altgreek][rm][serif][\currentmoduleparameter{altfont}][default][rscale=\currentmoduleparameter{altscale},fallbacks=GreekFallback,features=fea-\currentmoduleparameter{altfont}]
+\stoptypescript
+\usetypescript[altgreek]
+
+% \startsetups[enablegreek]
+%    \let~=\lettertilde
+%    \let|=\letterbar
+%    \language[agr]
+%    \switchtobodyfont[greek]
+% \stopsetups 
+%    
+% \startsetups[enablealtgreek]%
+%    \let~=\lettertilde
+%    \let|=\letterbar
+%    \language[agr]%
+%    \switchtobodyfont[altgreek]%
+% \stopsetups 
+
+%D This command is meant to allow replacing the exclamation mark with a
+%D sublinear dot for papyrological/epigraphical texts. I need to think more
+%D about this; right now, it's only a reminder.
+
+\startluacode
+  function epidots (s)
+    s = string.gsub(s, "!", "̣")
+    tex.sprint(s)
+  end
+\stopluacode
+
+%D Finally, we define a startstop environment and a command to enable these
+%D setups:
+
+\definestartstop[greek][commands={\language[agr]\switchtobodyfont[greek]}]
+
+\definestartstop[altgreek][commands={\language[agr]\switchtobodyfont[altgreek]}]
+
+\def\localgreek#1{\bgroup\language[agr]\switchtobodyfont[greek]#1\egroup}
+
+\def\localaltgreek#1{\bgroup\language[agr]\switchtobodyfont[altgreek]#1\egroup}
+
+\define{\sampi}{\greeksampi}
+
+\define{\stigma}{\greekstigma}
+
+\define{\koppa}{\greekkoppa}
+
+\define{\lunars}{\greeksigmalunate}
+\define{\lunarS}{\greekSigmalunate}
+
+\define{\crux}{\textdag}
+
+\define{\anglebracketleft}{〈}
+\define{\anglebracketright}{〉}
+
+\define{\halfbracketleft}{⌊}
+%{\getglyph{name:KadmosU}{\char"230A}}
+\define{\halfbracketright}{⌋}
+%{\getglyph{name:KadmosU}{\char"230B}}
+
+\define{\doublebracketleft}{⟦}
+\define{\doublebracketright}{⟧}
+
+% \define{\longalpha}{\buildtextaccent\textmacron\greekalpha}
+% \define{\longepsilon}{\buildtextaccent\textmacron\greekepsilon}
+% \define{\epsiloncircumflex}{\buildtextaccent\greekperispomeni\greekepsilon}
+% \define{\omicroncircumflex}{\buildtextaccent\greekperispomeni\greekomicron}
+% \define{\longomicron}{\buildtextaccent\textmacron\greekomicron}
+% \define{\omicronleniscircumflex}{\buildtextaccent\greekpsiliperispomeni\greekomicron}
+% \def\longepsilonacute%
+%   {\bgroup
+%    \setbox0\hbox{\greekepsilon}%
+%    \setbox2\hbox to \wd0{\hss\textmacron\hss}%
+%    \setbox4\hbox to \wd0{\kern0.2em\greekoxia\hss}%
+%    \hbox to \wd0 \bgroup
+%      \hss\copy0\hss
+%      \hskip-\wd2
+%      \copy2
+%      \hskip-\wd2
+%      \raise0.4ex\copy4
+%     \egroup
+%   \egroup}
+% 
+% \def\longomicronacute%
+%   {\bgroup
+%    \setbox0\hbox{\greekomicron}%
+%    \setbox2\hbox to \wd0{\hss\textmacron\hss}%
+%    \setbox4\hbox to \wd0{\kern0.2em\greekoxia\hss}%
+%    \hbox to \wd0 \bgroup
+%      \hss\copy0\hss
+%      \hskip-\wd2
+%      \copy2
+%      \hskip-\wd2
+%      \raise0.4ex\copy4
+%     \egroup
+%   \egroup}
+
+\newcount\synizesisnumber
+
+\startMPpositiongraphic{placesynizesis}
+     StartPage ;
+     begingroup ;
+     initialize_box(\MPpos{\MPvar{self}}) ;
+     numeric c ; c = EmWidth/18 ;
+     z1 = llxy ;
+     z2 = lrxy ;
+     z7 = 1/2[z1,z2] ;
+     z4 = ((x1 + 2*c), (y1 - 2.5*c)) ;
+     z5 = (x7, (y7 - 5*c)) ;
+     z6 = ((x2 - 2*c), (y2 - 2.5*c)) ;
+     path syn ; syn := z4 .. z5 .. z6 ;
+     pickup pencircle scaled (1.2*c) ;
+     draw syn ;
+     anchor_box(\MPanchor{\MPvar{self}}) ;
+     endgroup ;
+     save c ;     
+     StopPage ;
+\stopMPpositiongraphic%
+
+\define[1]\synizesis
+{\advance\synizesisnumber\plusone%
+ \setMPpositiongraphic{POS-\number\synizesisnumber}{placesynizesis}%
+ \hpos{POS-\number\synizesisnumber}{#1}}
+
+\startluacode
+do
+local
+
+subs_1 = {
+  {  "<'a|" , "ᾅ"  },
+  {  "<'h|" , "ᾕ"  },
+  {  "<'w|" , "ᾥ"  },
+  {  ">'a|" , "ᾄ"  },
+  {  ">'h|" , "ᾔ"  },
+  {  ">'w|" , "ᾤ"  },
+  {  "<`a|" , "ᾃ"  },
+  {  "<`h|" , "ᾓ"  },
+  {  "<`w|" , "ᾣ"  },
+  {  ">`a|" , "ᾂ"  },
+  {  ">`h|" , "ᾒ"  },
+  {  ">`w|" , "ᾢ"  },
+  {  "<~a|" , "ᾇ"  },
+  {  "<~h|" , "ᾗ"  },
+  {  "<~w|" , "ᾧ"  },
+  {  ">~a|" , "ᾆ"  },
+  {  ">~h|" , "ᾖ"  },
+  {  ">~w|" , "ᾦ"  },
+  {  "<'a" , "ἅ"  },
+  {  "<'e" , "ἕ"  },
+  {  "<'h" , "ἥ"  },
+  {  "<'i" , "ἵ"  },
+  {  "<'o" , "ὅ"  },
+  {  "<'u" , "ὕ"  },
+  {  "<'w" , "ὥ"  },
+  {  ">'a" , "ἄ"  },
+  {  ">'e" , "ἔ"  },
+  {  ">'h" , "ἤ"  },
+  {  ">'i" , "ἴ"  },
+  {  ">'o" , "ὄ"  },
+  {  ">'u" , "ὔ"  },
+  {  ">'w" , "ὤ"  },
+  {  "<`a" , "ἃ"  },
+  {  "<`e" , "ἓ"  },
+  {  "<`h" , "ἣ"  },
+  {  "<`i" , "ἳ"  },
+  {  "<`o" , "ὃ"  },
+  {  "<`u" , "ὓ"  },
+  {  "<`w" , "ὣ"  },
+  {  ">`a" , "ἂ"  },
+  {  ">`e" , "ἒ"  },
+  {  ">`h" , "ἢ"  },
+  {  ">`i" , "ἲ"  },
+  {  ">`o" , "ὂ"  },
+  {  ">`u" , "ὒ"  },
+  {  ">`w" , "ὢ"  },
+  {  "<~a" , "ἇ"  },
+  {  "<~h" , "ἧ"  },
+  {  "<~i" , "ἷ"  },
+  {  "<~u" , "ὗ"  },
+  {  "<~w" , "ὧ"  },
+  {  ">~a" , "ἆ"  },
+  {  ">~h" , "ἦ"  },
+  {  ">~i" , "ἶ"  },
+  {  ">~u" , "ὖ"  },
+  {  ">~w" , "ὦ"  },
+  {  "<'A" , "Ἅ"  },
+  {  "<'E" , "Ἕ"  },
+  {  "<'H" , "Ἥ"  },
+  {  "<'I" , "Ἵ"  },
+  {  "<'O" , "Ὅ"  },
+  {  "<'U" , "Ὕ"  },
+  {  "<'W" , "Ὥ"  },
+  {  ">'A" , "Ἄ"  },
+  {  ">'E" , "Ἔ"  },
+  {  ">'H" , "Ἤ"  },
+  {  ">'I" , "Ἴ"  },
+  {  ">'O" , "Ὄ"  },
+  {  ">'U" , "῎Υ"  },
+  {  ">'W" , "Ὤ"  },
+  {  "<`A" , "Ἃ"  },
+  {  "<`E" , "Ἒ"  },
+  {  "<`H" , "Ἣ"  },
+  {  "<`I" , "Ἳ"  },
+  {  "<`O" , "Ὃ"  },
+  {  "<`U" , "Ὓ"  },
+  {  "<`W" , "Ὣ"  },
+  {  ">`A" , "Ἂ"  },
+  {  ">`E" , "Ἒ"  },
+  {  ">`H" , "Ἢ"  },
+  {  ">`I" , "Ἲ"  },
+  {  ">`O" , "Ὂ"  },
+  {  ">`U" , "῍Υ"  },
+  {  ">`W" , "Ὢ"  },
+  {  "<~A" , "Ἇ"  },
+  {  "<~H" , "Ἧ"  },
+  {  "<~I" , "Ἷ"  },
+  {  "<~U" , "Ὗ"  },
+  {  "<~W" , "Ὧ"  },
+  {  ">~A" , "Ἆ"  },
+  {  ">~H" , "Ἦ"  },
+  {  ">~I" , "Ἶ"  },
+  {  ">~U" , "῏Υ"  },
+  {  ">~W" , "Ὦ"  },
+  {  "\"'i" , "ΐ"  },
+  {  "\"'u" , "ΰ"  },
+  {  "\"`i" , "ῒ"  },
+  {  "\"~i" , "ῗ"  },
+  {  "\"~u" , "ῧ"  },
+  {  "'a|" , "ᾴ"  },
+  {  "'h|" , "ῄ"  },
+  {  "'w|" , "ῴ"  },
+  {  "`a|" , "ᾲ"  },
+  {  "`h|" , "ῂ"  },
+  {  "`w|" , "ῲ"  },
+  {  "~a|" , "ᾷ"  },
+  {  "~h|" , "ῇ"  },
+  {  "~w|" , "ῷ"  },
+  {  "'a" , "ά"  },
+  {  "'e" , "έ"  },
+  {  "'h" , "ή"  },
+  {  "'i" , "ί"  },
+  {  "'o" , "ό"  },
+  {  "'u" , "ύ"  },
+  {  "'w" , "ώ"  },
+  {  "`a" , "ὰ"  },
+  {  "`e" , "ὲ"  },
+  {  "`h" , "ὴ"  },
+  {  "`i" , "ὶ"  },
+  {  "`o" , "ὸ"  },
+  {  "`u" , "ὺ"  },
+  {  "`w" , "ὼ"  },
+  {  "~a" , "ᾶ"  },
+  {  "~h" , "ῆ"  },
+  {  "~i" , "ῖ"  },
+  {  "~u" , "ῦ"  },
+  {  "~w" , "ῶ"  },
+  {  "<a" , "ἁ"  },
+  {  "<e" , "ἑ"  },
+  {  "<h" , "ἡ"  },
+  {  "<i" , "ἱ"  },
+  {  "<o" , "ὁ"  },
+  {  "<u" , "ὑ"  },
+  {  "<w" , "ὡ"  },
+  {  "<r" , "ῥ"  },
+  {  ">a" , "ἀ"  },
+  {  ">e" , "ἐ"  },
+  {  ">h" , "ἠ"  },
+  {  ">i" , "ἰ"  },
+  {  ">o" , "ὀ"  },
+  {  ">u" , "ὐ"  },
+  {  ">w" , "ὠ"  },
+  {  "<A" , "Ἁ"  },
+  {  "<E" , "Ἑ"  },
+  {  "<H" , "Ἡ"  },
+  {  "<I" , "Ἱ"  },
+  {  "<O" , "Ὁ"  },
+  {  "<U" , "Ὑ"  },
+  {  "<W" , "Ὡ"  },
+  {  ">A" , "Ἀ"  },
+  {  ">E" , "Ἐ"  },
+  {  ">H" , "Ἠ"  },
+  {  ">I" , "Ἰ"  },
+  {  ">O" , "Ὀ"  },
+  {  ">U" , "᾿Υ"  },
+  {  ">W" , "Ὠ"  },
+  {  "a|" , "ᾳ"  },
+  {  "h|" , "ῃ"  },
+  {  "w|" , "ῳ"  },
+  {  "\"i" , "ϊ"  },
+  {  "\"u" , "ϋ"  },
+  {  "''" , "’" },
+  {  "a" , "α"  },
+  {  "b" , "β"  },
+  {  "g" , "γ"  },
+  {  "d" , "δ"  },
+  {  "e" , "ε"  },
+  {  "z" , "ζ"  },
+  {  "h" , "η"  },
+  {  "j" , "θ"  },
+  {  "i" , "ι"  },
+  {  "k" , "κ"  },
+  {  "l" , "λ"  },
+  {  "m" , "μ"  },
+  {  "n" , "ν"  },
+  {  "x" , "ξ"  },
+  {  "o" , "ο"  },
+  {  "p" , "π"  },
+  {  "r" , "ρ"  },
+  {  "s" , "σ"  },
+  {  "c" , "ς"  },
+  {  "t" , "τ"  },
+  {  "u" , "υ"  },
+  {  "f" , "φ"  },
+  {  "q" , "χ"  },
+  {  "y" , "ψ"  },
+  {  "w" , "ω"  },
+  {  "A" , "Α"  },
+  {  "B" , "Β"  },
+  {  "G" , "Γ"  },
+  {  "D" , "Δ"  },
+  {  "E" , "Ε"  },
+  {  "Z" , "Ζ"  },
+  {  "H" , "Η"  },
+  {  "J" , "Θ"  },
+  {  "I" , "Ι"  },
+  {  "K" , "Κ"  },
+  {  "L" , "Λ"  },
+  {  "M" , "Μ"  },
+  {  "N" , "Ν"  },
+  {  "X" , "Ξ"  },
+  {  "O" , "Ο"  },
+  {  "P" , "Π"  },
+  {  "R" , "Ρ"  },
+  {  "S" , "Σ"  },
+  {  "T" , "Τ"  },
+  {  "U" , "Υ"  },
+  {  "F" , "Φ"  },
+  {  "Q" , "Χ"  },
+  {  "Y" , "Ψ"  },
+  {  "W" , "Ω"  }
+}
+
+function greeksub (str)
+  for a, b in ipairs(subs_1) do
+    str = string.gsub(str,b[1],b[2])
+  end
+  tex.sprint(tex.ctxcatcodes, str)
+end
+
+end
+\stopluacode
+ 
+%\def\asciigreek#1{\bgroup\directsetup{enablegreek}{\ctxlua{greeksub("#1")}}\egroup}
+\def\asciigreek#1{\bgroup\language[agr]\switchtobodyfont[greek]\ctxlua{greeksub("#1")}\egroup}
+
+
+\protect
+\stopmodule
+\endinput

@@ -1,0 +1,12 @@
+Aquamints symbols for ConTeXt
+(C) Vit Zyka, 2005-07-21, vit.zyka@seznam.cz, license: GNU GPL
+Font is made by Galápagos Design Group and is available at 
+  http://www.galapagosdesign.com
+
+Instalations:
+1. copy AquaMin_.pfb from Galapagos site to
+   .../texmf-local/fonts/type1/galapag/
+2. copy aquamin.ftm to .../texmf-local/fonts/tfm/galapag/
+3. copy galapag.map to .../texmf-local/fonts/map/
+4. refresh file database `mktexlsr`
+5. test by `texexec --pdf aquamints`

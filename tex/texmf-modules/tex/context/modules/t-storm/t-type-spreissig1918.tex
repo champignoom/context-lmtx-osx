@@ -1,0 +1,85 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\doifdefinedelse{stormmapdefined}
+  {}
+  {\let\stormmapdefined\empty \loadmapfile[storm]}
+%\starttypescript [map] [preissig1918] [st1,st2]
+%  \loadmapfile[storm]
+%\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [preissig1918] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		   [Preissig1918-Roman]
+
+  \definefontsynonym [SerifExt]		   [Preissig1918-Roman-Ext]
+
+  \definefontsynonym [SerifRegular]	[Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [preissig1918] [st1]
+  \definefontsynonym [Preissig1918-Roman]     [sp1r8t]  [encoding=st1]
+
+  \definefontsynonym [Preissig1918-Roman-Ext] [sp1r6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [preissig1918] [st2]
+  \definefontsynonym [Preissig1918-Roman]     [sp1r8z]  [encoding=st2]
+
+  \definefontsynonym [Preissig1918-Roman-Ext] [sp1r6s]  [encoding=st3]
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [preissig1918] [name]
+  \definefontsynonym [MathRoman]        [Preissig1918-Math-Letters]
+  \definefontsynonym [MathItalic]       [Preissig1918-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Preissig1918-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [preissig1918] [st1]
+  \definefontsynonym [Preissig1918-Math-Letters]            [sp1r8t] [encoding=st1]
+  \definefontsynonym [Preissig1918-Math-Letters-Italic]     [sp1r8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Preissig1918-Math-Storm]              [sp1r6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [preissig1918] [st2]
+  \definefontsynonym [Preissig1918-Math-Letters]            [sp1r8z] [encoding=st2]
+  \definefontsynonym [Preissig1918-Math-Letters-Italic]     [sp1r8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Preissig1918-Math-Storm]              [sp1r6s] [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [preissig1918] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [Preissig1918] [st1,st2]
+  \definetypeface [Preissig1918] [rm] [serif] [preissig1918] [default] [encoding=\typescripttwo]
+  \definetypeface [Preissig1918] [mm] [math] [preissig1918] [storm]   [encoding=\typescripttwo]
+  \definetypeface [Preissig1918] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection
+\endinput
+
+% end of type-spreissig1918.tex

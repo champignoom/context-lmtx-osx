@@ -1,0 +1,85 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\doifdefinedelse{stormmapdefined}
+  {}
+  {\let\stormmapdefined\empty \loadmapfile[storm]}
+%\starttypescript [map] [aichel] [st1,st2]
+%  \loadmapfile[storm]
+%\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [aichel] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		   [Aichel-Roman]
+
+  \definefontsynonym [SerifExt]		   [Aichel-Roman-Ext]
+
+  \definefontsynonym [SerifRegular]	[Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [aichel] [st1]
+  \definefontsynonym [Aichel-Roman]     [sair8t]  [encoding=st1]
+
+  \definefontsynonym [Aichel-Roman-Ext] [sair6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [aichel] [st2]
+  \definefontsynonym [Aichel-Roman]     [sair8z]  [encoding=st2]
+
+  \definefontsynonym [Aichel-Roman-Ext] [sair6s]  [encoding=st3]
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [aichel] [name]
+  \definefontsynonym [MathRoman]        [Aichel-Math-Letters]
+  \definefontsynonym [MathItalic]       [Aichel-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Aichel-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [aichel] [st1]
+  \definefontsynonym [Aichel-Math-Letters]          [sair8t] [encoding=st1]
+  \definefontsynonym [Aichel-Math-Letters-Italic]   [sair8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Aichel-Math-Storm]            [sair6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [aichel] [st2]
+  \definefontsynonym [Aichel-Math-Letters]          [sair8z] [encoding=st2]
+  \definefontsynonym [Aichel-Math-Letters-Italic]   [sair8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Aichel-Math-Storm]            [sair6s] [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [aichel] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [Aichel] [st1,st2]
+  \definetypeface [Aichel] [rm] [serif] [aichel] [default] [encoding=\typescripttwo]
+  \definetypeface [Aichel] [mm] [math] [aichel] [storm]   [encoding=\typescripttwo]
+  \definetypeface [Aichel] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection 
+\endinput
+
+% end of type-saichel.tex

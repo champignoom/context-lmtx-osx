@@ -1,0 +1,117 @@
+%D \module [
+%D		file			= t-simplebib, 
+%D		version		= 0.8
+%D		title			= \CONTEXT\ User Module,
+%D		subtitle		= Simple Bibliography,
+%D 		author		= Zenlima,
+%D		date			= 2012.11.03
+%D		copyright		= Henning Haeske,
+%D		license		= '' 
+%D ]
+
+% Todo
+% * take care also of doi: urls
+% * \item[...] should be rightaligned
+% * clean \isbn
+% * clean style of url
+
+\startmodule[simplebib]
+\unprotect
+
+\usemodule[crossref]
+
+\setupmodule[labelSpace=12]
+\def\labelspace{\moduleparameter{simplebib}{labelSpace}}
+
+\definelabelclass[simplebib]
+
+\setupsimplebibtext[labelLeft={}]
+\setupsimplebibtext[labelRight={}]
+
+\setupsimplebibtext[en][editor={ed.}]
+\setupsimplebibtext[en][number={number}]
+\setupsimplebibtext[en][fromSeries={from series}]
+\setupsimplebibtext[en][volume={volume}]
+\setupsimplebibtext[en][magazine={magazine}]
+\setupsimplebibtext[en][edition={edition}]
+\setupsimplebibtext[en][revedition={reviewed edition}]
+\setupsimplebibtext[en][datedition={edition from}]
+\setupsimplebibtext[en][isbn={ISBN}]
+\setupsimplebibtext[en][pages={p.}]
+\setupsimplebibtext[en][access={last access}]
+\setupsimplebibtext[en][in={in}]
+
+\setupsimplebibtext[de][editor={Hrsg.}]
+\setupsimplebibtext[de][number={Nummer}]
+\setupsimplebibtext[de][fromSeries={aus der Reihe}]
+\setupsimplebibtext[de][volume={Band}]
+\setupsimplebibtext[de][magazine={Heft}]
+\setupsimplebibtext[de][edition={Auflage}]
+\setupsimplebibtext[de][revedition={überarbeitete Auflage}]
+\setupsimplebibtext[de][datedition={Auflage vom}]
+\setupsimplebibtext[de][isbn={ISBN}]
+\setupsimplebibtext[de][pages={S.}]
+\setupsimplebibtext[de][access={letzter Zugriff}]
+\setupsimplebibtext[de][in={in}]
+
+\defineitemgroup[bibliography]
+\setupitemgroup[bibliography][levels=1,left={\simplebibtext{labelLeft}},right={\simplebibtext{labelRight}},stopper=]
+\expanded{\setupitemgroup[bibliography][1][n,\labelspace*broad]}
+
+\def\isbn#1{\hyphenatedurl{#1}}
+
+\unexpanded\def\bibref{\dodoubleempty\dobibref}
+\def\dobibref[#1][#2]{%
+	\ifsecondargument%
+		\crossref[type=external,#1][#2]%
+	\else%
+		\crossref[type=external][#1]%
+	\fi%
+	}
+
+\def\decodebibitem[#1]{%
+	\getparameters[tmp][author=,editor=,year=,title=,in=,number=,series=,volume=,magazine=,edition=,revedition=,datedition=,publisher=,place=,isbn=,url=,pages=,access=,#1]%
+	\doifnot{\tmpauthor}	{}	{\tmpauthor\doifnot{\tmpyear}{}{ }}%
+	\doifnot{\tmpeditor}	{}	{\doifnot{\tmpauthor}{}{ - }\tmpeditor~ (\simplebibtext{editor})\doifnot{\tmpyear}{}{ }}%
+	\doifnot{\tmpyear}		{}	{(\tmpyear)}%
+	\doifelse{\tmpauthor}	{}	{\doifelse{\tmpeditor}{}%
+								{\doifnot{\tmpyear}{}{: }}{: }}{: }%
+	\doifnot{\tmptitle}		{}	{{\it \tmptitle}}%
+	\doifnot{\tmpnumber}	{}	{ \simplebibtext{number} \tmpnumber}%
+	\doifnot{\tmpseries}		{}	{ \simplebibtext{series} {\it \tmpseries}}%
+	\doifnot{\tmpvolume}	{}	{ (\simplebibtext{volume} \tmpvolume)}%
+	\doifnot{\tmpmagazine}	{}	{ (\simplebibtext{magazine} \tmpmagazine)}%
+	\doifnot{\tmpedition}	{}	{, \tmpedition.~\simplebibtext{edition}}%
+	\doifnot{\tmprevedition}	{}	{, \tmprevedition.~\simplebibtext{revedition}}%
+	\doifnot{\tmpdatedition}	{}	{, \simplebibtext{datedition} \tmpdatedition}%
+	\doifelse{\tmppublisher}	{}	{\doifnot{\tmpplace}{}{,}}{,}%
+	\doifnot{\tmppublisher}	{}	{ \tmppublisher}%
+	\doifnot{\tmpplace}		{}	{ \tmpplace}%
+	\doifnot{\tmpisbn}		{}	{, \simplebibtext{isbn} \isbn{\tmpisbn}}%
+	\doifnot{\tmppages}	{}	{, \simplebibtext{pages}~\tmppages}%
+	\doifnot{\tmpurl}		{}	{, \goto{\hyphenatedurl{\tmpurl}}[url(\tmpurl)]}%
+	\doifnot{\tmpaccess}	{}	{, \simplebibtext{access} \tmpaccess}%
+	\doifnot{\tmpin}		{}	{ \simplebibtext{in} \expanded{\decodebibitem[\tmpin]}}%
+	}
+
+\def\bibitem[#1]{%
+	\getparameters[tmp][reference=,label=,#1]%
+	\doifelse{\tmplabel}{}%
+		{\item[\tmpreference]}%
+		{\sym{\simplebibtext{labelLeft}\sc{\tmplabel}\simplebibtext{labelRight}}\expanded{\textreference[\tmpreference]{\sc{\tmplabel}}}}%
+	\decodebibitem[#1]%
+	}
+
+%quick and dirty:
+\setupsimplebibtext[en][forwardLeft={(See at «}]
+\setupsimplebibtext[en][forwardRight={»)}]
+\setupsimplebibtext[de][forwardLeft={(Angaben siehe unter «}]
+\setupsimplebibtext[de][forwardRight={»)}]
+\def\bibitemdouble[#1]{%
+	\getparameters[tmp][reference=,origenalAt=,#1]%
+	\sym{\sc{\tmpreference}} \simplebibtext{forwardLeft}\tmporigenalAt\simplebibtext{forwardRight}%
+	}
+
+\protect
+\stopmodule
+\endinput

@@ -1,0 +1,568 @@
+%C Copyright (C) 2021  VicSanRoPe
+%C
+%C This work is licensed under the
+%C Creative Commons Attribution-ShareAlike 4.0 International License.
+%C To view a copy of this license, visit
+%C http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to
+%C Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+\setuppapersize[A4]
+\setupbodyfont[10pt]
+\setupwhitespace[medium]
+\setupheadertexts[\type{karnaugh}][VicSanRoPe]
+\setupalign[nothyphenated, stretch, tolerant]
+\setupindenting[always, 22pt]
+\setupheads[indentnext=yes]
+\setupformulas[indentnext=auto]
+\setupfloats[indentnext=auto, indent={yes, 22pt, first}]
+\setupheader[text][after=\hrule]
+\setuphead[section][style=\bfb]
+\setuphead[subsection][style=\bfa]
+\setuphead[subsubsection][style=\bf]
+\setuphead[subsubsubsection][style=\bfx]
+\setupitemize[packed, nowhite]
+\setuppagenumbering[location=bottom]
+\setuplayout[width=fit, height=fit, margin=1.5cm,
+	topspace=1.6cm, bottomspace=1cm, backspace=3cm, cutspace=3cm,
+	header=1.3cm, headerdistance=5mm, footer=1.3cm, footerdistance=5mm]
+\setupinteraction[state=start, color=darkblue,
+  title={ConTeXt - Karnaugh},
+  subtitle={ConTeXt module to draw Karnaugh maps},
+  author=VicSanRoPe]
+
+\usemodule[database]
+\defineseparatedlist[TabTABLE][separator=tab, before=\bTABLE,after=\eTABLE,
+	left=\bTD,right=\eTD, first=\bTR,last=\eTR]
+\setupTABLE[r][each][align=middle]
+\setupTABLE[c][each][align=middle]
+
+
+\usemodule[karnaugh]
+
+\usemodule[int-load]
+\loadsetups[t-karnaugh.xml]
+
+
+\setuptyping[before=, after=, tab=5]
+% \def\placeexample{\placefigure[here, high, none]{}{%
+% \startcombination[nx=2, ny=1, location=middle]
+% {\framedtext[width=fit, frame=off]{\typebuffer[example]}}{}
+% {\getbuffer[example]}{}
+% \stopcombination}\indentation}
+\def\placeexample{\par\midaligned{
+\startcombination[nx=2, ny=1, location=middle]
+{\framedtext[width=fit, frame=off]{\typebuffer[example]}}{}
+{\getbuffer[example]}{}
+\stopcombination}\par}
+
+
+% New cover with... lua
+\ctxlua{require("karnaugh-docs-cover")}
+\defineoverlay[cover][\useMPgraphic{cover}]
+
+
+
+\startbuffer[examplebig]
+\startkarnaugh[ny=8, nx=8, name=$f_{(I_0,I_1,I_2,I_3,I_4,I_5)}$,
+               ylabels={$I_0$, $I_1$, $I_2$}, xlabels={$I_3$, $I_4$, $I_5$},
+               labelstyle=corner, groupstyle=pass]
+	\startkarnaughdata
+		1,	0,	0,	1,	1,	0,	0,	1,
+		0,	1,	1,	0,	0,	1,	1,	0,
+		0,	1,	1,	0,	0,	1,	1,	0,
+		1,	0,	0,	1,	1,	0,	0,	1,
+		1,	0,	0,	1,	1,	0,	0,	1,
+		0,	0,	0,	0,	0,	0,	0,	0,
+		0,	1,	1,	0,	0,	0,	0,	0,
+		1,	0,	0,	1,	1,	0,	0,	1,
+	\stopkarnaughdata
+	\startkarnaughgroups
+		A,	,	,	A,	A,	,	,	A,
+		,	C*B,	C-B-,	,	,	B+,	B*,	,
+		,	B,	B,	,	,	B,	B,	,
+		A,	,	,	A,	A,	,	,	A,
+		A,	,	,	A,	A-,	,	,	A-,
+		,	,	,	,	,	,	,	,
+		,	C,	C+,	,	,	,	,	,
+		A,	,	,	A,	A-,	,	,	A+*,
+	\stopkarnaughgroups
+	\karnaughnote[A][r]{$\overbar{I_1} \cdot \overbar{I_4}$}
+	\karnaughnote[B][Tr]{$\overbar{I_0} \cdot I_2 \cdot I_5$}
+	\karnaughnote[C][Tl]{$\overbar{I_1} \cdot I_2 \cdot \overbar{I_3} \cdot I_5$}
+\stopkarnaugh
+\stopbuffer
+
+
+
+\starttext
+
+
+
+% First page ----------------------------------------------------------------
+\setupbackgrounds[page][background=cover]
+\startstandardmakeup
+\blank[4.5cm]
+\placefigure[here, none]{}{\scale[width=12cm]{\getbuffer[examplebig]}}
+\stopstandardmakeup
+\setupbackgrounds[page][background=]
+% ---------------------------------------------------------------------------
+
+
+
+
+\blank[force, 1cm]
+\midaligned{\bf Abstract}
+\startnarrower[2*middle]
+This module draws Karnaugh maps containing data (ones, ceros, or anything) and the corresponding groupings these maps have, all with easy to use syntax. It supports larger-than-four variable maps using grey code (and drawing lines between mirrored groups), but can be used with submaps. Lastly, formulas, or any text, can be added to the groups using arrows.
+\stopnarrower
+\vfill
+\subject{Contents}
+\placecontent
+\vfill
+\noindentation Licence of the document: \externalfigure[https://mirrors.creativecommons.org/presskit/buttons/80x15/png/by-sa.png][width=2cm]
+\hfill Licence of code examples: \externalfigure[https://mirrors.creativecommons.org/presskit/buttons/80x15/png/cc-zero.png][width=2cm]
+
+\pagebreak
+
+\section{Usage}
+
+\subsection{Options}
+
+To draw a Karnaugh map, the \type{karnaugh} environment is used, the options specified here override the global options.
+\showsetup[startkarnaugh]
+
+
+The options are set globally with the \type{setupkarnaugh} command.
+\showsetup[setupkarnaugh]
+
+\subsubsection{Labels}
+The options \type{ylabels} and \type{xlabels} are the input variables used for the map, they are written as a list, and math mode is usually used for each individual element. \type{xlabels} refers to the variables at the top of the map, and the last element is the least significant variable (for indices and minterms). \type{ylabels} are at the left, its first element is the most significant variable. If these labels are not specified, then the labels will be $I_0$, $I_1$, $I_2$, and so on.
+\startbuffer[example]
+\startkarnaugh[ylabels={$C$}, xlabels={$B$, $A$}]
+
+\stopkarnaugh
+\stopbuffer
+\placeexample
+
+
+\subsubsection{Size}
+The options \type{ny} and \type{nx} are the map's size in number of cells, they are calculated automatically when labels are specified, and if no size or labels are specified but there is data, the size of the map is guessed with the newline characters. Thus, the following produces an empty map with default labels.
+\startbuffer[example]
+\startkarnaugh[ny=2, nx=2]
+
+\stopkarnaugh
+\stopbuffer
+\placeexample
+
+
+\pagebreak
+
+
+\subsubsection{Name}
+The \type{name} option is some text that is added on top or on the top-left corner of the map, the name of the function could be placed there.
+\startbuffer[example]
+\startkarnaugh[name=$f(ABC)$,
+	ylabels={$A$}, xlabels={$B$, $C$}]
+
+\stopkarnaugh
+\stopbuffer
+\placeexample
+
+
+\subsubsection{Label style}
+This option specifies whether the input variables are placed in a corner of the map (value: \type{corner}) or at the edges (value: \type{edge}), or if they are placed on top of bars which represent when the variable's value is 1 (value: \type{bars}). By default, the \type{corner} style is used for small maps and the \type{edge} style is used for 5 variable maps or larger.
+\startbuffer[example]
+\startkarnaugh[nx=4, ny=2, name=$f(I)$]
+\stopkarnaugh
+\stopbuffer
+\par\midaligned{\startcombination[ny=1, nx=3, location=middle, distance=4em]
+{\setupkarnaugh[labelstyle=corner]\getbuffer[example]}
+	{\type{labelstyle=corner}}
+{\setupkarnaugh[labelstyle=edge]\getbuffer[example]}
+	{\type{labelstyle=edge}}
+{\setupkarnaugh[labelstyle=bars]\getbuffer[example]}
+	{\type{labelstyle=bars}}
+\stopcombination}\par
+
+
+\subsubsection{Group style}
+The \type{groupstyle} option changes how the group's lines are drawn, if its value is \type{pass} (the default), the lines continue for a bit outside of the map. If it is \type{stop}, they will not, which might be preferred when making a combination of maps using the overlay method, to mark that some adjacent groups are not connected, but the effect is minimal.
+\startbuffer[example]
+\startkarnaugh[nx=4, ny=2]
+\startkarnaughgroups
+A,	,	,	A,
+A,	,	,	A,
+\stopkarnaughgroups
+\stopkarnaugh
+\stopbuffer
+\par\midaligned{\startcombination[ny=1, nx=2, location=middle, distance=4em]
+{\setupkarnaugh[groupstyle=stop]\getbuffer[example]}{\type{groupstyle=stop}}
+{\setupkarnaugh[groupstyle=pass]\getbuffer[example]}{\type{groupstyle=pass}}
+\stopcombination}\par
+
+
+\subsubsection{Indices}
+If the \type{indices} option is set to \type{yes} or \type{on}, it will draw a small number on every cell with the value of the input variables in decimal. If groups are also being drawn, the map's spacing will be enlarged to acomodate both things and the data.
+
+
+
+\par\midaligned{\startcombination[ny=1, nx=3, location=middle]
+{\startkarnaugh[nx=4, ny=2, indices=no]
+\startkarnaughdata
+1,	,	,	1,
+1,	,	,	1,
+\stopkarnaughdata
+\startkarnaughgroups
+A,	,	,	A,
+A,	,	,	A,
+\stopkarnaughgroups
+\stopkarnaugh}{\type{indices=no}}
+{\startkarnaugh[nx=4, ny=2, indices=yes]
+\startkarnaughdata
+1,	,	,	1,
+1,	,	,	1,
+\stopkarnaughdata
+\stopkarnaugh}{\type{indices=yes}, no groups}
+{\startkarnaugh[nx=4, ny=2, indices=yes]
+\startkarnaughdata
+1,	,	,	1,
+1,	,	,	1,
+\stopkarnaughdata
+\startkarnaughgroups
+A,	,	,	A,
+A,	,	,	A,
+\stopkarnaughgroups
+\stopkarnaugh}{\type{indices=yes}, with groups}
+\stopcombination}\par
+
+
+\subsubsection{Spacing}
+The \type{spacing} option simply increases or decreases the whitespace around every cell's data.
+\par\midaligned{\startcombination[ny=1, nx=3, location=middle]
+{\startkarnaugh[nx=4, ny=2, spacing=small]
+\startkarnaughdata
+1,	,	,	1,
+1,	,	,	1,
+\stopkarnaughdata
+\startkarnaughgroups
+A,	,	,	A,
+A,	,	,	A,
+\stopkarnaughgroups
+\stopkarnaugh}{\type{spacing=small}}
+{\startkarnaugh[nx=4, ny=2, spacing=normal]
+\startkarnaughdata
+1,	,	,	1,
+1,	,	,	1,
+\stopkarnaughdata
+\startkarnaughgroups
+A,	,	,	A,
+A,	,	,	A,
+\stopkarnaughgroups
+\stopkarnaugh}{\type{spacing=normal}}
+{\startkarnaugh[nx=4, ny=2, spacing=big]
+\startkarnaughdata
+1,	,	,	1,
+1,	,	,	1,
+\stopkarnaughdata
+\startkarnaughgroups
+A,	,	,	A,
+A,	,	,	A,
+\stopkarnaughgroups
+\stopkarnaugh}{\type{spacing=big}}
+\stopcombination}\par
+
+Please note that the document's font size affects the map's size, such that is looks the same, just smaller or bigger, always with the same font as the main text. To make the maps have a constant size, surround them with \type{\scale}. \type{spacing} can be a number too, adjust both of these to get the proportions you want. Two (silly) examples follow:
+\startbuffer[example]
+\scale[width=0.33\textwidth]{
+\startkarnaugh[ny=2, nx=4, spacing=3] % The
+            % font will be tiny when scaled
+
+\stopkarnaugh}
+\stopbuffer
+\placeexample
+\startbuffer[example]
+\scale[width=0.4\textwidth]{
+\startkarnaugh[ny=2, nx=4, spacing=1]
+               % Normal spacing is 1
+
+\stopkarnaugh}
+\stopbuffer
+\placeexample
+
+
+\subsubsection{Setup}
+The \type{\setupkarnaugh} command can be used to set preferred style options, and also labels or size when making multiple similar maps. These options can be cleared (to use the defaults, for example) using the command with no arguments.
+
+When giving options to the \type{\startkarnaugh} command, they override the global options.
+
+Because global options are not limited to style (which is always the same), if size or labels have been assigned, the default generated labels will not be used, instead, if they are not appropriate for the current map's data, an error is thrown. The following example will fail until the commented command is uncommented.
+
+\starttyping
+\setupkarnaugh[ylabels={$A$}, xlabels={$B$}]
+% Assume there are multiple 2 by 2 maps here
+
+% Add this when finished with the previous maps:
+% \setupkarnaugh
+
+\startkarnaugh[nx=4, ny=2]
+% Data here
+\stopkarnaugh
+\stoptyping
+
+
+
+\pagebreak
+
+
+
+\subsection{Data input}
+
+\subsubsection{As a list}
+
+\showsetup[karnaughtabledata]
+This command fills the map with the elements specified in the comma separated list in the same order as the truth table. Space before and after a comma is ignored. If all elements are just one simple character (very common), then the elements may be written one after the other, with no commas or spaces.
+
+The map's size is calculated automatically if no size or labels are given. The elements aren't limited to ceros and ones, they just have to be short. The next is a simple example where the data used is a truth table and the names are longer than ideal.
+\startbuffer[example]
+\startkarnaugh[name=OUT,
+		labelstyle=edge,
+		spacing=big,
+		ylabels={EN},
+		xlabels={S1, S2}]
+	\karnaughtabledata{
+		Z, Z, Z, Z,
+		$data_0$, $data_1$,
+		$data_2$, $data_3$}
+\stopkarnaugh
+\stopbuffer
+\par\midaligned{
+\startcombination[nx=3, ny=1, location=middle]
+{\startTabTABLE
+EN	S1	S2	OUT
+0	X	X	Z
+1	0	0	$data_0$
+1	0	1	$data_1$
+1	1	0	$data_2$
+1	1	1	$data_3$
+\stopTabTABLE}{}
+{\framedtext[width=fit, frame=off]{\typebuffer[example]}}{}
+{\getbuffer[example]}{}
+\stopcombination}\par
+
+
+\showsetup[karnaughminterms]
+\showsetup[karnaughmaxterms]
+These commands place ones or ceros (respectively) on the specified locations (written as a list of the decimal values of the input variables) and then fill the rest of the map with the opposite symbol. Example:
+\startbuffer[example]
+\startkarnaugh[ylabels={A}, xlabels={B}]
+	\karnaughminterms{0, 3}
+\stopkarnaugh
+\stopbuffer
+\placeexample
+
+
+\pagebreak
+
+
+\subsubsection{As a map}
+\showsetup[startkarnaughdata]
+%If you have the map alredy drawn (on paper, for example), then look at the ease of use! Just compare the code and the map.
+Inside of this environment the data is placed as a comma separated list, preferably with newlines at every row, in the same positions as they will appear on the map. A trailing comma is ignored, and cells may be left empty.
+\startbuffer[example]
+\startkarnaugh[ylabels={d, c}, xlabels={b, a}]
+	\startkarnaughdata
+		1,	0,	1,	0,
+		0,	1,	1,	0,
+		1,	0,	1,	0,
+		0,	1,	1,	0,
+	\stopkarnaughdata
+\stopkarnaugh
+\stopbuffer
+\placeexample
+\blank[big]
+If no size or labels are specified, the size of the map is guessed reading the newlines.
+\startbuffer[example]
+\startkarnaugh
+	\startkarnaughdata
+		1,	0,	1,	0,
+		0,	1,	1,	0,
+	\stopkarnaughdata
+\stopkarnaugh
+\stopbuffer
+\placeexample
+
+
+
+\pagebreak
+
+\subsection{Groups and other data}
+This data is input with the map syntax because presumably the map is already drawn with the ones and ceros, and drawing the groups “in-place” is much easier than calculating the coordinates of the desired groups.
+\showsetup[startkarnaughgroups]
+Inside of this environment various types of data are placed as a comma separated list with as many elements as there are cells in the map. Any cell may contain various instances of any of the information types mentioned here.
+
+\subsubsection{Groups}
+Groups are input by inserting a letter (one per group) on every cell the group covers. The way they are drawn is handled automatically. The first few uppercase letters have colors assigned to them. The following example shows three groups: at the corners, the edges, and in the middle.
+\startbuffer[example]
+\startkarnaugh[ny=4, nx=4]
+	\startkarnaughgroups
+		BA,	,	,	BA,
+		B,	C,	C,	B,
+		,	C,	C,	,
+		A,	,	,	A,
+	\stopkarnaughgroups
+\stopkarnaugh
+\stopbuffer
+\placeexample
+
+Note that the upper cells contain more than one group, this is how two groups that share cells are specified. Their letter's order doesn't matter, but any other data associated with the group \type{A} is written after its letter, and the same with \type{B}.
+
+
+\subsubsection{Notes}
+After drawing a Karnaugh map, it is useful to know which term of the produced formula represents each group. These can be drawn as text with arrows coming from the desired group.
+\showsetup[karnaughnote]
+The base of the arrow is specified in the \type{karnaughgroups} environment as an asterisk after the group it represents, and the remaining data is specified using the \type{karnaughnote} command.
+The first argument is the character assigned to the group, the second is one of the specified directions the arrow may point to, and the third is the text to be added to the map.
+
+The first letter of the direction is where it will mainly point towards, with \type{t} meaning top, \type{b} meaning bottom, \type{l} meaning left, and \type{r} meaning right; if it is uppercase it will be further separated from the map (for two rows of text, for example). The second letter (if present) will be a slight offset to the desired side, mainly to make the arrow not overlap with the grey code to the top and left. The arrows look better when they come out of a group's corner.
+
+If the \type{labelstyle} option is \type{bars} and there are notes, the bars will be spaced further aprart from the map to make space for short text.
+
+\startbuffer[example]
+\startkarnaugh[ny=4, nx=4]
+	\startkarnaughgroups
+		B*A,	,	,	BA,
+		B,	C,	C,	B,
+		,	C,	C*,	,
+		A*,	,	,	A,
+	\stopkarnaughgroups
+	\karnaughnote[A][b]{A's note}
+	\karnaughnote[B][Tr]{B's note}
+	\karnaughnote[C][rb]{C's note}
+\stopkarnaugh
+\stopbuffer
+\placeexample
+
+
+\subsubsection{Connecting lines}
+This feature is only used when drawing Karnaugh maps with more than 4 variables, then a mirror line is drawn in the middle, and groups which exist in both halves should be connected to each other.
+
+To draw connections, a single plus \type{+} is placed in the \type{karnaughgroups} environment after the letter of the group to be connected, and at least one minus \type{-} has to be placed after the letter of a different region of the group.
+
+The following example shows:
+\startitemize[1]
+\item The group \type{A} which is mirrored on both axis and has 3 lines connecting one part of the group to the rest. An arrow could be added to the bottom-right part, the cell would be \type{A+*} or \type{A*+}.
+\item The group \type{C} which is mirrored on one axis and thus has one connection line (the \type{+} and \type{-} can be switched around in this case)
+\item The group \type{B} with a completely unnecessary connection.
+\stopitemize
+\startbuffer[example]
+\startkarnaugh[ny=8, nx=8]
+	\startkarnaughgroups
+		,	,	,	,	,	,	,	,
+		,	A,	A-C,	C,	,	A-,	A,	,
+		,	,	C+,	C,	,	,	,	,
+		B+,	,	,	,	,	,	,	B-,
+		B,	,	,	,	,	,	,	B,
+		,	,	C-,	C,	,	,	,	,
+		,	A,	A-C,	C,	,	A+,	A,	,
+		,	,	,	,	,	,	,	,
+	\stopkarnaughgroups
+\stopkarnaugh
+\stopbuffer
+\placeexample
+
+
+
+
+
+\pagebreak
+
+\section{Examples}
+
+\subsection{Sumbaps}
+The following example show how to draw a five variable Karnaugh map for the following function (and minterm list) using the overlay method. It is basically just two Karnaugh maps inside a combination where each map has its name assigned to the remaining input variables and the same letter is only used in both maps if it represents the same group. Additionally the \type{indicesstart} option is used to offset all indices and minterms to match the expected ones.
+\startformula
+f(X_4,X_3,X_2,X_1,X_0)=
+	\sum(0, 1, 2, 6, 7, 8, 9, 10 , 14, 15, 17, 20, 22, 23, 25, 30, 31)
+\stopformula
+\startbuffer[example]
+\setupkarnaugh[indices=yes,
+	ylabels={$X_3$, $X_2$}, xlabels={$X_1$, $X_0$},
+	labelstyle=corner, groupstyle=stop]
+\startcombination[nx=1, ny=2]
+	{\startkarnaugh[name={$X_4=0$}]
+		\karnaughminterms{
+			0, 1, 2, 6, 7, 8, 9, 10 , 14, 15}
+		\startkarnaughgroups
+			B,	D,	,	B,
+			,	,	A,	A,
+			,	,	A,	A,
+			B,	D,	,	B,
+		\stopkarnaughgroups
+	\stopkarnaugh}{}
+	{\startkarnaugh[name={$X_4=1$}, indicesstart=16]
+		\karnaughminterms{
+			17, 20, 22, 23, 25, 30, 31}
+		\startkarnaughgroups
+			,	D,	,	,
+			C,	,	A,	A,
+			,	,	A,	A,
+			,	D,	,	,
+		\stopkarnaughgroups
+	\stopkarnaugh}{}
+\stopcombination
+\setupkarnaugh % Optional: to clear the configuration
+\stopbuffer
+\placeexample
+
+
+\pagebreak
+
+
+\setuptyping[before=, after=, tab=6]
+
+
+\subsection{Six variable map}
+This example shows a six variable Karnaugh map using the grey code (mirrored) method. All groups have lines joining their mirrored parts, and their associated labels.
+
+\par\midaligned{\startcombination[nx=1, ny=2, location=middle]
+{\framedtext[width=fit, frame=off]{\typebuffer[examplebig]}}{}
+{\getbuffer[examplebig]}{}
+\stopcombination}\par
+
+
+\subsection{Map with bars and notes}
+\startbuffer[example]
+\placefigure[]{Bars!}{
+\startkarnaugh[ny=4, nx=8, name=$F(I)$, labelstyle=bars]
+	\startkarnaughdata
+		0,	0,	0,	0,	0,	0,	0,	0,
+		1,	0,	1,	1,	1,	1,	0,	X,
+		0,	1,	X,	X,	X,	X,	1,	0,
+		0,	1,	1,	0,	0,	1,	1,	0,
+	\stopkarnaughdata
+	\startkarnaughgroups
+		,	,	,	,	,	,	,	,
+		A*,	,	B,	B,	B,	B*,	,	A,
+		,	C,	BC,	B,	B,	BC,	C*,	,
+		,	C,	C+,	,	,	C-,	C,	,
+	\stopkarnaughgroups
+	\karnaughnote[A][l]{A}
+	\karnaughnote[B][tr]{B}
+	\karnaughnote[C][rt]{C}
+\stopkarnaugh}
+
+\def\term#1#2{\overset{\text{\tfa #1}}{\overbrace{#2}}}
+
+\placeformula\startformula F(I) =
+  \term{A}{\overbar{I_0} \cdot I_1 \cdot \overbar{I_3} \cdot \overbar{I_4}}
++ \term{B}{I_1 \cdot I_3}
++ \term{C}{I_0 \cdot I_4}
+\stopformula
+\stopbuffer
+
+\par\midaligned{\startcombination[nx=1, ny=2, location=middle]
+{\framedtext[width=fit, frame=off]{\typebuffer[example]}}{}
+{\getbuffer[example]}{}
+\stopcombination}\par
+
+\stoptext

@@ -1,0 +1,105 @@
+%D \module
+%D   [       file=t-high-cpp,
+%D        version=2017.04.05,
+%D          title=\CONTEXT\ User Module,
+%D       subtitle=Syntax Highlighter for C++,
+%D         author=Christoph Reller,
+%D           date=\currentdate,
+%D      copyright=Christoph Reller,
+%D          email=christoph.reller@gmail.com,
+%D      copyright=GNU General Public License]
+
+%C Copyright (C) 2017 Christoph Reller
+%C
+%C This program is free software: you can redistribute it and/or modify
+%C it under the terms of the GNU General Public License as published by
+%C the Free Software Foundation, either version 3 of the License, or
+%C any later version.
+%C
+%C This program is distributed in the hope that it will be useful,
+%C but WITHOUT ANY WARRANTY; without even the implied warranty of
+%C MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%C GNU General Public License for more details.
+%C
+%C You should have received a copy of the GNU General Public License
+%C along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+%M \usemodule[high-cpp]
+
+%D \section{Usage}
+%D Example:
+%D
+%D \startCPP
+%D #include/**/incl.h
+%D  #include /*comment*/ "stdio\".h" /* comment */
+%D #ifdef MACRO //comment
+%D #define MACRO_WITH_ARGS(arg1, arg2) \ //comment
+%D     int Do##arg1##() const; \
+%D     type Get##arg2##Value(int i)
+%D /* longer com-
+%D    ment */
+%D #endif
+%D
+%D int main() // comment
+%D {
+%D   int a = 0x1U;
+%D   for (int i = 0; i < 43; i--)
+%D     printf("Hello world\n"); /* comment */
+%D   bool b = true;
+%D   return 0;
+%D }
+%D template <typename T>
+%D Class<T>& Class<T>::operator+=(const T* p)
+%D {
+%D     if (p)
+%D     {
+%D         size_t l = Traits<T>::Length(p);
+%D     }
+%D     return *this;
+%D }
+%D \stopCPP
+
+\registerctxluafile{t-high-common.lua}{1.0}
+\registerctxluafile{t-high-cpp.lua}{1.0}
+
+\unprotect
+
+\definestartstop[CppSnippet][DefaultSnippet]
+
+\definestartstop[CppSnippetKeyword][
+  \c!color=darkgreen,
+  \c!style=]
+\definestartstop[CppSnippetType][
+  \c!color=darkgreen,
+  \c!style=]
+\definestartstop[CppSnippetOperator][
+  \c!color=darkcyan,
+  \c!style=]
+\definestartstop[CppSnippetIdent][
+  \c!color=middleblue,
+  \c!style=]
+\definestartstop[CppSnippetVariable][
+  \c!color=darkyellow,
+  \c!style=]
+\definestartstop[CppSnippetPreproc][
+  \c!color=middlemagenta,
+  \c!style=]
+\definestartstop[CppSnippetBoundary][
+  \c!color=darkgray,
+  \c!style=]
+\definestartstop[CppSnippetComment][
+  \c!color=middlegray,
+  \c!style=]
+\definestartstop[CppSnippetLiteral][
+  \c!color=middlered,
+  \c!style=]
+\definestartstop[CppSnippetInclude][
+  \c!color=cyan,
+  \c!style=]
+\definestartstop[CppSnippetMacro][
+  \c!color=middleyellow,
+  \c!style=]
+
+\definetyping[CPP][\c!option=cpp]
+
+\protect \endinput

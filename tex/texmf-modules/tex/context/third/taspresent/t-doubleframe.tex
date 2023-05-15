@@ -1,0 +1,278 @@
+%D \module
+%D   [      file=t-doubleframe,
+%D        version=2007.07.17, 
+%D          title=\CONTEXT\ Style File,
+%D       subtitle=Presentation Module doubleframe,
+%D         author=Thomas A. Schmitz,
+%D           date=\currentdate,
+%D      copyright={Thomas A. Schmitz}]
+%C
+%C Copyright 2007 Thomas A. Schmitz.
+%C This file may be distributed under the GNU General Public License v. 2.0.
+
+%D This file provides the \quotation{doubleframe} style for the presentation
+%D module. It is loaded at runtime. 
+
+\writestatus{loading}{module doubleframe}
+
+\startmodule[doubleframe]
+
+\unprotect
+
+%D The taspresentation module provides a skeleton into which different styles
+%D can be hooked. It uses a number of variables and macros which have to be set
+%D beforehand. Some parts are optional. We begin with the necessary definitions:
+
+%D We start colors:
+
+\setupcolors[state=start]
+
+%D The doubleframe module has parameters of its own; we set them up and use
+%D them:
+
+\setupmodule[bottom=square]
+
+\processaction[\currentmoduleparameter{bottom}]
+	[      square=>\def\bottommode{squaremode},
+               stripe=>\def\bottommode{stripemode},
+           \v!unknown=>\def\bottommode{squaremode},
+           \v!default=>\def\bottommode{squaremode}]
+
+\enablemode[\bottommode]
+
+%D These macros are used for placing figures/pictures:
+
+\define\NormalHeight{.98\textheight}
+\define\NormalWidth{.485\textwidth}
+\define\PictureFrameHeight{.98\textheight}
+\define\PictureFrameWidth{.485\textwidth}
+
+%D The page layout:
+
+\setuplayout [width=fit,
+              margin=0.6cm,
+              height=fit, 
+              header=2.1cm, 
+              footer=1.35cm, 
+	      footerdistance=0.5cm,
+              topspace=0.5cm, 
+              backspace=1cm,
+              location=singlesided]
+
+%D The macro for typesetting the Slidetitle; this is adapted from a sample
+%D document that Brooks Moses published on the wiki:
+
+\definelayer[slidetitle]
+    [width=\paperwidth,
+    height=\paperheight,
+    x=10mm,
+    y=3mm]
+
+\define[1]\Slidetitle{\page\setlayer[slidetitle]%
+     {\framed[frame=off,width=\textwidth,height=2.1cm,offset=0pt,top=\vss,bottom=\vss]{\switchtobodyfont[\Titlesize]\color[One]{#1}}}}
+
+%D The macro \tex{Maketitle} produces a default title page with the author, the
+%D title of the presentation, and the date. Using it is not mandatory.
+
+\define\Maketitle{%
+\titback
+%\switchtobodyfont[\Titlesize]
+\null
+\vfill
+\midaligned{\color[One]{\tfc\getvariable{taspresent}{title}}}
+\blank[3*line]
+\midaligned{\tfa\getvariable{taspresent}{author}}
+\blank[2*line]
+\midaligned{\tfa\currentdate}
+\vfill
+\null\switchtobodyfont[\Normalsize]}
+
+%D The following parts are optional; if you don't use backgrounds and are
+%D content with CONTEXT's default itemization, you don't have to set these
+%D macros. 
+
+%D We define our colors:
+
+\definecolor [BackgroundColor] [r=.85, g=.85, b=.85]
+\definecolor [MyFrameColor]    [r=.42, g=.42, b=.7]
+\definecolor [Dark]            [r=.9, g=.9, b=.9]
+\definecolor [One]             [r=0, g=0, b=.5]
+\definecolor [Two]             [r=0, g=0, b=.55]
+\definecolor [Three]           [r=0, g=0, b=.6]
+\definecolor [Four]            [r=0, g=0, b=.65]
+\definecolor [Five]            [r=0, g=0, b=.7]
+\definecolor [Six]             [r=0, g=0, b=.75]
+\definecolor [Seven]           [r=0, g=0, b=.8]
+\definecolor [Eight]           [r=0, g=0, b=.85]
+\definecolor [Nine]            [r=0, g=0, b=.9]
+\definecolor [Ten]             [r=0, g=0, b=.95]
+\definecolor [Eleven]          [r=0, g=0, b=1]
+\definecolor [Item]            [One]
+
+%D We let Metapost calculate the background:
+
+\startmode[squaremode]
+\startuseMPgraphic{Bottom09} 
+StartPage
+numeric a; a = 0.955cm ;
+numeric b; b = 0.52cm ;
+numeric c; c = 0.8cm ;
+path p[] ;
+p[2] = unitsquare xyscaled (a,a) shifted (b, c) ;
+p[3] = unitsquare xyscaled (a,a) shifted (b+2*a, c) ;
+p[4] = unitsquare xyscaled (a,a) shifted (b+4*a, c) ;
+p[5] = unitsquare xyscaled (a,a) shifted (b+6*a, c) ;
+p[6] = unitsquare xyscaled (a,a) shifted (b+8*a, c) ;
+p[7] = unitsquare xyscaled (a,a) shifted (b+10*a, c) ;
+p[8] = unitsquare xyscaled (a,a) shifted (b+12*a, c) ;
+p[9] = unitsquare xyscaled (a,a) shifted (b+14*a, c) ;
+p[10] = unitsquare xyscaled (a,a) shifted (b+16*a, c) ;
+p[11] = unitsquare xyscaled (a,a) shifted (b+18*a, c) ;
+p[12] = unitsquare xyscaled (a,a) shifted (b+20*a, c) ;
+fill p[2] withcolor \MPcolor{One} ;
+fill p[3] withcolor \MPcolor{Two} ;
+fill p[4] withcolor \MPcolor{Three} ;
+fill p[5] withcolor \MPcolor{Four} ;
+fill p[6] withcolor \MPcolor{Five} ;
+fill p[7] withcolor \MPcolor{Six} ;
+fill p[8] withcolor \MPcolor{Seven} ;
+fill p[9] withcolor \MPcolor{Eight} ;
+fill p[10] withcolor \MPcolor{Nine} ;
+fill p[11] withcolor \MPcolor{Ten} ;
+fill p[12] withcolor \MPcolor{Eleven} ;
+pickup pencircle scaled 2pt ;
+if NOfPages = 12:
+	for j=2 upto 12:
+		if PageNumber=(j):
+		draw llcorner p[j] --urcorner p[j] withcolor \MPcolor{BackgroundColor} ;
+		fi ;
+	endfor ;
+fi ;
+numeric o; o = NOfPages - 1 ;
+numeric i; i = PageNumber - 1 ;
+numeric k; k = i/o ;
+if NOfPages > 12:
+	if i = 1:
+		draw llcorner p[2] -- urcorner p[2] withcolor \MPcolor{BackgroundColor} ;
+	elseif (k>0.01) and (k<=2/11):
+		draw llcorner p[3] -- urcorner p[3] withcolor \MPcolor{BackgroundColor} ;
+	elseif (k>2/11) and (k<=3/11):
+		draw llcorner p[4] -- urcorner p[4] withcolor \MPcolor{BackgroundColor} ;
+	elseif (k>3/11) and (k<=4/11):
+		draw llcorner p[5] -- urcorner p[5] withcolor \MPcolor{BackgroundColor} ;
+	elseif (k>4/11) and (k<=5/11):
+		draw llcorner p[6] -- urcorner p[6] withcolor \MPcolor{BackgroundColor} ;
+	elseif (k>5/111) and (k<6/11):
+		draw llcorner p[7] -- urcorner p[7] withcolor \MPcolor{BackgroundColor} ;
+	elseif (k>6/11) and (k<=7/11):
+		draw llcorner p[8] -- urcorner p[8] withcolor \MPcolor{BackgroundColor} ;
+	elseif (k>7/11) and (k<=8/11):
+		draw llcorner p[9] -- urcorner p[9] withcolor \MPcolor{BackgroundColor} ;
+	elseif (k>8/11) and (k<=9/11):
+		draw llcorner p[10] -- urcorner p[10] withcolor \MPcolor{BackgroundColor} ;
+	elseif (k>9/11) and (k<1):
+		draw llcorner p[11] -- urcorner p[11] withcolor \MPcolor{BackgroundColor} ;
+	elseif k=1:
+		draw llcorner p[12] -- urcorner p[12] withcolor \MPcolor{BackgroundColor} ;
+	fi ;
+fi
+StopPage
+\stopuseMPgraphic 
+\stopmode
+
+\startmode[stripemode]
+\startuseMPgraphic{Bottom09}
+StartPage
+path p[] ;
+p[1] := unitsquare xyscaled(0.95*OverlayWidth,1cm) shifted (0.52cm,0.8cm) ;
+linear_shade(p[1],0,\MPcolor{BackgroundColor},\MPcolor{One}) ;
+numeric i; i = PageNumber/NOfPages ;
+p[2] = ulcorner p[1] -- urcorner p[1] ;
+p[3] = llcorner p[1] -- lrcorner p[1] ;
+pair o[] ;
+o[1] := point i along p[2] ;
+o[2] := point i along p[3] ;
+p[4] = ulcorner p[1] -- o[1] -- o[2] -- llcorner p[1] -- cycle ;
+clip currentpicture to p[4] ;
+StopPage
+\stopuseMPgraphic
+\stopmode
+
+\startuniqueMPgraphic{PicBackground09} 
+StartPage ;
+fill Page withcolor \MPcolor{BackgroundColor} ; 
+draw unitsquare 
+xyscaled(OverlayWidth,OverlayHeight) 
+enlarged (-.2cm) 
+withpen pencircle scaled 4pt 
+withcolor \MPcolor{MyFrameColor} ; 
+draw unitsquare 
+xyscaled(0.448*OverlayWidth,0.815*OverlayHeight) 
+shifted (0.528*OverlayWidth, 0.15*OverlayHeight)
+withpen pencircle scaled 2pt 
+withcolor \MPcolor{MyFrameColor} ; 
+StopPage ;
+\stopuniqueMPgraphic 
+
+\startuniqueMPgraphic{Background09} 
+fill unitsquare 
+xyscaled(OverlayWidth,OverlayHeight) 
+withcolor \MPcolor{BackgroundColor} ; 
+draw unitsquare 
+xyscaled(OverlayWidth,OverlayHeight) 
+enlarged (-.2cm) 
+withpen pencircle scaled 4pt 
+withcolor \MPcolor{MyFrameColor} ; 
+draw unitsquare 
+xyscaled(0.95*OverlayWidth,0.7*OverlayHeight) 
+shifted (0.025*OverlayWidth, 0.15*OverlayHeight)
+withpen pencircle scaled 2pt 
+withcolor \MPcolor{MyFrameColor} ; 
+\stopuniqueMPgraphic 
+
+\startuniqueMPgraphic{FancyFrame}
+draw unitsquare xyscaled(OverlayWidth-2pt,OverlayHeight-2pt)
+withpen pencircle scaled 2pt
+withcolor \MPcolor{MyFrameColor} ;
+\stopuniqueMPgraphic
+
+%D We define these backgrounds as overlays:
+
+\defineoverlay
+[bottom]
+[\useMPgraphic{Bottom09}]
+
+\defineoverlay 
+[lecbackground] 
+[\useMPgraphic{Background09}] 
+
+\defineoverlay 
+[picbackground] 
+[\useMPgraphic{PicBackground09}] 
+
+\defineoverlay
+[FrameFrame]
+[\uniqueMPgraphic{FancyFrame}]
+
+%D These are shortcuts to switch backgrounds:
+
+\define\lecback{\setupbackgrounds[page][background={lecbackground,bottom,slidetitle}]\setuplayout[backspace=1cm,header=2.1cm]}
+\define\titback{\setupbackgrounds[page][background=lecbackground]\setuplayout[backspace=1cm]}
+\define\picback{\setupbackgrounds[page][background={picbackground,bottom}]\setuplayout[backspace=0.5cm,header=0cm]}
+\define\noback{\setupbackgrounds[page][background=nobackground]}
+
+%D We use combinations for placing vertical pictures and text side by side, and
+%D we want a distance of 1.1 cm between both.
+
+\setupcombinations[distance=1.1cm]
+
+%D The symbol for the first level of itemizations. 
+
+\definesymbol[1][\useMPgraphic{ItSquare}]
+\setupitemize[color=One]
+
+\protect
+\stopmodule
+
+\endinput
+

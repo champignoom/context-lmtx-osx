@@ -1,0 +1,162 @@
+%D \module
+%D   [      file=t-lightblue,
+%D        version=2007.07.17, 
+%D          title=\CONTEXT\ Style File,
+%D       subtitle=Presentation Module lightblue,
+%D         author=Thomas A. Schmitz,
+%D           date=\currentdate,
+%D      copyright={Thomas A. Schmitz}]
+%C
+%C Copyright 2007 Thomas A. Schmitz.
+%C This file may be distributed under the GNU General Public License v. 2.0.
+
+%D This file provides the \quotation{lightblue} style for the presentation
+%D module. It is loaded at runtime.
+
+\writestatus{loading}{module lightblue}
+
+\startmodule[lightblue]
+
+\unprotect
+
+%D The taspresentation module provides a skeleton into which different styles
+%D can be hooked. It uses a number of variables and macros which have to be set
+%D beforehand. Some parts are optional. We begin with the necessary definitions:
+
+%D We start colors; textcolor is white:
+
+\setupcolors[state=start]
+
+%D These macros are used for placing figures/pictures:
+
+\define\NormalHeight{\textheight}
+\define\NormalWidth{.476\textwidth}
+\define\PictureFrameHeight{\textheight}
+\define\PictureFrameWidth{.476\textwidth}
+
+%D The page layout:
+
+\setuplayout [width=fit,
+              leftmargin=.5cm,
+	      rightmargin=0cm,
+              leftmargindistance=1.5cm,
+              rightmargindistance=0pt,
+              height=fit, 
+              header=2.5cm, 
+              footer=0cm, 
+              topspace=.2cm, 
+              backspace=2.6cm,
+	      cutspace=2.9cm,
+              bottomspace=.2cm,
+	      bottomdistance=1.2cm,
+              bottom=1.2cm,
+              location=singlesided]
+
+%D We define our colors:
+
+\definecolor [Item]            [r=0,g=.2,b=.4]
+\definecolor [a]               [r=.58,g=.84,b=.97]
+\definecolor [b]               [r=1,g=1,b=1]
+\definecolor [c]               [r=0,g=.2,b=.4]
+\definecolor [d]               [r=1,g=.6,b=0]
+
+%D The macro for typesetting the Slidetitle; this is adapted from a sample
+%D document that Brooks Moses published on the wiki:
+
+\definelayer[slidetitle]
+    [width=\paperwidth,
+    height=\paperheight,
+    x=2mm,
+    y=2mm]
+
+\define[1]\Slidetitle{%
+\page\setupheadertexts[{\framed[frame=off,background=color,backgroundcolor=c,height=1.2cm,offset=3pt,top=\vss,bottom=\vss]{\switchtobodyfont[\Titlesize]\color[d]{#1}}}]\setupheader[state=start]}
+
+\setupbottomtexts[{\framed[frame=off,background=color,backgroundcolor=c,height=1.2cm,offset=3pt,top=\vss,bottom=\vss]{\color[d]{\pagenumber}}}]
+
+\setupbottom[state=start]
+
+%D The macro \tex{Maketitle} produces a default title page with the author, the
+%D title of the presentation, and the date. Using it is not mandatory.
+
+\define\Maketitle{%
+\titback
+\null
+\vfill
+\midaligned{\framed[frame=off,background=color,backgroundcolor=c,height=1.2cm,offset=3pt,top=\vss,bottom=\vss]{\switchtobodyfont[\Titlesize]\color[d]{\getvariable{taspresent}{title}}}}
+\blank[2*line]
+\midaligned{\color[c]{\getvariable{taspresent}{author}}}
+\blank[3*line]
+\midaligned{\color[c]{\currentdate}}
+\vfill
+\null}
+
+%D The following parts are optional; if you don't use backgrounds and are
+%D content with CONTEXT's default itemization, you don't have to set these
+%D macros. 
+
+%D We let Metapost calculate the background:
+
+\startuniqueMPgraphic{blue1}
+StartPage ;
+numeric a ;
+numeric b ;
+numeric c ;
+pair zk[] ;
+path bl[] ;
+a = 2cm ;
+b = .7cm ;
+c = .2 cm ;
+z.k1 = ulcorner Page shifted (a,-a) ;
+z.k2 = urcorner Page shifted (0,-a) ;
+z.k3 = llcorner Page shifted (a,a) ;
+z.k4 = lrcorner Page shifted (0,a) ;
+z.k5 = z.k1 shifted (c,-c) ;
+z.k6 = z.k2 shifted (0,-c) ;
+z.k7 = z.k6 shifted (0,b) ;
+z.k8 = z.k5 shifted (-b,b) ;
+z.k9 = z.k3 shifted (c,c) ;
+z.k10 = z.k4 shifted (0,c) ;
+z.k11 = z.k10 shifted (0,-b) ;
+z.k12 = z.k9 shifted (-b,-b) ;
+bl[1] = urcorner Page -- ulcorner Page -- llcorner Page -- lrcorner Page -- z.k4 -- z.k3 -- z.k1 -- z.k2 -- cycle ;
+bl[2] = z.k5 -- z.k6 -- z.k7 -- z.k8 -- cycle ;
+bl[3] = z.k9 -- z.k10 -- z.k11 -- z.k12 -- cycle ;
+bl[4] = z.k5 -- z.k9 -- z.k12 -- z.k8 --cycle ;
+fill bl[1] withcolor \MPcolor{a} ;
+linear_shade(bl[2],8,\MPcolor{a},\MPcolor{b}) ;
+linear_shade(bl[3],6,\MPcolor{a},\MPcolor{b}) ;
+linear_shade(bl[4],5,\MPcolor{a},\MPcolor{b}) ;
+StopPage ;
+\stopuniqueMPgraphic
+
+%D We define these backgrounds as overlays:
+
+\defineoverlay
+[lecbackground]
+[\useMPgraphic{blue1}]
+
+%D We use combinations for placing vertical pictures and text side by side, and
+%D we want a distance of 1.1 cm between both.
+
+\setupcombinations[distance=1.1cm]
+
+%D These are shortcuts to switch backgrounds:
+
+\define\lecback{\setupbackgrounds[page][background={lecbackground,slidetitle}]}
+\define\titback{\setupheader[state=stop]\setupbackgrounds[page][background=lecbackground]}
+\define\picback{\setupheader[state=stop]\setupbackgrounds[page][background={lecbackground,slidetitle}]}
+\define\noback{\setupbackgrounds[page][background=nobackground]}
+
+\setupbackgrounds[page][background=lecbackground] 
+
+%D The symbol for the first level of itemizations. 
+
+\definesymbol[1][\useMPgraphic{ItSquare}]
+\setupitemize[1][inmargin][color=c]
+
+\protect
+\stopmodule
+
+\endinput
+

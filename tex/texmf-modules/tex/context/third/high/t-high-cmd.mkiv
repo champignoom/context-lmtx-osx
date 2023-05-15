@@ -1,0 +1,75 @@
+%D \module
+%D   [       file=t-high-cmd,
+%D        version=2017.04.05,
+%D          title=\CONTEXT\ User Module,
+%D       subtitle=Code Highlighter for Windows Batch Scripts (CMD),
+%D         author=Christoph Reller,
+%D           date=\currentdate,
+%D      copyright=Christoph Reller,
+%D          email=christoph.reller@gmail.com,
+%D        license=GNU General Public License]
+
+%C Copyright (C) 2017 Christoph Reller
+%C
+%C This program is free software: you can redistribute it and/or modify
+%C it under the terms of the GNU General Public License as published by
+%C the Free Software Foundation, either version 3 of the License, or
+%C any later version.
+%C
+%C This program is distributed in the hope that it will be useful,
+%C but WITHOUT ANY WARRANTY; without even the implied warranty of
+%C MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%C GNU General Public License for more details.
+%C
+%C You should have received a copy of the GNU General Public License
+%C along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+%M \usemodule[high-cmd]
+
+%D \section{Usage}
+%D Example:
+%D
+%D \startCMD
+%D set Var=C:\Path
+%D echo %Var%
+%D echo !Var!
+%D goto :label
+%D
+%D :label
+%D rem remark
+%D rEM remark
+%D :: remark
+%D sEt test=%~d0%~p0more
+%D %test:~-1,-3%
+%D %%~dpgmore
+%D %variable:strtofind=n!test!w%
+%D %~d$variable:param
+%D if /i [%1] == [-s] (set Var=C:\Path2
+%D ) else if [%1] == [-a] ( )
+%D \stopCMD
+
+\registerctxluafile{t-high-common.lua}{1.0}
+\registerctxluafile{t-high-cmd.lua}{1.0}
+
+\unprotect
+
+\definestartstop[CmdSnippet][DefaultSnippet]
+\definestartstop[CmdSnippetKeyword][
+  \c!color=darkgreen,
+  \c!style=]
+\definestartstop[CmdSnippetVariable][
+  \c!color=darkyellow,
+  \c!style=]
+\definestartstop[CmdSnippetBoundary][
+  \c!color=darkblue,
+  \c!style=]
+\definestartstop[CmdSnippetComment][
+  \c!color=darkred,
+  \c!style=]
+\definestartstop[CmdSnippetLabel][
+  \c!color=middlecyan,
+  \c!style=]
+
+\definetyping[CMD][\c!option=cmd]
+
+\protect \endinput

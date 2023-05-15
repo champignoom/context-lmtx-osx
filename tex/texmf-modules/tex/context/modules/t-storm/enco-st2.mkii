@@ -1,0 +1,518 @@
+%D \module
+%D   [     file=enco-st2,
+%D      version=2005.03.22,
+%D        title=\CONTEXT\ Encoding Macros,
+%D     subtitle=Encoding for Storm font (XL2 derivative),
+%D       author=Vit Zyka,
+%D         date=\currentdate,
+%D    copyright=PRAGMA-ADE]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+%D This encoding was prepared by Petr Olsak.
+%D It is XL2 of CS fonts with next exceptions:
+%D -- no upper Greece letters (0-10)
+%D -- no dotlessj (17)
+%D -- no Polish / (32)
+%D -- add ellipsis, dagger, daggerdbl, bullet, sterling, paragraph (128-133)
+%D -- add section (167), Lslash (163), lslash (179)
+%D -- add some European accents chars
+%D -- add euro (134), trademark, copyright, registered (136-138), guilsinglleft, guilsinglright
+%D -- add var v, lig ct, lig st, lig ft, longst, longs (142-149)
+%D -- add florin (151), quotsinglbase (154), quoteleft (155)
+%D
+%D Use for Storm Type Foundry fonts.
+
+\startmapping[st2]
+
+\definecasemap 127 to 255    % we map them all to themselves
+
+\definecasemap 152 184 152   \definecasemap 161 177 161
+\definecasemap 163 179 163   \definecasemap 165 181 165
+\definecasemap 166 182 166   \definecasemap 169 185 169
+\definecasemap 170 186 170   \definecasemap 171 187 171
+\definecasemap 172 188 172   \definecasemap 174 190 174
+\definecasemap 175 191 175   \definecasemap 177 177 161
+\definecasemap 179 179 163   \definecasemap 181 181 165
+\definecasemap 182 182 166   \definecasemap 184 184 152
+\definecasemap 185 185 169   \definecasemap 186 186 170
+\definecasemap 187 187 171   \definecasemap 188 188 172
+\definecasemap 189 189 222   \definecasemap 190 190 174
+\definecasemap 191 191 175   \definecasemap 192 224 192
+\definecasemap 193 225 193   \definecasemap 194 226 194
+\definecasemap 195 227 195   \definecasemap 196 228 196
+\definecasemap 197 229 197   \definecasemap 198 230 198
+\definecasemap 199 231 199   \definecasemap 200 232 200
+\definecasemap 201 233 201   \definecasemap 202 234 202
+\definecasemap 203 235 203   \definecasemap 204 236 204
+\definecasemap 205 237 205   \definecasemap 206 238 206
+\definecasemap 207 239 207   \definecasemap 208 240 208
+\definecasemap 209 241 209   \definecasemap 210 242 210
+\definecasemap 211 243 211   \definecasemap 212 244 212
+\definecasemap 213 245 213   \definecasemap 214 246 214
+\definecasemap 216 248 216   \definecasemap 217 249 217
+\definecasemap 218 250 218   \definecasemap 219 251 219
+\definecasemap 220 252 220   \definecasemap 221 253 221
+\definecasemap 222 189 222   \definecasemap 224 224 192
+\definecasemap 225 225 193   \definecasemap 226 226 194
+\definecasemap 227 227 195   \definecasemap 228 228 196
+\definecasemap 229 229 197   \definecasemap 230 230 198
+\definecasemap 231 231 199   \definecasemap 232 232 200
+\definecasemap 233 233 201   \definecasemap 234 234 202
+\definecasemap 235 235 203   \definecasemap 236 236 204
+\definecasemap 237 237 205   \definecasemap 238 238 206
+\definecasemap 239 239 207   \definecasemap 240 240 208
+\definecasemap 241 241 209   \definecasemap 242 242 210
+\definecasemap 243 243 211   \definecasemap 244 244 212
+\definecasemap 245 245 213   \definecasemap 246 246 214
+\definecasemap 248 248 216   \definecasemap 249 249 217
+\definecasemap 250 250 218   \definecasemap 251 251 219
+\definecasemap 252 252 220   \definecasemap 253 253 221
+
+\stopmapping
+
+\startcoding[st2]
+
+\definecharacter greekGamma		0
+\definecharacter greekDelta		1
+\definecharacter greekTheta		2
+\definecharacter greekLambda		3
+\definecharacter greekXi		4
+\definecharacter greekPi		5
+\definecharacter greekSigma		6
+\definecharacter greekUpsilon		7
+\definecharacter greekPhi		8
+\definecharacter greekPsi		9
+\definecharacter greekOmega		10
+\definecharacter ffligature		11
+\definecharacter filigature		12
+\definecharacter flligature		13
+\definecharacter ffiligature		14
+\definecharacter fflligature		15
+\definecharacter dotlessi		16
+\definecharacter dotlessj		17
+\definecharacter textgrave		18
+\definecharacter textacute		19
+\definecharacter textcaron		20
+\definecharacter textbreve		21
+\definecharacter textmacron		22
+\definecharacter textring		23
+\definecharacter textcedilla		24
+\definecharacter ssharp			25
+\definecharacter aeligature		26
+\definecharacter oeligature		27
+\definecharacter oslash			28
+\definecharacter AEligature		29
+\definecharacter OEligature		30
+\definecharacter Oslash			31
+\definecharacter exclam			33
+\definecharacter quotedblright		34
+\definecharacter numbersign		35
+\definecharacter dollar			36
+\definecharacter percent		37
+\definecharacter ampersand		38
+\definecharacter quoteright		39
+\definecharacter parenleft		40
+\definecharacter parenright		41
+\definecharacter asterisk		42
+\definecharacter plus			43
+\definecharacter comma			44
+\definecharacter hyphen			45
+\definecharacter period			46
+\definecharacter slash			47
+\definecharacter colon			58
+\definecharacter semicolon		59
+\definecharacter exclamdown		60
+\definecharacter equal			61
+\definecharacter questiondown		62
+\definecharacter question		63
+\definecharacter textat			64
+\definecharacter bracketleft		91
+\definecharacter quotedblleft		92
+\definecharacter bracketright		93
+\definecharacter textcircumflex     	94
+\definecharacter textdotaccent      	95
+\definecharacter endash			123
+\definecharacter emdash			124
+\definecharacter texthungarumlaut  	125
+\definecharacter texttilde         	126
+\definecharacter textdiaeresis     	127
+\definecharacter textellipsis		128
+\definecharacter textdag		129
+\definecharacter textddag		130
+\definecharacter textbullet		131
+\definecharacter textsterling		132
+\definecharacter paragraphmark		133
+\definecharacter texteuro		134
+\definecharacter trademark		136
+\definecharacter copyright		137
+\definecharacter registered		138
+\definecharacter perthousand		141
+\definecharacter guilsingleleft		142
+\definecharacter guilsingleright	143
+\definecharacter greekpi		144  % variant-v in some italics: recommended ligtable: BOUNDARYCHAR v -> variant-v
+\definecharacter ctligature		145
+\definecharacter stligature		146
+\definecharacter ftligature		147
+\definecharacter longstligature		148
+\definecharacter longs			149
+\definecharacter textlozenge		150
+\definecharacter florin	                151
+\definecharacter Agrave			152
+\definecharacter quotesinglebase	154
+\definecharacter quoteleft		155
+\definecharacter softhyphen		156
+\definecharacter textogonek		157
+\definecharacter guillemotleft		158
+\definecharacter guillemotright		159
+\definecharacter Aogonek		161
+\definecharacter Lslash			163
+\definecharacter textcurrency		164
+\definecharacter Lcaron			165
+\definecharacter Sacute			166
+\definecharacter sectionmark		167
+\definecharacter Scaron			169
+\definecharacter Scedilla		170
+\definecharacter Tcaron			171
+\definecharacter Zacute			172
+\definecharacter Zcaron			174
+\definecharacter Zdotaccent		175
+\definecharacter degree			176
+\definecharacter aogonek		177
+\definecharacter lslash			179
+\definecharacter lcaron			181
+\definecharacter sacute			182
+\definecharacter agrave			184
+\definecharacter scaron			185
+\definecharacter scedilla		186
+\definecharacter tcaron			187
+\definecharacter zacute			188
+\definecharacter tcedilla		189
+\definecharacter zcaron			190
+\definecharacter zdotaccent		191
+\definecharacter Racute			192
+\definecharacter Aacute			193
+\definecharacter Acircumflex		194
+\definecharacter Abreve			195
+\definecharacter Adiaeresis		196
+\definecharacter Lacute			197
+\definecharacter Cacute			198
+\definecharacter Ccedilla		199
+\definecharacter Ccaron			200
+\definecharacter Eacute			201
+\definecharacter Eogonek		202
+\definecharacter Ediaeresis		203
+\definecharacter Ecaron			204
+\definecharacter Iacute			205
+\definecharacter Icircumflex		206
+\definecharacter Dcaron			207
+\definecharacter Eth			208
+\definecharacter Nacute			209
+\definecharacter Ncaron			210
+\definecharacter Oacute			211
+\definecharacter Ocircumflex		212
+\definecharacter Ohungarumlaut		213
+\definecharacter Odiaeresis		214
+\definecharacter textmultiply		215
+\definecharacter Rcaron			216
+\definecharacter Uring			217
+\definecharacter Uacute			218
+\definecharacter Uhungarumlaut		219
+\definecharacter Udiaeresis		220
+\definecharacter Yacute			221
+\definecharacter Tcedilla		222
+\definecharacter racute			224
+\definecharacter aacute			225
+\definecharacter acircumflex		226
+\definecharacter abreve			227
+\definecharacter adiaeresis		228
+\definecharacter lacute			229
+\definecharacter cacute			230
+\definecharacter ccedilla		231
+\definecharacter ccaron			232
+\definecharacter eacute			233
+\definecharacter eogonek		234
+\definecharacter ediaeresis		235
+\definecharacter ecaron			236
+\definecharacter iacute			237
+\definecharacter icircumflex		238
+\definecharacter dcaron			239
+\definecharacter eth			240
+\definecharacter nacute			241
+\definecharacter ncaron			242
+\definecharacter oacute			243
+\definecharacter ocircumflex		244
+\definecharacter ohungarumlaut		245
+\definecharacter odiaeresis		246
+\definecharacter textdivide		247
+\definecharacter rcaron			248
+\definecharacter uring			249
+\definecharacter uacute			250
+\definecharacter uhungarumlaut		251
+\definecharacter udiaeresis		252
+\definecharacter yacute			253
+\definecharacter quotedblbase		254
+\definecharacter quotedblleft		255
+
+%--- pointers to variants (extension excoding)
+\def\defineVarcharacter#1 #2 #3 % 1-glyph name 2-glyph code 3-variant
+  {\definecharacter #1 {{\Var[#3]#2}} } % spaces important!
+\unexpanded\def\defineVarExtcharacter#1 #2 % 1-glyph name 2-glyph code
+  {\defineVarcharacter #1 #2 ext }
+\unexpanded\def\defineVarExtAutocharacter#1 % 1-glyph name
+  {\defineVarExtcharacter #1 {\csname#1\endcsname} }
+
+\defineVarExtAutocharacter minus
+\defineVarExtAutocharacter onesuperior
+\defineVarExtAutocharacter twosuperior
+\defineVarExtAutocharacter threesuperior
+\defineVarExtAutocharacter lessequal
+\defineVarExtAutocharacter notequal
+\defineVarExtAutocharacter greaterequal
+\defineVarExtAutocharacter plusminus
+\defineVarExtAutocharacter onequarter
+\defineVarExtAutocharacter onehalf
+\defineVarExtAutocharacter threequarters
+\defineVarExtAutocharacter textfraction
+%\defineVarExtAutocharacter degree
+\defineVarExtAutocharacter brokenbar
+% 0x10
+\defineVarExtAutocharacter summation
+\defineVarExtAutocharacter greekOmega
+%\defineVarExtAutocharacter pi
+\defineVarExtAutocharacter mu
+%\defineVarExtAutocharacter greekDelta
+\defineVarExtAutocharacter logicalnot
+\defineVarExtAutocharacter infinity
+\defineVarExtAutocharacter textradical
+\defineVarExtAutocharacter ordfeminine
+\defineVarExtAutocharacter ordmasculine
+\defineVarExtAutocharacter UCtexttextgrave
+\defineVarExtAutocharacter UCtextacute
+\defineVarExtAutocharacter UCtextcaron
+\defineVarExtAutocharacter UCtextcircumflex
+\defineVarExtAutocharacter UCtextbreve
+\defineVarExtAutocharacter UCtextring
+% 0x20 (ASCII begins)
+\defineVarExtAutocharacter nbspace
+%\defineVarExtAutocharacter exclam
+\defineVarExtAutocharacter quotedbl
+\defineVarExtAutocharacter UCtextmacron
+\defineVarExtAutocharacter UCtextdotaccent
+\defineVarExtAutocharacter UCtexthungarumlaut
+\defineVarExtAutocharacter UCtextogonek
+\defineVarExtAutocharacter UCtextcedilla
+\defineVarExtAutocharacter UCtexttilde
+\defineVarExtAutocharacter UCtextdiaeresis
+\defineVarExtAutocharacter commaaccent
+\defineVarExtAutocharacter less
+\defineVarExtAutocharacter greater
+\defineVarExtAutocharacter backslash
+\defineVarExtAutocharacter asciicircum
+\defineVarExtAutocharacter underscore
+% 0x60
+\defineVarExtAutocharacter braceleft
+\defineVarExtAutocharacter bar
+\defineVarExtAutocharacter braceright
+\defineVarExtAutocharacter asciitilde
+\defineVarExtAutocharacter periodcentered
+% 0x80
+\defineVarExtAutocharacter dmacron
+\defineVarExtAutocharacter franc
+\defineVarExtAutocharacter Tbar
+\defineVarExtAutocharacter Tcommaaccent
+\defineVarExtAutocharacter Umacron
+\defineVarExtAutocharacter Ubreve
+% 0x90
+\defineVarExtAutocharacter Thorn
+\defineVarExtAutocharacter Ydiaeresis
+\defineVarExtAutocharacter Rcedilla
+\defineVarExtAutocharacter Scircumflex
+\defineVarExtAutocharacter Ucircumflex
+\defineVarExtAutocharacter Uogonek
+\defineVarExtAutocharacter Utilde
+\defineVarExtAutocharacter Ncommaaccent
+\defineVarExtAutocharacter Gacute
+\defineVarExtAutocharacter Gbreve
+\defineVarExtAutocharacter Jcircumflex
+\defineVarExtAutocharacter IJligature
+\defineVarExtAutocharacter Idotaccent
+\defineVarExtAutocharacter Lcedilla
+\defineVarExtAutocharacter Ldotaccent
+% 0xA0
+\defineVarExtAutocharacter cent
+\defineVarExtAutocharacter yen
+\defineVarExtAutocharacter tbar
+\defineVarExtAutocharacter tcommaaccent
+\defineVarExtAutocharacter umacron
+\defineVarExtAutocharacter ubreve
+% 0xD0
+\defineVarExtAutocharacter eth
+\defineVarExtAutocharacter thorn
+\defineVarExtAutocharacter ydiaeresis
+\defineVarExtAutocharacter rcedilla
+\defineVarExtAutocharacter scircumflex
+\defineVarExtAutocharacter ucircumflex
+\defineVarExtAutocharacter uogonek
+\defineVarExtAutocharacter utilde
+\defineVarExtAutocharacter ncommaaccent
+\defineVarExtAutocharacter gacute
+\defineVarExtAutocharacter gbreve
+\defineVarExtAutocharacter jcircumflex
+\defineVarExtAutocharacter ijligature
+\defineVarExtAutocharacter lcedilla
+\defineVarExtAutocharacter ldotaccent
+% 0xC0
+\defineVarExtAutocharacter Wcircumflex
+\defineVarExtAutocharacter Edotaccent
+\defineVarExtAutocharacter Ycircumflex
+\defineVarExtAutocharacter Atilde
+\defineVarExtAutocharacter Amacron
+\defineVarExtAutocharacter Aring
+\defineVarExtAutocharacter Ccircumflex
+\defineVarExtAutocharacter Cdotaccent
+\defineVarExtAutocharacter Egrave
+\defineVarExtAutocharacter Ebreve
+\defineVarExtAutocharacter Ecircumflex
+\defineVarExtAutocharacter Emacron
+\defineVarExtAutocharacter Igrave
+\defineVarExtAutocharacter Itilde
+\defineVarExtAutocharacter Imacron
+\defineVarExtAutocharacter Idiaeresis
+% 0xD0
+\defineVarExtAutocharacter Iogonek
+\defineVarExtAutocharacter Ntilde
+\defineVarExtAutocharacter Ograve
+\defineVarExtAutocharacter Omacron
+\defineVarExtAutocharacter Obreve
+\defineVarExtAutocharacter Otilde
+\defineVarExtAutocharacter Ncedilla
+\defineVarExtAutocharacter Kcedilla
+\defineVarExtAutocharacter Ugrave
+\defineVarExtAutocharacter Gcircumflex
+\defineVarExtAutocharacter Gdotaccent
+\defineVarExtAutocharacter Gcedilla
+\defineVarExtAutocharacter Scommaaccent
+\defineVarExtAutocharacter Hcircumflex
+\defineVarExtAutocharacter Hbar
+% 0xE0
+\defineVarExtAutocharacter wcircumflex
+\defineVarExtAutocharacter edotaccent
+\defineVarExtAutocharacter ycircumflex
+\defineVarExtAutocharacter atilde
+\defineVarExtAutocharacter amacron
+\defineVarExtAutocharacter aring
+\defineVarExtAutocharacter ccircumflex
+\defineVarExtAutocharacter cdotaccent
+\defineVarExtAutocharacter egrave
+\defineVarExtAutocharacter ebreve
+\defineVarExtAutocharacter ecircumflex
+\defineVarExtAutocharacter emacron
+\defineVarExtAutocharacter igrave
+\defineVarExtAutocharacter itilde
+\defineVarExtAutocharacter imacron
+\defineVarExtAutocharacter idiaeresis
+% 0xF0
+\defineVarExtAutocharacter iogonek
+\defineVarExtAutocharacter ntilde
+\defineVarExtAutocharacter ograve
+\defineVarExtAutocharacter omacron
+\defineVarExtAutocharacter obreve
+\defineVarExtAutocharacter otilde
+\defineVarExtAutocharacter ncedilla
+\defineVarExtAutocharacter kcedilla
+\defineVarExtAutocharacter ugrave
+\defineVarExtAutocharacter gcircumflex
+\defineVarExtAutocharacter gdotaccent
+\defineVarExtAutocharacter gcedilla
+\defineVarExtAutocharacter scommaaccent
+\defineVarExtAutocharacter hcircumflex
+\defineVarExtAutocharacter hbar
+
+%--- Uppercase accents
+\def\buildUCaccent#1#2% 1-accent 2-base char
+  {\ifignoreaccent
+     \expandafter\nobuildtextaccent
+   \else
+     \expandafter\dobuildUCaccent
+   \fi{#1}{#2}}
+
+\unexpanded\def\dobuildUCaccent#1#2%
+  {{\leavevmode\lineskiplimit=-\maxdimen
+    \vtop{\baselineskip=0pt \ialign{\hfil##\hfil\crcr#1\crcr#2\crcr}}}}
+
+\definecommand UCgrave        {\buildUCaccent{\UCtextgrave}}
+\definecommand UCacute        {\buildUCaccent{\UCtextacute}}
+\definecommand UCcaron        {\buildUCaccent{\UCtextcaron}}
+\definecommand UCcircumflex   {\buildUCaccent{\UCtextcircumflex}}
+\definecommand UCbreve        {\buildUCaccent{\UCtextbreve}}
+\definecommand UCring         {\buildUCaccent{\UCtextring}}
+\definecommand UCmacron       {\buildUCaccent{\UCtextmacron}}
+\definecommand UCdotaccent    {\buildUCaccent{\UCtextdotaccent}}
+\definecommand UChungarumlaut {\buildUCaccent{\UCtexthungarumlaut}}
+\definecommand UCogonek       {\buildUCaccent{\UCtextogonek}}
+\definecommand UCcedilla      {\buildUCaccent{\UCtextcedilla}}
+\definecommand UCtilde        {\buildUCaccent{\UCtexttilde}}
+\definecommand UCdiaeresis    {\buildUCaccent{\UCtextdiaeresis}}
+
+\def\defineVarExtUCcharacter#1#2 % 12-glyph name with accent
+  {\defineVarExtcharacter #1#2 {\buildUCaccent{\csname UCtext#2\endcsname}{#1}} }
+
+\defineVarExtUCcharacter Ygrave
+\defineVarExtUCcharacter Ytilde
+\defineVarExtUCcharacter Ibreve
+\defineVarExtUCcharacter Ycaron
+\defineVarExtUCcharacter Etilde
+
+%--- synonyms
+\definecharacter textbottomdot		46  % period
+\definecharacter textplus		43  % plus
+\definecharacter textdollar		36  % dollar
+
+%\definecharacter textumlaut		125 % texthungarumlaut
+%\definecharacter umlaut		125 % texthungarumlaut
+\definecharacter textdagger		129 % textdag
+\definecharacter textdaggerdbl		130 % textddag
+\definecharacter textdegree		176 % degree
+\definecharacter textflorin		151 % florin
+\definecharacter ostroke		28  % oslash
+\definecharacter Ostroke		31  % Oslash
+\definecharacter Lstroke		163 % Lslash
+\definecharacter lstroke		179 % lslash
+\definecharacter Hstroke		{\Hbar}
+\definecharacter hstroke		{\hbar}
+\definecharacter textdiv		{\textdivide}
+\definecharacter dotlessI		{I}
+\definecharacter dotlessJ		{J}
+\definecharacter Ssharp			{SS}
+\definecharacter threequarter		{\threequarters}
+\definecharacter textcomma		{\comma}
+\definecharacter textperiod		{\period}
+\definecharacter textminus		{\minus}
+\definecharacter textpm			{\plusminus}
+\definecharacter textless		{\less}
+\definecharacter textgreater		{\greater}
+\definecharacter textlognot		{\logicalnot}
+\definecharacter textbackslash		{\backslash}
+\definecharacter textslash		{\slash}
+\definecharacter textunderscore		{\underscore}
+\definecharacter textbraceleft		{\braceleft}
+\definecharacter textbar		{\bar}
+\definecharacter textbrokenbar		{\brokenbar}
+\definecharacter textbraceright		{\braceright}
+\definecharacter textasciitilde		{\asciitilde}
+\definecharacter textasciicircum	{\asciicircum}
+\definecharacter textfranc		{\franc}
+\definecharacter textcent		{\cent}
+\definecharacter textyen		{\yen}
+\definecharacter textmu			{\mu}
+\definecharacter quotesingle		{\quoteleft}
+\definecharacter leftguillemot		{\guillemotleft}
+\definecharacter rightguillemot		{\guillemotright}
+\definecharacter greekSigma		{\summation}
+
+%\definecommand tilde          {\buildtextaccent{\texttilde}}
+
+\stopcoding

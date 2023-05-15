@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="yes"?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands" 
+  name="context" language="en" 
+  version="2010.02.19">
+
+  <cd:command name="ancientgreek" file="t-ancientgreek.tex">
+    <cd:sequence>
+      <cd:string value="usemodule"/>
+    </cd:sequence>
+    <cd:arguments>
+      <cd:keywords list="no">
+        <cd:constant type="ancientgreek"/>
+      </cd:keywords>
+      <cd:assignments list="yes" optional="yes">
+        <cd:parameter name="font">
+          <cd:constant type="Alkaios"/>
+          <cd:constant type="Bosporos"/>
+          <cd:constant type="GFSArtemisia"/>
+          <cd:constant type="GFSBaskerville"/>
+          <cd:constant type="GFSBodoni"/>
+          <cd:constant type="GFSBodoniClassic"/>
+          <cd:constant type="GFSComplutum"/>
+          <cd:constant type="GFSDidot"/>
+          <cd:constant type="GFSDidotClassic"/>
+          <cd:constant type="GFSElpis"/>
+          <cd:constant type="GFSGazis"/>
+          <cd:constant type="GFSNeohellenic"/>
+          <cd:constant type="GFSOlga"/>
+          <cd:constant type="GFSPhilostratos"/>
+          <cd:constant type="GFSPorson"/>
+          <cd:constant type="GFSSolomos"/>
+          <cd:constant type="GFSTheokritos"/>
+          <cd:constant type="GreekArno"/>
+          <cd:constant type="GreekAsteria"/>
+          <cd:constant type="GreekCanonica"/>
+          <cd:constant type="GreekGaramondPrem"/>
+          <cd:constant type="GreekGentium"/>
+          <cd:constant type="GreekGentiumAlt"/>
+          <cd:constant type="GreekKerkis"/>
+          <cd:constant type="GreekLibertine"/>
+          <cd:constant type="GreekMinion"/>
+          <cd:constant type="GreekOldStandard"/>
+          <cd:constant type="GreekPorson"/>         
+          <cd:constant type="Ibycus"/>
+          <cd:constant type="Kadmos"/>
+          <cd:constant type="NewHellenic"/>
+        </cd:parameter>
+        <cd:parameter name="scale">
+          <cd:constant type="cd:number"/>
+        </cd:parameter>
+        <cd:parameter name="altfont">
+          <cd:string value='values as in parameter "font"'/>
+        </cd:parameter>
+        <cd:parameter name="altscale">
+          <cd:constant type="cd:number"/>
+        </cd:parameter>
+      </cd:assignments>
+    </cd:arguments>
+  </cd:command>
+</cd:interface>

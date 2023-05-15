@@ -1,0 +1,32 @@
+<!DOCTYPE rdf:RDF SYSTEM "tpm.dtd">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+		 xmlns:TPM="http://texlive.dante.de/">
+  <rdf:Description about="http://dl.contextgarden.net/modules/t-inifile.zip">
+    <TPM:Name>t-inifile</TPM:Name>
+    <TPM:Type>Package</TPM:Type>
+    <TPM:Date>2008/03/02 00:00:00</TPM:Date>
+    <TPM:Version>2008.07.15</TPM:Version>
+    <TPM:Creator>Peter</TPM:Creator>
+    <TPM:Title>Formatting of ini-files</TPM:Title>
+    <TPM:Description>
+With this module, you can easily transform a text file in ini-format to a
+nice pdf with a user defined formatting. Moreover, you can provide up to
+three keys for sorting the entries.
+    </TPM:Description>
+    <TPM:Author>Peter Münster</TPM:Author>
+    <TPM:Size>94845</TPM:Size>
+    <TPM:Build/>
+    <TPM:RunFiles size="6853">
+tex/context/third/inifile/t-inifile.tex
+tpm/t-inifile.tpm
+   </TPM:RunFiles>
+    <TPM:DocFiles size="87992">
+doc/context/third/inifile/inifile-doc.pdf
+doc/context/third/inifile/inifile-demo.pdf
+    </TPM:DocFiles>
+    <TPM:Requires>
+      <TPM:Package name="context"/>
+    </TPM:Requires>
+    <TPM:Provides>Package/t-inifile</TPM:Provides>
+  </rdf:Description>
+</rdf:RDF>

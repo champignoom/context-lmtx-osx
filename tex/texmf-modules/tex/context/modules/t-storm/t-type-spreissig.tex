@@ -1,0 +1,199 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\doifdefinedelse{stormmapdefined}
+  {}
+  {\let\stormmapdefined\empty \loadmapfile[storm]}
+%\starttypescript [map] [preissig] [st1,st2]
+%  \loadmapfile[storm]
+%\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [preissig-text,preissig-antikva] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		      [Preissig-Roman]
+  \definefontsynonym [SerifBold]	      [Preissig-Bold]
+  \definefontsynonym [SerifItalic]	      [Preissig-Italic]
+  \definefontsynonym [SerifBoldItalic]	      [Preissig-Bold-Italic]
+  \definefontsynonym [SerifOrnament]	      [Preissig-Ornament]
+
+  \definefontsynonym [SerifExt]		   [Preissig-Roman-Ext]
+  \definefontsynonym [SerifBoldExt]	   [Preissig-Bold-Ext]
+  \definefontsynonym [SerifItalicExt]	   [Preissig-Italic-Ext]
+  \definefontsynonym [SerifBoldItalicExt]  [Preissig-Bold-Italic-Ext]
+  \definefontsynonym [SerifSlantedExt]	   [Preissig-Italic-Ext]
+  \definefontsynonym [SerifBoldSlantedExt] [Preissig-Bold-Italic-Ext]
+
+  \definefontsynonym [SerifRegular]	      [Serif]
+  \definefontsynonym [SerifRegularExt]	      [SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [preissig-text] [st1]
+  \definefontsynonym [Preissig-Roman]           [spsrg8t]  [encoding=st1]
+  \definefontsynonym [Preissig-Bold]            [spsbg8t]  [encoding=st1]
+  \definefontsynonym [Preissig-Italic]          [spsrig8t] [encoding=st1]
+  \definefontsynonym [Preissig-Bold-Italic]     [spsbig8t] [encoding=st1]
+  \definefontsynonym [Preissig-Ornament]        [spor]     %[encoding=st1]
+
+  \definefontsynonym [Preissig-Roman-Ext]       [spsrg6s]  [encoding=st3]
+  \definefontsynonym [Preissig-Bold-Ext]        [spsbg6s]  [encoding=st3]
+  \definefontsynonym [Preissig-Italic-Ext]      [spsrig6s] [encoding=st3]
+  \definefontsynonym [Preissig-Bold-Italic-Ext] [spsbig6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [preissig-text] [st2]
+  \definefontsynonym [Preissig-Roman]           [spsrg8z]  [encoding=st2]
+  \definefontsynonym [Preissig-Bold]            [spsbg8z]  [encoding=st2]
+  \definefontsynonym [Preissig-Italic]          [spsrig8z] [encoding=st2]
+  \definefontsynonym [Preissig-Bold-Italic]     [spsbig8z] [encoding=st2]
+  \definefontsynonym [Preissig-Ornament]        [spor]     %[encoding=st2]
+
+  \definefontsynonym [Preissig-Roman-Ext]       [spsrg6s]  [encoding=st3]
+  \definefontsynonym [Preissig-Bold-Ext]        [spsbg6s]  [encoding=st3]
+  \definefontsynonym [Preissig-Italic-Ext]      [spsrig6s] [encoding=st3]
+  \definefontsynonym [Preissig-Bold-Italic-Ext] [spsbig6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [preissig-antikva] [st1]
+  \definefontsynonym [Preissig-Roman]           [spar8t]  [encoding=st1]
+  \definefontsynonym [Preissig-Bold]            [spab8t]  [encoding=st1]
+  \definefontsynonym [Preissig-Italic]          [spari8t] [encoding=st1]
+  \definefontsynonym [Preissig-Bold-Italic]     [spabi8t] [encoding=st1]
+  \definefontsynonym [Preissig-Ornament]        [spor]    %[encoding=default]
+
+  \definefontsynonym [Preissig-Roman-Ext]       [spar6s]  [encoding=st3]
+  \definefontsynonym [Preissig-Bold-Ext]        [spab6s]  [encoding=st3]
+  \definefontsynonym [Preissig-Italic-Ext]      [spari6s] [encoding=st3]
+  \definefontsynonym [Preissig-Bold-Italic-Ext] [spabi6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [preissig-antikva] [st2]
+  \definefontsynonym [Preissig-Roman]           [spar8z]  [encoding=st2]
+  \definefontsynonym [Preissig-Bold]            [spab8z]  [encoding=st2]
+  \definefontsynonym [Preissig-Italic]          [spari8z] [encoding=st2]
+  \definefontsynonym [Preissig-Bold-Italic]     [spabi8z] [encoding=st2]
+  \definefontsynonym [Preissig-Ornament]        [spor]    %[encoding=default]
+
+  \definefontsynonym [Preissig-Roman-Ext]       [spar6s]  [encoding=st3]
+  \definefontsynonym [Preissig-Bold-Ext]        [spab6s]  [encoding=st3]
+  \definefontsynonym [Preissig-Italic-Ext]      [spari6s] [encoding=st3]
+  \definefontsynonym [Preissig-Bold-Italic-Ext] [spabi6s] [encoding=st3]
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [preissig-text,preissig-antikva] [name]
+  \definefontsynonym [MathRoman]        [Preissig-Math-Letters]
+  \definefontsynonym [MathItalic]       [Preissig-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Preissig-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [preissig-text] [st1]
+  \definefontsynonym [Preissig-Math-Letters]        [spsrg8t]  [encoding=st1]
+  \definefontsynonym [Preissig-Math-Letters-Italic] [spsrig8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Preissig-Math-Storm]          [spsrg6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [preissig-text] [st2]
+  \definefontsynonym [Preissig-Math-Letters]        [spsrg8z]  [encoding=st2]
+  \definefontsynonym [Preissig-Math-Letters-Italic] [spsrig8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Preissig-Math-Storm]          [spsrg6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [preissig-antikva] [st1]
+  \definefontsynonym [Preissig-Math-Letters]        [spar8t]  [encoding=st1]
+  \definefontsynonym [Preissig-Math-Letters-Italic] [spari8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Preissig-Math-Storm]          [spar6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [preissig-antikva] [st2]
+  \definefontsynonym [Preissig-Math-Letters]        [spar8z]  [encoding=st2]
+  \definefontsynonym [Preissig-Math-Letters-Italic] [spari8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Preissig-Math-Storm]          [spar6s]  [encoding=st3]
+\stoptypescript
+
+% bold
+\starttypescript [boldmath] [preissig-text,preissig-antikva] [name]
+  \definefontsynonym [MathRoman]        [Preissig-MathBold-Letters]
+  \definefontsynonym [MathItalic]       [Preissig-MathBold-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMathBold-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Preissig-MathBold-Storm]
+\stoptypescript
+
+\starttypescript [boldmath] [preissig-text] [st1]
+  \definefontsynonym [Preissig-MathBold-Letters]        [spsbg8t]  [encoding=st1]
+  \definefontsynonym [Preissig-MathBold-Letters-Italic] [spsbig8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [Preissig-MathBold-Storm]          [spsbg6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [preissig-text] [st2]
+  \definefontsynonym [Preissig-MathBold-Letters]        [spsbg8z]  [encoding=st2]
+  \definefontsynonym [Preissig-MathBold-Letters-Italic] [spsbig8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [Preissig-MathBold-Storm]          [spsbg6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [preissig-antikva] [st1]
+  \definefontsynonym [Preissig-MathBold-Letters]        [spab8t]  [encoding=st1]
+  \definefontsynonym [Preissig-MathBold-Letters-Italic] [spabi8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [Preissig-MathBold-Storm]          [spab6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [preissig-antikva] [st2]
+  \definefontsynonym [Preissig-MathBold-Letters]        [spab8z]  [encoding=st2]
+  \definefontsynonym [Preissig-MathBold-Letters-Italic] [spabi8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [Preissig-MathBold-Storm]          [spab6s]  [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [preissig-text,preissig-antikva] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [Preissig-Text] [st1,st2]
+  \definetypeface [Preissig-Text] [rm] [serif] [preissig-text] [ornam] [encoding=\typescripttwo]
+  \definetypeface [Preissig-Text] [mm] [math] [preissig-text] [storm]   [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [preissig-text] [storm] [encoding=\typescripttwo]
+  \definetypeface [Preissig-Text] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\starttypescript [Preissig-Antikva] [st1,st2]
+  \definetypeface [Preissig-Antikva] [rm] [serif] [preissig-antikva] [ornam] [encoding=\typescripttwo]
+  \definetypeface [Preissig-Antikva] [mm] [math] [preissig-antikva] [storm]   [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [preissig-antikva] [storm] [encoding=\typescripttwo]
+  \definetypeface [Preissig-Antikva] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection
+\endinput
+
+% end of type-spreissig.tex

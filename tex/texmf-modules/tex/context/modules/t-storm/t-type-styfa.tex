@@ -1,0 +1,155 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\doifdefinedelse{stormmapdefined}
+  {}
+  {\let\stormmapdefined\empty \loadmapfile[storm]}
+%\starttypescript [map] [tyfa] [st1,st2]
+%  \loadmapfile[storm]
+%\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [tyfa-text] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		   [Tyfa-Roman]
+  \definefontsynonym [SerifBold]	   [Tyfa-Bold]
+  \definefontsynonym [SerifItalic]	   [Tyfa-Italic]
+  \definefontsynonym [SerifBoldItalic]	   [Tyfa-Bold-Italic]
+  \definefontsynonym [SerifCaps]	   [Tyfa-Caps]
+  \definefontsynonym [SerifBoldCaps]	   [Tyfa-Bold-Caps]
+  \definefontsynonym [SerifMedium]	   [Tyfa-Medium]
+  \definefontsynonym [SerifMediumItalic]   [Tyfa-Medium-Italic]
+
+  \definefontsynonym [SerifExt]		   [Tyfa-Roman-Ext]
+  \definefontsynonym [SerifBoldExt]	   [Tyfa-Bold-Ext]
+  \definefontsynonym [SerifItalicExt]	   [Tyfa-Italic-Ext]
+  \definefontsynonym [SerifBoldItalicExt]  [Tyfa-Bold-Italic-Ext]
+  \definefontsynonym [SerifSlantedExt]	   [Tyfa-Italic-Ext]
+  \definefontsynonym [SerifBoldSlantedExt] [Tyfa-Bold-Italic-Ext]
+  \definefontsynonym [SerifCapsExt]        [Tyfa-Caps-Ext]
+  \definefontsynonym [SerifBoldCapsExt]    [Tyfa-Bold-Caps-Ext]
+  \definefontsynonym [SerifMediumExt]      [Tyfa-Medium-Ext]
+  \definefontsynonym [SerifMediumItalicExt][Tyfa-Medium-Italic-Ext]
+
+  \definefontsynonym [SerifRegular]	[Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [tyfa-text] [st1]
+  \definefontsynonym [Tyfa-Roman]            [stfrg8t]  [encoding=st1]
+  \definefontsynonym [Tyfa-Bold]             [stfbg8t]  [encoding=st1]
+  \definefontsynonym [Tyfa-Italic]           [stfrig8t] [encoding=st1]
+  \definefontsynonym [Tyfa-Bold-Italic]      [stfbig8t] [encoding=st1]
+  \definefontsynonym [Tyfa-Caps]             [stfrc8t]  [encoding=st1]
+  \definefontsynonym [Tyfa-Bold-Caps]        [stfbc8t]  [encoding=st1]
+  \definefontsynonym [Tyfa-Medium]           [stfmg8t]  [encoding=st1]
+  \definefontsynonym [Tyfa-Medium-Italic]    [stfmig8t] [encoding=st1]
+
+  \definefontsynonym [Tyfa-Roman-Ext]        [stfrg6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Bold-Ext]         [stfbg6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Italic-Ext]       [stfrig6s] [encoding=st3]
+  \definefontsynonym [Tyfa-Bold-Italic-Ext]  [stfbig6s] [encoding=st3]
+  \definefontsynonym [Tyfa-Caps-Ext]         [stfrc6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Bold-Caps-Ext]    [stfbc6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Medium-Ext]       [stfmg6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Medium-Italic-Ext][stfmig6s] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [tyfa-text] [st2]
+  \definefontsynonym [Tyfa-Roman]            [stfrg8z]  [encoding=st2]
+  \definefontsynonym [Tyfa-Bold]             [stfbg8z]  [encoding=st2]
+  \definefontsynonym [Tyfa-Italic]           [stfrig8z] [encoding=st2]
+  \definefontsynonym [Tyfa-Bold-Italic]      [stfbig8z] [encoding=st2]
+  \definefontsynonym [Tyfa-Caps]             [stfrc8z]  [encoding=st2]
+  \definefontsynonym [Tyfa-Bold-Caps]        [stfbc8z]  [encoding=st2]
+  \definefontsynonym [Tyfa-Medium]           [stfmg8z]  [encoding=st2]
+  \definefontsynonym [Tyfa-Medium-Italic]    [stfmig8z] [encoding=st2]
+
+  \definefontsynonym [Tyfa-Roman-Ext]        [stfrg6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Bold-Ext]         [stfbg6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Italic-Ext]       [stfrig6s] [encoding=st3]
+  \definefontsynonym [Tyfa-Bold-Italic-Ext]  [stfbig6s] [encoding=st3]
+  \definefontsynonym [Tyfa-Caps-Ext]         [stfrc6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Bold-Caps-Ext]    [stfbc6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Medium-Ext]       [stfmg6s]  [encoding=st3]
+  \definefontsynonym [Tyfa-Medium-Italic-Ext][stfmig6s] [encoding=st3]
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [tyfa-text] [name]
+  \definefontsynonym [MathRoman]        [Tyfa-Math-Letters]
+  \definefontsynonym [MathItalic]       [Tyfa-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Tyfa-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [tyfa-text] [st1]
+  \definefontsynonym [Tyfa-Math-Letters]            [stfrg8t]  [encoding=st1]
+  \definefontsynonym [Tyfa-Math-Letters-Italic]     [stfrig8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Tyfa-Math-Storm]              [stfrg6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [tyfa-text] [st2]
+  \definefontsynonym [Tyfa-Math-Letters]            [stfrg8z]  [encoding=st2]
+  \definefontsynonym [Tyfa-Math-Letters-Italic]     [stfrig8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Tyfa-Math-Storm]              [stfrg6s]  [encoding=st3]
+\stoptypescript
+
+% bold
+\starttypescript [boldmath] [tyfa-text] [name]
+  \definefontsynonym [MathRoman]        [Tyfa-MathBold-Letters]
+  \definefontsynonym [MathItalic]       [Tyfa-MathBold-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMathBold-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Tyfa-MathBold-Storm]
+\stoptypescript
+
+\starttypescript [boldmath] [tyfa-text] [st1]
+  \definefontsynonym [Tyfa-MathBold-Letters]          [stfbg8t]  [encoding=st1]
+  \definefontsynonym [Tyfa-MathBold-Letters-Italic]   [stfbig8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols] [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]   [cmex10]
+  \definefontsynonym [Tyfa-MathBold-Storm]            [stfbg6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [tyfa-text] [st2]
+  \definefontsynonym [Tyfa-MathBold-Letters]          [stfbg8z]  [encoding=st2]
+  \definefontsynonym [Tyfa-MathBold-Letters-Italic]   [stfbig8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols] [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]   [cmex10]
+  \definefontsynonym [Tyfa-MathBold-Storm]            [stfbg6s]  [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [tyfa-text] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [Tyfa-Text] [st1,st2]
+  \definetypeface [Tyfa-Text] [rm] [serif] [tyfa-text] [caps-medium] [encoding=\typescripttwo]
+  \definetypeface [Tyfa-Text] [mm] [math] [tyfa-text] [storm]   [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [tyfa-text] [storm] [encoding=\typescripttwo]
+  \definetypeface [Tyfa-Text] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection
+\endinput
+
+% end of type-styfa.tex

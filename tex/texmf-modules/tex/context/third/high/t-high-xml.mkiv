@@ -1,0 +1,98 @@
+%D \module
+%D   [       file=t-high-xml,
+%D        version=2017.05.04,
+%D          title=\CONTEXT\ User Module,
+%D       subtitle=Syntax Highlighter for XML,
+%D         author=Christoph Reller,
+%D           date=\currentdate,
+%D      copyright=Christoph Reller,
+%D          email=christoph.reller@gmail.com,
+%D        license=GNU General Public License]
+
+%C Copyright (C) 2017 Christoph Reller
+%C
+%C This program is free software: you can redistribute it and/or modify
+%C it under the terms of the GNU General Public License as published by
+%C the Free Software Foundation, either version 3 of the License, or
+%C any later version.
+%C
+%C This program is distributed in the hope that it will be useful,
+%C but WITHOUT ANY WARRANTY; without even the implied warranty of
+%C MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%C GNU General Public License for more details.
+%C
+%C You should have received a copy of the GNU General Public License
+%C along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+%M \usemodule[high-xml]
+
+%D \section{Usage}
+%D Example:
+%D
+%D \startXML
+%D <?xml version="1.0" encoding="utf-8"?>
+%D
+%D <tag name="something">
+%D   <anothertag>
+%D     <time>04.01.2016  9:14:18.09&#1500;</time>
+%D   </anothertag>
+%D <!-- This is a comment
+%D    - across several
+%D    - lines. -->
+%D   <yat><![CDATA[
+%D CData with % some # special [
+%D characters.
+%D ]]>
+%D   </yat>
+%D </tag>
+%D \stopXML
+%D
+%D Incomplete XML in the form \type{attribute="value"} is supported:
+%D
+%D \startXML
+%D version="1.0" encoding="utf-8"
+%D \stopXML
+
+\writestatus{loading}{ConTeXt User Module / Syntax Highlighter for XML}
+
+\registerctxluafile{t-high-common.lua}{1.0}
+\registerctxluafile{t-high-xml.lua}{1.0}
+
+\unprotect
+
+\definestartstop[XmlSnippet][DefaultSnippet]
+
+\definestartstop[XmlSnippetName][
+  \c!color=darkblue,
+  \c!style=]
+\definestartstop[XmlSnippetKey][
+  \c!color=darkgreen,
+  \c!style=]
+\definestartstop[XmlSnippetBoundary][
+  \c!color=darkblue,
+  \c!style=]
+\definestartstop[XmlSnippetEntity][
+  \c!color=darkred,
+  \c!style=]
+\definestartstop[XmlSnippetString][
+  \c!color=darkblue,
+  \c!style=]
+\definestartstop[XmlSnippetEqual][
+  \c!color=darkblue,
+  \c!style=]
+\definestartstop[XmlSnippetComment][
+  \c!color=darkgray,
+  \c!style=]
+\definestartstop[XmlSnippetCdata][
+  \c!color=middleyellow,
+  \c!style=]
+\definestartstop[XmlSnippetInstruction][
+  \c!color=middlemagenta,
+  \c!style=]
+\definestartstop[XmlSnippetAttrVal][
+  \c!color=red,
+  \c!style=]
+
+\definetyping[XML][\c!option=xml]
+
+\protect \endinput

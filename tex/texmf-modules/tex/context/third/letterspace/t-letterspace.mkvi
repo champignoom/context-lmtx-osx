@@ -1,0 +1,167 @@
+%D \module [
+%D         file=t-letterspace,
+%D      version=2013-03-27 22:55:19+0100 or later,
+%D        title=\CONTEXT\ User Module,
+%D     subtitle=Letterspacing commands,
+%D       author=Philipp Gesang,
+%D         date=\currentdate,
+%D    copyright=Philipp Gesang,
+%D      license=2-clause BSD,
+%D ]
+
+%C Read the license conditions in the file \type{COPYING}.
+
+
+
+\writestatus{loading}{ConTeXt User Module / Letterspace}
+
+\startmodule [letterspace]
+
+\startinterface all
+  \setinterfacevariable {letterspace} {letterspace}
+  \setinterfacevariable {factor}      {factor}
+  \setinterfacevariable {spaceskip}   {spaceskip}
+  \setinterfacevariable {suppresskern}{suppresskern}
+\stopinterface
+
+\unprotect
+
+\definenamespace [\v!letterspace] [
+  command=yes,
+  comment=Letterspace module,
+  name=\v!letterspace,
+  \s!parent=\v!letterspace,
+  setup=list,
+  style=no,
+  type=module,
+  version=hg-rev:3+,
+]
+
+%D \macros
+%D    {letterspace}
+%D
+%D \useURL [wschuster] [https://bitbucket.org/wolfs/] [] [Wolfgang Schuster]
+%D \from[wschuster]’s {\em fancybreak} and {\em annotation}
+%D modules served as the primary source for the following code.
+%D You’ll have to thank him if it works and blame me if it doesn’t.
+
+\appendtoks
+  \setuevalue{\currentletterspace        }{\letterspace_cmd[\currentletterspace]}%
+  \setuevalue{\e!start\currentletterspace}{\letterspace_env_start[\currentletterspace]}%
+  \setuevalue{\e!stop \currentletterspace}{\letterspace_env_stop}%
+\to \everydefineletterspace
+
+\definecharacterkerning [letterspace:current]
+
+\unexpanded\def\letterspace_cmd[#id]{%
+  \edef\currentletterspace{#id}%
+  \dosingleempty\letterspace_cmd_parameters%
+}
+
+\def\letterspace_cmd_parameters[#parms]{%
+  \iffirstargument
+    \doifassignmentelse{#parms}{%
+      \setupletterspace[\currentletterspace][#parms]%
+    }\relax
+  \fi
+  \letterspace_cmd_content%
+}
+
+\definefontfeature [letterspace:kerning] [kern=yes]
+\def\letterspace_truevalues{true,yep,yes}
+
+\def\letterspace_cmd_content#obj{%
+  \def\currentobject{#obj}%
+  \dontleavehmode
+  \setupcharacterkerning[letterspace:current][factor=\letterspaceparameter{factor}]%
+  \def\letterspace_setstuff{%
+    \setcharacterkerning[letterspace:current]%
+    \advance \spaceskip  \letterspaceparameter{spaceskip}%
+    \advance \xspaceskip \letterspaceparameter{spaceskip}%
+    \doifinset{\letterspaceparameter{suppresskern}}{\letterspace_truevalues}{%
+      \subtractfontfeaturefromfont{letterspace:kerning}%
+    }%
+  }%
+  \ifhmode\ifnum\lastnodetype=\gluenodecode
+      \unskip{\letterspace_setstuff\ }%
+    \fi
+  \fi%
+  {\letterspace_setstuff\currentobject}%
+  \doifnextspace{%
+    {\letterspace_setstuff\ }%
+    \gobblespacetokens%
+  }%
+}
+
+%D This is a partial ripoff of a couple of macros from
+%D \type{syst-aux.mkiv}.
+%D \useURL [flet] [http://www.tug.org/TUGboat/Articles/tb09-3/tb22bechtolsheim.pdf] [] [\type{futurelet}]
+%D Very helpful for further understanding of what’s exactly going
+%D on: Stephan von Bechtolsheim’s tutorial on \from[flet].
+%D
+%D In short: the trick is checking whether the token following
+%D the command is a space, that is: whether it expands to
+%D \type{\blankspace}. If the test succeeds, a space will be
+%D added that has the correct parameters and all space tokens
+%D following the command will be gobbled. Otherwise -- the next
+%D token being anything else -- \type{\letterspace} will proceed
+%D without changing anything.
+
+\def\doifnextspace#tok{%
+  \def\!!string{#tok}%
+  \futurelet\nexttoken\inspectnexttoken%
+}
+
+\def\inspectnexttoken{%
+  \ifx\nexttoken\blankspace
+    \@EA\!!string
+  \fi%
+}
+
+%D \macros
+%D    {startletterspace,stopletterspace}
+%D
+%D These rely even more shamelessly on \from[wschuster]’s code
+%D from the {\em fancybreak} module.
+%D
+%D The \type{\[start|stop]letterspace} environment is provided
+%D for sake of completeness.
+
+\unexpanded\def\letterspace_env_start[#id]{%
+  \edef\currentletterspace{#id}%
+  \dosingleempty\letterspace_env_start_indeed%
+}
+
+\def\letterspace_env_start_indeed[#parms]{%
+  \iffirstargument
+    \setupletterspace[\currentletterspace][#parms]%
+  \fi
+  \letterspace_cmd_content\bgroup%
+}
+
+\let\letterspace_env_stop\egroup
+
+%D \macros
+%D    {setupletterspace}
+%D
+%D Initial setup.
+%D The factor by which the {\em letter space} (i.e. space between
+%D glyphs) will be increased is specified via the
+%D \type{factor} key.
+%D Additionally, it is wise with respect to legibility to enlarge
+%D the {\em interword space} as well. That is what the
+%D \type{spaceskip} key is for. The {\em spaceskip} should be an
+%D ordinary dimension.
+
+\setupletterspace [
+  \v!factor=.125,
+  \v!spaceskip=.5em,
+  \v!suppresskern=false,
+]
+
+\defineletterspace[\v!letterspace]
+
+\protect \stopmodule \endinput
+
+% vim:ft=context:sw=2:ts=2
+

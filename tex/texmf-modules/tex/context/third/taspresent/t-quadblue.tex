@@ -1,0 +1,163 @@
+%D \module
+%D   [      file=t-quadblue,
+%D        version=2007.07.17, 
+%D          title=\CONTEXT\ Style File,
+%D       subtitle=Presentation Module quadblue,
+%D         author=Thomas A. Schmitz,
+%D           date=\currentdate,
+%D      copyright={Thomas A. Schmitz}]
+%C
+%C Copyright 2007 Thomas A. Schmitz.
+%C This file may be distributed under the GNU General Public License v. 2.0.
+
+%D This file provides the \quotation{quadblue} style for the presentation
+%D module. It is loaded at runtime. 
+
+\writestatus{loading}{module quadblue}
+
+\startmodule[quadblue]
+
+\unprotect
+
+%D The taspresentation module provides a skeleton into which different styles
+%D can be hooked. It uses a number of variables and macros which have to be set
+%D beforehand. Some parts are optional. We begin with the necessary definitions:
+
+%D We define our colors:
+
+\definecolor[outer][r=0,g=0,b=.92]
+\definecolor[current][r=0,g=0,b=.4]
+\definecolor[inner][s=.98]
+
+%D We start colors:
+
+\setupcolors[state=start]
+
+%D These macros are used for placing figures/pictures:
+
+\define\NormalHeight{\textheight}
+\define\NormalWidth{.5\textwidth}
+\define\PictureFrameHeight{\textheight}
+\define\PictureFrameWidth{.5\textwidth}
+
+%D The page layout:
+
+\setuplayout [width=fit,
+	      height=middle,
+              margin=1.5cm,
+              height=fit,
+	      leftmargindistance=.4cm,
+	      rightmargindistance=0cm,
+              header=1.5cm, 
+              footer=0cm, 
+              topspace=1cm, 
+              backspace=2.5cm,
+	      cutspace=1.5cm,
+              location=singlesided]
+
+%D The macro for typesetting the Slidetitle; this is adapted from a sample
+%D document that Brooks Moses published on the wiki:
+
+\definelayer[slidetitle]
+    [width=\paperwidth,
+    height=\paperheight,
+    x=25mm]
+
+\define[1]\Slidetitle{\page\setlayer[slidetitle]%
+     {\framed[frame=off,width=\textwidth,height=2.5cm,offset=0pt,top=\vss,bottom=\vss]{\switchtobodyfont[\Titlesize]\color[outer]{#1}}}}
+
+%D The macro \tex{Maketitle} produces a default title page with the author, the
+%D title of the presentation, and the date. Using it is not mandatory.
+
+\define\Maketitle{%
+\titback
+\null
+\vfill
+\midaligned{\switchtobodyfont[\Titlesize]\color[outer]{\getvariable{taspresent}{title}}}
+\blank[2*line]
+\midaligned{\color[outer]{\getvariable{taspresent}{author}}}
+\blank[3*line]
+\midaligned{\color[outer]{\currentdate}}
+\vfill
+\null}
+
+%D The following parts are optional; if you don't use backgrounds and are
+%D content with CONTEXT's default itemization, you don't have to set these
+%D macros. 
+
+%D We let Metapost calculate the background:
+
+\startuseMPgraphic{left} 
+StartPage ;
+fill Page withcolor \MPcolor{inner} ;
+z1 = ulcorner Page ;
+z5 = llcorner Page ;
+path q ;
+q = z1 -- z5 ;
+t := arclength (q) ;
+u := t/15 ;
+v := (PageNumber/NOfPages) ;
+z4 = (x1+1cm, y1-1cm) ;
+z3 = (x4, y1) ;
+z2 = (x1, y4) ;
+path m[] ;
+m[1] = z1 -- z2 -- z4 -- z3 -- cycle ;
+m[2] = m[1] shifted (0, -2*u) ;
+m[3] = m[1] shifted (0, -4*u) ;
+m[4] = m[1] shifted (0, -6*u) ;
+m[5] = m[1] shifted (0, -8*u) ;
+m[6] = m[1] shifted (0, -10*u) ;
+m[7] = m[1] shifted (0, -12*u) ;
+m[8] = m[1] shifted (0, (-14*u-0.5mm)) ;
+for i=1 upto 8:
+	fill m[i] withcolor\MPcolor{outer} ;
+endfor;
+if PageNumber=1:
+	fill m[1] withcolor \MPcolor{current} ;
+elseif (v>.001) and (v<.167) :
+	fill m[2] withcolor \MPcolor{current} ;	
+elseif (v>.166) and (v<.334):
+	fill m[3] withcolor \MPcolor{current} ;	
+elseif (v>.333) and (v<.501):
+	fill m[4] withcolor \MPcolor{current} ;	
+elseif (v>.5) and (v<.667):
+	fill m[5] withcolor \MPcolor{current} ;	
+elseif (v>.666) and (v<.834):
+	fill m[6] withcolor \MPcolor{current} ;	
+elseif (v>.833) and (v<1):
+	fill m[7] withcolor \MPcolor{current} ;	
+elseif v=1:
+	fill m[8] withcolor \MPcolor{current} ;
+fi ;
+StopPage ;
+
+\stopuseMPgraphic 
+
+%D We define these backgrounds as overlays:
+
+\defineoverlay 
+[lecbackground] 
+[\useMPgraphic{left}] 
+
+%D These are shortcuts to switch backgrounds:
+
+\define\lecback{\setuplayout[header=1.5cm]\setupbackgrounds[page][background={lecbackground,slidetitle}]}
+\define\titback{\setuplayout[header=0cm]\setupbackgrounds[page][background=lecbackground]}
+\define\picback{\setuplayout[header=0cm]\setupbackgrounds[page][background={lecbackground,slidetitle}]}
+\define\noback{\setupbackgrounds[page][background=nobackground]}
+
+%D We use combinations for placing vertical pictures and text side by side, and
+%D we want a distance of 1.1 cm between both.
+
+\setupcombinations[distance=0cm]
+
+%D The symbol for the first level of itemizations. 
+
+\definesymbol[1][$\square$]
+\setupitemize[1][inmargin][color=outer]
+
+\protect
+\stopmodule
+
+\endinput
+

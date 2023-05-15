@@ -1,0 +1,160 @@
+%D \module
+%D   [      file=t-bluestripe,
+%D        version=2007.07.17, 
+%D          title=\CONTEXT\ Style File,
+%D       subtitle=Presentation Module bluestripe,
+%D         author=Thomas A. Schmitz,
+%D           date=\currentdate,
+%D      copyright={Thomas A. Schmitz}]
+%C
+%C Copyright 2007 Thomas A. Schmitz.
+%C This file may be distributed under the GNU General Public License v. 2.0.
+
+%D This file provides the \quotation{bluestripe} style for the presentation
+%D module. It is loaded at runtime. The theme for this style is inspired by the
+%D \quotation{Berkeley} theme of the \LaTeX\ Beamer package.
+
+\writestatus{loading}{module bluestripe}
+
+\startmodule[bluestripe]
+
+\unprotect
+
+%D The taspresentation module provides a skeleton into which different styles
+%D can be hooked. It uses a number of variables and macros which have to be set
+%D beforehand. Some parts are optional. We begin with the necessary definitions:
+
+%D We start colors; textcolor is white:
+
+\setupcolors[state=start]
+
+%D These macros are used for placing figures/pictures:
+
+\define\NormalHeight{\textheight}
+\define\NormalWidth{.476\textwidth}
+\define\PictureFrameHeight{\textheight}
+\define\PictureFrameWidth{.476\textwidth}
+
+%D The page layout:
+
+\setuplayout [width=fit,
+              leftmargin=1.5cm,
+	      rightmargin=0cm,
+              leftmargindistance=.9cm,
+              rightmargindistance=0pt,
+              height=fit, 
+              header=2.5cm, 
+              footer=0cm, 
+              topspace=.4cm, 
+              backspace=2.9cm,
+	      cutspace=2.8cm,
+              bottomspace=0cm,
+              bottom=0pt,
+              location=singlesided]
+
+%D The macro for typesetting the Slidetitle; this is adapted from a sample
+%D document that Brooks Moses published on the wiki:
+
+\definelayer[slidetitle]
+    [width=\paperwidth,
+    height=\paperheight,
+    x=29mm]
+
+\define[1]\Slidetitle{\page\setlayer[slidetitle]%
+     {\framed[frame=off,height=2.5cm,offset=0pt,top=\vss,bottom=\vss]{\switchtobodyfont[\Titlesize]\color[a]{#1}}}}
+
+%D The macro \tex{Maketitle} produces a default title page with the author, the
+%D title of the presentation, and the date. Using it is not mandatory.
+
+\define\Maketitle{%
+\titback
+\null
+\vfill
+\midaligned{\switchtobodyfont[\Titlesize]\color[b]{\getvariable{taspresent}{title}}}
+\blank[2*line]
+\midaligned{\color[b]{\getvariable{taspresent}{author}}}
+\blank[3*line]
+\midaligned{\color[b]{\currentdate}}
+\vfill
+\null}
+
+%D The following parts are optional; if you don't use backgrounds and are
+%D content with CONTEXT's default itemization, you don't have to set these
+%D macros. 
+
+%D We define our colors:
+
+\definecolor [Item]            [s=.9]
+\definecolor [a]               [s=.9]
+\definecolor [c]               [r=.15,g=.15,b=.525]
+\definecolor [b]               [r=.2,g=.2,b=.7]
+\definecolor [d]               [s=.4]
+
+%D We let Metapost calculate the background:
+
+\startuseMPgraphic{stripe}
+StartPage ;
+numeric a, dur, now, before, proa, prob ;
+pair k[], F[] ;
+a = 2.5cm ;
+dur = 1.5cm ;
+k[1] = ulcorner Page shifted (a,0) ;
+k[2] = llcorner Page shifted (a,0) ;
+k[3] = ulcorner Page shifted (0,-a) ;
+k[4] = urcorner Page shifted (0,-a) ;
+k[5] = ulcorner Page shifted (a,-a) ;
+path p[] ;
+p[1] = ulcorner Page -- k[1] -- k[2] -- llcorner Page -- cycle ;
+p[2] = ulcorner Page -- urcorner Page -- k[4] -- k[3] -- cycle ;
+p[3] = ulcorner Page -- k[1] -- k[5] -- k[3] -- cycle ;
+fill Page withcolor \MPcolor{a} ;
+fill p[1] withcolor \MPcolor{b} ;
+fill p[2] withcolor \MPcolor{b} ;
+fill p[3] withcolor \MPcolor{c} ;
+pickup pencircle scaled 5pt ;
+if \realfolio > 1:
+	before = PageNumber - 1 ;
+	now = NOfPages - 1 ;
+	prob = before/now ;
+	p[4] = unitcircle scaled dur rotated 90 shifted (dur + ((a-dur)/2),(a-dur)/2) ;
+	fill p[4] withcolor \MPcolor{a} ;
+	F[0] = center p[4] ;
+	F[1] = point 1 along p[4] ;
+	F[2] = point -prob along p[4] ;
+	F[3] = point -prob/2 along p[4] ;
+	p[5] = F[0] -- F[1] .. F[3] .. F[2] -- cycle ;
+	fill p[5] withcolor \MPcolor{d} ;
+fi ;
+StopPage ;
+\stopuseMPgraphic
+
+%D We define these backgrounds as overlays:
+
+\defineoverlay
+[lecbackground]
+[\useMPgraphic{stripe}]
+
+%D We use combinations for placing vertical pictures and text side by side, and
+%D we want a distance of 1.1 cm between both.
+
+\setupcombinations[distance=1.1cm]
+
+%D These are shortcuts to switch backgrounds:
+
+\define\lecback{\setupbackgrounds[page][background={lecbackground,slidetitle}]}
+\define\titback{\setupbackgrounds[page][background=lecbackground]}
+\define\picback{\setupbackgrounds[page][background={lecbackground,slidetitle}]}
+\define\noback{\setupbackgrounds[page][background=nobackground]}
+
+\setupbackgrounds[page][background=lecbackground] 
+
+%D The symbol for the first level of itemizations. 
+
+\definesymbol[1][\useMPgraphic{ItTriangle}]
+\setupitemize[1][inmargin][color=a]
+
+\protect
+\stopmodule
+
+\endinput
+

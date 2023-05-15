@@ -1,0 +1,95 @@
+% Aquamints symbols for ConTeXt
+% (C) Vit Zyka, 2005-07-21, vit.zyka@seznam.cz, license: GNU GPL
+% Font is made by Galápagos Design Group and is available at 
+%   http://www.galapagosdesign.com
+%
+% Instalations:
+% 1. copy AquaMin_.pfb from Galapagos site to
+%    .../texmf-local/fonts/type1/galapag/
+% 2. copy aquamin.ftm to .../texmf-local/fonts/tfm/galapag/
+% 3. copy galapag.map to .../texmf-local/fonts/map/
+% 4. refresh file database `mktexlsr`
+% 5. test by `texexec --pdf aquamints`
+
+\loadmapfile[galapag.map]
+
+\definefontsynonym [AquaMints] [aquamin]
+
+\def\AquaMinSymbol#1{\getglyph{AquaMints}{\char#1}}
+
+\startsymbolset [aqua]
+
+  \definesymbol [stripsun]           [\AquaMinSymbol{83}]
+  \definesymbol [stripsun-neg]       [\AquaMinSymbol{115}]
+  \definesymbol [risingsun]          [\AquaMinSymbol{84}]
+  \definesymbol [risingsun-neg]      [\AquaMinSymbol{116}]
+  \definesymbol [palm]               [\AquaMinSymbol{40}]
+  \definesymbol [palm-neg]           [\AquaMinSymbol{53}]
+  \definesymbol [2palms]             [\AquaMinSymbol{36}]
+  \definesymbol [2palms-neg]         [\AquaMinSymbol{50}]
+  \definesymbol [3palms]             [\AquaMinSymbol{35}]
+  \definesymbol [3palms-neg]         [\AquaMinSymbol{49}]
+  \definesymbol [fatpalm]            [\AquaMinSymbol{37}]
+  \definesymbol [fatpalm-neg]        [\AquaMinSymbol{51}]
+  \definesymbol [sunisland]          [\AquaMinSymbol{82}]
+  \definesymbol [sunisland-neg]      [\AquaMinSymbol{114}]
+  \definesymbol [turtle]             [\AquaMinSymbol{33}]
+  \definesymbol [turtle-neg]         [\AquaMinSymbol{48}]
+  \definesymbol [dolphin]            [\AquaMinSymbol{68}]
+  \definesymbol [dolphin-neg]        [\AquaMinSymbol{100}]
+  \definesymbol [shark]              [\AquaMinSymbol{67}]
+  \definesymbol [shark-neg]          [\AquaMinSymbol{99}]
+  \definesymbol [devilfish]          [\AquaMinSymbol{65}]
+  \definesymbol [devilfish-neg]      [\AquaMinSymbol{97}]
+  \definesymbol [3fish]              [\AquaMinSymbol{66}]
+  \definesymbol [3fish-neg]          [\AquaMinSymbol{98}]
+  \definesymbol [starfish]           [\AquaMinSymbol{41}]
+  \definesymbol [starfish-neg]       [\AquaMinSymbol{54}]
+  \definesymbol [sunstarfish]        [\AquaMinSymbol{64}]
+  %\definesymbol [sunstarfish-neg]    [\AquaMinSymbol{}]
+  \definesymbol [seaurchin]          [\AquaMinSymbol{76}]
+  \definesymbol [seaurchin-neg]      [\AquaMinSymbol{108}]
+  \definesymbol [medusa]             [\AquaMinSymbol{70}]
+  \definesymbol [medusa-neg]         [\AquaMinSymbol{102}]
+  \definesymbol [cuttlefish]         [\AquaMinSymbol{74}]
+  \definesymbol [cuttlefish-neg]     [\AquaMinSymbol{106}]
+  \definesymbol [architeuthis]       [\AquaMinSymbol{71}]
+  \definesymbol [architeuthis-neg]   [\AquaMinSymbol{103}]
+  \definesymbol [langouste]          [\AquaMinSymbol{72}]
+  \definesymbol [langouste-neg]      [\AquaMinSymbol{104}]
+  \definesymbol [crab]               [\AquaMinSymbol{73}]
+  \definesymbol [crab-neg]           [\AquaMinSymbol{105}]
+  \definesymbol [shellfish1]         [\AquaMinSymbol{77}]
+  \definesymbol [shellfish1-neg]     [\AquaMinSymbol{109}]
+  \definesymbol [shellfish2]         [\AquaMinSymbol{78}]
+  \definesymbol [shellfish2-neg]     [\AquaMinSymbol{110}]
+  \definesymbol [shellfish3]         [\AquaMinSymbol{79}]
+  \definesymbol [shellfish3-neg]     [\AquaMinSymbol{111}]
+  \definesymbol [seaweed]            [\AquaMinSymbol{80}]
+  \definesymbol [seaweed-neg]        [\AquaMinSymbol{112}]
+  \definesymbol [sadpalm]            [\AquaMinSymbol{81}]
+  \definesymbol [sadpalm-neg]        [\AquaMinSymbol{113}]
+  \definesymbol [flamingo]           [\AquaMinSymbol{38}]
+  \definesymbol [flamingo-neg]       [\AquaMinSymbol{52}]
+  \definesymbol [flyflamingo]        [\AquaMinSymbol{85}]
+  \definesymbol [flyflamingo-neg]    [\AquaMinSymbol{117}]
+  \definesymbol [fishskeleton1]      [\AquaMinSymbol{43}]
+  \definesymbol [fishskeleton1-neg]  [\AquaMinSymbol{56}]
+  \definesymbol [fishskeleton2]      [\AquaMinSymbol{90}]
+  \definesymbol [fishskeleton2-neg]  [\AquaMinSymbol{122}]
+  \definesymbol [mask]               [\AquaMinSymbol{44}]
+  \definesymbol [mask-neg]           [\AquaMinSymbol{57}]
+  \definesymbol [sadmask]            [\AquaMinSymbol{46}]
+  \definesymbol [sadmask-neg]        [\AquaMinSymbol{58}]
+  \definesymbol [yacht]              [\AquaMinSymbol{87}]
+  \definesymbol [yacht-neg]          [\AquaMinSymbol{119}]
+  \definesymbol [compassrose]        [\AquaMinSymbol{88}]
+  \definesymbol [compassrose-neg]    [\AquaMinSymbol{120}]
+  \definesymbol [fin]                [\AquaMinSymbol{86}]
+  \definesymbol [fin-neg]            [\AquaMinSymbol{118}]
+  \definesymbol [chocice]            [\AquaMinSymbol{89}]
+  \definesymbol [chocice-neg]        [\AquaMinSymbol{121}]
+
+\stopsymbolset
+
+% end of t-symb-aquamints.tex

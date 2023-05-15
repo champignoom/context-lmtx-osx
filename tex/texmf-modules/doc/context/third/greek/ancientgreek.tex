@@ -1,0 +1,570 @@
+\mainlanguage[en]
+
+% \enableregime[utf]
+
+\usetypescript[palatino]
+\setupbodyfont[palatino,11pt]
+
+% \usetypescriptfile[type-palatino]
+% \usetypescript[Palatino][texnansi]
+% \setupbodyfont[MyPalatino,11pt]
+
+% \setupinterlinespace[line=14pt]
+
+% \usetypescriptfile[type-freeserif]
+
+% \usetypescript[FreeSerif]
+
+% \setupbodyfont[MyFreeSerif,11pt]
+
+\usemodule[ancientgreek][font=Kadmos,scale=1.2,altfont=GreekGentiumAlt,scale=1.2]% GreekAsteria,scale=1.05,altfont=Kadmos]
+
+\setupindenting[medium,yes]
+
+\setupcolors[state=start]
+
+\setupurl[style=normal]
+
+\setupinteraction[state=start,color=blue,style=normal]
+
+\usemodule[int-load]
+\loadsetups[cont-en.xml]
+\loadsetups[t-ancientgreek.xml]
+
+\useURL[adobe][{http://www.adobe.com/products/reader/}][][Adobe]
+
+\useURL[apa][{http://socrates.berkeley.edu/~pinax/greekkeys/index.html}][][GreekKeys
+Page]
+
+\useURL[arno][{http://www.adobe.com/type/browser/landing/arno/arno.html}][][Adobe]
+
+\useURL[ellak][{http://www.ellak.gr/index.php?option=com_content\&task=view\&id=6493}][][ellak website]
+
+\useURL[elpenor][{http://www.ellopos.net/elpenor/greek-texts/greek-fonts.asp}][][elpenor
+website]
+
+\useURL[freeserif][{http://savannah.nongnu.org/download/freefont/}][][savannah
+website]
+
+\useURL[garmprem][{http://www.adobe.com/type/browser/landing/garamond/garamond.html}][][Adobe]
+
+\useURL[hartmann][{http://www.lucius-hartmann.ch/diverse/greekfonts/\#unicode}][][Lucius
+  Hartmann's homepage]
+
+\useURL[kerkis][{http://iris.math.aegean.gr/kerkis}][][University of the Aegean]
+
+\useURL[kryukov][{http://www.thessalonica.org.ru/en/oldstandard.html}][][Alexey Kryukov]
+
+\useURL[libertine][{http://linuxlibertine.sourceforge.net/Libertine-EN.html}][][sourceforge]
+
+\useURL[monotype][{http://www.monotypefonts.com/Library/Non-Latin-Library.asp}][][Monotype
+  Corporation]
+
+\useURL[gentium][{http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=Gentium_download}][][gentium
+site]
+
+\useURL[gfs][{http://www.greekfontsociety.org/typefaces.html}][][Greek
+  Font Society]
+
+% \useURL[gdr][{http://www.ucl.ac.uk/GrandLat/greekfonts/frameFonts.html}][][University
+%   College London]
+
+% \useURL[gandh][{http://depts.washington.edu/ebmp/software.php}][][Early Buddhist Manuscript website]
+
+% \useURL[labo][{http://www.geocities.com/SoHo/workshop/3799/download.htm}][][Carmelo Lupini's Laboratorio Pluri\-disciplinare]
+
+% \useURL[myway][{http://dl.contextgarden.net/myway/GreekInContext.pdf}][][myway]
+
+% \useURL[aisa][{http://www.oeaw.ac.at/kal/multikey}][][multikey website]
+
+% \useURL[aristarcoj][{http://www.russellcottrell.com/greek/fonts.htm}][][Russell
+%   Cottrell's site]
+
+% \useURL[gainsford][{http://gainsford.tripod.com/archive/freeserif.zip}][][http://gainsford.tripod.com/archive/
+%   freeserif.zip]
+
+% \useURL[hancock][{http://www.users.dircon.co.uk/~hancock/vudown.htm}][][Ralph
+% Hancock's site]
+
+% \useURL[semata][{http://semata.delendis.com/}][][semata website]
+
+% \useURL[cardo][{http://scholarsfonts.net/cardofnt.html}][][David J. Perry's
+% website]
+
+% \useURL[adobe][{http://www.adobe.com/products/acrobat/readstep2.html}][][adobe
+% website]
+
+% \useURL[rusten][{http://ccat.sas.upenn.edu/bmcr/1998/98.1.11.html}][][Jeffrey
+% Rusten's review]
+
+\useexternalfigure[theo][theo.jpg][width=.75\textwidth]
+
+\definetype[typeTEX][option=tex,style=type]
+
+\define[1]\ShowGreek%
+{\bgroup\color[red]{\localgreek{#1}}\egroup}
+\define[1]\ShowAltGreek%
+{\bgroup\color[red]{\localaltgreek{#1}}\egroup}
+
+% \enablemode[demo]
+
+\starttext
+
+\title{Greek in Proper \CONTEXT}
+
+\section{For the Impatient}
+
+\startitemize[n]
+
+\item Unzip the {\tt zip} archive in one of your {\tt texmf} trees (the
+  canonical places are {\tt texmf-local} or {\tt \$HOME/texmf}). 
+
+\item In your sourcefile, use the module: \typeTEX+\usemodule[ancientgreek]+
+
+\item Shorter Greek passages are included in the \typeTEX+\localgreek{}+ command,
+  longer passages in the \typeTEX+\startgreek+ \textellipsis\ \typeTEX+\stopgreek+
+  environment. 
+  
+\stopitemize
+
+\section{Some Preliminary Remarks}
+
+Until a few years ago, typesetting Greek with \TeX\ was a nontrivial
+exercise because of the limitations of \TeX\ and of computer fonts. With
+the advent of new font technologies (Truetype and OpenType fonts) and of
+new \TeX\ engines (\XETEX\ and lua\TeX), this situation has changed. If you
+are using these newer engines and are typesetting in a font with support
+for polytonic Greek, your Greek text will appear without any further
+steps. 
+
+Hence, this Greek module is strictly necessary only if you want to typeset
+Greek in \CONTEXT\ {\tt mkii}, i.e. good old pdf\TeX; for \XETEX\ and
+lua\TeX, you can do without it. However, using the Greek module will offer
+a number of advantages even with these new engines:
+
+\startitemize[2]
+
+\item You can change the font for Greek passages with one simple setup
+  command.
+
+\item You can easily mix a Latin font without support for Greek and a Greek
+  font. 
+
+\item The module allows you to scale the Greek font so that it provides a
+  pleasant optical match with your Latin script.
+
+\item The commands provided by the module also switch the language to
+  \quotation{Greek} and provide proper hyphenation.
+
+\item The module provides a few additional characters which will be handy
+  especially for scholarly texts.
+
+\stopitemize
+
+At the time of this writing, \CONTEXT\ can use three \TEX\ engines:
+traditional pdf\TeX, \XETEX, and lua\TeX. In theory, there should not be
+any difference for the user; the same input file should give (nearly)
+identical output, whether compiled with traditional {\tt texexec} command
+(for pdf\TeX), the {\tt --xtx} switch (for \XETEX), or the {\tt context}
+command (for lua\TeX). Utf-8 input is now considered the rule; older
+solutions are merely treated in an appendix. As is already the case for
+other parts of \CONTEXT, future development for the Greek module will be
+restricted to the lua\TEX\ engine and {\tt mkiv}; support for the
+traditional pdf\TEX\ engine ({\tt mkii}) will be frozen.
+
+\section{Installation}
+
+Installation of the module is straightforward: unpack the {\tt zip} archive
+in one of your {\tt texmf}|-|trees.  If you have added these files to a
+{\tt texmf}|-|tree that uses {\tt ls-R} files, you will need to rebuild
+this database by running \type{texhash} (if you don't know what this means,
+run it anyway, it won't hurt); if you're using mkiv, you need to run {\tt
+  luatools --generate}. After this, everything should be in its proper
+place.\footnote{For {\tt mkii} only: If your \CONTEXT|-|installation has
+  \tex{autoloadmapfilestrue} set in \type{cont-sys.tex}, the module will
+  take care of loading the appropriate mapfiles. If you have not enabled
+  this setting or if you want to make the fonts available to other
+  \TeX|-|applications, add the mapfile to the configuration of your
+  postscript- and pdf|-|drivers: {\tt sudo updmap-sys --enable Map
+    tasgreek.map}.}
+
+\section{Usage}
+
+Call the module in the preamble of your document and set up the necessary
+fonts: 
+
+\setup{ancientgreek}
+
+The module lets you define a main Greek font with the {\tt font} parameter
+which will be scaled at the {\tt scale} parameter and an alternative Greek
+font with {\tt altfont} parameter which will be scaled at the {\tt
+  altscale} parameter.
+
+\subsection{The Fonts}
+
+The module offers support for a variety of Greek fonts. For the casual
+user, we can distinguish between three categories:
+
+\page
+
+\midaligned{Fonts that come with the module}
+
+\starttabulate[|lw(.25\textwidth)|p|]
+
+  \NC GreekCanonica \NC Free font from the \from[ellak]. \NC \NR
+
+  \NC GreekLibertine \NC LinuxLibertine is a large OpenType font project
+  whose main developer is Philipp H. Poll, hosted on \from[libertine]. \NC \NR
+
+  \NC GreekOldStandard \NC OpenType font developed by \from[kryukov]; comes
+  in upright and italic. \NC \NR
+
+  \NC Ibycus \NC An OpenType version of the Ibycus font that was developed
+  by Pierre McKay for the Ibycus|-|package for \LaTeX. No italics or
+  bold. \NC \NR
+
+\stoptabulate
+
+\midaligned{Fonts that are freely available}
+
+The following fonts are not included, either because of licensing issues or
+because including them would have made the package too big. However, all
+the support files are in place; all you need to do in order to use them is
+download the appropriate files at the location indicated below, extract the
+font files (in {\tt .ttf} or {\tt .otf} format), move them to the
+appropriate directory in your installation of the Greek module ({\tt
+  .../fonts/truetype/greek/...} or {\tt .../fonts/opentype/greek/...}), and
+run {\tt texhash} (for {\tt mkii}) or {\tt luatools --generate} (for {\tt
+  mkiv}). 
+
+\starttabulate[|lw(.25\textwidth)|p|]
+
+  \NC Alkaios \NC Can be downloaded from \from[hartmann] (there is no
+  license information). \NC \NR
+
+  \NC GreekAsteria \NC Can be downloaded at the \from[elpenor]. \NC \NR
+
+  \NC GreekKerkis \NC Can be downloaded at the \from[kerkis]. \NC \NR
+
+  \NC GreekMinion \NC The Minion font family comes with the free Adobe
+  Reader software (downloadable at \from[adobe]). \NC \NR
+
+  \NC FreeSerif \NC OpenType developed for Debian Linux by various
+  contributors; can be downloaded from the \from[freeserif]. Complete
+  font family. \NC \NR
+
+  \NC GFS fonts \NC All the fonts beginning with \quotation{GFS} are
+  relatively recent developments, available at the \from[gfs]. If you use a
+  newer version of \TeX Live, many of them will already be present in your
+  installation under {\tt .../texmf-dist/fonts/opentype/public/}; in this
+  case, you should be able to just use them. If you're running the
+  \CONTEXT\ minimals, you will have to download the font files. \NC \NR
+
+  \NC Gentium \NC The Gentium and GentiumAlt fonts are included both in the
+  minimals and in \TeX Live 2009, so if you use one of these distributions,
+  they should just work. If you don't have them, they can be downloaded at
+  the \from[gentium]. \NC \NR
+
+\stoptabulate
+
+\midaligned{Commercial Fonts}
+
+The following fonts are commercial. The module offers all necessary support
+for these fonts, but {\bf not the fonts themselves}. If you want to use
+them, you will have to contact the license holders, buy an appropriate
+license, and then copy the font files to your installation of the Greek
+module. 
+
+\starttabulate[|lw(.25\textwidth)|p|]
+
+  \NC Bosporos \NC Comes with the GreekKeys keyboard macros (for Mac OS X
+  and Windows), which can be purchased at the \from[apa]. \NC \NR
+
+  \NC GreekArno \NC The ArnoPro font family, available at \from[arno]. \NC
+  \NR 
+
+  \NC GreekGaramondPrem \NC The Garamond Premier Pro font family, also
+  available at \from[garmprem]. \NC \NR
+
+  \NC GreekPorson \NC This is the original Porsonian font such as it has
+  been used by many publishers (e.g., Oxford University Press) for a long
+  time. It can be purchased from the \from[monotype]. \NC \NR
+
+  \NC Kadmos \NC  Comes with the GreekKeys keyboard macros (for Mac OS X
+  and Windows), which can be purchased at the \from[apa]. \NC \NR
+
+  \NC NewHellenic \NC The original NewHellenic font such as it has been
+  used by many publishers (e.g., Cambridge University Press) for a long
+  time. It can be purchased from the \from[monotype]. \NC \NR
+
+\stoptabulate
+
+For the fonts Alkaios, Bosporos, GreekGentium, GreekGentiumAlt,
+GreekPorson, Ibycus, Kadmos, and NewHellenic, an alternative
+\quotation{lunate} (rounded) shape of the letter sigma
+(\ShowGreek{\getglyph{name:GenAR102}{\char"0063}}, without distinction
+between final and intermediate sigma) is available. Without making any
+changes to your input, you can choose this form by adding \quotation{lun}
+directly to the name of the font, e.g.,
+\typeTEX+[font=GreekGentiumlun,scale=1.2]+.
+
+Only a few fonts provide Roman, Italic, Bold, and BoldItalic variants; if
+you need them, you will have to experiment whether the font switches
+\typeTEX+\bf+, \typeTEX+\bi+ or \typeTEX+\em+ work. If the font doesn't
+offer these variants, they are simply mapped to the normal
+\quotation{Roman} form, so font switches will simply not give any visual
+effect.\footnote{At a very early date, typesetters distinguished between
+  an upright (\quotation{Roman}) and slanted (\quotation{Italic}) form of
+  Latin letters; both forms were mixed for graphical effect and to add
+  emphasis to parts of the text; whence our use of \quotation{Italics.}
+  This convention did not exist for Greek typefaces; hence, Greek
+  \quotation{italics} really is a spurious notion.}
+
+\subsection{Scaling}
+
+The module allows scaling of the Greek font. As you will probably know,
+different fonts may look very different even at the same size: Lucida
+Bright, e.g., at 10~pt is almost as big as Computer Modern at 12~pt. If you
+want to mix fonts, you cannot simply rely on the design size; you have
+adapt the different sizes by tweaking the appearance of the fonts. Since
+our Greek fonts will be mixed with Roman text, the module provides the
+ability to adapt the size of the Greek font: \type{[scale=1]} would
+correspond to the design size of the font; \type{[scale=0.95]} would shrink
+the font to 95\,\%; \type{[scale=1.05]} magnify to 105\,\%. Just play
+around until the relation between both fonts looks right.
+
+Since this scaling is done in relation to the main bodyfont of your
+document, \CONTEXT\ needs a proper bodyfont environment to calculate
+it. This environment is set up automatically for \quotation{normal} sizes
+(9pt, 10pt, 11pt, 12pt). If you want to use a bodyfont at an unusual size
+(say, at 19.5pt), you need to put these lines into the preamble of your
+document {\bf before} defining the bodyfont:
+
+\startTEX
+\starttypescript [serif] [default] [size]
+  \definebodyfont [19.5pt] [rm] [default]
+\stoptypescript
+\definebodyfontenvironment [19.5pt]
+\stopTEX
+
+Moreover, if you use an unusual bodyfont size and want Greek text in your
+footnotes, you will need to set up their size explicitly (and add this size
+to the \typeTEX+\definebodyfont+ typescript just described):
+
+\startTEX
+\setupfootnotes[bodyfont=14pt]
+\stopTEX
+
+\subsection{Greek Text}
+
+After setting these values in the preamble, switching to Greek in the body
+of your documents is easy: use the command \typeTEX+\localgreek{}+ for
+shorter passages and the environment \typeTEX+\startgreek+ \textellipsis\
+\typeTEX+\stopgreek+ for longer stretches (the corresponding commands for
+the alternate Greek font are \typeTEX+\localaltgreek{}+ for shorter
+passages and the environment \typeTEX+\startaltgreek+ \textellipsis\
+\typeTEX+\stopaltgreek+ for longer stretches).
+
+If you are using {\tt mkii}, you will see that certain environments
+(esp. tables and tabulate) cannot be used within the \typeTEX+\startgreek
+\stopgreek+ pair.\footnote{Technical explanation: in order for ASCII input
+  to work, the Greek environment has to change some catcodes; this confuses
+\TeX's table mechanisms.} In that case, you will have to wrap single table
+cells into \typeTEX+\localgreek{}+ commands instead of having the entire
+table in a  \typeTEX+\startgreek \stopgreek+ environment. This should not
+affect {\tt mkiv} and \XETEX\ users.
+
+Moreover, the module provides a couple of convenient commands to typeset
+symbols that are needed for writing ancient Greek or editing papyrological
+material:\footnote{Not all symbols are present in all fonts. In {\tt mkiv},
+  there is a fallback mechanism which will try to take these symbols from
+  fonts that do have them; this will work in most (but not all) cases. In
+  {\tt mkii} and \XETEX , you will have to experiment with different
+  fonts.}
+
+\starttabulate[|lw(.4\textwidth)|lw(.1\textwidth)|lw(.4\textwidth)|lw(.1\textwidth)|]
+\NC \typeTEX{\digamma} \NC \ShowGreek{\digamma} \NC \typeTEX{\sampi} \NC
+\ShowGreek{\sampi}\NC \NR
+
+\NC \typeTEX{\stigma} \NC \ShowGreek{\stigma} \NC \typeTEX{\koppa}  \NC
+\ShowGreek{\koppa} \NC \NR 
+
+\NC \typeTEX{\lunars}  \NC \ShowGreek{\lunars} \NC \typeTEX{\lunarS} \NC
+\ShowGreek{\lunarS} \NC \NR
+
+\NC \typeTEX{\textbraceleft} \NC \ShowGreek{\textbraceleft} \NC
+\typeTEX{\textbraceright} \NC \ShowGreek{\textbraceright} \NC \NR
+
+\NC \typeTEX{\halfbracketleft} \NC \ShowGreek{\halfbracketleft} \NC
+\typeTEX{\halfbracketright} \NC \ShowGreek{\halfbracketright} \NC \NR
+
+\NC \typeTEX{\doublebracketleft} \NC \ShowGreek{\doublebracketleft} \NC
+\typeTEX{\doublebracketright} \NC \ShowGreek{\doublebracketright} \NC \NR
+
+\NC \typeTEX{\anglebracketleft} \NC \ShowGreek{\anglebracketleft} \NC
+\typeTEX{\anglebracketright} \NC \ShowGreek{\anglebracketright} \NC \NR
+
+\NC \typeTEX{\crux} \NC \ShowGreek{\crux} \NC \NC \NC \NR
+\stoptabulate
+
+\section{Release History}
+
+\setupindenting[no]
+
+{\bf 04/2013: ver 1.3}
+
+Split type-agr.tex into mkii and mkiv files.
+
+\blank[small]
+
+{\bf 02/2010: ver 1.2}
+
+Fallback fonts for missing characters. Support for \XETEX\ and {\tt mkiv}
+improved. 
+
+\blank[small]
+
+{\bf 08/2008: ver 1.1}
+
+Support for \XeTeX\ and mkiv added. New mechanism for active characters. 
+
+\blank[small]
+
+{\bf 01/2007: ver 1.0}
+
+New version of Aristarcoj font; added two new GFS fonts. The module has been
+pretty stable for a while, so I decided to call it ver 1.0\textellipsis
+
+\blank[small]
+
+{\bf 11/2006: ver 0.99}
+
+Added some new GFS fonts; removed fonts that have become unavailable.
+
+General cleanup of fonts and encodings.
+
+\blank[small]
+
+{\bf 04/2006: ver 0.98}
+
+Added the new GFSNeohellenic font.
+
+Compatibility module {\tt t-oldgreek} now als uses the new {\tt
+  moduleparameter} mechanism.
+
+Cleaned up directory structure.
+
+\blank[small]
+
+{\bf 04/2006: ver 0.97}
+
+Module now uses the new {\tt moduleparameter} mechanism. 
+
+Renamed from {\tt t-greek} to {\tt t-ancientgreek} to avoid clashes in
+namespace. 
+
+Hyphenation of polytonic Greek now works properly.
+
+\blank[small]
+
+{\bf 02/2006: ver 0.95}
+
+Supports more Greek fonts.
+
+Greek are now defined as typefaces; normal font switches such as \type{\em}
+and \type{\bf} work within Greek text.
+
+\blank[small]
+
+{\bf 05/2005: ver 0.9}
+
+Initial release.
+
+\section{Appendix: {\tt ASCII} input}
+
+In the time before Unicode input, Greek was usually input via a
+transliteration scheme developed for \LaTeX. This was available for
+\CONTEXT\ mkii; it will not work with either mkiv or the \XETEX\
+engine. Since this type of input is considered obsolete, I will just give a
+very brief description of the correspondence between {\tt ASCII} input and
+the typeset Greek letters:
+
+\blank[big]
+
+\setupTABLE[frame=off]
+
+\setupTABLE[c][each][width=.0416\textwidth,align=middle]
+
+\bTABLE
+
+\bTR\bTD A\eTD\bTD B\eTD\bTD G\eTD\bTD D\eTD\bTD E\eTD\bTD Z\eTD\bTD H\eTD\bTD J\eTD\bTD I\eTD\bTD K\eTD\bTD L\eTD\bTD M\eTD\bTD N\eTD\bTD X\eTD\bTD O\eTD\bTD P\eTD\bTD R\eTD\bTD S\eTD\bTD T\eTD\bTD U\eTD\bTD F\eTD\bTD Q\eTD\bTD Y\eTD\bTD W
+\eTD\eTR
+
+\bTR\bTD\localgreek{Α}\eTD\bTD\localgreek{Β}\eTD\bTD\localgreek{Γ}\eTD\bTD\localgreek{Δ}\eTD\bTD\localgreek{Ε}\eTD\bTD\localgreek{Ζ}\eTD\bTD\localgreek{Η}\eTD\bTD\localgreek{Θ}\eTD\bTD\localgreek{Ι}\eTD\bTD\localgreek{Κ}\eTD\bTD\localgreek{Λ}\eTD\bTD\localgreek{Μ}\eTD\bTD\localgreek{Ν}\eTD\bTD\localgreek{Ξ}\eTD\bTD\localgreek{Ο}\eTD\bTD\localgreek{Π}\eTD\bTD\localgreek{Ρ}\eTD\bTD\localgreek{Σ}\eTD\bTD\localgreek{Τ}\eTD\bTD\localgreek{Υ}\eTD\bTD\localgreek{Φ}\eTD\bTD\localgreek{Χ}\eTD\bTD\localgreek{Ψ}\eTD\bTD\localgreek{Ω}\eTD\eTR
+
+\bTR\bTD a\eTD\bTD b\eTD\bTD g\eTD\bTD d\eTD\bTD e\eTD\bTD z\eTD\bTD h\eTD\bTD j\eTD\bTD i\eTD\bTD k\eTD\bTD l\eTD\bTD m\eTD\bTD n\eTD\bTD x\eTD\bTD o\eTD\bTD p\eTD\bTD r\eTD\bTD s\eTD\bTD t\eTD\bTD u\eTD\bTD f\eTD\bTD q\eTD\bTD y\eTD\bTD w\eTD\eTR
+
+\bTR\bTD\localgreek{α}\eTD\bTD\localgreek{β}\eTD\bTD\localgreek{γ}\eTD\bTD\localgreek{δ}\eTD\bTD\localgreek{ε}\eTD\bTD\localgreek{ζ}\eTD\bTD\localgreek{η}\eTD\bTD\localgreek{θ}\eTD\bTD\localgreek{ι}\eTD\bTD\localgreek{κ}\eTD\bTD\localgreek{λ}\eTD\bTD\localgreek{μ}\eTD\bTD\localgreek{ν}\eTD\bTD\localgreek{ξ}\eTD\bTD\localgreek{ο}\eTD\bTD\localgreek{π}\eTD\bTD\localgreek{ρ}\eTD\bTD\localgreek{σ}\eTD\bTD\localgreek{τ}\eTD\bTD\localgreek{υ}\eTD\bTD\localgreek{φ}\eTD\bTD\localgreek{χ}\eTD\bTD\localgreek{ψ}\eTD\bTD\localgreek{ω}\eTD\eTR
+
+\eTABLE
+
+Accents, breathings, and iota subscript are written with {\tt \quotesingle\
+  \textgrave\ \textasciitilde\ < > \textbar}; these can be combined as
+necessary. I provide just a few examples:
+
+\blank[big]
+
+{\tt >e} = \localgreek{ἐ}
+
+{\tt \quotedbl \textasciitilde u} = \localgreek{ῧ}
+
+{\tt <\textasciitilde w\textbar} = \localgreek{ᾧ}
+
+\blank[big]
+
+The original Greek encoding for \LaTeX\ took care of the letter sigma: when
+it occurred at the end of a word, it would automatically be transformed
+into a final sigma \localgreek{c}. After some hesitation, I decided not to
+follow this approach: there are too many cases where users might want a
+\quotation{normal} sigma even in front of a space or a punctuation mark. In
+order to obtain a final sigma, type \quotation{c.}
+
+\blank[big]
+
+ASCII input was common and useful in {\tt mkii}; in {\tt mkiv}, which
+expects Unicode input, it doesn't serve any purpose. Nevertheless, it can
+be convenient if you want just a few words in Greek, to use this convention
+(not all operating systems and all editors offer intuitive and ready
+methods of inputting Unicode Greek). For this case (and this case alone),
+the module offers a convenient shortcut: even in {\tt mkiv}, you can use
+the command  \typeTEX+\asciigreek{}+. It will convert your ASCII input on
+the fly into Unicode and process it with {\tt mkiv}. This is a hack and is
+not meant for longer stretches of text. In particular, this conversion will
+not be able to process \TeX\ commands within the  \typeTEX+\asciigreek{}+
+group, so use at your own risk. 
+
+\stoptext
+
+Since some of these symbols (especially the papyrological brackets) are
+very rare in Greek fonts, I have decided to use glyphs from Latin Modern
+and mathematical fonts that should be available on every \TeX\ system.
+
+In order to get an apostrophe, type {\tt \quotesingle \quotesingle}. For
+opening and closing quotes, type {\tt ((} and {\tt ))}. To obtain the
+sublinear dot in papyrological or epigraphical editions, type an
+exclamation mark after the character: {\tt >a!n!\quotesingle h!r!} becomes
+\localgreek{>a!n!'h!r!}.
+
+Unicode input is intuitive: if you have a proper keyboard driver for input
+of Unicode Greek, just type away, but remember to include Greek passages
+between \type{\localgreek {...}} or \type{\startgreek \stopgreek}. Of
+course, all the named glyphs are available for Unicode|-|input as well.
+
+Please be advised that not all fonts contain all symbols or
+characters. Archaic number symbols, the sublinear dot, or characters that
+do not occur in normal Attic morphology (like \localgreek{>~e}) are not
+included in some of the fonts, so if you need those, you will have to
+experiment which font provides them (Ibycus, KadmosNew and GreekCardo are
+pretty complete).
+
+\stoptext

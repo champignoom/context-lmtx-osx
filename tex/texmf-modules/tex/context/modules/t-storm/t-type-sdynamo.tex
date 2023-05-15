@@ -1,0 +1,129 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\doifdefinedelse{stormmapdefined}
+  {}
+  {\let\stormmapdefined\empty \loadmapfile[storm]}
+%\starttypescript [map] [DynamoRE] [st1,st2]
+%  \loadmapfile[storm]
+%\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [sans] [dynamoRE] [name]
+  \setups [font:fallback:sans]
+  \definefontsynonym [Sans]		[DynamoRE-Roman]
+  \definefontsynonym [SansBold]		[DynamoRE-Bold]
+  \definefontsynonym [SansItalic]	[DynamoRE-Italic]
+  \definefontsynonym [SansBoldItalic]	[DynamoRE-Bold-Italic]
+
+  \definefontsynonym [SansExt]		[DynamoRE-Roman-Ext]
+  \definefontsynonym [SansBoldExt]	[DynamoRE-Bold-Ext]
+  \definefontsynonym [SansItalicExt]	[DynamoRE-Italic-Ext]
+  \definefontsynonym [SansBoldItalicExt][DynamoRE-Bold-Italic-Ext]
+  \definefontsynonym [SansSlantedExt]	[DynamoRE-Italic-Ext]
+  \definefontsynonym [SansBoldSlantedExt][DynamoRE-Bold-Italic-Ext]
+
+  \definefontsynonym [SansRegular]	[Sans]
+  \definefontsynonym [SansRegularExt]	[SansExt]
+
+  \definefontvariant [Sans] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [sans] [dynamoRE] [st1]
+  \definefontsynonym [DynamoRE-Roman]           [sdgr8te]  [encoding=st1]
+  \definefontsynonym [DynamoRE-Bold]            [sdgb8te]  [encoding=st1]
+  \definefontsynonym [DynamoRE-Italic]          [sdgri8te] [encoding=st1]
+  \definefontsynonym [DynamoRE-Bold-Italic]     [sdgbi8te] [encoding=st1]
+  \definefontsynonym [DynamoRE-Roman-Ext]       [sdgr6se]  [encoding=st3]
+  \definefontsynonym [DynamoRE-Bold-Ext]        [sdgb6se]  [encoding=st3]
+  \definefontsynonym [DynamoRE-Italic-Ext]      [sdgri6se] [encoding=st3]
+  \definefontsynonym [DynamoRE-Bold-Italic-Ext] [sdgbi6se] [encoding=st3]
+\stoptypescript
+
+\starttypescript [sans] [dynamoRE] [st2]
+  \definefontsynonym [DynamoRE-Roman]           [sdgr8ze]  [encoding=st2]
+  \definefontsynonym [DynamoRE-Bold]            [sdgb8ze]  [encoding=st2]
+  \definefontsynonym [DynamoRE-Italic]          [sdgri8ze] [encoding=st2]
+  \definefontsynonym [DynamoRE-Bold-Italic]     [sdgbi8ze] [encoding=st2]
+  \definefontsynonym [DynamoRE-Roman-Ext]       [sdgr6se]  [encoding=st3]
+  \definefontsynonym [DynamoRE-Bold-Ext]        [sdgb6se]  [encoding=st3]
+  \definefontsynonym [DynamoRE-Italic-Ext]      [sdgri6se] [encoding=st3]
+  \definefontsynonym [DynamoRE-Bold-Italic-Ext] [sdgbi6se] [encoding=st3]
+\stoptypescript
+
+%\usetypescriptfile[type-buy] % realy needed?
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [dynamoRE] [name]
+  \definefontsynonym [MathRoman]        [DynamoRE-Math-Letters]
+  \definefontsynonym [MathItalic]       [DynamoRE-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [DynamoRE-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [dynamoRE] [st1]
+  \definefontsynonym [DynamoRE-Math-Letters]        [sdgr8te]  [encoding=st1]
+  \definefontsynonym [DynamoRE-Math-Letters-Italic] [sdgri8te] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [DynamoRE-Math-Storm]          [sdgr6se]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [dynamoRE] [st2]
+  \definefontsynonym [DynamoRE-Math-Letters]        [sdgr8ze]  [encoding=st2]
+  \definefontsynonym [DynamoRE-Math-Letters-Italic] [sdgri8ze] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [DynamoRE-Math-Storm]          [sdgr6se]  [encoding=st3]
+\stoptypescript
+
+% bold
+\starttypescript [boldmath] [dynamoRE] [name]
+  \definefontsynonym [MathRoman]        [DynamoRE-MathBold-Letters]
+  \definefontsynonym [MathItalic]       [DynamoRE-MathBold-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMathBold-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [DynamoRE-MathBold-Storm]
+\stoptypescript
+
+\starttypescript [boldmath] [dynamoRE] [st1]
+  \definefontsynonym [DynamoRE-MathBold-Letters]        [sdgb8te]  [encoding=st1]
+  \definefontsynonym [DynamoRE-MathBold-Letters-Italic] [sdgbi8te] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [DynamoRE-MathBold-Storm]          [sdgb6se]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [dynamoRE] [st2]
+  \definefontsynonym [DynamoRE-MathBold-Letters]        [sdgb8ze]  [encoding=st2]
+  \definefontsynonym [DynamoRE-MathBold-Letters-Italic] [sdgbi8ze] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [DynamoRE-MathBold-Storm]          [sdgb6se]  [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [dynamoRE] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [DynamoRE] [st1,st2]
+  \definetypeface [DynamoRE] [ss] [sans] [dynamoRE] [default] [encoding=\typescripttwo]
+  \definetypeface [DynamoRE] [mm] [math] [dynamoRE] [storm] [encoding=\typescripttwo]
+%  \definetypeface [DynamoREboldmath] [mm] [boldmath] [dynamoRE] [storm] [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [dynamoRE] [storm] [encoding=\typescripttwo]
+\stoptypescript
+
+\stoptypescriptcollection
+\endinput
+
+% end of type-sdynamo.tex

@@ -1,0 +1,343 @@
+%D \module
+%D   [     file=enco-st3,
+%D      version=2005.03.15,
+%D        title=\CONTEXT\ Encoding Macros,
+%D     subtitle=Extension encoding for Storm fonts,
+%D       author=Vit Zyka,
+%D         date=\currentdate,
+%D    copyright=PRAGMA-ADE]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+%D This encoding was prepared by Petr Olsak.
+%D It is extension version for characters not in both st1 and st2.
+%D
+%D Use for Storm Type Foundry fonts.
+
+%D Change to Petr Olsak: 138 .notdef -> currency
+
+\startmapping[st3]
+
+\definecasemap 127 to 255    % we map them all to themselves
+
+\definecasemap 152 184 152   \definecasemap 161 177 161
+\definecasemap 163 179 163   \definecasemap 165 181 165
+\definecasemap 166 182 166   \definecasemap 169 185 169
+\definecasemap 170 186 170   \definecasemap 171 187 171
+\definecasemap 172 188 172   \definecasemap 174 190 174
+\definecasemap 175 191 175   \definecasemap 177 177 161
+\definecasemap 179 179 163   \definecasemap 181 181 165
+\definecasemap 182 182 166   \definecasemap 184 184 152
+\definecasemap 185 185 169   \definecasemap 186 186 170
+\definecasemap 187 187 171   \definecasemap 188 188 172
+\definecasemap 189 189 222   \definecasemap 190 190 174
+\definecasemap 191 191 175   \definecasemap 192 224 192
+\definecasemap 193 225 193   \definecasemap 194 226 194
+\definecasemap 195 227 195   \definecasemap 196 228 196
+\definecasemap 197 229 197   \definecasemap 198 230 198
+\definecasemap 199 231 199   \definecasemap 200 232 200
+\definecasemap 201 233 201   \definecasemap 202 234 202
+\definecasemap 203 235 203   \definecasemap 204 236 204
+\definecasemap 205 237 205   \definecasemap 206 238 206
+\definecasemap 207 239 207   \definecasemap 208 240 208
+\definecasemap 209 241 209   \definecasemap 210 242 210
+\definecasemap 211 243 211   \definecasemap 212 244 212
+\definecasemap 213 245 213   \definecasemap 214 246 214
+\definecasemap 216 248 216   \definecasemap 217 249 217
+\definecasemap 218 250 218   \definecasemap 219 251 219
+\definecasemap 220 252 220   \definecasemap 221 253 221
+\definecasemap 222 189 222   \definecasemap 224 224 192
+\definecasemap 225 225 193   \definecasemap 226 226 194
+\definecasemap 227 227 195   \definecasemap 228 228 196
+\definecasemap 229 229 197   \definecasemap 230 230 198
+\definecasemap 231 231 199   \definecasemap 232 232 200
+\definecasemap 233 233 201   \definecasemap 234 234 202
+\definecasemap 235 235 203   \definecasemap 236 236 204
+\definecasemap 237 237 205   \definecasemap 238 238 206
+\definecasemap 239 239 207   \definecasemap 240 240 208
+\definecasemap 241 241 209   \definecasemap 242 242 210
+\definecasemap 243 243 211   \definecasemap 244 244 212
+\definecasemap 245 245 213   \definecasemap 246 246 214
+\definecasemap 248 248 216   \definecasemap 249 249 217
+\definecasemap 250 250 218   \definecasemap 251 251 219
+\definecasemap 252 252 220   \definecasemap 253 253 221
+
+\stopmapping
+
+\startcoding[st3]
+
+\definecharacter minus			0
+\definecharacter onesuperior		1
+\definecharacter twosuperior		2
+\definecharacter threesuperior		3
+\definecharacter lessequal		4
+\definecharacter notequal		5
+\definecharacter greaterequal		6
+\definecharacter plusminus		7
+\definecharacter onequarter		8
+\definecharacter onehalf		9
+\definecharacter threequarters		10
+\definecharacter textfraction		11
+\definecharacter degree			12
+\definecharacter brokenbar		13
+\definecharacter textmultiply		14
+\definecharacter textdivide		15
+% 0x10
+\definecharacter summation		16
+\definecharacter greekOmega		17
+\definecharacter pi			18
+\definecharacter mu			19
+\definecharacter Delta			20
+\definecharacter logicalnot		21
+\definecharacter infinity		22
+\definecharacter textradical		23
+\definecharacter ordfeminine		24
+\definecharacter ordmasculine		25
+\definecharacter UCtextgrave		26
+\definecharacter UCtextacute		27
+\definecharacter UCtextcaron		28
+\definecharacter UCtextcircumflex	29
+\definecharacter UCtextbreve		30
+\definecharacter UCtextring		31
+% 0x20 (ASCII begins)
+\definecharacter nbspace		32
+\definecharacter exclam			33
+\definecharacter quotedbl		34
+\definecharacter UCtextmacron		35
+\definecharacter UCtextdotaccent	36
+\definecharacter UCtexthungarumlaut	37
+\definecharacter UCtextogonek		38
+\definecharacter UCtextcedilla		39
+\definecharacter UCtexttilde		40
+\definecharacter UCtextdiaeresis 	41
+\definecharacter commaaccent		42
+\definecharacter comma			44
+\definecharacter hyphen			45
+\definecharacter period			46
+\definecharacter slash			47
+% 0x30
+\definecharacter zero			48
+\definecharacter one			49
+\definecharacter two			50
+\definecharacter three			51
+\definecharacter four			52
+\definecharacter five			53
+\definecharacter six			54
+\definecharacter seven			55
+\definecharacter eight			56
+\definecharacter nine			57
+\definecharacter colon			58
+\definecharacter semicolon		59
+\definecharacter less			60
+\definecharacter equal			61
+\definecharacter greater		62
+\definecharacter question		63
+% 0x40
+\definecharacter at			64
+\definecharacter A			65
+\definecharacter B			66
+\definecharacter C			67
+\definecharacter D			68
+\definecharacter E			69
+\definecharacter F			70
+\definecharacter G			71
+\definecharacter H			72
+\definecharacter I			73
+\definecharacter J			74
+\definecharacter K			75
+\definecharacter L			76
+\definecharacter M			77
+\definecharacter N			78
+\definecharacter O			79
+% 0x50
+\definecharacter P			80
+\definecharacter Q			81
+\definecharacter R			82
+\definecharacter S			83
+\definecharacter T			84
+\definecharacter U			85
+\definecharacter V			86
+\definecharacter W			87
+\definecharacter X			88
+\definecharacter Y			89
+\definecharacter Z			90
+\definecharacter bracketleft		91
+\definecharacter backslash		92
+\definecharacter bracketright		93
+\definecharacter asciicircum		94
+\definecharacter underscore		95
+% 0x60
+\definecharacter quoteleft		96
+\definecharacter a			97
+\definecharacter b			98
+\definecharacter c			99
+\definecharacter d			100
+\definecharacter e			101
+\definecharacter f			102
+\definecharacter g			103
+\definecharacter h			104
+\definecharacter i			105
+\definecharacter j			106
+\definecharacter k			107
+\definecharacter l			108
+\definecharacter m			109
+\definecharacter n			110
+\definecharacter o			111
+% 0x70
+\definecharacter p			112
+\definecharacter q			113
+\definecharacter r			114
+\definecharacter s			115
+\definecharacter t			116
+\definecharacter u			117
+\definecharacter v			118
+\definecharacter w			119
+\definecharacter x			120
+\definecharacter y			121
+\definecharacter z			122
+\definecharacter braceleft		123
+\definecharacter bar			124
+\definecharacter braceright		125
+\definecharacter asciitilde		126
+\definecharacter periodcentered		127
+% 0x80
+\definecharacter ct			128
+\definecharacter st			129
+\definecharacter ft			130
+\definecharacter longst			131
+\definecharacter longs			132
+\definecharacter lozenge		133
+\definecharacter textflorin		134
+%\definecharacter florin			134
+\definecharacter dmacron		135
+\definecharacter Euro			136
+\definecharacter franc			137
+\definecharacter currency		136 % for now only! (if regenerate all *6s* tfm -> 138)
+\definecharacter Tbar			140
+\definecharacter Tcommaaccent		141
+\definecharacter Umacron		142
+\definecharacter Ubreve			143
+% 0x90
+\definecharacter Eth			144
+\definecharacter Thorn			145
+\definecharacter Ydiaeresis		146
+\definecharacter Rcedilla		147
+\definecharacter Scircumflex		148
+\definecharacter Ucircumflex		149
+\definecharacter Uogonek		150
+\definecharacter Utilde			151
+\definecharacter Ncommaaccent		152
+\definecharacter Gacute			153
+\definecharacter Gbreve			154
+\definecharacter Jcircumflex		155
+\definecharacter IJligature		156
+\definecharacter Idotaccent		157
+\definecharacter Lcedilla		158
+\definecharacter Ldotaccent		159
+% 0xA0
+\definecharacter dagger			160
+\definecharacter daggerdbl		161
+\definecharacter bullet			162
+\definecharacter paragraph		163
+\definecharacter ellipsis		164
+\definecharacter trademark		165
+\definecharacter copyright		166
+\definecharacter registered		167
+\definecharacter cent			168
+\definecharacter yen			169
+\definecharacter tbar			172
+\definecharacter tcommaaccent		173
+\definecharacter umacron		174
+\definecharacter ubreve			175
+% 0xD0
+\definecharacter eth			176
+\definecharacter thorn			177
+\definecharacter ydiaeresis		178
+\definecharacter rcedilla		179
+\definecharacter scircumflex		180
+\definecharacter ucircumflex		181
+\definecharacter uogonek		182
+\definecharacter utilde			183
+\definecharacter ncommaaccent		184
+\definecharacter gacute			185
+\definecharacter gbreve			186
+\definecharacter jcircumflex		187
+\definecharacter ijligature		188
+\definecharacter lcedilla		190
+\definecharacter ldotaccent		191
+% 0xC0
+\definecharacter Wcircumflex		192
+\definecharacter Edotaccent		193
+\definecharacter Ycircumflex		194
+\definecharacter Atilde			195
+\definecharacter Amacron		196
+\definecharacter Aring			197
+\definecharacter Ccircumflex		198
+\definecharacter Cdotaccent		199
+\definecharacter Egrave			200
+\definecharacter Ebreve			201
+\definecharacter Ecircumflex		202
+\definecharacter Emacron		203
+\definecharacter Igrave			204
+\definecharacter Itilde			205
+\definecharacter Imacron		206
+\definecharacter Idiaeresis		207
+% 0xD0
+\definecharacter Iogonek		208
+\definecharacter Ntilde			209
+\definecharacter Ograve			210
+\definecharacter Omacron		211
+\definecharacter Obreve			212
+\definecharacter Otilde			213
+\definecharacter Ncedilla		214
+\definecharacter Kcedilla		215
+\definecharacter Oslash			216
+\definecharacter Ugrave			217
+\definecharacter Gcircumflex		218
+\definecharacter Gdotaccent		219
+\definecharacter Gcedilla		220
+\definecharacter Scommaaccent		221
+\definecharacter Hcircumflex		222
+\definecharacter Hbar			223
+% 0xE0
+\definecharacter wcircumflex		224
+\definecharacter edotaccent		225
+\definecharacter ycircumflex		226
+\definecharacter atilde			227
+\definecharacter amacron		228
+\definecharacter aring			229
+\definecharacter ccircumflex		230
+\definecharacter cdotaccent		231
+\definecharacter egrave			232
+\definecharacter ebreve			233
+\definecharacter ecircumflex		234
+\definecharacter emacron		235
+\definecharacter igrave			236
+\definecharacter itilde			237
+\definecharacter imacron		238
+\definecharacter idiaeresis		239
+% 0xF0
+\definecharacter iogonek		240
+\definecharacter ntilde			241
+\definecharacter ograve			242
+\definecharacter omacron		243
+\definecharacter obreve			244
+\definecharacter otilde			245
+\definecharacter ncedilla		246
+\definecharacter kcedilla		247
+\definecharacter oslash			248
+\definecharacter ugrave			249
+\definecharacter gcircumflex		250
+\definecharacter gdotaccent		251
+\definecharacter gcedilla		252
+\definecharacter scommaaccent		253
+\definecharacter hcircumflex		254
+\definecharacter hbar			255
+
+% synonyms
+\definecharacter textminus		0   % minus
+%\definecharacter texttilde		126 % asciitilde
+
+\stopcoding

@@ -1,0 +1,27 @@
+% Aquamints symbols for ConTeXt: test and example file
+% (C) Vit Zyka, 2005-07-21, vit.zyka@seznam.cz, license: GNU GPL
+% Font is made by Galápagos Design Group and is available at 
+%   http://www.galapagosdesign.com
+
+\setuplayout[top=1cm,header=0pt,footer=0pt]
+\setupinteraction[title=AquaMints symbols for ConTeXt,author=Vít Zýka]
+
+\input t-symb-aquamints
+
+\starttext
+  \cbox{
+    AquaMints font (www.galapagosdesign.com)\\
+    \CONTEXT\ usage: \type{\input t-symb-aquamints \symbol[aqua][mask]}\\
+    %
+    \symbol[aqua][mask]
+    %
+    \setupsymbolset[aqua]
+    \symbol[sadmask]
+  }
+  \blank
+  \showsymbolset[aqua][n=4]
+
+%  \showfont[AquaMints]
+\stoptext
+
+% end of aquamints.tex

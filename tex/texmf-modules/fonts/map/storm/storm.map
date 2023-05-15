@@ -1,0 +1,1124 @@
+%%% This file is a part of TeX support of TypoKatalog 3.5.
+%%% TeX support: (C) Petr Olsak, license: GNU GPL
+%%% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+
+%%% Antique Ancienne
+saar8z AntiqueAncienne "StormL2Encoding ReEncodeFont" <storml2.enc <antiquea.pfb
+saari8z AntiqueAncienne-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <antiquai.pfb
+saar8t AntiqueAncienne "StormT1Encoding ReEncodeFont" <stormt1.enc <antiquea.pfb
+saari8t AntiqueAncienne-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <antiquai.pfb
+saar6s AntiqueAncienne "StormExEncoding ReEncodeFont" <stormex.enc <antiquea.pfb
+saari6s AntiqueAncienne-Italic "StormExEncoding ReEncodeFont" <stormex.enc <antiquai.pfb
+%%% Antique Moderne
+samr8z AntiqueModerne "StormL2Encoding ReEncodeFont" <storml2.enc <antiquem.pfb
+samri8z AntiqueModerne-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <antiqumi.pfb
+samr8t AntiqueModerne "StormT1Encoding ReEncodeFont" <stormt1.enc <antiquem.pfb
+samri8t AntiqueModerne-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <antiqumi.pfb
+samr6s AntiqueModerne "StormExEncoding ReEncodeFont" <stormex.enc <antiquem.pfb
+samri6s AntiqueModerne-Italic "StormExEncoding ReEncodeFont" <stormex.enc <antiqumi.pfb
+%%% Antique Regent
+sarr8z AntiqueRegent "StormL2Encoding ReEncodeFont" <storml2.enc <antiquer.pfb
+sarri8z AntiqueRegent-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <antiquri.pfb
+sarr8t AntiqueRegent "StormT1Encoding ReEncodeFont" <stormt1.enc <antiquer.pfb
+sarri8t AntiqueRegent-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <antiquri.pfb
+sarr6s AntiqueRegent "StormExEncoding ReEncodeFont" <stormex.enc <antiquer.pfb
+sarri6s AntiqueRegent-Italic "StormExEncoding ReEncodeFont" <stormex.enc <antiquri.pfb
+
+%%% Biblon
+sbbr8z Biblon "StormL2Encoding ReEncodeFont" <storml2.enc <biblon__.pfb
+sbbb8z Biblon-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <biblonbo.pfb
+sbbri8z Biblon-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <biblonit.pfb
+sbbbi8z Biblon-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <biblonbi.pfb
+sbbr8t Biblon "StormT1Encoding ReEncodeFont" <stormt1.enc <biblon__.pfb
+sbbb8t Biblon-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <biblonbo.pfb
+sbbri8t Biblon-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <biblonit.pfb
+sbbbi8t Biblon-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <biblonbi.pfb
+sbbr6s Biblon "StormExEncoding ReEncodeFont" <stormex.enc <biblon__.pfb
+sbbb6s Biblon-Bold "StormExEncoding ReEncodeFont" <stormex.enc <biblonbo.pfb
+sbbri6s Biblon-Italic "StormExEncoding ReEncodeFont" <stormex.enc <biblonit.pfb
+sbbbi6s Biblon-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <biblonbi.pfb
+%%% Biblon Caps
+sbbrc8z BiblonCaps "StormL2Encoding ReEncodeFont" <storml2.enc <biblonca.pfb
+sbbbc8z BiblonCaps-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <bibloncb.pfb
+sbbric8z BiblonCaps-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <biblonci.pfb
+sbbbic8z BiblonCaps-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <biblocbi.pfb
+sbbrc8t BiblonCaps "StormT1Encoding ReEncodeFont" <stormt1.enc <biblonca.pfb
+sbbbc8t BiblonCaps-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <bibloncb.pfb
+sbbric8t BiblonCaps-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <biblonci.pfb
+sbbbic8t BiblonCaps-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <biblocbi.pfb
+sbbrc6s BiblonCaps "StormExEncoding ReEncodeFont" <stormex.enc <biblonca.pfb
+sbbbc6s BiblonCaps-Bold "StormExEncoding ReEncodeFont" <stormex.enc <bibloncb.pfb
+sbbric6s BiblonCaps-Italic "StormExEncoding ReEncodeFont" <stormex.enc <biblonci.pfb
+sbbbic6s BiblonCaps-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <biblocbi.pfb
+%%% Biblon ITC
+sbbrn8z BiblonITCCE "StormL2Encoding ReEncodeFont" <storml2.enc <bibitcce.pfb
+sbbbn8z BiblonITCCE-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <biitcceb.pfb
+sbbrin8z BiblonITCCE-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <biitccei.pfb
+sbbbin8z BiblonITCCE-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <biitcceb_.pfb
+sbbrn8t BiblonITCCE "StormT1Encoding ReEncodeFont" <stormt1.enc <bibitcce.pfb
+sbbbn8t BiblonITCCE-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <biitcceb.pfb
+sbbrin8t BiblonITCCE-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <biitccei.pfb
+sbbbin8t BiblonITCCE-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <biitcceb_.pfb
+sbbrn6s BiblonITCCE "StormExEncoding ReEncodeFont" <stormex.enc <bibitcce.pfb
+sbbbn6s BiblonITCCE-Bold "StormExEncoding ReEncodeFont" <stormex.enc <biitcceb.pfb
+sbbrin6s BiblonITCCE-Italic "StormExEncoding ReEncodeFont" <stormex.enc <biitccei.pfb
+sbbbin6s BiblonITCCE-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <biitcceb_.pfb
+%%% Biblon ITC Swash
+sbbrd8z BiblonITCSwashCE "StormL2Encoding ReEncodeFont" <storml2.enc <biitcsce.pfb
+sbbbd8z BiblonITCSwashCE-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <biitcsce__.pfb
+sbbrid8z BiblonITCSwashCE-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <biitcsce____.pfb
+sbbbid8z BiblonITCSwashCE-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <biitcsce___.pfb
+sbbrd8t BiblonITCSwashCE "StormT1Encoding ReEncodeFont" <stormt1.enc <biitcsce.pfb
+sbbbd8t BiblonITCSwashCE-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <biitcsce__.pfb
+sbbrid8t BiblonITCSwashCE-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <biitcsce____.pfb
+sbbbid8t BiblonITCSwashCE-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <biitcsce___.pfb
+sbbrd6s BiblonITCSwashCE "StormExEncoding ReEncodeFont" <stormex.enc <biitcsce.pfb
+sbbbd6s BiblonITCSwashCE-Bold "StormExEncoding ReEncodeFont" <stormex.enc <biitcsce__.pfb
+sbbrid6s BiblonITCSwashCE-Italic "StormExEncoding ReEncodeFont" <stormex.enc <biitcsce____.pfb
+sbbbid6s BiblonITCSwashCE-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <biitcsce___.pfb
+%%% Biblon ITC Caps
+sbbra8z BiblonITCSmallCapsCE "StormL2Encoding ReEncodeFont" <storml2.enc <biitcscc.pfb
+sbbba8z BiblonITCSmallCapsCE-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <biitcscc_____.pfb
+sbbra8t BiblonITCSmallCapsCE "StormT1Encoding ReEncodeFont" <stormt1.enc <biitcscc.pfb
+sbbba8t BiblonITCSmallCapsCE-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <biitcscc_____.pfb
+sbbra6s BiblonITCSmallCapsCE "StormExEncoding ReEncodeFont" <stormex.enc <biitcscc.pfb
+sbbba6s BiblonITCSmallCapsCE-Bold "StormExEncoding ReEncodeFont" <stormex.enc <biitcscc_____.pfb
+
+%%% Dynamo Grotesk DXE
+sdgd8zv DynaGroteskDXE "StormL2Encoding ReEncodeFont" <storml2.enc <dynagdxe.pfb
+sdgc8zv DynaGroteskDXE-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dyngdxeb.pfb
+sdgdi8zv DynaGroteskDXE-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngdxei.pfb
+sdgci8zv DynaGroteskDXE-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dygdxebi.pfb
+sdgd8tv DynaGroteskDXE "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagdxe.pfb
+sdgc8tv DynaGroteskDXE-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngdxeb.pfb
+sdgdi8tv DynaGroteskDXE-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngdxei.pfb
+sdgci8tv DynaGroteskDXE-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dygdxebi.pfb
+sdgd6sv DynaGroteskDXE "StormExEncoding ReEncodeFont" <stormex.enc <dynagdxe.pfb
+sdgc6sv DynaGroteskDXE-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dyngdxeb.pfb
+sdgdi6sv DynaGroteskDXE-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dyngdxei.pfb
+sdgci6sv DynaGroteskDXE-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dygdxebi.pfb
+%%% Dynamo Grotesk RXE
+sdgr8zv DynaGroteskRXE "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrxe.pfb
+sdgb8zv DynaGroteskRXE-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dyngrxeb.pfb
+sdgri8zv DynaGroteskRXE-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngrxei.pfb
+sdgbi8zv DynaGroteskRXE-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dygrxebi.pfb
+sdgr8tv DynaGroteskRXE "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrxe.pfb
+sdgb8tv DynaGroteskRXE-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngrxeb.pfb
+sdgri8tv DynaGroteskRXE-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngrxei.pfb
+sdgbi8tv DynaGroteskRXE-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dygrxebi.pfb
+sdgr6sv DynaGroteskRXE "StormExEncoding ReEncodeFont" <stormex.enc <dynagrxe.pfb
+sdgb6sv DynaGroteskRXE-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dyngrxeb.pfb
+sdgri6sv DynaGroteskRXE-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dyngrxei.pfb
+sdgbi6sv DynaGroteskRXE-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dygrxebi.pfb
+%%% Dynamo Grotesk LXE
+sdgl8zv DynaGroteskLXE "StormL2Encoding ReEncodeFont" <storml2.enc <dynaglxe.pfb
+% sdgd8zv DynaGroteskLXE-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynglxeb.pfb
+sdgli8zv DynaGroteskLXE-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynglxei.pfb
+% sdgdi8zv DynaGroteskLXE-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dyglxebi.pfb
+sdgl8tv DynaGroteskLXE "StormT1Encoding ReEncodeFont" <stormt1.enc <dynaglxe.pfb
+% sdgd8tv DynaGroteskLXE-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynglxeb.pfb
+sdgli8tv DynaGroteskLXE-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynglxei.pfb
+% sdgdi8tv DynaGroteskLXE-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyglxebi.pfb
+sdgl6sv DynaGroteskLXE "StormExEncoding ReEncodeFont" <stormex.enc <dynaglxe.pfb
+% sdgd6sv DynaGroteskLXE-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynglxeb.pfb
+sdgli6sv DynaGroteskLXE-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynglxei.pfb
+% sdgdi6sv DynaGroteskLXE-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dyglxebi.pfb
+%%% Dynamo Grotesk DE
+sdgd8ze DynaGroteskDE "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrde.pfb
+sdgc8ze DynaGroteskDE-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagdeb.pfb
+sdgdi8ze DynaGroteskDE-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagdei.pfb
+sdgci8ze DynaGroteskDE-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngdebi.pfb
+sdgd8te DynaGroteskDE "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrde.pfb
+sdgc8te DynaGroteskDE-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagdeb.pfb
+sdgdi8te DynaGroteskDE-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagdei.pfb
+sdgci8te DynaGroteskDE-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngdebi.pfb
+sdgd6se DynaGroteskDE "StormExEncoding ReEncodeFont" <stormex.enc <dynagrde.pfb
+sdgc6se DynaGroteskDE-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagdeb.pfb
+sdgdi6se DynaGroteskDE-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynagdei.pfb
+sdgci6se DynaGroteskDE-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dyngdebi.pfb
+%%% Dynamo Grotesk RE
+sdgr8ze DynaGroteskRE "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrre.pfb
+sdgb8ze DynaGroteskRE-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagreb.pfb
+sdgri8ze DynaGroteskRE-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrei.pfb
+sdgbi8ze DynaGroteskRE-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngrebi.pfb
+sdgr8te DynaGroteskRE "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrre.pfb
+sdgb8te DynaGroteskRE-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagreb.pfb
+sdgri8te DynaGroteskRE-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrei.pfb
+sdgbi8te DynaGroteskRE-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngrebi.pfb
+sdgr6se DynaGroteskRE "StormExEncoding ReEncodeFont" <stormex.enc <dynagrre.pfb
+sdgb6se DynaGroteskRE-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagreb.pfb
+sdgri6se DynaGroteskRE-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynagrei.pfb
+sdgbi6se DynaGroteskRE-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dyngrebi.pfb
+%%% Dynamo Grotesk LE
+sdgl8ze DynaGroteskLE "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrle.pfb
+% sdgd8ze DynaGroteskLE-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagleb.pfb
+sdgli8ze DynaGroteskLE-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynaglei.pfb
+% sdgdi8ze DynaGroteskLE-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dynglebi.pfb
+sdgl8te DynaGroteskLE "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrle.pfb
+% sdgd8te DynaGroteskLE-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagleb.pfb
+sdgli8te DynaGroteskLE-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynaglei.pfb
+% sdgdi8te DynaGroteskLE-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynglebi.pfb
+sdgl6se DynaGroteskLE "StormExEncoding ReEncodeFont" <stormex.enc <dynagrle.pfb
+% sdgd6se DynaGroteskLE-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagleb.pfb
+sdgli6se DynaGroteskLE-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynaglei.pfb
+% sdgdi6se DynaGroteskLE-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dynglebi.pfb
+%%% Dynamo Grotesk D
+sdgd8z DynaGroteskD "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrod.pfb
+sdgc8z DynaGroteskD-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrdb.pfb
+sdgdi8z DynaGroteskD-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrdi.pfb
+sdgci8z DynaGroteskD-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagdbi.pfb
+sdgd8t DynaGroteskD "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrod.pfb
+sdgc8t DynaGroteskD-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrdb.pfb
+sdgdi8t DynaGroteskD-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrdi.pfb
+sdgci8t DynaGroteskD-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagdbi.pfb
+sdgd6s DynaGroteskD "StormExEncoding ReEncodeFont" <stormex.enc <dynagrod.pfb
+sdgc6s DynaGroteskD-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagrdb.pfb
+sdgdi6s DynaGroteskD-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynagrdi.pfb
+sdgci6s DynaGroteskD-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dynagdbi.pfb
+%%% Dynamo Grotesk R
+sdgr8z DynaGroteskR "StormL2Encoding ReEncodeFont" <storml2.enc <dynagror.pfb
+sdgb8z DynaGroteskR-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrrb.pfb
+sdgri8z DynaGroteskR-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrri.pfb
+sdgbi8z DynaGroteskR-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrbi.pfb
+sdgr8t DynaGroteskR "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagror.pfb
+sdgb8t DynaGroteskR-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrrb.pfb
+sdgri8t DynaGroteskR-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrri.pfb
+sdgbi8t DynaGroteskR-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrbi.pfb
+sdgr6s DynaGroteskR "StormExEncoding ReEncodeFont" <stormex.enc <dynagror.pfb
+sdgb6s DynaGroteskR-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagrrb.pfb
+sdgri6s DynaGroteskR-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynagrri.pfb
+sdgbi6s DynaGroteskR-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dynagrbi.pfb
+%%% Dynamo Grotesk L
+sdgl8z DynaGroteskL "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrol.pfb
+% sdgd8z DynaGroteskL-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrlb.pfb
+sdgli8z DynaGroteskL-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrli.pfb
+% sdgdi8z DynaGroteskL-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dynaglbi.pfb
+sdgl8t DynaGroteskL "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrol.pfb
+% sdgd8t DynaGroteskL-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrlb.pfb
+sdgli8t DynaGroteskL-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrli.pfb
+% sdgdi8t DynaGroteskL-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynaglbi.pfb
+sdgl6s DynaGroteskL "StormExEncoding ReEncodeFont" <stormex.enc <dynagrol.pfb
+% sdgd6s DynaGroteskL-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagrlb.pfb
+sdgli6s DynaGroteskL-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynagrli.pfb
+% sdgdi6s DynaGroteskL-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dynaglbi.pfb
+%%% Dynamo Grotesk DM
+sdgd8zn DynaGroteskDM "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrdm.pfb
+sdgc8zn DynaGroteskDM-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagdmb.pfb
+sdgdi8zn DynaGroteskDM-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagdmi.pfb
+sdgci8zn DynaGroteskDM-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngdmbi.pfb
+sdgd8tn DynaGroteskDM "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrdm.pfb
+sdgc8tn DynaGroteskDM-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagdmb.pfb
+sdgdi8tn DynaGroteskDM-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagdmi.pfb
+sdgci8tn DynaGroteskDM-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngdmbi.pfb
+sdgd6sn DynaGroteskDM "StormExEncoding ReEncodeFont" <stormex.enc <dynagrdm.pfb
+sdgc6sn DynaGroteskDM-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagdmb.pfb
+sdgdi6sn DynaGroteskDM-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynagdmi.pfb
+sdgci6sn DynaGroteskDM-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dyngdmbi.pfb
+%%% Dynamo Grotesk RM
+sdgr8zn DynaGroteskRM "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrrm.pfb
+sdgb8zn DynaGroteskRM-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrmb.pfb
+sdgri8zn DynaGroteskRM-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrmi.pfb
+sdgbi8zn DynaGroteskRM-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngrmbi.pfb
+sdgr8tn DynaGroteskRM "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrrm.pfb
+sdgb8tn DynaGroteskRM-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrmb.pfb
+sdgri8tn DynaGroteskRM-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrmi.pfb
+sdgbi8tn DynaGroteskRM-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngrmbi.pfb
+sdgr6sn DynaGroteskRM "StormExEncoding ReEncodeFont" <stormex.enc <dynagrrm.pfb
+sdgb6sn DynaGroteskRM-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagrmb.pfb
+sdgri6sn DynaGroteskRM-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynagrmi.pfb
+sdgbi6sn DynaGroteskRM-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dyngrmbi.pfb
+%%% Dynamo Grotesk LM
+sdgl8zn DynaGroteskLM "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrlm.pfb
+% sdgd8zn DynaGroteskLM-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynaglmb.pfb
+sdgli8zn DynaGroteskLM-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynaglmi.pfb
+% sdgdi8zn DynaGroteskLM-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dynglmbi.pfb
+sdgl8tn DynaGroteskLM "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrlm.pfb
+% sdgd8tn DynaGroteskLM-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynaglmb.pfb
+sdgli8tn DynaGroteskLM-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynaglmi.pfb
+% sdgdi8tn DynaGroteskLM-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynglmbi.pfb
+sdgl6sn DynaGroteskLM "StormExEncoding ReEncodeFont" <stormex.enc <dynagrlm.pfb
+% sdgd6sn DynaGroteskLM-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynaglmb.pfb
+sdgli6sn DynaGroteskLM-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynaglmi.pfb
+% sdgdi6sn DynaGroteskLM-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dynglmbi.pfb
+%%% Dynamo Grotesk DC
+sdgd8zc DynaGroteskDC "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrdc.pfb
+sdgc8zc DynaGroteskDC-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagdcb.pfb
+sdgdi8zc DynaGroteskDC-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagdci.pfb
+sdgci8zc DynaGroteskDC-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngdcbi.pfb
+sdgd8tc DynaGroteskDC "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrdc.pfb
+sdgc8tc DynaGroteskDC-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagdcb.pfb
+sdgdi8tc DynaGroteskDC-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagdci.pfb
+sdgci8tc DynaGroteskDC-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngdcbi.pfb
+sdgd6sc DynaGroteskDC "StormExEncoding ReEncodeFont" <stormex.enc <dynagrdc.pfb
+sdgc6sc DynaGroteskDC-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagdcb.pfb
+sdgdi6sc DynaGroteskDC-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynagdci.pfb
+sdgci6sc DynaGroteskDC-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dyngdcbi.pfb
+%%% Dynamo Grotesk RC
+sdgr8zc DynaGroteskRC "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrrc.pfb
+sdgb8zc DynaGroteskRC-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrcb.pfb
+sdgri8zc DynaGroteskRC-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrci.pfb
+sdgbi8zc DynaGroteskRC-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngrcbi.pfb
+sdgr8tc DynaGroteskRC "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrrc.pfb
+sdgb8tc DynaGroteskRC-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrcb.pfb
+sdgri8tc DynaGroteskRC-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrci.pfb
+sdgbi8tc DynaGroteskRC-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngrcbi.pfb
+sdgr6sc DynaGroteskRC "StormExEncoding ReEncodeFont" <stormex.enc <dynagrrc.pfb
+sdgb6sc DynaGroteskRC-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynagrcb.pfb
+sdgri6sc DynaGroteskRC-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynagrci.pfb
+sdgbi6sc DynaGroteskRC-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dyngrcbi.pfb
+%%% Dynamo Grotesk LC
+sdgl8zc DynaGroteskLC "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrlc.pfb
+% sdgd8zc DynaGroteskLC-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynaglcb.pfb
+sdgli8zc DynaGroteskLC-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynaglci.pfb
+% sdgdi8zc DynaGroteskLC-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dynglcbi.pfb
+sdgl8tc DynaGroteskLC "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrlc.pfb
+% sdgd8tc DynaGroteskLC-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynaglcb.pfb
+sdgli8tc DynaGroteskLC-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynaglci.pfb
+% sdgdi8tc DynaGroteskLC-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynglcbi.pfb
+sdgl6sc DynaGroteskLC "StormExEncoding ReEncodeFont" <stormex.enc <dynagrlc.pfb
+% sdgd6sc DynaGroteskLC-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynaglcb.pfb
+sdgli6sc DynaGroteskLC-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynaglci.pfb
+% sdgdi6sc DynaGroteskLC-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dynglcbi.pfb
+%%% Dynamo Grotesk DXC
+sdgd8zq DynaGroteskDXC "StormL2Encoding ReEncodeFont" <storml2.enc <dynagdxc.pfb
+sdgc8zq DynaGroteskDXC-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dyngdxcb.pfb
+sdgdi8zq DynaGroteskDXC-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngdxci.pfb
+sdgci8zq DynaGroteskDXC-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dygdxcbi.pfb
+sdgd8tq DynaGroteskDXC "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagdxc.pfb
+sdgc8tq DynaGroteskDXC-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngdxcb.pfb
+sdgdi8tq DynaGroteskDXC-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngdxci.pfb
+sdgci8tq DynaGroteskDXC-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dygdxcbi.pfb
+sdgd6sq DynaGroteskDXC "StormExEncoding ReEncodeFont" <stormex.enc <dynagdxc.pfb
+sdgc6sq DynaGroteskDXC-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dyngdxcb.pfb
+sdgdi6sq DynaGroteskDXC-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dyngdxci.pfb
+sdgci6sq DynaGroteskDXC-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dygdxcbi.pfb
+%%% Dynamo Grotesk RXC
+sdgr8zq DynaGroteskRXC "StormL2Encoding ReEncodeFont" <storml2.enc <dynagrxc.pfb
+sdgb8zq DynaGroteskRXC-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dyngrxcb.pfb
+sdgri8zq DynaGroteskRXC-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dyngrxci.pfb
+sdgbi8zq DynaGroteskRXC-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dygrxcbi.pfb
+sdgr8tq DynaGroteskRXC "StormT1Encoding ReEncodeFont" <stormt1.enc <dynagrxc.pfb
+sdgb8tq DynaGroteskRXC-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngrxcb.pfb
+sdgri8tq DynaGroteskRXC-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyngrxci.pfb
+sdgbi8tq DynaGroteskRXC-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dygrxcbi.pfb
+sdgr6sq DynaGroteskRXC "StormExEncoding ReEncodeFont" <stormex.enc <dynagrxc.pfb
+sdgb6sq DynaGroteskRXC-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dyngrxcb.pfb
+sdgri6sq DynaGroteskRXC-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dyngrxci.pfb
+sdgbi6sq DynaGroteskRXC-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dygrxcbi.pfb
+%%% Dynamo Grotesk LXC
+sdgl8zq DynaGroteskLXC "StormL2Encoding ReEncodeFont" <storml2.enc <dynaglxc.pfb
+% sdgd8zq DynaGroteskLXC-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <dynglxcb.pfb
+sdgli8zq DynaGroteskLXC-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <dynglxci.pfb
+% sdgdi8zq DynaGroteskLXC-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <dyglxcbi.pfb
+sdgl8tq DynaGroteskLXC "StormT1Encoding ReEncodeFont" <stormt1.enc <dynaglxc.pfb
+% sdgd8tq DynaGroteskLXC-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <dynglxcb.pfb
+sdgli8tq DynaGroteskLXC-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <dynglxci.pfb
+% sdgdi8tq DynaGroteskLXC-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <dyglxcbi.pfb
+sdgl6sq DynaGroteskLXC "StormExEncoding ReEncodeFont" <stormex.enc <dynaglxc.pfb
+% sdgd6sq DynaGroteskLXC-Bold "StormExEncoding ReEncodeFont" <stormex.enc <dynglxcb.pfb
+sdgli6sq DynaGroteskLXC-Italic "StormExEncoding ReEncodeFont" <stormex.enc <dynglxci.pfb
+% sdgdi6sq DynaGroteskLXC-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <dyglxcbi.pfb
+
+%%% Genre
+sgnr8z Genre "StormL2Encoding ReEncodeFont" <storml2.enc <genre___.pfb
+sgnb8z Genre-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <genrebol.pfb
+sgnri8z Genre-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <genreita.pfb
+sgnbi8z Genre-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <genreboi.pfb
+sgnr8t Genre "StormT1Encoding ReEncodeFont" <stormt1.enc <genre___.pfb
+sgnb8t Genre-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <genrebol.pfb
+sgnri8t Genre-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <genreita.pfb
+sgnbi8t Genre-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <genreboi.pfb
+sgnr6s Genre "StormExEncoding ReEncodeFont" <stormex.enc <genre___.pfb
+sgnb6s Genre-Bold "StormExEncoding ReEncodeFont" <stormex.enc <genrebol.pfb
+sgnri6s Genre-Italic "StormExEncoding ReEncodeFont" <stormex.enc <genreita.pfb
+sgnbi6s Genre-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <genreboi.pfb
+%%% Genre Medium
+sgnm8z GenreMedium "StormL2Encoding ReEncodeFont" <storml2.enc <genremed.pfb
+% sgnb8z GenreMedium-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <genremeb.pfb
+sgnmi8z GenreMedium-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <genremei.pfb
+% sgnbi8z GenreMedium-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <genrembi.pfb
+sgnm8t GenreMedium "StormT1Encoding ReEncodeFont" <stormt1.enc <genremed.pfb
+% sgnb8t GenreMedium-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <genremeb.pfb
+sgnmi8t GenreMedium-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <genremei.pfb
+% sgnbi8t GenreMedium-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <genrembi.pfb
+sgnm6s GenreMedium "StormExEncoding ReEncodeFont" <stormex.enc <genremed.pfb
+% sgnb6s GenreMedium-Bold "StormExEncoding ReEncodeFont" <stormex.enc <genremeb.pfb
+sgnmi6s GenreMedium-Italic "StormExEncoding ReEncodeFont" <stormex.enc <genremei.pfb
+% sgnbi6s GenreMedium-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <genrembi.pfb
+
+%%% Hercules
+shcr8z Hercules "StormL2Encoding ReEncodeFont" <storml2.enc <hercules.pfb
+shcb8z Hercules-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <herculeb.pfb
+shcri8z Hercules-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <herculei.pfb
+shcbi8z Hercules-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <herculbi.pfb
+shcr8t Hercules "StormT1Encoding ReEncodeFont" <stormt1.enc <hercules.pfb
+shcb8t Hercules-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <herculeb.pfb
+shcri8t Hercules-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <herculei.pfb
+shcbi8t Hercules-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <herculbi.pfb
+shcr6s Hercules "StormExEncoding ReEncodeFont" <stormex.enc <hercules.pfb
+shcb6s Hercules-Bold "StormExEncoding ReEncodeFont" <stormex.enc <herculeb.pfb
+shcri6s Hercules-Italic "StormExEncoding ReEncodeFont" <stormex.enc <herculei.pfb
+shcbi6s Hercules-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <herculbi.pfb
+%%% Hercules Medium
+shcm8z HerculesMedium "StormL2Encoding ReEncodeFont" <storml2.enc <herculem.pfb
+% shcb8z HerculesMedium-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <herculmb.pfb
+shcmi8z HerculesMedium-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <herculmi.pfb
+% shcbi8z HerculesMedium-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <hercumbi.pfb
+shcm8t HerculesMedium "StormT1Encoding ReEncodeFont" <stormt1.enc <herculem.pfb
+% shcb8t HerculesMedium-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <herculmb.pfb
+shcmi8t HerculesMedium-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <herculmi.pfb
+% shcbi8t HerculesMedium-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <hercumbi.pfb
+shcm6s HerculesMedium "StormExEncoding ReEncodeFont" <stormex.enc <herculem.pfb
+% shcb6s HerculesMedium-Bold "StormExEncoding ReEncodeFont" <stormex.enc <herculmb.pfb
+shcmi6s HerculesMedium-Italic "StormExEncoding ReEncodeFont" <stormex.enc <herculmi.pfb
+% shcbi6s HerculesMedium-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <hercumbi.pfb
+%%% Hercules Text
+shcrg8z HerculesText "StormL2Encoding ReEncodeFont" <storml2.enc <herculet.pfb
+shcbg8z HerculesText-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <hercultb.pfb
+shcrig8z HerculesText-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <herculti.pfb
+shcbig8z HerculesText-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <hercutbi.pfb
+shcrg8t HerculesText "StormT1Encoding ReEncodeFont" <stormt1.enc <herculet.pfb
+shcbg8t HerculesText-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <hercultb.pfb
+shcrig8t HerculesText-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <herculti.pfb
+shcbig8t HerculesText-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <hercutbi.pfb
+shcrg6s HerculesText "StormExEncoding ReEncodeFont" <stormex.enc <herculet.pfb
+shcbg6s HerculesText-Bold "StormExEncoding ReEncodeFont" <stormex.enc <hercultb.pfb
+shcrig6s HerculesText-Italic "StormExEncoding ReEncodeFont" <stormex.enc <herculti.pfb
+shcbig6s HerculesText-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <hercutbi.pfb
+
+%%% Ideal Gothic
+sigr8z IdealGothic "StormL2Encoding ReEncodeFont" <storml2.enc <idealgot.pfb
+sigb8z IdealGothic-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <idealgob.pfb
+sigri8z IdealGothic-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <idealgoi.pfb
+sigbi8z IdealGothic-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <idealgbi.pfb
+sigro8z IdealGothicOblique "StormL2Encoding ReEncodeFont" <storml2.enc <idealgoo.pfb
+sigbo8z IdealGothicOblique-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <idealgob_.pfb
+sigr8t IdealGothic "StormT1Encoding ReEncodeFont" <stormt1.enc <idealgot.pfb
+sigb8t IdealGothic-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <idealgob.pfb
+sigri8t IdealGothic-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <idealgoi.pfb
+sigbi8t IdealGothic-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <idealgbi.pfb
+sigro8t IdealGothicOblique "StormT1Encoding ReEncodeFont" <stormt1.enc <idealgoo.pfb
+sigbo8t IdealGothicOblique-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <idealgob_.pfb
+sigr6s IdealGothic "StormExEncoding ReEncodeFont" <stormex.enc <idealgot.pfb
+sigb6s IdealGothic-Bold "StormExEncoding ReEncodeFont" <stormex.enc <idealgob.pfb
+sigri6s IdealGothic-Italic "StormExEncoding ReEncodeFont" <stormex.enc <idealgoi.pfb
+sigbi6s IdealGothic-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <idealgbi.pfb
+sigro6s IdealGothicOblique "StormExEncoding ReEncodeFont" <stormex.enc <idealgoo.pfb
+sigbo6s IdealGothicOblique-Bold "StormExEncoding ReEncodeFont" <stormex.enc <idealgob_.pfb
+
+%%% Jannon Antikva
+sjnr8z JannonAntiqua "StormL2Encoding ReEncodeFont" <storml2.enc <jannonan.pfb
+sjnb8z JannonAntiqua-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <jannonab.pfb
+sjnri8z JannonAntiqua-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <jannonai.pfb
+sjnbi8z JannonAntiqua-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <jannoabi.pfb
+sjnr8t JannonAntiqua "StormT1Encoding ReEncodeFont" <stormt1.enc <jannonan.pfb
+sjnb8t JannonAntiqua-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <jannonab.pfb
+sjnri8t JannonAntiqua-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <jannonai.pfb
+sjnbi8t JannonAntiqua-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <jannoabi.pfb
+% OSF:
+sjnr6s JannonAntOSF "StormExEncoding ReEncodeFont" <stormex.enc <jannaosf.pfb
+sjnb6s JannonAntOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <janaosfb.pfb
+sjnri6s JannonAntOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <janaosfi.pfb
+sjnbi6s JannonAntOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <jaaosfbi.pfb
+% non OSF:
+% sjnr6s JannonAntiqua "StormExEncoding ReEncodeFont" <stormex.enc <jannonan.pfb
+% sjnb6s JannonAntiqua-Bold "StormExEncoding ReEncodeFont" <stormex.enc <jannonab.pfb
+% sjnri6s JannonAntiqua-Italic "StormExEncoding ReEncodeFont" <stormex.enc <jannonai.pfb
+% sjnbi6s JannonAntiqua-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <jannoabi.pfb
+%%% Jannon Medium
+sjnm8z JannonMedium "StormL2Encoding ReEncodeFont" <storml2.enc <jannonme.pfb
+% sjnb8z JannonMedium-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <jannonmb.pfb
+sjnmi8z JannonMedium-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <jannonmi.pfb
+% sjnbi8z JannonMedium-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <jannombi.pfb
+sjnm8t JannonMedium "StormT1Encoding ReEncodeFont" <stormt1.enc <jannonme.pfb
+% sjnb8t JannonMedium-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <jannonmb.pfb
+sjnmi8t JannonMedium-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <jannonmi.pfb
+% sjnbi8t JannonMedium-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <jannombi.pfb
+% OSF:
+sjnm6s JannonMedOSF "StormExEncoding ReEncodeFont" <stormex.enc <jannmosf.pfb
+% sjnb6s JannonMedOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <janmosfb.pfb
+sjnmi6s JannonMedOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <janmosfi.pfb
+% sjnbi6s JannonMedOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <jamosfbi.pfb
+% non OSF:
+% sjnm6s JannonMedium "StormExEncoding ReEncodeFont" <stormex.enc <jannonme.pfb
+% sjnb6s JannonMedium-Bold "StormExEncoding ReEncodeFont" <stormex.enc <jannonmb.pfb
+% sjnmi6s JannonMedium-Italic "StormExEncoding ReEncodeFont" <stormex.enc <jannonmi.pfb
+% sjnbi6s JannonMedium-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <jannombi.pfb
+%%% Jannon Text
+sjnrg8z JannonText "StormL2Encoding ReEncodeFont" <storml2.enc <jannonte.pfb
+sjnbg8z JannonText-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <jannontb.pfb
+sjnrig8z JannonText-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <jannonti.pfb
+sjnbig8z JannonText-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <jannotbi.pfb
+sjnrg8t JannonText "StormT1Encoding ReEncodeFont" <stormt1.enc <jannonte.pfb
+sjnbg8t JannonText-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <jannontb.pfb
+sjnrig8t JannonText-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <jannonti.pfb
+sjnbig8t JannonText-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <jannotbi.pfb
+% OSF:
+sjnrg6s JannonTextOSF "StormExEncoding ReEncodeFont" <stormex.enc <janntosf.pfb
+sjnbg6s JannonTextOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <jantosfb.pfb
+sjnrig6s JannonTextOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <jantosfi.pfb
+sjnbig6s JannonTextOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <jatosfbi.pfb
+% non OSF:
+% sjnrg6s JannonText "StormExEncoding ReEncodeFont" <stormex.enc <jannonte.pfb
+% sjnbg6s JannonText-Bold "StormExEncoding ReEncodeFont" <stormex.enc <jannontb.pfb
+% sjnrig6s JannonText-Italic "StormExEncoding ReEncodeFont" <stormex.enc <jannonti.pfb
+% sjnbig6s JannonText-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <jannotbi.pfb
+%%% Jannon Text Medium
+sjnmg8z JannonTextMed "StormL2Encoding ReEncodeFont" <storml2.enc <jannontm.pfb
+% sjnbg8z JannonTextMed-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <jannotmb.pfb
+sjnmig8z JannonTextMed-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <jannotmi.pfb
+% sjnbig8z JannonTextMed-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <janntmbi.pfb
+sjnmg8t JannonTextMed "StormT1Encoding ReEncodeFont" <stormt1.enc <jannontm.pfb
+% sjnbg8t JannonTextMed-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <jannotmb.pfb
+sjnmig8t JannonTextMed-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <jannotmi.pfb
+% sjnbig8t JannonTextMed-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <janntmbi.pfb
+% OSF:
+sjnmg6s JannonTextMedOSF "StormExEncoding ReEncodeFont" <stormex.enc <jantmosf.pfb
+% sjnbg6s JannonTextMedOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <jatmosfb.pfb
+sjnmig6s JannonTextMedOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <jatmosfi.pfb
+% sjnbig6s JannonTextMedOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <jatmosfb_.pfb
+% non OSF:
+% sjnmg6s JannonTextMed "StormExEncoding ReEncodeFont" <stormex.enc <jannontm.pfb
+% sjnbg6s JannonTextMed-Bold "StormExEncoding ReEncodeFont" <stormex.enc <jannotmb.pfb
+% sjnmig6s JannonTextMed-Italic "StormExEncoding ReEncodeFont" <stormex.enc <jannotmi.pfb
+% sjnbig6s JannonTextMed-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <janntmbi.pfb
+%%% Jannon Caps
+sjnrc8z JannonTextCaps "StormL2Encoding ReEncodeFont" <storml2.enc <jannontc.pfb
+sjnbc8z JannonTextCaps-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <jannotcb.pfb
+sjnric8z JannonTextCaps-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <jannotci.pfb
+sjnbic8z JannonTextCaps-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <janntcbi.pfb
+sjnrc8t JannonTextCaps "StormT1Encoding ReEncodeFont" <stormt1.enc <jannontc.pfb
+sjnbc8t JannonTextCaps-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <jannotcb.pfb
+sjnric8t JannonTextCaps-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <jannotci.pfb
+sjnbic8t JannonTextCaps-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <janntcbi.pfb
+sjnrc6s JannonTextCaps "StormExEncoding ReEncodeFont" <stormex.enc <jannontc.pfb
+sjnbc6s JannonTextCaps-Bold "StormExEncoding ReEncodeFont" <stormex.enc <jannotcb.pfb
+sjnric6s JannonTextCaps-Italic "StormExEncoding ReEncodeFont" <stormex.enc <jannotci.pfb
+sjnbic6s JannonTextCaps-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <janntcbi.pfb
+
+%%% John Baskerville
+sjbr8z JohnBaskerville "StormL2Encoding ReEncodeFont" <storml2.enc <johnbask.pfb
+sjbb8z JohnBaskerville-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <johnbasb.pfb
+sjbri8z JohnBaskerville-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbasi.pfb
+sjbbi8z JohnBaskerville-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbabi.pfb
+sjbr8t JohnBaskerville "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbask.pfb
+sjbb8t JohnBaskerville-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbasb.pfb
+sjbri8t JohnBaskerville-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbasi.pfb
+sjbbi8t JohnBaskerville-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbabi.pfb
+sjbr6s JohnBaskerville "StormExEncoding ReEncodeFont" <stormex.enc <johnbask.pfb
+sjbb6s JohnBaskerville-Bold "StormExEncoding ReEncodeFont" <stormex.enc <johnbasb.pfb
+sjbri6s JohnBaskerville-Italic "StormExEncoding ReEncodeFont" <stormex.enc <johnbasi.pfb
+sjbbi6s JohnBaskerville-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <johnbabi.pfb
+%%% John Baskerville Medium
+sjbm8z JohnBaskervilleMed "StormL2Encoding ReEncodeFont" <storml2.enc <johnbasm.pfb
+% sjbb8z JohnBaskervilleMed-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <johnbamb.pfb
+sjbmi8z JohnBaskervilleMed-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbami.pfb
+% sjbbi8z JohnBaskervilleMed-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbmbi.pfb
+sjbm8t JohnBaskervilleMed "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbasm.pfb
+% sjbb8t JohnBaskervilleMed-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbamb.pfb
+sjbmi8t JohnBaskervilleMed-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbami.pfb
+% sjbbi8t JohnBaskervilleMed-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbmbi.pfb
+sjbm6s JohnBaskervilleMed "StormExEncoding ReEncodeFont" <stormex.enc <johnbasm.pfb
+% sjbb6s JohnBaskervilleMed-Bold "StormExEncoding ReEncodeFont" <stormex.enc <johnbamb.pfb
+sjbmi6s JohnBaskervilleMed-Italic "StormExEncoding ReEncodeFont" <stormex.enc <johnbami.pfb
+% sjbbi6s JohnBaskervilleMed-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <johnbmbi.pfb
+%%% John Baskerville Text
+sjbrg8z JohnBaskervilleText "StormL2Encoding ReEncodeFont" <storml2.enc <johnbast.pfb
+sjbbg8z JohnBaskervilleText-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <johnbatb.pfb
+sjbrig8z JohnBaskervilleText-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbati.pfb
+sjbbig8z JohnBaskervilleText-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbtbi.pfb
+sjbrg8t JohnBaskervilleText "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbast.pfb
+sjbbg8t JohnBaskervilleText-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbatb.pfb
+sjbrig8t JohnBaskervilleText-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbati.pfb
+sjbbig8t JohnBaskervilleText-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbtbi.pfb
+sjbrg6s JohnBaskervilleText "StormExEncoding ReEncodeFont" <stormex.enc <johnbast.pfb
+sjbbg6s JohnBaskervilleText-Bold "StormExEncoding ReEncodeFont" <stormex.enc <johnbatb.pfb
+sjbrig6s JohnBaskervilleText-Italic "StormExEncoding ReEncodeFont" <stormex.enc <johnbati.pfb
+sjbbig6s JohnBaskervilleText-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <johnbtbi.pfb
+%%% John Baskerville Text Medium
+sjbmg8z JohnBaskervilleTMed "StormL2Encoding ReEncodeFont" <storml2.enc <johnbatm.pfb
+% sjbbg8z JohnBaskervilleTMed-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <johnbtmb.pfb
+sjbmig8z JohnBaskervilleTMed-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbtmi.pfb
+% sjbbig8z JohnBaskervilleTMed-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <johbtmbi.pfb
+sjbmg8t JohnBaskervilleTMed "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbatm.pfb
+% sjbbg8t JohnBaskervilleTMed-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbtmb.pfb
+sjbmig8t JohnBaskervilleTMed-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbtmi.pfb
+% sjbbig8t JohnBaskervilleTMed-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <johbtmbi.pfb
+sjbmg6s JohnBaskervilleTMed "StormExEncoding ReEncodeFont" <stormex.enc <johnbatm.pfb
+% sjbbg6s JohnBaskervilleTMed-Bold "StormExEncoding ReEncodeFont" <stormex.enc <johnbtmb.pfb
+sjbmig6s JohnBaskervilleTMed-Italic "StormExEncoding ReEncodeFont" <stormex.enc <johnbtmi.pfb
+% sjbbig6s JohnBaskervilleTMed-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <johbtmbi.pfb
+%%% John Baskerville TxN
+sjbrn8z JBaskervilleTxN "StormL2Encoding ReEncodeFont" <storml2.enc <jbasketn.pfb
+sjbbn8z JBaskervilleTxN-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <jbasktnb.pfb
+sjbrin8z JBaskervilleTxN-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <jbasktni.pfb
+sjbbin8z JBaskervilleTxN-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <jbastnbi.pfb
+sjbrn8t JBaskervilleTxN "StormT1Encoding ReEncodeFont" <stormt1.enc <jbasketn.pfb
+sjbbn8t JBaskervilleTxN-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <jbasktnb.pfb
+sjbrin8t JBaskervilleTxN-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <jbasktni.pfb
+sjbbin8t JBaskervilleTxN-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <jbastnbi.pfb
+sjbrn6s JBaskervilleTxN "StormExEncoding ReEncodeFont" <stormex.enc <jbasketn.pfb
+sjbbn6s JBaskervilleTxN-Bold "StormExEncoding ReEncodeFont" <stormex.enc <jbasktnb.pfb
+sjbrin6s JBaskervilleTxN-Italic "StormExEncoding ReEncodeFont" <stormex.enc <jbasktni.pfb
+sjbbin6s JBaskervilleTxN-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <jbastnbi.pfb
+%%% John Baskerville Caps
+sjbrc8z JohnBaskervilleCaps "StormL2Encoding ReEncodeFont" <storml2.enc <johnbasc.pfb
+sjbmc8z JohnBaskervilleCaps-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <johnbacb.pfb
+sjbric8z JohnBaskervilleCaps-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbaci.pfb
+sjbmic8z JohnBaskervilleCaps-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbcbi.pfb
+sjbrc8t JohnBaskervilleCaps "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbasc.pfb
+sjbmc8t JohnBaskervilleCaps-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbacb.pfb
+sjbric8t JohnBaskervilleCaps-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbaci.pfb
+sjbmic8t JohnBaskervilleCaps-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbcbi.pfb
+sjbrc6s JohnBaskervilleCaps "StormExEncoding ReEncodeFont" <stormex.enc <johnbasc.pfb
+sjbmc6s JohnBaskervilleCaps-Bold "StormExEncoding ReEncodeFont" <stormex.enc <johnbacb.pfb
+sjbric6s JohnBaskervilleCaps-Italic "StormExEncoding ReEncodeFont" <stormex.enc <johnbaci.pfb
+sjbmic6s JohnBaskervilleCaps-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <johnbcbi.pfb
+%%% John Baskerville Text Caps
+sjbra8z JohnBaskervilleTCaps "StormL2Encoding ReEncodeFont" <storml2.enc <johnbatc.pfb
+sjbma8z JohnBaskervilleTCaps-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <johnbtcb.pfb
+sjbria8z JohnBaskervilleTCaps-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <johnbtci.pfb
+sjbmia8z JohnBaskervilleTCaps-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <johbtcbi.pfb
+sjbra8t JohnBaskervilleTCaps "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbatc.pfb
+sjbma8t JohnBaskervilleTCaps-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbtcb.pfb
+sjbria8t JohnBaskervilleTCaps-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <johnbtci.pfb
+sjbmia8t JohnBaskervilleTCaps-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <johbtcbi.pfb
+sjbra6s JohnBaskervilleTCaps "StormExEncoding ReEncodeFont" <stormex.enc <johnbatc.pfb
+sjbma6s JohnBaskervilleTCaps-Bold "StormExEncoding ReEncodeFont" <stormex.enc <johnbtcb.pfb
+sjbria6s JohnBaskervilleTCaps-Italic "StormExEncoding ReEncodeFont" <stormex.enc <johnbtci.pfb
+sjbmia6s JohnBaskervilleTCaps-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <johbtcbi.pfb
+
+%%% Lexicon Gothic
+slgr8z LexonGothic "StormL2Encoding ReEncodeFont" <storml2.enc <lexongot.pfb
+slgb8z LexonGothic-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <lexongob.pfb
+slgri8z LexonGothic-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <lexongoi.pfb
+slgbi8z LexonGothic-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <lexongbi.pfb
+slgr8t LexonGothic "StormT1Encoding ReEncodeFont" <stormt1.enc <lexongot.pfb
+slgb8t LexonGothic-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <lexongob.pfb
+slgri8t LexonGothic-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <lexongoi.pfb
+slgbi8t LexonGothic-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <lexongbi.pfb
+slgr6s LexonGothic "StormExEncoding ReEncodeFont" <stormex.enc <lexongot.pfb
+slgb6s LexonGothic-Bold "StormExEncoding ReEncodeFont" <stormex.enc <lexongob.pfb
+slgri6s LexonGothic-Italic "StormExEncoding ReEncodeFont" <stormex.enc <lexongoi.pfb
+slgbi6s LexonGothic-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <lexongbi.pfb
+%%% Lexicon Gothic SC+OSF
+slgrc8z LexonSC+OSF "StormL2Encoding ReEncodeFont" <storml2.enc <lexscosf.pfb
+slgbc8z LexonSC+OSF-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <lescosfb.pfb
+slgrc8t LexonSC+OSF "StormT1Encoding ReEncodeFont" <stormt1.enc <lexscosf.pfb
+slgbc8t LexonSC+OSF-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <lescosfb.pfb
+slgrc6s LexonSC+OSF "StormExEncoding ReEncodeFont" <stormex.enc <lexscosf.pfb
+slgbc6s LexonSC+OSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <lescosfb.pfb
+%%% Lexicon Gothic Headline+Xylo
+slxr8z LexonHeadline "StormL2Encoding ReEncodeFont" <storml2.enc <lexonhea.pfb
+slxd8z LexonXylo "StormL2Encoding ReEncodeFont" <storml2.enc <lexonxyl.pfb
+slxr8t LexonHeadline "StormT1Encoding ReEncodeFont" <stormt1.enc <lexonhea.pfb
+slxd8t LexonXylo "StormT1Encoding ReEncodeFont" <stormt1.enc <lexonxyl.pfb
+slxr6s LexonHeadline "StormExEncoding ReEncodeFont" <stormex.enc <lexonhea.pfb
+slxd6s LexonXylo "StormExEncoding ReEncodeFont" <stormex.enc <lexonxyl.pfb
+
+%%% Mediaeval
+smar8z Mediaeval "StormL2Encoding ReEncodeFont" <storml2.enc <mediaeva.pfb
+smab8z Mediaeval-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <mediaevb.pfb
+smari8z Mediaeval-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <mediaevi.pfb
+smabi8z Mediaeval-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <mediaebi.pfb
+smar8t Mediaeval "StormT1Encoding ReEncodeFont" <stormt1.enc <mediaeva.pfb
+smab8t Mediaeval-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <mediaevb.pfb
+smari8t Mediaeval-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <mediaevi.pfb
+smabi8t Mediaeval-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <mediaebi.pfb
+smar6s Mediaeval "StormExEncoding ReEncodeFont" <stormex.enc <mediaeva.pfb
+smab6s Mediaeval-Bold "StormExEncoding ReEncodeFont" <stormex.enc <mediaevb.pfb
+smari6s Mediaeval-Italic "StormExEncoding ReEncodeFont" <stormex.enc <mediaevi.pfb
+smabi6s Mediaeval-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <mediaebi.pfb
+%%% MediaevalSC
+smarc8z MediaevalSC+OSF "StormL2Encoding ReEncodeFont" <storml2.enc <medscosf.pfb
+smabc8z MediaevalSC+OSF-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <mescosfb.pfb
+smaric8z MediaevalSC+OSF-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <mescosfi.pfb
+smabic8z MediaevalSC+OSF-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <mescosfb_.pfb
+smarc8t MediaevalSC+OSF "StormT1Encoding ReEncodeFont" <stormt1.enc <medscosf.pfb
+smabc8t MediaevalSC+OSF-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <mescosfb.pfb
+smaric8t MediaevalSC+OSF-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <mescosfi.pfb
+smabic8t MediaevalSC+OSF-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <mescosfb_.pfb
+smarc6s MediaevalSC+OSF "StormExEncoding ReEncodeFont" <stormex.enc <medscosf.pfb
+smabc6s MediaevalSC+OSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <mescosfb.pfb
+smaric6s MediaevalSC+OSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <mescosfi.pfb
+smabic6s MediaevalSC+OSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <mescosfb_.pfb
+
+%%% Mramor Medium
+smmm8z MramorMedium "StormL2Encoding ReEncodeFont" <storml2.enc <mramorme.pfb
+smmc8z MramorMedium-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <mramormb.pfb
+smmmi8z MramorMedium-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <mramormi.pfb
+smmci8z MramorMedium-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <mramombi.pfb
+smmm8t MramorMedium "StormT1Encoding ReEncodeFont" <stormt1.enc <mramorme.pfb
+smmc8t MramorMedium-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <mramormb.pfb
+smmmi8t MramorMedium-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <mramormi.pfb
+smmci8t MramorMedium-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <mramombi.pfb
+smmm6s MramorMedium "StormExEncoding ReEncodeFont" <stormex.enc <mramorme.pfb
+smmc6s MramorMedium-Bold "StormExEncoding ReEncodeFont" <stormex.enc <mramormb.pfb
+smmmi6s MramorMedium-Italic "StormExEncoding ReEncodeFont" <stormex.enc <mramormi.pfb
+smmci6s MramorMedium-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <mramombi.pfb
+%%% Mramor Book
+smmr8z Mramor "StormL2Encoding ReEncodeFont" <storml2.enc <mramor__.pfb
+smmb8z Mramor-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <mramorbo.pfb
+smmri8z Mramor-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <mramorit.pfb
+smmbi8z Mramor-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <mramorbi.pfb
+smmr8t Mramor "StormT1Encoding ReEncodeFont" <stormt1.enc <mramor__.pfb
+smmb8t Mramor-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <mramorbo.pfb
+smmri8t Mramor-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <mramorit.pfb
+smmbi8t Mramor-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <mramorbi.pfb
+smmr6s Mramor "StormExEncoding ReEncodeFont" <stormex.enc <mramor__.pfb
+smmb6s Mramor-Bold "StormExEncoding ReEncodeFont" <stormex.enc <mramorbo.pfb
+smmri6s Mramor-Italic "StormExEncoding ReEncodeFont" <stormex.enc <mramorit.pfb
+smmbi6s Mramor-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <mramorbi.pfb
+%%% Mramor Light
+smml8z MramorLight "StormL2Encoding ReEncodeFont" <storml2.enc <mramorli.pfb
+% smmm8z MramorLight-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <mramorlb.pfb
+smmli8z MramorLight-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <mramorli_.pfb
+% smmmi8z MramorLight-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <mramolbi.pfb
+smml8t MramorLight "StormT1Encoding ReEncodeFont" <stormt1.enc <mramorli.pfb
+% smmm8t MramorLight-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <mramorlb.pfb
+smmli8t MramorLight-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <mramorli_.pfb
+% smmmi8t MramorLight-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <mramolbi.pfb
+smml6s MramorLight "StormExEncoding ReEncodeFont" <stormex.enc <mramorli.pfb
+% smmm6s MramorLight-Bold "StormExEncoding ReEncodeFont" <stormex.enc <mramorlb.pfb
+smmli6s MramorLight-Italic "StormExEncoding ReEncodeFont" <stormex.enc <mramorli_.pfb
+% smmmi6s MramorLight-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <mramolbi.pfb
+%%% Mramor Text
+smmrg8z MramorText "StormL2Encoding ReEncodeFont" <storml2.enc <mramorte.pfb
+smmbg8z MramorText-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <mramortb.pfb
+smmrig8z MramorText-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <mramorti.pfb
+smmbig8z MramorText-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <mramotbi.pfb
+smmrg8t MramorText "StormT1Encoding ReEncodeFont" <stormt1.enc <mramorte.pfb
+smmbg8t MramorText-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <mramortb.pfb
+smmrig8t MramorText-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <mramorti.pfb
+smmbig8t MramorText-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <mramotbi.pfb
+smmrg6s MramorText "StormExEncoding ReEncodeFont" <stormex.enc <mramorte.pfb
+smmbg6s MramorText-Bold "StormExEncoding ReEncodeFont" <stormex.enc <mramortb.pfb
+smmrig6s MramorText-Italic "StormExEncoding ReEncodeFont" <stormex.enc <mramorti.pfb
+smmbig6s MramorText-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <mramotbi.pfb
+
+%%% Pentagramme
+spgr8z Pentagramme "StormL2Encoding ReEncodeFont" <storml2.enc <pentagra.pfb
+spgb8z Pentagramme-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <pentagrb.pfb
+spgri8z Pentagramme-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <pentagri.pfb
+spgbi8z Pentagramme-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <pentagbi.pfb
+spgr8t Pentagramme "StormT1Encoding ReEncodeFont" <stormt1.enc <pentagra.pfb
+spgb8t Pentagramme-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <pentagrb.pfb
+spgri8t Pentagramme-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <pentagri.pfb
+spgbi8t Pentagramme-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <pentagbi.pfb
+% OSF:
+spgr6s PentagrammeOSF "StormExEncoding ReEncodeFont" <stormex.enc <pentaosf.pfb
+spgb6s PentagrammeOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <pentosfb.pfb
+spgri6s PentagrammeOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <pentosfi.pfb
+spgbi6s PentagrammeOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <penosfbi.pfb
+% non OSF:
+% spgr6s Pentagramme "StormExEncoding ReEncodeFont" <stormex.enc <pentagra.pfb
+% spgb6s Pentagramme-Bold "StormExEncoding ReEncodeFont" <stormex.enc <pentagrb.pfb
+% spgri6s Pentagramme-Italic "StormExEncoding ReEncodeFont" <stormex.enc <pentagri.pfb
+% spgbi6s Pentagramme-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <pentagbi.pfb
+
+%%% Preissig Antikva
+spar8z PreissigAntikva "StormL2Encoding ReEncodeFont" <storml2.enc <preissia.pfb
+spab8z PreissigAntikva-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <preissab.pfb
+spari8z PreissigAntikva-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <preissai.pfb
+spabi8z PreissigAntikva-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <preisabi.pfb
+spar8t PreissigAntikva "StormT1Encoding ReEncodeFont" <stormt1.enc <preissia.pfb
+spab8t PreissigAntikva-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <preissab.pfb
+spari8t PreissigAntikva-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <preissai.pfb
+spabi8t PreissigAntikva-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <preisabi.pfb
+spar6s PreissigAntikva "StormExEncoding ReEncodeFont" <stormex.enc <preissia.pfb
+spab6s PreissigAntikva-Bold "StormExEncoding ReEncodeFont" <stormex.enc <preissab.pfb
+spari6s PreissigAntikva-Italic "StormExEncoding ReEncodeFont" <stormex.enc <preissai.pfb
+spabi6s PreissigAntikva-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <preisabi.pfb
+%%% Preissig
+spsr8z Preissig "StormL2Encoding ReEncodeFont" <storml2.enc <preissig.pfb
+spsb8z Preissig-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <preissib.pfb
+spsri8z Preissig-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <preissii.pfb
+spsbi8z Preissig-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <preissbi.pfb
+spsr8t Preissig "StormT1Encoding ReEncodeFont" <stormt1.enc <preissig.pfb
+spsb8t Preissig-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <preissib.pfb
+spsri8t Preissig-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <preissii.pfb
+spsbi8t Preissig-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <preissbi.pfb
+spsr6s Preissig "StormExEncoding ReEncodeFont" <stormex.enc <preissig.pfb
+spsb6s Preissig-Bold "StormExEncoding ReEncodeFont" <stormex.enc <preissib.pfb
+spsri6s Preissig-Italic "StormExEncoding ReEncodeFont" <stormex.enc <preissii.pfb
+spsbi6s Preissig-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <preissbi.pfb
+%%% Preissig Text
+spsrg8z PreissigText "StormL2Encoding ReEncodeFont" <storml2.enc <preissit.pfb
+spsbg8z PreissigText-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <preisstb.pfb
+spsrig8z PreissigText-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <preissti.pfb
+spsbig8z PreissigText-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <preistbi.pfb
+spsrg8t PreissigText "StormT1Encoding ReEncodeFont" <stormt1.enc <preissit.pfb
+spsbg8t PreissigText-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <preisstb.pfb
+spsrig8t PreissigText-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <preissti.pfb
+spsbig8t PreissigText-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <preistbi.pfb
+spsrg6s PreissigText "StormExEncoding ReEncodeFont" <stormex.enc <preissit.pfb
+spsbg6s PreissigText-Bold "StormExEncoding ReEncodeFont" <stormex.enc <preisstb.pfb
+spsrig6s PreissigText-Italic "StormExEncoding ReEncodeFont" <stormex.enc <preissti.pfb
+spsbig6s PreissigText-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <preistbi.pfb
+%%% Preissig Ozdoby
+spor PreissigOzdoby <preissio.pfb
+%%% Preissig 1918
+sp1r8z Preissig1918 "StormL2Encoding ReEncodeFont" <storml2.enc <prei1918.pfb
+sp1r8t Preissig1918 "StormT1Encoding ReEncodeFont" <stormt1.enc <prei1918.pfb
+sp1r6s Preissig1918 "StormExEncoding ReEncodeFont" <stormex.enc <prei1918.pfb
+
+%%% Regent
+srgr8z Regent "StormL2Encoding ReEncodeFont" <storml2.enc <regent__.pfb
+srgb8z Regent-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <regentbo.pfb
+srgri8z Regent-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <regentit.pfb
+srgbi8z Regent-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <regentbi.pfb
+srgr8t Regent "StormT1Encoding ReEncodeFont" <stormt1.enc <regent__.pfb
+srgb8t Regent-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <regentbo.pfb
+srgri8t Regent-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <regentit.pfb
+srgbi8t Regent-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <regentbi.pfb
+% OSF:
+srgr6s RegentOSF "StormExEncoding ReEncodeFont" <stormex.enc <regenosf.pfb
+srgb6s RegentOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <regeosfb.pfb
+srgri6s RegentOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <regeosfi.pfb
+srgbi6s RegentOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <regosfbi.pfb
+% non OSF:
+% srgr6s Regent "StormExEncoding ReEncodeFont" <stormex.enc <regent__.pfb
+% srgb6s Regent-Bold "StormExEncoding ReEncodeFont" <stormex.enc <regentbo.pfb
+% srgri6s Regent-Italic "StormExEncoding ReEncodeFont" <stormex.enc <regentit.pfb
+% srgbi6s Regent-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <regentbi.pfb
+
+%%% Serapion
+% OSF variant is default here:
+ssrr8z SerapionOSF "StormL2Encoding ReEncodeFont" <storml2.enc <seraposf.pfb
+ssrb8z SerapionOSF-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <seraosfb.pfb
+ssrri8z SerapionOSF-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <seraosfi.pfb
+ssrbi8z SerapionOSF-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <serosfbi.pfb
+ssrr8t SerapionOSF "StormT1Encoding ReEncodeFont" <stormt1.enc <seraposf.pfb
+ssrb8t SerapionOSF-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <seraosfb.pfb
+ssrri8t SerapionOSF-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <seraosfi.pfb
+ssrbi8t SerapionOSF-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <serosfbi.pfb
+% non OSF:
+% ssrr8z Serapion "StormL2Encoding ReEncodeFont" <storml2.enc <serapion.pfb
+% ssrb8z Serapion-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <serapiob.pfb
+% ssrri8z Serapion-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <serapioi.pfb
+% ssrbi8z Serapion-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <serapibi.pfb
+% ssrr8t Serapion "StormT1Encoding ReEncodeFont" <stormt1.enc <serapion.pfb
+% ssrb8t Serapion-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <serapiob.pfb
+% ssrri8t Serapion-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <serapioi.pfb
+% ssrbi8t Serapion-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <serapibi.pfb
+% non OSF:
+ssrr6s Serapion "StormExEncoding ReEncodeFont" <stormex.enc <serapion.pfb
+ssrb6s Serapion-Bold "StormExEncoding ReEncodeFont" <stormex.enc <serapiob.pfb
+ssrri6s Serapion-Italic "StormExEncoding ReEncodeFont" <stormex.enc <serapioi.pfb
+ssrbi6s Serapion-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <serapibi.pfb
+% OSF:
+% ssrr6s SerapionOSF "StormExEncoding ReEncodeFont" <stormex.enc <seraposf.pfb
+% ssrb6s SerapionOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <seraosfb.pfb
+% ssrri6s SerapionOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <seraosfi.pfb
+% ssrbi6s SerapionOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <serosfbi.pfb
+
+%%% Solpera
+%sslr8z Solpera "StormL2Encoding ReEncodeFont" <storml2.enc <solpera_.pfb
+%sslb8z Solpera-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <solperab.pfb
+%sslri8z Solpera-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <solperai.pfb
+%sslbi8z Solpera-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <solperbi.pfb
+%sslr8t Solpera "StormT1Encoding ReEncodeFont" <stormt1.enc <solpera_.pfb
+%sslb8t Solpera-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <solperab.pfb
+%sslri8t Solpera-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <solperai.pfb
+%sslbi8t Solpera-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <solperbi.pfb
+%% OSF:
+%sslr6s SolperaOSF "StormExEncoding ReEncodeFont" <stormex.enc <solpeosf.pfb
+%sslb6s SolperaOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <solposfb.pfb
+%sslri6s SolperaOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <solposfi.pfb
+%sslbi6s SolperaOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <solosfbi.pfb
+%% non OSF:
+%% sslr6s Solpera "StormExEncoding ReEncodeFont" <stormex.enc <solpera_.pfb
+%% sslb6s Solpera-Bold "StormExEncoding ReEncodeFont" <stormex.enc <solperab.pfb
+%% sslri6s Solpera-Italic "StormExEncoding ReEncodeFont" <stormex.enc <solperai.pfb
+%% sslbi6s Solpera-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <solperbi.pfb
+%%% Solpera Medium
+sslm8z SolperaMedium "StormL2Encoding ReEncodeFont" <storml2.enc <solperam.pfb
+sslc8z SolperaMedium-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <solpermb.pfb
+sslmi8z SolperaMedium-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <solpermi.pfb
+sslci8z SolperaMedium-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <solpembi.pfb
+sslm8t SolperaMedium "StormT1Encoding ReEncodeFont" <stormt1.enc <solperam.pfb
+sslc8t SolperaMedium-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <solpermb.pfb
+sslmi8t SolperaMedium-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <solpermi.pfb
+sslci8t SolperaMedium-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <solpembi.pfb
+% OSF:
+sslm6s SolperaMediumOSF "StormExEncoding ReEncodeFont" <stormex.enc <solpmosf.pfb
+sslc6s SolperaMediumOSF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <solmosfb.pfb
+sslmi6s SolperaMediumOSF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <solmosfi.pfb
+sslci6s SolperaMediumOSF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <somosfbi.pfb
+% non OSF:
+% sslm6s SolperaMedium "StormExEncoding ReEncodeFont" <stormex.enc <solperam.pfb
+% sslc6s SolperaMedium-Bold "StormExEncoding ReEncodeFont" <stormex.enc <solpermb.pfb
+% sslmi6s SolperaMedium-Italic "StormExEncoding ReEncodeFont" <stormex.enc <solpermi.pfb
+% sslci6s SolperaMedium-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <solpembi.pfb
+
+%%% Alcoholica
+salr8z Alcoholica "StormL2Encoding ReEncodeFont" <storml2.enc <alcoholi.pfb
+salb8z Alcoholica-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <alcoholb.pfb
+salri8z Alcoholica-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <alcoholi_.pfb
+salr8t Alcoholica "StormT1Encoding ReEncodeFont" <stormt1.enc <alcoholi.pfb
+salb8t Alcoholica-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <alcoholb.pfb
+salri8t Alcoholica-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <alcoholi_.pfb
+salr6s Alcoholica "StormExEncoding ReEncodeFont" <stormex.enc <alcoholi.pfb
+salb6s Alcoholica-Bold "StormExEncoding ReEncodeFont" <stormex.enc <alcoholb.pfb
+salri6s Alcoholica-Italic "StormExEncoding ReEncodeFont" <stormex.enc <alcoholi_.pfb
+%%% Monarchia
+smor8z Monarchia "StormL2Encoding ReEncodeFont" <storml2.enc <monarchi.pfb
+smob8z Monarchia-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <monarchb.pfb
+smor8t Monarchia "StormT1Encoding ReEncodeFont" <stormt1.enc <monarchi.pfb
+smob8t Monarchia-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <monarchb.pfb
+smor6s MonarchiaSwash "StormEx3Encoding ReEncodeFont" <stormex3.enc <monarchs.pfb
+smob6s Monarchia-Bold "StormExEncoding ReEncodeFont" <stormex.enc <monarchb.pfb
+%%% Monarchia Text
+smorg8z MonarchiaText "StormL2Encoding ReEncodeFont" <storml2.enc <monarcht.pfb
+smobg8z MonarchiaText-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <monarctb.pfb
+smorg8t MonarchiaText "StormT1Encoding ReEncodeFont" <stormt1.enc <monarcht.pfb
+smobg8t MonarchiaText-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <monarctb.pfb
+smorg6s MonarchiaText "StormExEncoding ReEncodeFont" <stormex.enc <monarcht.pfb
+smobg6s MonarchiaText-Bold "StormExEncoding ReEncodeFont" <stormex.enc <monarctb.pfb
+%%% Clichee
+sclr8z Clichee "StormL2Encoding ReEncodeFont" <storml2.enc <clichee_.pfb
+sclb8z Clichee-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <clicheeb.pfb
+sclri8z Clichee-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <clicheei.pfb
+sclbi8z Clichee-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <clichebi.pfb
+sclr8t Clichee "StormT1Encoding ReEncodeFont" <stormt1.enc <clichee_.pfb
+sclb8t Clichee-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <clicheeb.pfb
+sclri8t Clichee-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <clicheei.pfb
+sclbi8t Clichee-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <clichebi.pfb
+sclr6s Clichee "StormExEncoding ReEncodeFont" <stormex.enc <clichee_.pfb
+sclb6s Clichee-Bold "StormExEncoding ReEncodeFont" <stormex.enc <clicheeb.pfb
+sclri6s Clichee-Italic "StormExEncoding ReEncodeFont" <stormex.enc <clicheei.pfb
+sclbi6s Clichee-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <clichebi.pfb
+%%% Regula
+srer8z Regula "StormL2Encoding ReEncodeFont" <storml2.enc <regula__.pfb
+sreri8z Regula-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <regulait.pfb
+srer8t Regula "StormT1Encoding ReEncodeFont" <stormt1.enc <regula__.pfb
+sreri8t Regula-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <regulait.pfb
+srer6s Regula "StormExEncoding ReEncodeFont" <stormex.enc <regula__.pfb
+sreri6s Regula-Italic "StormExEncoding ReEncodeFont" <stormex.enc <regulait.pfb
+%%% Splendid Quartett
+sspr8z SplendidQuartett "StormL2Encoding ReEncodeFont" <storml2.enc <splendiq.pfb
+sspb8z SplendidQuartett-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <splendqb.pfb
+sspri8z SplendidQuartett-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <splendqi.pfb
+ssprs8z SplendidQuartett-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <splenqbi.pfb
+sspr8t SplendidQuartett "StormT1Encoding ReEncodeFont" <stormt1.enc <splendiq.pfb
+sspb8t SplendidQuartett-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <splendqb.pfb
+sspri8t SplendidQuartett-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <splendqi.pfb
+ssprs8t SplendidQuartett-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <splenqbi.pfb
+sspr6s SplendidQuartett "StormExEncoding ReEncodeFont" <stormex.enc <splendiq.pfb
+sspb6s SplendidQuartett-Bold "StormExEncoding ReEncodeFont" <stormex.enc <splendqb.pfb
+sspri6s SplendidOrnamenty "StormEx2Encoding ReEncodeFont" <stormex2.enc <splendio.pfb
+ssprs6s SplendidQuartett-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <splenqbi.pfb
+%%% Cobra
+scbr8z Cobra "StormL2Encoding ReEncodeFont" <storml2.enc <cobra___.pfb
+scbb8z Cobra-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <cobrabol.pfb
+scbr8t Cobra "StormT1Encoding ReEncodeFont" <stormt1.enc <cobra___.pfb
+scbb8t Cobra-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <cobrabol.pfb
+scbr6s Cobra "StormExEncoding ReEncodeFont" <stormex.enc <cobra___.pfb
+scbb6s Cobra-Bold "StormExEncoding ReEncodeFont" <stormex.enc <cobrabol.pfb
+%%% Excelsior Script
+sesr8z ExcelsorScript "StormL2Encoding ReEncodeFont" <storml2.enc <excelsos.pfb
+sesr8ze ExcelsorScript-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <excelssi.pfb
+sesr8t ExcelsorScript "StormT1Encoding ReEncodeFont" <stormt1.enc <excelsos.pfb
+sesr8te ExcelsorScript-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <excelssi.pfb
+sesr6s ExcelsorScript "StormExEncoding ReEncodeFont" <stormex.enc <excelsos.pfb
+sesr6se ExcelsorScript-Italic "StormExEncoding ReEncodeFont" <stormex.enc <excelssi.pfb
+%%% Excelsior Script Text
+sesrg8z ExcelsorScript-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <excelssb.pfb
+sesrg8ze ExcelsorScript-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <excelsbi.pfb
+sesrg8t ExcelsorScript-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <excelssb.pfb
+sesrg8te ExcelsorScript-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <excelsbi.pfb
+sesrg6s ExcelsorScript-Bold "StormExEncoding ReEncodeFont" <stormex.enc <excelssb.pfb
+sesrg6se ExcelsorScript-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <excelsbi.pfb
+%%% Zeppelin
+szpr8z ZeppelinMedium "StormL2Encoding ReEncodeFont" <storml2.enc <zeppelim.pfb
+szpb8z ZeppelinMedium-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <zeppelmb.pfb
+szpl8z ZeppelinLight-Light "StormL2Encoding ReEncodeFont" <storml2.enc <zeppelll.pfb
+szprl8z ZeppelinCollege "StormL2Encoding ReEncodeFont" <storml2.enc <zeppelic.pfb
+% szpr8z ZeppelinLight-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <zeppellb.pfb
+szpr8t ZeppelinMedium "StormT1Encoding ReEncodeFont" <stormt1.enc <zeppelim.pfb
+szpb8t ZeppelinMedium-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <zeppelmb.pfb
+szpl8t ZeppelinLight-Light "StormT1Encoding ReEncodeFont" <stormt1.enc <zeppelll.pfb
+szprl8t ZeppelinCollege "StormT1Encoding ReEncodeFont" <stormt1.enc <zeppelic.pfb
+% szpr8t ZeppelinLight-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <zeppellb.pfb
+szpr6s ZeppelinMedium "StormExEncoding ReEncodeFont" <stormex.enc <zeppelim.pfb
+szpb6s ZeppelinMedium-Bold "StormExEncoding ReEncodeFont" <stormex.enc <zeppelmb.pfb
+szpl6s ZeppelinLight-Light "StormExEncoding ReEncodeFont" <stormex.enc <zeppelll.pfb
+szprl6s ZeppelinCollege "StormExEncoding ReEncodeFont" <stormex.enc <zeppelic.pfb
+% szpr6s ZeppelinLight-Bold "StormExEncoding ReEncodeFont" <stormex.enc <zeppellb.pfb
+%%% Negro
+sngr8z Negro "StormL2Encoding ReEncodeFont" <storml2.enc <negro___.pfb
+sngr8t Negro "StormT1Encoding ReEncodeFont" <stormt1.enc <negro___.pfb
+sngr6s Negro "StormExEncoding ReEncodeFont" <stormex.enc <negro___.pfb
+%%% Farao
+sfar8z Farao "StormL2Encoding ReEncodeFont" <storml2.enc <farao___.pfb
+sfab8z Farao-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <faraobol.pfb
+sfac8z FaraoBlack "StormL2Encoding ReEncodeFont" <storml2.enc <faraobla.pfb
+sfarl8z FaraoCollege "StormL2Encoding ReEncodeFont" <storml2.enc <faraocol.pfb
+sfar8t Farao "StormT1Encoding ReEncodeFont" <stormt1.enc <farao___.pfb
+sfab8t Farao-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <faraobol.pfb
+sfac8t FaraoBlack "StormT1Encoding ReEncodeFont" <stormt1.enc <faraobla.pfb
+sfarl8t FaraoCollege "StormT1Encoding ReEncodeFont" <stormt1.enc <faraocol.pfb
+sfar6s Farao "StormExEncoding ReEncodeFont" <stormex.enc <farao___.pfb
+sfab6s Farao-Bold "StormExEncoding ReEncodeFont" <stormex.enc <faraobol.pfb
+sfac6s FaraoBlack "StormExEncoding ReEncodeFont" <stormex.enc <faraobla.pfb
+sfarl6s FaraoCollege "StormExEncoding ReEncodeFont" <stormex.enc <faraocol.pfb
+%%% Compur
+scpr8z Compur "StormL2Encoding ReEncodeFont" <storml2.enc <compur__.pfb
+scpb8z Compur-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <compurbo.pfb
+scpl8z CompurLight "StormL2Encoding ReEncodeFont" <storml2.enc <compurli.pfb
+scpr8t Compur "StormT1Encoding ReEncodeFont" <stormt1.enc <compur__.pfb
+scpb8t Compur-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <compurbo.pfb
+scpl8t CompurLight "StormT1Encoding ReEncodeFont" <stormt1.enc <compurli.pfb
+scpr6s Compur "StormExEncoding ReEncodeFont" <stormex.enc <compur__.pfb
+scpb6s Compur-Bold "StormExEncoding ReEncodeFont" <stormex.enc <compurbo.pfb
+scpl6s CompurLight "StormExEncoding ReEncodeFont" <stormex.enc <compurli.pfb
+%%% Bahnhof
+sbhr8z BahnhofRegular "StormL2Encoding ReEncodeFont" <storml2.enc <bahnhofr.pfb
+sbhb8z BahnhofBlack "StormL2Encoding ReEncodeFont" <storml2.enc <bahnhofb.pfb
+sbhc8z BahnhofUltra "StormL2Encoding ReEncodeFont" <storml2.enc <bahnhofu.pfb
+sbhrl8z BahnhofOutline "StormL2Encoding ReEncodeFont" <storml2.enc <bahnhofo.pfb
+sbhrh8z BahnhofSolid "StormL2Encoding ReEncodeFont" <storml2.enc <bahnhofs.pfb
+sbhr8t BahnhofRegular "StormT1Encoding ReEncodeFont" <stormt1.enc <bahnhofr.pfb
+sbhb8t BahnhofBlack "StormT1Encoding ReEncodeFont" <stormt1.enc <bahnhofb.pfb
+sbhc8t BahnhofUltra "StormT1Encoding ReEncodeFont" <stormt1.enc <bahnhofu.pfb
+sbhrl8t BahnhofOutline "StormT1Encoding ReEncodeFont" <stormt1.enc <bahnhofo.pfb
+sbhrh8t BahnhofSolid "StormT1Encoding ReEncodeFont" <stormt1.enc <bahnhofs.pfb
+sbhr6s BahnhofRegular "StormExEncoding ReEncodeFont" <stormex.enc <bahnhofr.pfb
+sbhb6s BahnhofBlack "StormExEncoding ReEncodeFont" <stormex.enc <bahnhofb.pfb
+sbhc6s BahnhofUltra "StormExEncoding ReEncodeFont" <stormex.enc <bahnhofu.pfb
+sbhrl6s BahnhofOutline "StormExEncoding ReEncodeFont" <stormex.enc <bahnhofo.pfb
+sbhrh6s BahnhofSolid "StormExEncoding ReEncodeFont" <stormex.enc <bahnhofs.pfb
+%%% Rondka
+sror8z Rondka "StormL2Encoding ReEncodeFont" <storml2.enc <rondka__.pfb
+sror8t Rondka "StormT1Encoding ReEncodeFont" <stormt1.enc <rondka__.pfb
+sror6s Rondka "StormExEncoding ReEncodeFont" <stormex.enc <rondka__.pfb
+%%% Tenebra
+stnr8z Tenebra "StormL2Encoding ReEncodeFont" <storml2.enc <tenebra_.pfb
+stnrd8z TenebraOldFace "StormL2Encoding ReEncodeFont" <storml2.enc <tenebrof.pfb
+stnrh8z TenebraShaded "StormL2Encoding ReEncodeFont" <storml2.enc <tenebras.pfb
+stnr8t Tenebra "StormT1Encoding ReEncodeFont" <stormt1.enc <tenebra_.pfb
+stnrd8t TenebraOldFace "StormT1Encoding ReEncodeFont" <stormt1.enc <tenebrof.pfb
+stnrh8t TenebraShaded "StormT1Encoding ReEncodeFont" <stormt1.enc <tenebras.pfb
+stnr6s Tenebra "StormExEncoding ReEncodeFont" <stormex.enc <tenebra_.pfb
+stnrd6s TenebraOldFace "StormExEncoding ReEncodeFont" <stormex.enc <tenebrof.pfb
+stnrh6s TenebraShaded "StormExEncoding ReEncodeFont" <stormex.enc <tenebras.pfb
+%%% Aichel
+sair8z Aichel "StormL2Encoding ReEncodeFont" <storml2.enc <aichel__.pfb
+sair8t Aichel "StormT1Encoding ReEncodeFont" <stormt1.enc <aichel__.pfb
+sair6s Aichel "StormExEncoding ReEncodeFont" <stormex.enc <aichel__.pfb
+%%% Traktoretka
+stkr8z Traktoretka "StormL2Encoding ReEncodeFont" <storml2.enc <traktore.pfb
+stkrh8z TraktoretkaGrad "StormL2Encoding ReEncodeFont" <storml2.enc <traktorg.pfb
+stkrl8z TraktoretkaOutline "StormL2Encoding ReEncodeFont" <storml2.enc <traktoro.pfb
+stkr8t Traktoretka "StormT1Encoding ReEncodeFont" <stormt1.enc <traktore.pfb
+stkrh8t TraktoretkaGrad "StormT1Encoding ReEncodeFont" <stormt1.enc <traktorg.pfb
+stkrl8t TraktoretkaOutline "StormT1Encoding ReEncodeFont" <stormt1.enc <traktoro.pfb
+stkr6s Traktoretka "StormExEncoding ReEncodeFont" <stormex.enc <traktore.pfb
+stkrh6s TraktoretkaGrad "StormExEncoding ReEncodeFont" <stormex.enc <traktorg.pfb
+stkrl6s TraktoretkaOutline "StormExEncoding ReEncodeFont" <stormex.enc <traktoro.pfb
+%%% Evil
+sevr8z Evil "StormL2Encoding ReEncodeFont" <storml2.enc <evil____.pfb
+sevr8t Evil "StormT1Encoding ReEncodeFont" <stormt1.enc <evil____.pfb
+sevr6s Evil "StormExEncoding ReEncodeFont" <stormex.enc <evil____.pfb
+%%% Ozdoby
+sozr Ozdoby <ozdoby__.pfb
+%%% Modell
+smdr8z Modell "StormL2Encoding ReEncodeFont" <storml2.enc <modell__.pfb
+smdri8z Modell-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <modellit.pfb
+smdrd8z ModellEnvelo "StormL2Encoding ReEncodeFont" <storml2.enc <modellen.pfb
+smdr8t Modell "StormT1Encoding ReEncodeFont" <stormt1.enc <modell__.pfb
+smdri8t Modell-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <modellit.pfb
+smdrd8t ModellEnvelo "StormT1Encoding ReEncodeFont" <stormt1.enc <modellen.pfb
+smdr6s Modell "StormExEncoding ReEncodeFont" <stormex.enc <modell__.pfb
+smdri6s Modell-Italic "StormExEncoding ReEncodeFont" <stormex.enc <modellit.pfb
+smdrd6s ModellEnvelo "StormExEncoding ReEncodeFont" <stormex.enc <modellen.pfb
+%%% Kompressor
+skpr8z Kompressor "StormL2Encoding ReEncodeFont" <storml2.enc <kompress.pfb
+skpr8ze Kompressor-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <kompresb.pfb
+skpro8z Kompressor-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <kompresi.pfb
+skpro8ze Kompressor-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <komprebi.pfb
+skpr8t Kompressor "StormT1Encoding ReEncodeFont" <stormt1.enc <kompress.pfb
+skpr8te Kompressor-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <kompresb.pfb
+skpro8t Kompressor-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <kompresi.pfb
+skpro8te Kompressor-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <komprebi.pfb
+skpr6s Kompressor "StormExEncoding ReEncodeFont" <stormex.enc <kompress.pfb
+skpr6se Kompressor-Bold "StormExEncoding ReEncodeFont" <stormex.enc <kompresb.pfb
+skpro6s Kompressor-Italic "StormExEncoding ReEncodeFont" <stormex.enc <kompresi.pfb
+skpro6se Kompressor-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <komprebi.pfb
+%%% Libcziowes
+slwr8z Libcziowes "StormL2Encoding ReEncodeFont" <storml2.enc <libcziow.pfb
+slwr8t Libcziowes "StormT1Encoding ReEncodeFont" <stormt1.enc <libcziow.pfb
+slwr6s Libcziowes "StormExEncoding ReEncodeFont" <stormex.enc <libcziow.pfb
+%%% Ohrada
+sohr8z Ohrada "StormL2Encoding ReEncodeFont" <storml2.enc <ohrada__.pfb
+sohr8t Ohrada "StormT1Encoding ReEncodeFont" <stormt1.enc <ohrada__.pfb
+sohr6s Ohrada "StormExEncoding ReEncodeFont" <stormex.enc <ohrada__.pfb
+%%% Patzcuaro
+spzr8z Patzcuaro "StormL2Encoding ReEncodeFont" <storml2.enc <patzcuar.pfb
+spzr8t Patzcuaro "StormT1Encoding ReEncodeFont" <stormt1.enc <patzcuar.pfb
+spzr6s Patzcuaro "StormExEncoding ReEncodeFont" <stormex.enc <patzcuar.pfb
+%%% Plagwitz
+spwr8z Plagwitz " StormL2Encoding ReEncodeFont " <storml2.enc <plagwitz.pfb
+spwr8t Plagwitz " StormT1Encoding ReEncodeFont " <stormt1.enc <plagwitz.pfb
+spwr6s Plagwitz " StormExEncoding ReEncodeFont " <stormex.enc <plagwitz.pfb
+
+%%% Tyfa ITC
+stfr8z TyfaITC "StormL2Encoding ReEncodeFont" <storml2.enc <tyfaitc_.pfb
+stfb8z TyfaITC-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <tyfaitcb.pfb
+stfri8z TyfaITC-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <tyfaitci.pfb
+stfbi8z TyfaITC-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <tyfitcbi.pfb
+stfr8t TyfaITC "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfaitc_.pfb
+stfb8t TyfaITC-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfaitcb.pfb
+stfri8t TyfaITC-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfaitci.pfb
+stfbi8t TyfaITC-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfitcbi.pfb
+stfr6s TyfaITC "StormExEncoding ReEncodeFont" <stormex.enc <tyfaitc_.pfb
+stfb6s TyfaITC-Bold "StormExEncoding ReEncodeFont" <stormex.enc <tyfaitcb.pfb
+stfri6s TyfaITC-Italic "StormExEncoding ReEncodeFont" <stormex.enc <tyfaitci.pfb
+stfbi6s TyfaITC-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <tyfitcbi.pfb
+%%% Tyfa ITC Medium
+stfm8z TyfaITCMedium "StormL2Encoding ReEncodeFont" <storml2.enc <tyfaitcm.pfb
+% stfb8z TyfaITCMedium-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <tyfitcmb.pfb
+stfmi8z TyfaITCMedium-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <tyfitcmi.pfb
+% stfbi8z TyfaITCMedium-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <tyitcmbi.pfb
+stfm8t TyfaITCMedium "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfaitcm.pfb
+% stfb8t TyfaITCMedium-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfitcmb.pfb
+stfmi8t TyfaITCMedium-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfitcmi.pfb
+% stfbi8t TyfaITCMedium-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <tyitcmbi.pfb
+stfm6s TyfaITCMedium "StormExEncoding ReEncodeFont" <stormex.enc <tyfaitcm.pfb
+% stfb6s TyfaITCMedium-Bold "StormExEncoding ReEncodeFont" <stormex.enc <tyfitcmb.pfb
+stfmi6s TyfaITCMedium-Italic "StormExEncoding ReEncodeFont" <stormex.enc <tyfitcmi.pfb
+% stfbi6s TyfaITCMedium-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <tyitcmbi.pfb
+%%% Tyfa Text
+stfrg8z TyfaText "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatext.pfb
+stfbg8z TyfaText-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatexb.pfb
+stfrig8z TyfaText-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatexi.pfb
+stfbig8z TyfaText-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatebi.pfb
+stfrg8t TyfaText "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatext.pfb
+stfbg8t TyfaText-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatexb.pfb
+stfrig8t TyfaText-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatexi.pfb
+stfbig8t TyfaText-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatebi.pfb
+stfrg6s TyfaText "StormExEncoding ReEncodeFont" <stormex.enc <tyfatext.pfb
+stfbg6s TyfaText-Bold "StormExEncoding ReEncodeFont" <stormex.enc <tyfatexb.pfb
+stfrig6s TyfaText-Italic "StormExEncoding ReEncodeFont" <stormex.enc <tyfatexi.pfb
+stfbig6s TyfaText-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <tyfatebi.pfb
+%%% Tyfa Text Medium
+stfmg8z TyfaTextMedium "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatexm.pfb
+% stfbg8z TyfaTextMedium-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatemb.pfb
+%%%stfmg8z TyfaTextMedium-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatemb.pfb
+stfmig8z TyfaTextMedium-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatemi.pfb
+% stfbig8z TyfaTextMedium-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatmbi.pfb
+stfmg8t TyfaTextMedium "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatexm.pfb
+% stfbg8t TyfaTextMedium-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatemb.pfb
+stfmig8t TyfaTextMedium-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatemi.pfb
+% stfbig8t TyfaTextMedium-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatmbi.pfb
+stfmg6s TyfaTextMedium "StormExEncoding ReEncodeFont" <stormex.enc <tyfatexm.pfb
+% stfbg6s TyfaTextMedium-Bold "StormExEncoding ReEncodeFont" <stormex.enc <tyfatemb.pfb
+stfmig6s TyfaTextMedium-Italic "StormExEncoding ReEncodeFont" <stormex.enc <tyfatemi.pfb
+% stfbig6s TyfaTextMedium-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <tyfatmbi.pfb
+%%% Tyfa Text Caps
+stfrc8z TyfaTextCaps "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatexc.pfb
+stfbc8z TyfaTextCaps-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <tyfatecb.pfb
+stfrc8t TyfaTextCaps "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatexc.pfb
+stfbc8t TyfaTextCaps-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <tyfatecb.pfb
+stfrc6s TyfaTextCaps "StormExEncoding ReEncodeFont" <stormex.enc <tyfatexc.pfb
+stfbc6s TyfaTextCaps-Bold "StormExEncoding ReEncodeFont" <stormex.enc <tyfatecb.pfb

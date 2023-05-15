@@ -1,0 +1,271 @@
+%D \module
+%D   [      file=t-bluegray,
+%D        version=2007.07.17, 
+%D          title=\CONTEXT\ Style File,
+%D       subtitle=Presentation Module bluegray,
+%D         author=Thomas A. Schmitz,
+%D           date=\currentdate,
+%D      copyright={Thomas A. Schmitz}]
+%C
+%C Copyright 2007 Thomas A. Schmitz.
+%C This file may be distributed under the GNU General Public License v. 2.0.
+
+%D This file provides the \quotation{bluegray} style for the presentation
+%D module. It is loaded at runtime. 
+
+\writestatus{loading}{module bluegray}
+
+\startmodule[bluegray]
+
+\unprotect
+
+%D The taspresentation module provides a skeleton into which different styles
+%D can be hooked. It uses a number of variables and macros which have to be set
+%D beforehand. Some parts are optional. We begin with the necessary definitions:
+
+%D The bluegray module has parameters of its own; we set them up and use
+%D them:
+
+\setupmodule[color=blue]
+
+\processaction[\currentmoduleparameter{color}]
+	[        blue=>\def\colormode{bluemode},
+                  red=>\def\colormode{redmode},
+           \v!unknown=>\def\colormode{bluemode},
+           \v!default=>\def\colormode{bluemode}]
+
+\enablemode[\colormode]
+
+%D We define our colors:
+
+\startmode[bluemode]
+\definecolor [outer]           [r=0.8,g=0.8,b=0.9]
+\definecolor [inner]	       [s=.88]
+\definecolor [One]             [r=.67, g=0, b=.04]
+\definecolor [tcolor]          [s=0]
+\stopmode
+
+\startmode[redmode]
+\definecolor [outer]           [r=0.45,]
+\definecolor [inner]	       [s=.18]
+\definecolor [One]             [r=.67, g=0, b=.04]
+\definecolor [tcolor]          [s=1]
+\stopmode
+
+%D We start colors:
+
+\setupcolors[state=start,textcolor=tcolor]
+
+%D These macros are used for placing figures/pictures:
+
+\define\NormalHeight{\textheight}
+\define\NormalWidth{.476\textwidth}
+\define\PictureFrameHeight{\textheight}
+\define\PictureFrameWidth{.476\textwidth}
+
+%D The page layout:
+
+\setuplayout [width=fit,
+              margin=2cm,
+              height=fit,
+	      leftmargindistance=.8cm,
+	      rightmargindistance=0cm,
+              header=18mm, 
+              footer=0cm, 
+              topspace=.8cm, 
+              backspace=2cm,
+              location=singlesided]
+
+%D The macro for typesetting the Slidetitle; this is adapted from a sample
+%D document that Brooks Moses published on the wiki:
+
+\definelayer[slidetitle]
+    [width=\paperwidth,
+    height=\paperheight,
+    x=20mm]
+
+\define[1]\Slidetitle{\page\setlayer[slidetitle]%
+     {\framed[frame=off,height=2.5cm,width=\textwidth,offset=0pt,align=middle,top=\vss,bottom=\vss]{\switchtobodyfont[\Titlesize]#1}}}
+
+%D The macro \tex{Maketitle} produces a default title page with the author, the
+%D title of the presentation, and the date. Using it is not mandatory.
+
+\define\Maketitle{%
+\titback
+\null
+\vfill
+\midaligned{\switchtobodyfont[\Titlesize]\getvariable{taspresent}{title}}
+\blank[2*line]
+\midaligned{\getvariable{taspresent}{author}}
+\blank[3*line]
+\midaligned{\currentdate}
+\vfill
+\null}
+
+%D The following parts are optional; if you don't use backgrounds and are
+%D content with CONTEXT's default itemization, you don't have to set these
+%D macros. 
+
+%D This is the font we will use to draw the numbers on the slides
+
+\beginOLDTEX
+\definefontsynonym [BigN] [uhvb8r] 
+\definefont[NumberFont] [BigN at 30pt]
+
+%D We let Metapost calculate the background:
+
+\startuniqueMPgraphic{textslide} 
+StartPage ;
+fill Page withcolor \MPcolor{outer} ;
+fill Field[Text][Text] enlarged.2cm withcolor \MPcolor{inner} ;
+StopPage ;
+\stopuniqueMPgraphic 
+
+\startuniqueMPgraphic{vertpic}
+StartPage ;
+fill Page withcolor \MPcolor{outer} ;
+path Main ;
+z1 = urcorner Field[Text][Text] shifted (.2cm,0) ;
+z2 = lrcorner Field[Text][Text] shifted (.2cm,-.2cm) ;
+z3 = z1 shifted (-8.05cm,0) ;
+z4 = (x3,y2) ;
+Main := z1 -- z2 -- z4 -- z3 --cycle ;
+fill Main withcolor \MPcolor{inner} ;
+StopPage ;
+\stopuniqueMPgraphic
+
+\startuseMPgraphic{Bottomone}
+StartPage
+picture Left, Right ;
+%defaultfont := "texnansi-myros-MyriadProBold" ;
+%defaultfont := "texnansi-lmssbx10" ;
+%Left := Right := thelabel("\folio",origin) ysized 5cm ;
+if PageNumber < 10:
+	Left := \sometxt{\framed[width=1cm,offset=0pt,align=middle,frame=off]{\color[outer]{\NumberFont \folio}}} ysized 6cm; 
+	Right := \sometxt{\framed[width=1cm,offset=0pt,align=middle,frame=off]{\color[inner]{\NumberFont \folio}}} ysized 6cm; 
+	clip Right to boundingbox Right xyscaled(0,3cm) shifted (bbwidth(Right)/2,0) ;
+	draw Left shifted (16.34cm,-.3cm) ;
+	draw Right shifted (16.34cm,-.3cm) ;
+fi;
+StopPage
+\stopuseMPgraphic
+
+
+\startuseMPgraphic{Bottomten}
+StartPage
+picture Left, Right ;
+%defaultfont := "texnansi-myros-MyriadProBold" ;
+%defaultfont := "texnansi-lmssbx10" ;
+%Left := Right := thelabel("\folio",origin) ysized 5cm ;
+if PageNumber >= 10:
+	Left := \sometxt{\framed[width=1.7cm,offset=0pt,align=middle,frame=off]{\color[outer]{\NumberFont \folio}}} ysized 6cm ; 
+	Right := \sometxt{\framed[width=1.7cm,offset=0pt,align=middle,frame=off]{\color[inner]{\NumberFont \folio}}} ysized 6cm ; 
+	clip Right to boundingbox Right xyscaled(0,3cm) shifted (bbwidth(Right)/1.5,0) ;
+	draw Left shifted (12.61cm,-.3cm)  withcolor \MPcolor{outer} ;
+	draw Right shifted (12.61cm,-.3cm)  withcolor \MPcolor{inner} ;
+fi ;
+StopPage
+\stopuseMPgraphic
+\endOLDTEX
+
+\beginLUATEX
+\definefontfeature[intended][script=latn,language=dflt,liga=yes,kern=yes,tlig=yes,trep=yes,mode=node]
+\font\NumberFont=name:texgyreheros-bold*intended at 30pt
+
+%D We let Metapost calculate the background:
+
+\startuniqueMPgraphic{textslide} 
+StartPage ;
+fill Page withcolor \MPcolor{outer} ;
+fill Field[Text][Text] enlarged.2cm withcolor \MPcolor{inner} ;
+StopPage ;
+\stopuniqueMPgraphic 
+
+\startuniqueMPgraphic{vertpic}
+StartPage ;
+fill Page withcolor \MPcolor{outer} ;
+path Main ;
+z1 = urcorner Field[Text][Text] shifted (.2cm,0) ;
+z2 = lrcorner Field[Text][Text] shifted (.2cm,-.2cm) ;
+z3 = z1 shifted (-8.05cm,0) ;
+z4 = (x3,y2) ;
+Main := z1 -- z2 -- z4 -- z3 --cycle ;
+fill Main withcolor \MPcolor{inner} ;
+StopPage ;
+\stopuniqueMPgraphic
+
+\startuseMPgraphic{Bottomone}
+StartPage
+picture Left, Right ;
+%defaultfont := "texnansi-myros-MyriadProBold" ;
+%defaultfont := "texnansi-lmssbx10" ;
+%Left := Right := thelabel("\folio",origin) ysized 5cm ;
+if PageNumber < 10:
+	Left := \sometxt{\framed[width=1cm,offset=0pt,align=middle,frame=off]{\color[outer]{\NumberFont \folio}}} ysized 6cm; 
+	Right := \sometxt{\framed[width=1cm,offset=0pt,align=middle,frame=off]{\color[inner]{\NumberFont \folio}}} ysized 6cm; 
+	clip Right to boundingbox Right xyscaled(0,3cm) shifted (bbwidth(Right)/2,0) ;
+	draw Left shifted (16.34cm,-.3cm) ;
+	draw Right shifted (16.34cm,-.3cm) ;
+fi;
+StopPage
+\stopuseMPgraphic
+
+
+\startuseMPgraphic{Bottomten}
+StartPage
+picture Left, Right ;
+%defaultfont := "texnansi-myros-MyriadProBold" ;
+%defaultfont := "texnansi-lmssbx10" ;
+%Left := Right := thelabel("\folio",origin) ysized 5cm ;
+if PageNumber >= 10:
+	Left := \sometxt{\framed[width=1.7cm,offset=0pt,align=middle,frame=off]{\color[outer]{\NumberFont \folio}}} ysized 6cm ; 
+	Right := \sometxt{\framed[width=1.7cm,offset=0pt,align=middle,frame=off]{\color[inner]{\NumberFont \folio}}} ysized 6cm ; 
+	clip Right to boundingbox Right xyscaled(0,3cm) shifted (bbwidth(Right)/1.5,0) ;
+	draw Left shifted (12.61cm,-.3cm)  withcolor \MPcolor{outer} ;
+	draw Right shifted (12.61cm,-.3cm)  withcolor \MPcolor{inner} ;
+fi ;
+StopPage
+\stopuseMPgraphic
+\endLUATEX
+
+%D We define these backgrounds as overlays:
+
+\defineoverlay 
+[lecbackground] 
+[\useMPgraphic{textslide}] 
+
+\defineoverlay 
+[picbackground] 
+[\useMPgraphic{vertpic}] 
+
+\defineoverlay 
+[bottomone] 
+[\useMPgraphic{Bottomone}] 
+
+\defineoverlay 
+[bottomten] 
+[\useMPgraphic{Bottomten}] 
+
+%D These are shortcuts to switch backgrounds:
+
+\define\lecback{\setuplayout[header=18mm]\setupbackgrounds[page][background={lecbackground,bottomone,bottomten,slidetitle}]}
+\define\titback{\setupbackgrounds[page][background=lecbackground]}
+\define\picback{\setuplayout[header=0mm]\setupbackgrounds[page][background={picbackground,bottomone,bottom,bottomten,slidetitle}]}
+\define\noback{\setupbackgrounds[page][background=nobackground]}
+
+%D We use combinations for placing vertical pictures and text side by side, and
+%D we want a distance of 1.1 cm between both.
+
+\setupcombinations[distance=1.1cm]
+
+%D The symbol for the first level of itemizations. 
+
+\definesymbol[1][$\square$]
+\setupitemize[1][inmargin]
+%\setupitemize[each][joinedup,unpacked]
+
+\protect
+\stopmodule
+
+\endinput
+

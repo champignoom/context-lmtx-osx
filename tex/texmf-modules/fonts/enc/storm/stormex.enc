@@ -1,0 +1,81 @@
+% Extra characters from fonts by Storm Type Foundry
+% Encoding suggested by Petr Olsak, Jun 2001
+% Vit Zyka: 138: .notdf -> currency
+
+%
+/StormExEncoding [
+% 0x00 
+  /minus /onesuperior /twosuperior /threesuperior
+  /lessequal /notequal /greaterequal /plusminus
+  /onequarter /onehalf /threequarters /fraction
+  /degree /brokenbar /multiply /divide 
+% 0x10
+ /summation /Omegagreek /pi /mu 
+ /Delta /logicalnot /infinity /radical 
+ /ordfeminine /ordmasculine /gravecmb /acutecmb 
+ /caroncmb /circumflexcmb /brevecmb /ringcmb
+% 0x20 (ASCII begins)
+ /nbspace /exclam /quotedbl /macroncmb
+ /dotaccentcmb /hungarumlautcmb /ogonekcmb /cedillacmb
+ /tildecmb /dieresiscmb /commaaccent /.notdef
+ /comma /hyphen /period /slash
+% 0x30
+ /zero /one /two /three /four /five /six /seven
+ /eight /nine /colon /semicolon 
+ /less /equal /greater /question
+% 0x40
+ /at /A /B /C /D /E /F /G /H /I /J /K /L /M /N /O
+% 0x50
+ /P /Q /R /S /T /U /V /W
+ /X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore
+% 0x60
+ /quoteleft /a /b /c /d /e /f /g /h /i /j /k /l /m /n /o
+% 0x70
+ /p /q /r /s /t /u /v /w
+ /x /y /z /braceleft /bar /braceright /asciitilde
+ /periodcentered % ASCII ends
+% 0x80
+ /ct /st /ft /longst
+ /longs /lozenge /florin /dmacron 
+ /Euro /franc /currency /.notdef
+ /Tbar /Tcommaaccent /Umacron /Ubreve 
+% 0x90
+ /Eth /Thorn /Ydieresis /Rcedilla
+ /Scircumflex /Ucircumflex /Uogonek /Utilde
+ /Ncommaaccent /Gacute /Gbreve /Jcircumflex
+ /IJ /Idot /Lcedilla /Ldotaccent
+% 0xA0
+ /dagger /daggerdbl /bullet /paragraph
+ /ellipsis /trademark /copyright /registered
+ /cent /yen /.notdef /.notdef
+ /tbar /tcommaaccent /umacron /ubreve 
+% 0xD0
+ /eth /thorn /ydieresis /rcedilla
+ /scircumflex /ucircumflex /uogonek /utilde
+ /ncommaaccent /gacute /gbreve /jcircumflex
+  /ij /.notdef /lcedilla /ldotaccent
+% 0xC0
+ /Wcircumflex /Edotaccent /Ycircumflex /Atilde 
+ /Amacron /Aring /Ccircumflex /Cdotaccent
+ /Egrave /Ebreve /Ecircumflex /Emacron
+ /Igrave /Itilde /Imacron /Idieresis
+% 0xD0
+ /Iogonek /Ntilde /Ograve /Omacron
+ /Obreve /Otilde /Ncedilla /Kcedilla
+ /Oslash /Ugrave /Gcircumflex /Gdotaccent
+ /Gcedilla /Scommaaccent /Hcircumflex /Hbar
+% 0xE0
+ /wcircumflex /edotaccent /ycircumflex /atilde 
+ /amacron /aring /ccircumflex /cdotaccent
+ /egrave /ebreve /ecircumflex /emacron
+ /igrave /itilde /imacron /idieresis
+% 0xF0
+ /iogonek /ntilde /ograve /omacron
+ /obreve /otilde /ncedilla /kcedilla
+ /oslash /ugrave /gcircumflex /gdotaccent
+ /gcedilla /scommaaccent /hcircumflex /hbar
+] def
+
+
+
+

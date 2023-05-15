@@ -1,0 +1,154 @@
+%D \module
+%D   [      file=t-embossed,
+%D        version=2007.07.17, 
+%D          title=\CONTEXT\ Style File,
+%D       subtitle=Presentation Module embossed,
+%D         author=Thomas A. Schmitz,
+%D           date=\currentdate,
+%D      copyright={Thomas A. Schmitz}]
+%C
+%C Copyright 2007 Thomas A. Schmitz.
+%C This file may be distributed under the GNU General Public License v. 2.0.
+
+%D This file provides the \quotation{embossed} style for the presentation
+%D module. It is loaded at runtime. 
+
+\writestatus{loading}{module embossed}
+
+\startmodule[embossed]
+
+\unprotect
+
+%D The taspresentation module provides a skeleton into which different styles
+%D can be hooked. It uses a number of variables and macros which have to be set
+%D beforehand. Some parts are optional. We begin with the necessary definitions:
+
+%D We start colors:
+
+\setupcolors[state=start]
+
+%D These macros are used for placing figures/pictures:
+
+\define\NormalHeight{.94\textheight}
+\define\NormalWidth{.476\textwidth}
+\define\PictureFrameHeight{.94\textheight}
+\define\PictureFrameWidth{.476\textwidth}
+
+%D The page layout:
+
+\setuplayout [width=fit,
+              margin=1.3cm,
+              height=fit,
+              header=1cm, 
+              footer=1cm, 
+              topspace=10mm, 
+              backspace=2cm,
+              location=singlesided]
+
+%D The macro for typesetting the Slidetitle; this is adapted from a sample
+%D document that Brooks Moses published on the wiki:
+
+\definelayer[slidetitle]
+    [width=\paperwidth,
+    height=\paperheight,
+    x=20mm,
+    y=2mm]
+
+\define[1]\Slidetitle{\page\setlayer[slidetitle]%
+     {\framed[frame=off,height=2cm,width=\textwidth,offset=0pt,align=middle,top=\vss,bottom=\vss]{\switchtobodyfont[\Titlesize]\color[e]{#1}}}}
+
+%D The macro \tex{Maketitle} produces a default title page with the author, the
+%D title of the presentation, and the date. Using it is not mandatory.
+
+\define\Maketitle{%
+\titback
+\null
+\vfill
+\midaligned{\switchtobodyfont[\Titlesize]\color[e]{\getvariable{taspresent}{title}}}
+\blank[2*line]
+\midaligned{\getvariable{taspresent}{author}}
+\blank[3*line]
+\midaligned{\currentdate}
+\vfill
+\null}
+
+%D The following parts are optional; if you don't use backgrounds and are
+%D content with CONTEXT's default itemization, you don't have to set these
+%D macros. 
+
+%D We define our colors:
+
+\definecolor [a]	       [r=1,g=1,b=.8]
+\definecolor [Item]            [r=.2,b=.2,b=.5]
+\definecolor [b]               [r=.6,g=.2,b=.2]
+\definecolor [c] 	       [r=.7,g=.2,b=.2]
+\definecolor [d] 	       [r=.4,g=.2,b=.2]
+\definecolor [e] 	       [r=.2,g=.2,b=.5]
+\definecolor [f]               [s=.4]
+
+\beginOLDTEX
+\definefontsynonym [BigBoss] [uhvb8r] 
+\definefont[Emblem] [BigBoss at 30pt]
+\endOLDTEX
+
+\beginLUATEX
+\definefontsynonym [BigBoss] [name:TeXGyreHeros-Bold]
+\definefont[Emblem] [BigBoss at 30pt]
+\endLUATEX
+
+%D However, it seemed more portable to let Metapost calculate the background.
+%D The rainbow effect takes some lines of code, but it's not too bad:
+
+\startuseMPgraphic{redyellow}
+StartPage ;
+picture boss ;
+picture bboss ;
+pair zf[] ;
+fill Page withcolor \MPcolor{a} ;
+path gr[] ;
+numeric a; a = 2cm ;
+numeric b; b = 0.9cm ;
+z.f1 = llcorner Page shifted (0,a) ;
+z.f2 = lrcorner Page shifted (0,a) ;
+gr[1] = llcorner Page -- z.f1 -- z.f2 -- lrcorner Page -- cycle ;
+fill gr[1] withcolor \MPcolor{b} ;
+pickup pencircle scaled 6pt ;
+gr[2] = ulcorner Page -- urcorner Page -- lrcorner Page -- llcorner Page -- cycle ;
+gr[2] := gr[2] enlarged -2.8.pt ;
+draw gr[2] withcolor \MPcolor{f} ;
+draw z.f1 -- z.f2 withcolor \MPcolor{f} ;
+boss := \sometxt{\framed[width=\textwidth,height=2cm,offset=0pt,align=right,top=\vss,bottom=\vss,frame=off]{\Emblem \color[c]{Made with \CONTEXT\hfill \pagenumber\ of \lastpage}}} ;
+bboss := \sometxt{\framed[width=\textwidth,height=2cm,offset=0pt,align=right,top=\vss,bottom=\vss,frame=off]{\strut\Emblem \color[d]{Made with \CONTEXT\hfill \pagenumber\ of \lastpage}}} ;
+draw bboss shifted (1.96cm,0.04cm) ;
+draw boss shifted (2cm,0) ; 
+StopPage ;
+\stopuseMPgraphic
+
+
+%D We define these backgrounds as overlays:
+
+\defineoverlay[yellowbg]
+[\useMPgraphic{redyellow}]
+
+%D These are shortcuts to switch backgrounds:
+
+\define\lecback{\setuplayout[header=10mm]\setupbackgrounds[page][background={yellowbg,slidetitle}]}
+\define\titback{\setuplayout[header=0mm]\setupbackgrounds[page][background={yellowbg}]}
+\define\picback{\setuplayout[header=0mm]\setupbackgrounds[page][background={yellowbg}]}
+\define\noback{\setupbackgrounds[page][background=nobackground]}
+
+%D We use combinations for placing vertical pictures and text side by side, and
+%D we want a distance of 1.1 cm between both.
+
+\setupcombinations[distance=1.1cm]
+
+%D The symbol for the first level of itemizations. 
+
+\definesymbol[1][\useMPgraphic{ItSquare}]
+\setupitemize[1][inmargin][color=e]
+
+\protect
+\stopmodule
+
+\endinput
+

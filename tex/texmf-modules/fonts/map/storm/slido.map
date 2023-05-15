@@ -1,0 +1,20 @@
+
+%%% Lido -- Storm Type Foundry
+sldr8z LidoSTF "StormL2Encoding ReEncodeFont" <storml2.enc <lidostf_.pfb
+sldb8z LidoSTF-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <lidostfb.pfb
+sldri8z LidoSTF-Italic "StormL2Encoding ReEncodeFont" <storml2.enc <lidostfi.pfb
+sldbi8z LidoSTF-BoldItalic "StormL2Encoding ReEncodeFont" <storml2.enc <lidstfbi.pfb
+sldr8zc LidoSTFCond "StormL2Encoding ReEncodeFont" <storml2.enc <lidostfc.pfb
+sldb8zc LidoSTFCond-Bold "StormL2Encoding ReEncodeFont" <storml2.enc <lidstfcb.pfb
+sldr8t LidoSTF "StormT1Encoding ReEncodeFont" <stormt1.enc <lidostf_.pfb
+sldb8t LidoSTF-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <lidostfb.pfb
+sldri8t LidoSTF-Italic "StormT1Encoding ReEncodeFont" <stormt1.enc <lidostfi.pfb
+sldbi8t LidoSTF-BoldItalic "StormT1Encoding ReEncodeFont" <stormt1.enc <lidstfbi.pfb
+sldr8tc LidoSTFCond "StormT1Encoding ReEncodeFont" <stormt1.enc <lidostfc.pfb
+sldb8tc LidoSTFCond-Bold "StormT1Encoding ReEncodeFont" <stormt1.enc <lidstfcb.pfb
+sldr6s LidoSTF "StormExEncoding ReEncodeFont" <stormex.enc <lidostf_.pfb
+sldb6s LidoSTF-Bold "StormExEncoding ReEncodeFont" <stormex.enc <lidostfb.pfb
+sldri6s LidoSTF-Italic "StormExEncoding ReEncodeFont" <stormex.enc <lidostfi.pfb
+sldbi6s LidoSTF-BoldItalic "StormExEncoding ReEncodeFont" <stormex.enc <lidstfbi.pfb
+sldr6sc LidoSTFCond "StormExEncoding ReEncodeFont" <stormex.enc <lidostfc.pfb
+sldb6sc LidoSTFCond-Bold "StormExEncoding ReEncodeFont" <stormex.enc <lidstfcb.pfb

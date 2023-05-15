@@ -1,0 +1,36 @@
+Storm font support for ConTeXt
+------------------------------
+
+support: (c) Vit Zyka, vit.zyka@seznam.cz
+distributed under General Public Licence
+(http://typokitek.com/typokv-download-TeX-en.html)
+
+based on: plain TeX Storm font support by Petr Olsak
+(http://www.cstug.cz/stormtype/)
+
+fonts: (c) Storm Font Foundry (http://www.stormtype.com)
+
+--- Distribution:
+
+stormcontext.zip      support itself
+stormcontext-lido.zip support only for Lido font
+stormcontext-cat.zip  catalog and its sources
+storm-lido.zip        Type1 Lido: read the licence before installing!
+
+--- Catalogue:
+
+cont-storm-catalog.pdf
+
+--- Quick Usage:
+
+\useencoding[st1]
+\useencoding[st3]
+\enableregime[ec]
+
+\usetypescriptfile[t-type-slido]
+\usetypescript[Lido][st1]
+\setupbodyfont[Lido,10pt,rm]
+
+--- Font family list:
+Aichel, Biblon, DynamoRE, Libcziowes, Lido, Preissig-Text,
+Preissig-Antikva, Preissig1918, Serapion, Solpera, Tyfa-Text.

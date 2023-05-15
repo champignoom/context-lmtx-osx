@@ -1,0 +1,54 @@
+<!DOCTYPE rdf:RDF SYSTEM "tpm.dtd">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:TPM="http://texlive/dante.de/">
+  <rdf:Description
+      about="http://dl.contextgarden.net/modules/taspresent-2008-08-11.zip">
+    <TPM:Name>t-taspresent</TPM:Name>
+    <TPM:Type>Package</TPM:Type>
+    <TPM:Date>2008/08/11 21:00:00</TPM:Date>
+    <TPM:Version>2008.08.11</TPM:Version>
+    <TPM:Creator>Thomas A. Schmitz</TPM:Creator>
+    <TPM:Title>taspresent</TPM:Title>
+    <TPM:Description>
+      taspresentation is a module to prepare projector-based presentations
+      with ConTeXt
+    </TPM:Description>
+    <TPM:Author>Thomas A. Schmitz</TPM:Author>
+    <TPM:Size>2255176</TPM:Size>
+    <TPM:Build/>
+    <TPM:RunFiles size="125944">
+      tex/context/third/taspresent/t-blackblue.tex
+      tex/context/third/taspresent/t-bluegray.tex
+      tex/context/third/taspresent/t-bluestripe.tex
+      tex/context/third/taspresent/t-darkshade.tex
+      tex/context/third/taspresent/t-doubleframe.tex
+      tex/context/third/taspresent/t-doubleshade.tex
+      tex/context/third/taspresent/t-embossed.tex
+      tex/context/third/taspresent/t-graybeams.tex
+      tex/context/third/taspresent/t-graysquare.tex
+      tex/context/third/taspresent/t-greenblue.tex
+      tex/context/third/taspresent/t-horizontalblue.tex
+      tex/context/third/taspresent/t-lightblue.tex
+      tex/context/third/taspresent/t-narrowstripe.tex
+      tex/context/third/taspresent/t-quadblue.tex
+      tex/context/third/taspresent/t-rainbowstripe.tex
+      tex/context/third/taspresent/t-redframe.tex
+      tex/context/third/taspresent/t-superellipse.tex
+      tex/context/third/taspresent/t-taspresent.tex
+      tex/context/third/taspresent/t-titleframe.tex
+      tpm/t-taspresent.tpm
+    </TPM:RunFiles>
+    <TPM:DocFiles size="2129232">
+      doc/context/third/taspresent/readme
+      doc/context/third/taspresent/taspresent-manual.tex
+      doc/context/third/taspresent/taspresent-manual.pdf
+      doc/context/third/taspresent/hor.jpg
+      doc/context/third/taspresent/vert.jpg
+      doc/context/third/taspresent/demo.tex
+    </TPM:DocFiles>
+    <TPM:Requires>
+      <TPM:Package name="context"/>
+    </TPM:Requires>
+    <TPM:Provides>Package/taspresent</TPM:Provides>
+  </rdf:Description>
+</rdf:RDF>

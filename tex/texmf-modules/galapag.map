@@ -1,0 +1,10 @@
+% You need to add the following line to your file:
+%
+%   \pdfmapfile{+galapag.map}
+%
+% In ConTeXt you can best use:
+%
+%   \loadmapfile[galapag.map]
+
+aquamin AquaMintsGD 4 < AquaMin_.pfb
+webomin WebOMintsGD   < webomint.pfb

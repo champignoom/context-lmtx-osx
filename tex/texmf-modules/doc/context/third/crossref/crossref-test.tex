@@ -1,0 +1,29 @@
+\setupcolors[state=start]
+
+\definecolor[red][r=1]
+\definecolor[green][g=1]
+\definecolor[blue][b=1]
+
+\setupinteraction[state=start,style=normal,color=red,contrastcolor=red]
+% color and contrastcolor must be the the final color of the refref area in crossref
+
+\usemodule[crossref][refColor=green,reffixColor=blue,refrefColor=red]
+
+\starttext
+
+
+\textreference[ref1]{1.1/3}
+
+
+Should be: 1.1/3 and is: \crossref[ref1]
+
+Should be: (Abs. 1.1/3) and is: \crossref[type=internal,left={(},label=Abs.,right={)}][ref1]
+
+Should be: [Zen12, p 23] and is: \crossref[type=external,detail={p. 23}][ref2]
+
+Should be: (nach [Zen12, S. 32-33] und weitere) and is: \crossref[type=external, left={(nach }, right={ und weitere)},detail={S. 32-33}][ref2]
+
+
+\textreference[ref2]{Zen12} Biblio blabla fasel
+
+\stoptext

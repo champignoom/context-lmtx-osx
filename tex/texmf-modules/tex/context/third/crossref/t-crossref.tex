@@ -1,0 +1,94 @@
+%D \module [
+%D		file			= t-crossref, 
+%D		version		= 0.9.3
+%D		title			= \CONTEXT\ User Module,
+%D		subtitle		= General Cross Reference,
+%D 		author		= Zenlima,
+%D		date			= 2013.01.06
+%D		copyright		= Henning Haeske,
+%D		license		= '' 
+%D ]
+
+\startmodule[crossref]
+\unprotect
+
+\setupmodule[refColor=,reffixColor=,refrefColor=]
+\def\crossrefColor{\moduleparameter{crossref}{refColor}}
+\def\crossreffixColor{\moduleparameter{crossref}{reffixColor}}
+\def\crossrefrefColor{\moduleparameter{crossref}{refrefColor}}
+
+\definelabelclass[crossref]
+
+\setupcrossreftext[internalPrefix={}]
+\setupcrossreftext[internalSuffix={}]
+\setupcrossreftext[externalPrefix={[}]
+\setupcrossreftext[externalSuffix={]}]
+\setupcrossreftext[refDetailDivider={\textcomma\space}]
+
+\setupcrossreftext[cz][atpageLeft={ na straně }]
+\setupcrossreftext[cz][atpageRight={ }]
+\setupcrossreftext[de][atpageLeft={ auf Seite }]
+\setupcrossreftext[de][atpageRight={}]
+\setupcrossreftext[en][atpageLeft={ on page }]
+\setupcrossreftext[en][atpageRight={}]
+
+
+%D For cross reference the method \crossref is created. It can you used in following manner:
+%D 
+%D \crossref[<reference>]
+%D \crossref[type=internal,left=,right=,detail=,label=yes][<reference>]
+%D type	   	= *internal external none
+%D left		= ..text..
+%D right    	= ..text..
+%D label		= ..text..
+%D detail 		= ..text..
+
+
+\unexpanded\def\crossref{\dodoubleempty\docrossref}
+\def\docrossref[#1][#2]{%
+	\ifsecondargument%
+		\getrawparameters[crossref][type=internal,left=,right=,label=,detail=,color=,fixcolor=,refcolor=,#1]%
+		\def\crossrefref{#2}%
+	\else%
+		\def\crossrefref{#1}%
+		\def\crossreftype{internal}%
+		\def\crossrefleft{}%
+		\def\crossrefright{}%
+		\def\crossreflabel{}%
+		\def\crossrefdetail{}%
+		\def\crossrefcolor{}%
+		\def\crossreffixcolor{}%
+		\def\crossrefrefcolor{}%
+	\fi% 
+	\doifelse{\crossrefcolor}{}%
+		{\def\crossreftmpColor{\crossrefColor}}%
+		{\def\crossreftmpColor{\crossrefcolor}}%
+	\doifelse{\crossreffixcolor}{}%
+		{\def\crossreftmpfixColor{\crossreffixColor}}%
+		{\def\crossreftmpfixColor{\crossreffixcolor}}%
+	\doifelse{\crossrefrefcolor}{}%
+		{\def\crossreftmprefColor{\crossrefrefColor}}%
+		{\def\crossreftmprefColor{\crossrefrefcolor}}%
+	\color[\crossreftmpColor]{%
+		\crossrefleft%
+		\doif{\crossreftype}{internal}{\color[\crossreftmpfixColor]{\crossreftext{internalPrefix}}}%
+		\doif{\crossreftype}{external}{\color[\crossreftmpfixColor]{\crossreftext{externalPrefix}}}%
+		\color[\crossreftmprefColor]{%
+		%\in{\doifnot{\crossreflabel}{}{\crossreflabel\space}}%
+		%{\doif{\crossreftype}{internal}{\somewhere{\crossreftext{atpageLeft}\at[#2]\crossreftext{atpageRight}}{\crossreftext{atpageLeft}\at[#2]\crossreftext{atpageRight}}[#2]}%
+		%\doifnot{\crossrefdetail}{}{\crossreftext{refDetailDivider}\crossrefdetail}}%
+		%[\crossrefref]%
+		%\ignorespaces%
+		% Should be like above, but two 'mistakes': extra leading space from \in and no color control about bookmark
+		\doifnot{\crossreflabel}{}{\crossreflabel\space}%
+		\in[\crossrefref]%
+		\doif{\crossreftype}{internal}{\somewhere{\crossreftext{atpageLeft}\at[#2]\crossreftext{atpageRight}}{\crossreftext{atpageLeft}\at[#2]\crossreftext{atpageRight}}[#2]}%
+		\doifnot{\crossrefdetail}{}{\crossreftext{refDetailDivider}\crossrefdetail}%
+		}%
+		\doif{\crossreftype}{internal}{\color[\crossreftmpfixColor]{\crossreftext{internalSuffix}}}%
+		\doif{\crossreftype}{external}{\color[\crossreftmpfixColor]{\crossreftext{externalSuffix}}}%
+		\crossrefright%
+	}}
+\protect
+\stopmodule
+\endinput

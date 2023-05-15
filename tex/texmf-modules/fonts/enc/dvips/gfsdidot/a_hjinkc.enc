@@ -1,0 +1,61 @@
+% THIS FILE WAS AUTOMATICALLY GENERATED -- DO NOT EDIT
+
+%%AutoEnc_hjinkcelckntkglfmrr7v4xzsd
+% Encoding created by otftotfm on Fri Dec 16 10:02:50 2005
+% Command line follows encoding
+/AutoEnc_hjinkcelckntkglfmrr7v4xzsd [
+%00
+  /.notdef /Euro /.notdef /.notdef /fraction /dotaccent /hungarumlaut /ogonek
+  /fl /.notdef /.notdef /ff /fi /.notdef /ffi /ffl
+%10
+  /dotlessi /.notdef /grave /acute /caron /breve /overscore /ring
+  /cedilla /germandbls /AEsmall /OEsmall /Oslashsmall /AEsmall /OEsmall /Oslashsmall
+%20
+  /space /exclamsmall /quotedbl /uniF650 /dollaroldstyle /uniF642 /ampersandsmall /quoteright
+  /parenleft /parenright /asterisk /plus /comma /minus /period /slash
+%30
+  /zerooldstyle /oneoldstyle /twooldstyle /threeoldstyle /fouroldstyle /fiveoldstyle /sixoldstyle /sevenoldstyle
+  /eightoldstyle /nineoldstyle /colon /semicolon /less /equalorig /greater /question
+%40
+  /at /Asmall /Bsmall /Csmall /Dsmall /Esmall /Fsmall /Gsmall
+  /Hsmall /Ismall /Jsmall /Ksmall /Lsmall /Msmall /Nsmall /Osmall
+%50
+  /Psmall /Qsmall /Rsmall /Ssmall /Tsmall /Usmall /Vsmall /Wsmall
+  /Xsmall /Ysmall /Zsmall /bracketleft /backslash /bracketright /circumflex /underscore
+%60
+  /quoteleft /Asmall /Bsmall /Csmall /Dsmall /Esmall /Fsmall /Gsmall
+  /Hsmall /Ismall /Jsmall /Ksmall /Lsmall /Msmall /Nsmall /Osmall
+%70
+  /Psmall /Qsmall /Rsmall /Ssmall /Tsmall /Usmall /Vsmall /Wsmall
+  /Xsmall /Ysmall /Zsmall /braceleft /bar /braceright /tilde /dieresis
+%80
+  /Lslashsmall /quotesingle /quotesinglbase /florin /quotedblbase /ellipsis /dagger /daggerdbl
+  /circumflex /perthousand /Scaronsmall /guilsinglleft /OE /Zcaronsmall /asciicircum /hyphen
+%90
+  /Lslashsmall /quoteleft /quoteright /quotedblleft /quotedblright /bullet /endash /emdash
+  /tilde /trademark /Scaronsmall /guilsinglright /oe /Zcaronsmall /asciitilde /Ydieresissmall
+%A0
+  /ch202 /exclamdown /cent /uniF651 /currency /yen /brokenbar /section
+  /dieresis /copyright /ordfeminine /guillemotleft /logicalnot /.notdef /registered /overscore
+%B0
+  /degree /plusminus /twosuperior /threesuperior /acute /uniF50B /paragraph /middot
+  /cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown
+%C0
+  /Agravesmall /Aacutesmall /Acircumflexsmall /Atildesmall /Adieresissmall /Aringsmall /AE /Ccedillasmall
+  /Egravesmall /Eacutesmall /Ecircumflexsmall /Edieresissmall /Igravesmall /Iacutesmall /Icircumflexsmall /Idieresissmall
+%D0
+  /uniF676 /Ntildesmall /Ogravesmall /Oacutesmall /Ocircumflexsmall /Otildesmall /Odieresissmall /multiply
+  /Oslash /Ugravesmall /Uacutesmall /Ucircumflexsmall /Udieresissmall /Yacutesmall /Thornsmall /germandbls
+%E0
+  /Agravesmall /Aacutesmall /Acircumflexsmall /Atildesmall /Adieresissmall /Aringsmall /ae /Ccedillasmall
+  /Egravesmall /Eacutesmall /Ecircumflexsmall /Edieresissmall /Igravesmall /Iacutesmall /Icircumflexsmall /Idieresissmall
+%F0
+  /uniF676 /Ntildesmall /Ogravesmall /Oacutesmall /Ocircumflexsmall /Otildesmall /Odieresissmall /divide
+  /oslash /Ugravesmall /Uacutesmall /Ucircumflexsmall /Udieresissmall /Yacutesmall /Thornsmall /Ydieresissmall
+] def
+% Command line: 'otftotfm -a -f liga -f kern -f onum -f pnum -f smcp -e
+% /usr/local/teTeX/share/texmf.tetex/fonts/enc/dvips/psnfssx/texnansi.enc
+% --name=texnansi-LIGA-KERN-ONUM-PNUM-SMCP-GFSDidot
+% --encoding-dir=.//fonts/enc/dvips/context/ --tfm-dir=.//fonts/tfm/tas/gfs/
+% --vf-dir=.//fonts/vf/tas/gfs/ --no-type1 --map-file=./texfont.map
+% ./GFSDidot.otf'

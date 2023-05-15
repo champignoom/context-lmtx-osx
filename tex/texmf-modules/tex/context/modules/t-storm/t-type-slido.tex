@@ -1,0 +1,227 @@
+% This file is a part of ConTeXt support of Storm's fonts
+% (C) Vit Zyka, 2005-04-07, vit.zyka@seznam.cz, license: GNU GPL
+% Fonts: (C) Storm Type Foundry, license: see www.stormtype.com
+%
+%\tracetypescriptstrue
+
+\starttypescriptcollection[storm]
+% -map -------------------------------------------------------------------
+\starttypescript [map] [lido,lido-condensed] [st1,st2]
+  \loadmapfile[slido.map]
+\stoptypescript
+
+% -enc -------------------------------------------------------------------
+\starttypescript [serif] [lido] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		   [Lido-Roman]
+  \definefontsynonym [SerifBold]	   [Lido-Bold]
+  \definefontsynonym [SerifItalic]	   [Lido-Italic]
+  \definefontsynonym [SerifBoldItalic]	   [Lido-Bold-Italic]
+  \definefontsynonym [SerifCond]	   [Lido-Cond]
+  \definefontsynonym [SerifBoldCond]	   [Lido-Bold-Cond]
+
+  \definefontsynonym [SerifExt]		   [Lido-Roman-Ext]
+  \definefontsynonym [SerifBoldExt]	   [Lido-Bold-Ext]
+  \definefontsynonym [SerifItalicExt]	   [Lido-Italic-Ext]
+  \definefontsynonym [SerifBoldItalicExt]  [Lido-Bold-Italic-Ext]
+  \definefontsynonym [SerifSlantedExt]	   [Lido-Italic-Ext]
+  \definefontsynonym [SerifBoldSlantedExt] [Lido-Bold-Italic-Ext]
+  \definefontsynonym [SerifCondExt]        [Lido-Cond-Ext]
+  \definefontsynonym [SerifBoldCondExt]    [Lido-Bold-Cond-Ext]
+
+  \definefontsynonym [SerifRegular]     [Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [lido] [st1]
+  \definefontsynonym [Lido-Roman]            [sldr8t]  [encoding=st1]
+  \definefontsynonym [Lido-Bold]             [sldb8t]  [encoding=st1]
+  \definefontsynonym [Lido-Italic]           [sldri8t] [encoding=st1]
+  \definefontsynonym [Lido-Bold-Italic]      [sldbi8t] [encoding=st1]
+  \definefontsynonym [Lido-Cond]             [sldr8tc] [encoding=st1]
+  \definefontsynonym [Lido-Bold-Cond]        [sldb8tc] [encoding=st1]
+
+  \definefontsynonym [Lido-Roman-Ext]        [sldr6s]  [encoding=st3]
+  \definefontsynonym [Lido-Bold-Ext]         [sldb6s]  [encoding=st3]
+  \definefontsynonym [Lido-Italic-Ext]       [sldri6s] [encoding=st3]
+  \definefontsynonym [Lido-Bold-Italic-Ext]  [sldbi6s] [encoding=st3]
+  \definefontsynonym [Lido-Cond-Ext]         [sldr6sc] [encoding=st3]
+  \definefontsynonym [Lido-Bold-Cond-Ext]    [sldb6sc] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [lido] [st2]
+  \definefontsynonym [Lido-Roman]            [sldr8z]  [encoding=st2]
+  \definefontsynonym [Lido-Bold]             [sldb8z]  [encoding=st2]
+  \definefontsynonym [Lido-Italic]           [sldri8z] [encoding=st2]
+  \definefontsynonym [Lido-Bold-Italic]      [sldbi8z] [encoding=st2]
+  \definefontsynonym [Lido-Cond]             [sldr8zc] [encoding=st2]
+  \definefontsynonym [Lido-Bold-Cond]        [sldb8zc] [encoding=st2]
+
+  \definefontsynonym [Lido-Roman-Ext]        [sldr6s]  [encoding=st3]
+  \definefontsynonym [Lido-Bold-Ext]         [sldb6s]  [encoding=st3]
+  \definefontsynonym [Lido-Italic-Ext]       [sldri6s] [encoding=st3]
+  \definefontsynonym [Lido-Bold-Italic-Ext]  [sldbi6s] [encoding=st3]
+  \definefontsynonym [Lido-Cond-Ext]         [sldr6sc] [encoding=st3]
+  \definefontsynonym [Lido-Bold-Cond-Ext]    [sldb6sc] [encoding=st3]
+\stoptypescript
+
+% condensed
+\starttypescript [serif] [lido-condensed] [name]
+  \setups [font:fallback:serif]
+  \definefontsynonym [Serif]		   [Lido-Cond]
+  \definefontsynonym [SerifBold]	   [Lido-Bold-Cond]
+
+  \definefontsynonym [SerifExt]		   [Lido-Cond-Ext]
+  \definefontsynonym [SerifBoldExt]	   [Lido-Bold-Cond-Ext]
+
+  \definefontsynonym [SerifRegular]     [Serif]
+  \definefontsynonym [SerifRegularExt]	[SerifExt]
+
+  \definefontvariant [Serif] [ext] [Ext]
+\stoptypescript
+
+\starttypescript [serif] [lido-condensed] [st1]
+  \definefontsynonym [Lido-Cond]             [sldr8tc] [encoding=st1]
+  \definefontsynonym [Lido-Bold-Cond]        [sldb8tc] [encoding=st1]
+
+  \definefontsynonym [Lido-Cond-Ext]         [sldr6sc] [encoding=st3]
+  \definefontsynonym [Lido-Bold-Cond-Ext]    [sldb6sc] [encoding=st3]
+\stoptypescript
+
+\starttypescript [serif] [lido-condensed] [st2]
+  \definefontsynonym [Lido-Cond]             [sldr8zc] [encoding=st2]
+  \definefontsynonym [Lido-Bold-Cond]        [sldb8zc] [encoding=st2]
+
+  \definefontsynonym [Lido-Cond-Ext]         [sldr6sc] [encoding=st3]
+  \definefontsynonym [Lido-Bold-Cond-Ext]    [sldb6sc] [encoding=st3]
+\stoptypescript
+
+\usetypescriptfile[t-type-sto]
+
+% math -----------
+\starttypescript [math] [lido] [name]
+  \definefontsynonym [MathRoman]        [Lido-Math-Letters]
+  \definefontsynonym [MathItalic]       [Lido-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Lido-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [lido] [st1]
+  \definefontsynonym [Lido-Math-Letters]            [sldr8t]  [encoding=st1]
+  \definefontsynonym [Lido-Math-Letters-Italic]     [sldri8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Lido-Math-Storm]              [sldr6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [lido] [st2]
+  \definefontsynonym [Lido-Math-Letters]            [sldr8z]  [encoding=st2]
+  \definefontsynonym [Lido-Math-Letters-Italic]     [sldri8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Lido-Math-Storm]              [sldr6s]  [encoding=st3]
+\stoptypescript
+
+% bold
+\starttypescript [boldmath] [lido] [name]
+  \definefontsynonym [MathRoman]        [Lido-MathBold-Letters]
+  \definefontsynonym [MathItalic]       [Lido-MathBold-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMathBold-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Lido-MathBold-Storm]
+\stoptypescript
+
+\starttypescript [boldmath] [lido] [st1]
+  \definefontsynonym [Lido-MathBold-Letters]          [sldb8t]  [encoding=st1]
+  \definefontsynonym [Lido-MathBold-Letters-Italic]   [sldbi8t] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols] [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]   [cmex10]
+  \definefontsynonym [Lido-MathBold-Storm]            [sldb6s]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [lido] [st2]
+  \definefontsynonym [Lido-MathBold-Letters]          [sldb8z]  [encoding=st2]
+  \definefontsynonym [Lido-MathBold-Letters-Italic]   [sldbi8z] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols] [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]   [cmex10]
+  \definefontsynonym [Lido-MathBold-Storm]            [sldb6s]  [encoding=st3]
+\stoptypescript
+
+% math condensed
+\starttypescript [math] [lido-condensed] [name]
+  \definefontsynonym [MathRoman]        [Lido-Cond-Math-Letters]
+  \definefontsynonym [MathItalic]       [Lido-Cond-Math-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMath-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Lido-Cond-Math-Storm]
+\stoptypescript
+
+\starttypescript [math] [lido-condensed] [st1]
+  \definefontsynonym [Lido-Cond-Math-Letters]       [sldr8tc]  [encoding=st1]
+  \definefontsynonym [Lido-Cond-Math-Letters-Italic][sldr8tc] [encoding=st1]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Lido-Cond-Math-Storm]         [sldr6sc]  [encoding=st3]
+\stoptypescript
+
+\starttypescript [math] [lido-condensed] [st2]
+  \definefontsynonym [Lido-Cond-Math-Letters]       [sldr8zc]  [encoding=st2]
+  \definefontsynonym [Lido-Cond-Math-Letters-Italic][sldr8zc] [encoding=st2]
+  \definefontsynonym [ComputerModernMath-Symbols]   [cmsy10]
+  \definefontsynonym [ComputerModernMath-Extension] [cmex10]
+  \definefontsynonym [Lido-Cond-Math-Storm]         [sldr6sc]  [encoding=st3]
+\stoptypescript
+
+% bold
+\starttypescript [boldmath] [lido-condensed] [name]
+  \definefontsynonym [MathRoman]        [Lido-Cond-MathBold-Letters]
+  \definefontsynonym [MathItalic]       [Lido-Cond-MathBold-Letters-Italic]
+  \definefontsynonym [MathSymbol]       [ComputerModernMathBold-Symbols]
+  \definefontsynonym [MathExtension]    [ComputerModernMath-Extension]
+  \definefontsynonym [MathStorm]        [Lido-Cond-MathBold-Storm]
+\stoptypescript
+
+\starttypescript [boldmath] [lido-condensed] [st1]
+  \definefontsynonym [Lido-Cond-MathBold-Letters]       [sldb8tc] [encoding=st1]
+  \definefontsynonym [Lido-Cond-MathBold-Letters-Italic][sldb8tc] [encoding=st1]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [Lido-Cond-MathBold-Storm]         [sldb6sc] [encoding=st3]
+\stoptypescript
+
+\starttypescript [boldmath] [lido-condensed] [st2]
+  \definefontsynonym [Lido-Cond-MathBold-Letters]       [sldb8zc] [encoding=st2]
+  \definefontsynonym [Lido-Cond-MathBold-Letters-Italic][sldb8zc] [encoding=st2]
+  \definefontsynonym [ComputerModernMathBold-Symbols]   [cmbsy10]
+  \definefontsynonym [ComputerModernMath-Extension]     [cmex10]
+  \definefontsynonym [Lido-Cond-MathBold-Storm]         [sldb6sc] [encoding=st3]
+\stoptypescript
+
+% -spe --------------------------------------------------------------------
+\starttypescript [math,boldmath] [lido,lido-condensed] [special]
+  \input t-math-sto.tex
+  \usemathcollection[storm]
+\stoptypescript
+
+% -exa --------------------------------------------------------------------
+\starttypescript [Lido] [st1,st2]
+  \definetypeface [Lido] [rm] [serif] [lido] [default] [encoding=\typescripttwo]
+  \definetypeface [Lido] [mm] [math] [lido] [storm]   [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [lido] [storm] [encoding=\typescripttwo]
+  \definetypeface [Lido] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\starttypescript [Lido-Condensed] [st1,st2]
+  \definetypeface [Lido-Condensed] [rm] [serif] [lido-condensed] [default] [encoding=\typescripttwo]
+  \definetypeface [Lido-Condensed] [mm] [math] [lido-condensed] [storm] [encoding=\typescripttwo]
+  \definetypeface [boldmath] [mm] [boldmath] [lido-condensed] [storm] [encoding=\typescripttwo]
+  \definetypeface [Lido-Condensed] [tt] [mono] [modern] [default] [encoding=default]
+\stoptypescript
+
+\stoptypescriptcollection
+\endinput
+
+% end of type-slido.tex
