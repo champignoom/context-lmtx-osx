@@ -17,8 +17,21 @@ engine_state_info lmt_engine_state = {
 };
 
 /*tex
+
     We assume that the strings are proper \UTF\ and in \MSWINDOWS\ we handle wide characters to get
-    that right.
+    that right. The conversions are hidden for the user. 
+
+    The command line has to be interpreted because we have to pick up the initial filename. We do 
+    handle double quotes here (so that we can have spaces) but we don't do any further magic. So, 
+    we don't do wildcard expansion here. If the operating system does that, so be it: we can deal 
+    with it later and also decide to either or not glob files. In the case of \CONTEXT\ one normally
+    passes explicit names, or uses --pattern when applicable. All these things are shell dependent 
+    anyway. On Windows expansion is up to the application anyway, which means interpretation and 
+    possible errors. 
+
+    On the other hand I might support single quotes as well, so that we can say --foo='bar"bar' 
+    just like in Lua but then I need to check if that works out the same on lin and win. 
+
 */
 
 typedef struct environment_state_info {
@@ -104,8 +117,6 @@ char *tex_engine_input_filename(void)
     string. At the \TEX\ level curly braces are also an option but these are dealt with in the
     scanner.
 
-    Comment: maybe we should also support single quotes, so that we're consistent with \LUA\ quoting.
-
 */
 
 static char *enginelib_normalize_quotes(const char* name, const char* mesg)
@@ -155,6 +166,11 @@ static char *enginelib_normalize_quotes(const char* name, const char* mesg)
     restrictions on loading libraries. It also means that the optional modules will be (un)locked,
     but we can control that in the runners so it's no big deal because we will never depend on
     external code for the \CONTEXT\ core features.
+
+    Commandline options that block |os.execute|, |io.popen|, the debugger and socket libraries etc.
+    will not make it into \LUAMETATEX. If security is a concern there are always ways around it
+    (not that I'll be too public about unplugged holes in engines). One can deal with most issues 
+    in \LUA\ anyway. 
 
 */
 
@@ -222,7 +238,7 @@ static void enginelib_show_version_info(void)
         "\n"
         "Functionality : level " LMT_TOSTRING(luametatex_development_id) "\n"
         "Support       : " luametatex_support_address "\n"
-        "Copyright     : The Lua(Meta)TeX Team(s) (2005-2023+)\n"
+        "Copyright     : The Lua(Meta)TeX Team(s) (2005-2024+)\n"
         "\n"
         "The LuaMetaTeX project is related to ConTeXt development. This macro package\n"
         "tightly integrates TeX and MetaPost in close cooperation with Lua. Updates will\n"
@@ -314,6 +330,7 @@ static void enginelib_show_credits(void)
         "  avl        : Richard (adapted a bit to fit in)\n"
         "  hjn        : Raph Levien (derived from TeX's hyphenator, but adapted again)\n"
         "  softposit  : S. H. Leong (Cerlane)\n"
+        "  potrace    : Peter Selinger\n"
         "\n"
         "The code base contains more names and references. Some libraries are partially adapted or\n"
         "have been replaced. The MetaPost library has additional functionality, some of which is\n"
@@ -404,8 +421,7 @@ static void enginelib_check_option(char **options, int i)
     }
     if (*n == '\0') {
         return;
-    }
-    {
+    } else {
         char *v = strchr(n, '=');
         size_t l = (int) (v ? (v - n) : strlen(n));
         lmt_environment_state.flag = lmt_memory_malloc(l + 1);
@@ -469,8 +485,7 @@ static void enginelib_parse_options(void)
         i++;
         if (! lmt_environment_state.flag) {
             continue;
-        }
-        if (strcmp(lmt_environment_state.flag, "luaonly") == 0) {
+        } else if (strcmp(lmt_environment_state.flag, "luaonly") == 0) {
             lmt_engine_state.lua_only = 1;
             lmt_environment_state.luatex_lua_offset = i;
             lmt_engine_state.lua_init = 1;
@@ -563,7 +578,8 @@ static void enginelib_parse_options(void)
 
     Being a general purpose typesetting system, a \TEX\ system normally has its own way of dealing
     with language, script, country etc.\ specific properties. It is for that reason that we disable
-    locales.
+    locales. In \CONTEXT\ we even disable the setter completely and this might at some point also 
+    be hardcoded in the \LUA\ library. 
 
 */
 
@@ -901,6 +917,7 @@ static const luaL_Reg lmt_libs_extra_function_list[] = {
     { "xcomplex", luaopen_xcomplex },
     { "xdecimal", luaopen_xdecimal },
     { "posit",    luaopen_posit    },
+    { "potrace",  luaopen_potrace  },
     { NULL,       NULL             },
 };
 
@@ -995,9 +1012,21 @@ static void enginelib_disable_loadlib(lua_State *L)
     lua_settop(L, top);
 }
 
+/*tex
+    The seed is new but makeseed needs a state before we have a state. Maybe it relates to multiple
+    states with the same hash. Anyway, we can decide on zero at some point which brings us back to 
+    predictable 'ordering', not that it matters much because we adapted when coming from 5.2 already,
+    even if 5.5 makes it possible to undo that. 
+
+    Remark: we might use a common random approach for \LUA\ and \METAPOST\ which gives less code 
+    in the latter. 
+*/
+
 void lmt_initialize(void)
 {
-    lua_State *L = lua_newstate(enginelib_aux_luaalloc, NULL);
+    lua_State *L = NULL;
+    int seed = luaL_makeseed(L); /* maybe we will default to the luametatex version number */
+    L = lua_newstate(enginelib_aux_luaalloc, NULL, seed);
     if (L) {
         /*tex By default we use the generational garbage collector. */
         lua_gc(L, LUA_GCGEN, 0, 0);
@@ -1018,6 +1047,7 @@ void lmt_initialize(void)
         luaextend_os(L);
         luaextend_io(L);
         luaextend_string(L);
+     // luaextend_table(L);
         /*tex Loading the socket library is a bit odd (old stuff). */
         enginelib_luaopen_liblist(L, lmt_libs_socket_function_list);
         /*tex This initializes the 'tex' related libraries that have some luaonly functionality */
@@ -1082,13 +1112,13 @@ void lmt_error(
     if (is_fatal > 0) {
         /*
             Normally a memory error from lua. The pool may overflow during the |maketexlstring()|,
-            but we are crashing anyway so we may as well abort on the pool size. It is probably
-            too risky to show the error context now but we can imagine some more granularity.
+            but we are crashing anyway so we may as well abort on the pool size. It is probably too 
+            risky to show the error context now but we can imagine some more granularity.
         */
         tex_normal_error("lua", err ? err : where);
         /*tex
-            This should never be reached, so there is no need to close, so let's make sure of
-            that!
+            This should never be reached, so there is no need to close, so let's not do it and leave
+            it to the operating system to clean up the memory!
         */
         /* lua_close(L); */
     }

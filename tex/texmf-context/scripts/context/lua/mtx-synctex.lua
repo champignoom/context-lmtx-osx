@@ -123,8 +123,8 @@ local function findlocation(filename,page,xpos,ypos)
             if find(line,"^}") then
                 break
             else
-                -- we only look at positive cases
-                local f, l, x, y, w, h, d = match(line,"^h(.-),(.-):(.-),(.-):(.-),(.-),(.-)$")
+                -- we only look at positive cases / could be sped up but it is not critical
+                local f, l, x, y, w, h, d = match(line,"^[hr](.-),(.-):(.-),(.-):(.-),(.-),(.-)$")
                 if f and f ~= 0 then
                     x = tonumber(x)
                     if px >= x then
@@ -221,7 +221,7 @@ local function findlocation(filename,page,xpos,ypos,tolerance)
                     for i=1,#lines do
                         local line = lines[i]
                         -- we only look at positive cases
-                        local f, l, x, y, w, h, d = match(line,"^h(.-),(.-):(.-),(.-):(.-),(.-),(.-)$")
+                        local f, l, x, y, w, h, d = match(line,"^[hr](.-),(.-):(.-),(.-):(.-),(.-),(.-)$")
                         if f and f ~= 0 then
 -- print(x,y,f)
                             x = tonumber(x)
@@ -284,6 +284,8 @@ local function findlocation(filename,page,xpos,ypos,tolerance)
                     locate( s,-s) if fi ~= 0 then tl = s ; goto done end
                     locate(-s, s) if fi ~= 0 then tl = s ; goto done end
                     locate(-s,-s) if fi ~= 0 then tl = s ; goto done end
+                    locate( 0, s) if fi ~= 0 then tl = s ; goto done end
+                    locate( 0,-s) if fi ~= 0 then tl = s ; goto done end
                 end
                 break
             else
@@ -331,7 +333,7 @@ local function showlocation(filename,sourcename,linenumber,direct)
                     report("end page: %i",page)
                 end
             else
-                local f, l, x, y, w, h, d = match(line,"^h(.-),(.-):(.-),(.-):(.-),(.-),(.-)$")
+                local f, l, x, y, w, h, d = match(line,"^[hr](.-),(.-):(.-),(.-):(.-),(.-),(.-)$")
                 if f then
                     x = tonumber(x)
                     y = tonumber(y)

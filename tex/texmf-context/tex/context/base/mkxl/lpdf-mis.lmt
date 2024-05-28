@@ -47,6 +47,7 @@ local pdfstring            = lpdf.string
 local pdfaction            = lpdf.action
 local pdfflushobject       = lpdf.flushobject
 local pdfflushstreamobject = lpdf.flushstreamobject
+local pdfmajorversion      = lpdf.majorversion
 local pdfminorversion      = lpdf.minorversion
 
 local adddocumentextgstate = lpdf.adddocumentextgstate
@@ -59,26 +60,26 @@ local texset               = tex.set
 
 local variables            = interfaces.variables
 
-local v_stop               = variables.stop
-local v_none               = variables.none
-local v_max                = variables.max
-local v_bookmark           = variables.bookmark
-local v_fit                = variables.fit
-local v_doublesided        = variables.doublesided
-local v_singlesided        = variables.singlesided
-local v_default            = variables.default
-local v_auto               = variables.auto
-local v_fixed              = variables.fixed
-local v_landscape          = variables.landscape
-local v_portrait           = variables.portrait
-local v_page               = variables.page
-local v_paper              = variables.paper
-local v_attachment         = variables.attachment
-local v_layer              = variables.layer
-local v_lefttoright        = variables.lefttoright
-local v_righttoleft        = variables.righttoleft
-local v_title              = variables.title
-local v_nomenubar          = variables.nomenubar
+local v_stop               <const> = variables.stop
+local v_none               <const> = variables.none
+local v_max                <const> = variables.max
+local v_bookmark           <const> = variables.bookmark
+local v_fit                <const> = variables.fit
+local v_doublesided        <const> = variables.doublesided
+local v_singlesided        <const> = variables.singlesided
+local v_default            <const> = variables.default
+local v_auto               <const> = variables.auto
+local v_fixed              <const> = variables.fixed
+local v_landscape          <const> = variables.landscape
+local v_portrait           <const> = variables.portrait
+local v_page               <const> = variables.page
+local v_paper              <const> = variables.paper
+local v_attachment         <const> = variables.attachment
+local v_layer              <const> = variables.layer
+local v_lefttoright        <const> = variables.lefttoright
+local v_righttoleft        <const> = variables.righttoleft
+local v_title              <const> = variables.title
+local v_nomenubar          <const> = variables.nomenubar
 
 local positive             = register(setstate("/GSpositive gs"))
 local negative             = register(setstate("/GSnegative gs"))
@@ -397,7 +398,9 @@ local function documentspecification()
             prints = pdfarray(flattened(pages.toranges(marked)))
         end
     end
-    if fit or fixed or duplex or copies or paper or prints or title or direction or nomenubar then
+    -- The ua spec demands that the DisplayDocTitle should be set, with the argument
+    -- that otherwise viewers can't show it correctly. Who cares anyway.
+ -- if fit or fixed or duplex or copies or paper or prints or title or direction or nomenubar then
         addtocatalog("ViewerPreferences",pdfdictionary {
             FitWindow         = fit       and true                   or nil,
             PrintScaling      = fixed     and pdfconstant("None")    or nil,
@@ -405,17 +408,17 @@ local function documentspecification()
             NumCopies         = copies    and copies                 or nil,
             PickTrayByPDFSize = paper     and true                   or nil,
             PrintPageRange    = prints                               or nil,
-            DisplayDocTitle   = title     and true                   or nil,
+            DisplayDocTitle   = true,
             Direction         = direction and pdfconstant(direction) or nil,
             HideMenubar       = nomenubar and true                   or nil,
         })
-    end
-    addtoinfo   ("Trapped", pdfconstant("False")) -- '/Trapped' in /Info, 'Trapped' in XMP
-    addtocatalog("Version", pdfconstant(format("1.%s",pdfminorversion())))
+ -- end
+ -- addtoinfo   ("Trapped", pdfconstant("False")) -- '/Trapped' in /Info, 'Trapped' in XMP
+    addtocatalog("Version", pdfconstant(format("%s.%s",pdfmajorversion(),pdfminorversion())))
     addtocatalog("Lang",    pdfstring(tokens.getters.macro("currentmainlanguage")))
 end
 
-local bpfactor = number.dimenfactors.bp
+local bpfactor <const> = number.dimenfactors.bp
 
 local function pagespecification()
     local canvas      = getcanvas()
@@ -510,7 +513,7 @@ local function featurecreep()
             return -- fatal error
         end
         local label = p.viewerprefix or ""
-        if p.status == v_stop then
+        if p.state == v_stop then
             if not stopped then
                 list[#list+1] = i - 1 -- pdf starts numbering at 0
                 list[#list+1] = pdfdictionary {
@@ -538,7 +541,7 @@ local function featurecreep()
                 list[#list+1] = i - 1 -- pdf starts numbering at 0
                 list[#list+1] = pdfdictionary {
                     S  = pdfconstant(conversion),
-                    St = number,
+                    St = number > 0 and number or 1, -- there is no 'nonumber' and we need to be >= 1
                     P  = label ~= "" and pdfunicode(label) or nil,
                 }
             end

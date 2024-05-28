@@ -42,15 +42,18 @@
 
 */
 
-typedef enum fitness_value {
-    very_loose_fit, /*tex lines stretching more than their stretchability */
-    loose_fit,      /*tex lines stretching 0.5 to 1.0 of their stretchability */
-    semi_loose_fit,
-    decent_fit,     /*tex for all other lines */
-    semi_tight_fit,
-    tight_fit,      /*tex lines shrinking 0.5 to 1.0 of their shrinkability */
-    n_of_finess_values
-} fitness_value;
+// typedef enum fitness_value {
+//     very_loose_fit,       /*tex lines stretching more than their stretchability */
+//     loose_fit,
+//     almost_loose_fit,     /*tex lines stretching 0.5 to 1.0 of their stretchability */
+//     barely_loose_fit,
+//     decent_fit,           /*tex for all other lines */
+//     barely_tight_fit,
+//     almost_tight_fit,     /*tex lines shrinking 0.5 to 1.0 of their shrinkability */
+//     tight_fit,
+//     very_tight_fit,
+//     n_of_finess_values,   /* also padding */
+// } fitness_value;
 
 /*tex
 
@@ -59,74 +62,106 @@ typedef enum fitness_value {
 
 */
 
+typedef halfword fitcriterion[n_of_fitness_values] ;
+
+typedef struct break_passes { 
+    int n_of_first_passes;
+    int n_of_second_passes;
+    int n_of_third_passes;
+    int n_of_sub_passes;
+} break_passes;
+
 typedef struct linebreak_state_info {
     /*tex the |hlist_node| for the last line of the new paragraph */
-    halfword just_box;
-    halfword last_line_fill;
-    int      no_shrink_error_yet;
-    int      second_pass;
-    int      final_pass;
-    int      threshold;
-    halfword adjust_spacing;
-    halfword adjust_spacing_step;
-    halfword adjust_spacing_shrink;
-    halfword adjust_spacing_stretch;
-    int      max_stretch_ratio;
-    int      max_shrink_ratio;
-    halfword current_font_step;
-    halfword passive;
-    halfword printed_node;
-    halfword pass_number;
- /* int      auto_breaking; */ /* is gone */
- /* int      math_level;    */ /* was never used */
-    scaled   active_width[10];
-    scaled   background[10];
-    scaled   break_width[10];
-    scaled   disc_width[10];
-    scaled   fill_width[4];
-    halfword internal_penalty_interline;
-    halfword internal_penalty_broken;
-    halfword internal_left_box;
-    scaled   internal_left_box_width;
-    halfword init_internal_left_box;
-    scaled   init_internal_left_box_width;
-    halfword internal_right_box;
-    scaled   internal_right_box_width;
-    scaled   internal_middle_box;
-    halfword minimal_demerits[n_of_finess_values];
-    halfword minimum_demerits;
-    halfword easy_line;
-    halfword last_special_line;
-    scaled   first_width;
-    scaled   second_width;
-    scaled   first_indent;
-    scaled   second_indent;
-    halfword best_bet;
-    halfword fewest_demerits;
-    halfword best_line;
-    halfword actual_looseness;
-    halfword line_difference;
-    int      do_last_line_fit;
-    halfword dir_ptr;
-    halfword warned;
-    halfword calling_back;
+    halfword     just_box;
+    halfword     last_line_fill;
+    int          no_shrink_error_yet;
+    int          second_pass;
+    int          final_pass;
+    int          threshold;
+    halfword     adjust_spacing;
+    halfword     adjust_spacing_step;
+    halfword     adjust_spacing_shrink;
+    halfword     adjust_spacing_stretch;
+    int          max_stretch_ratio;
+    int          max_shrink_ratio;
+    halfword     current_font_step;
+    halfword     passive;
+    halfword     printed_node;
+    halfword     pass_number;
+ /* int          auto_breaking; */ /* is gone */
+ /* int          math_level;    */ /* was never used */
+    scaled       active_width[n_of_glue_amounts];
+    scaled       background[n_of_glue_amounts];
+    scaled       break_width[n_of_glue_amounts];
+    scaled       disc_width[n_of_glue_amounts];
+    scaled       fill_width[4];
+    halfword     internal_interline_penalty;
+    halfword     internal_broken_penalty;
+    halfword     internal_left_box;
+    scaled       internal_left_box_width;
+    halfword     internal_left_box_init;       /* hm: |_init| */
+    scaled       internal_left_box_width_init; /* hm: |_init| */
+    halfword     internal_right_box;
+    scaled       internal_right_box_width;
+    scaled       internal_middle_box;
+    fitcriterion minimal_demerits;
+    halfword     minimum_demerits;
+    halfword     easy_line;
+    halfword     last_special_line;
+    scaled       first_width;
+    scaled       second_width;
+    scaled       first_indent;
+    scaled       second_indent;
+    halfword     best_bet;
+    halfword     fewest_demerits;
+    halfword     best_line;
+    halfword     actual_looseness;
+    halfword     line_difference;
+    int          do_last_line_fit;
+    halfword     dir_ptr;
+    halfword     warned;
+    halfword     calling_back;
+    int          saved_threshold;   /*tex Saves the value outside inline math. */
+    int          global_threshold;  /*tex Saves the value outside local par states. */
+    int          checked_expansion; 
+    int          line_break_dir;
+    break_passes passes[n_of_par_context_codes];
 } linebreak_state_info;
 
 extern linebreak_state_info lmt_linebreak_state;
 
-void tex_line_break_prepare (
+typedef enum linebreak_quality { 
+    par_has_glyph    = 0x0001, 
+    par_has_disc     = 0x0002, 
+    par_has_space    = 0x0004,
+    par_has_uleader  = 0x0008,
+    par_is_overfull  = 0x0010,
+    par_is_underfull = 0x0020,
+} linebreak_quality;
+
+extern void tex_line_break_prepare (
     halfword par, 
     halfword *tail, 
     halfword *parinit_left_skip_glue,
     halfword *parinit_right_skip_glue,
     halfword *parfill_left_skip_glue,
     halfword *parfill_right_skip_glue,
-    halfword *final_penalty
+    halfword *final_line_penalty
+);
+
+extern void tex_check_fitness_demerits(
+    halfword fitnessdemerits
+);
+
+extern halfword tex_default_fitness_demerits(
+    void
 );
 
 extern void tex_line_break (
     int d, 
-    int line_break_context
+    int group_context,
+    int par_context
 );
 
 extern void tex_initialize_active (
@@ -153,22 +188,22 @@ extern halfword tex_wipe_margin_kerns(
 
 */
 
-inline static int tex_zero_box_dimensions(halfword a)
+static inline int tex_zero_box_dimensions(halfword a)
 {
     return box_width(a) == 0 && box_height(a) == 0 && box_depth(a) == 0;
 }
 
-inline static int tex_zero_rule_dimensions(halfword a)
+static inline int tex_zero_rule_dimensions(halfword a)
 {
     return rule_width(a) == 0 && rule_height(a) == 0 && rule_depth(a) == 0;
 }
 
-inline static int tex_empty_disc(halfword a)
+static inline int tex_empty_disc(halfword a)
 {
     return (! disc_pre_break_head(a)) && (! disc_post_break_head(a)) && (! disc_no_break_head(a));
 }
 
-inline static int tex_protrusion_skipable(halfword a)
+static inline int tex_protrusion_skipable(halfword a)
 {
     if (a) {
         switch (node_type(a)) {
@@ -200,10 +235,16 @@ inline static int tex_protrusion_skipable(halfword a)
     return 0;
  }
 
-inline static void tex_append_list(halfword head, halfword tail)
+static inline void tex_append_list(halfword head, halfword tail)
 {
     tex_couple_nodes(cur_list.tail, node_next(head));
     cur_list.tail = tail;
 }
 
+extern void tex_get_line_content_range(
+    halfword  head, 
+    halfword  tail, 
+    halfword *first, 
+    halfword *last
+); 
 # endif

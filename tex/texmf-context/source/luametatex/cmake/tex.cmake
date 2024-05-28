@@ -31,6 +31,7 @@ set(tex_sources
     source/luarest/lmtiolibext.c
     source/luarest/lmtoslibext.c
     source/luarest/lmtstrlibext.c
+  # source/luarest/lmttablibext.c
     source/luarest/lmtdecodelib.c
     source/luarest/lmtsha2lib.c
     source/luarest/lmtmd5lib.c
@@ -41,6 +42,7 @@ set(tex_sources
     source/luarest/lmtziplib.c
     source/luarest/lmtsparselib.c
     source/luarest/lmtposit.c
+    source/luarest/lmtpotrace.c
 
     source/tex/texalign.c
     source/tex/texarithmetic.c
@@ -96,7 +98,8 @@ target_include_directories(tex PRIVATE
     source/libraries/miniz
     source/libraries/pplib
     source/libraries/pplib/util
-    source/luacore/lua54/src
+    source/luacore/lua55/src
     source/libraries/mimalloc/include
     source/libraries/softposit/source/include
+    source/libraries/potrace/src
 )

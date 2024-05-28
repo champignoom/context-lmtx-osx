@@ -16,8 +16,8 @@ local tasks        = nodes.tasks
 local handlers     = nodes.handlers
 
 local nodecodes    = nodes.nodecodes
-local hlist_code   = nodecodes.hlist
-local vlist_code   = nodecodes.vlist
+local hlist_code   <const> = nodecodes.hlist
+local vlist_code   <const> = nodecodes.vlist
 
 local nuts         = nodes.nuts
 local tonut        = nuts.tonut
@@ -28,18 +28,18 @@ local getbox       = nuts.getbox
 
 local implement    = interfaces.implement
 
-local v_yes        = interfaces.variables.yes
+local v_yes        <const> = interfaces.variables.yes
 
 local actions = tasks.actions("shipouts")
 
 handlers.finalizelist = actions
 
-function handlers.finalizebox(box)
-    actions(getbox(box)) -- nut
+function handlers.finalizebox(box,ispage)
+    actions(getbox(box),ispage) -- nut
 end
 
-function handlers.finalizelist(list) -- beware of export: block it if needed
-    actions(list) -- nut
+function handlers.finalizelist(list,ispage) -- beware of export: block it if needed
+    actions(list,ispage) -- nut
 end
 
 do
@@ -49,10 +49,13 @@ do
 
     local report  = logs.reporter("shipout")
 
-    local trace   = false  trackers.register("backend.cleanup", function(v) trace = v end)
-
+    local trace   = false
     local flatten = true -- also done as line option
     local soften  = true -- true by default
+
+    trackers  .register("backend.cleanup",         function(v) trace   = v end)
+    directives.register("backend.cleanup.flatten", function(v) flatten = v end)
+    directives.register("backend.cleanup.soften",  function(v) soften  = v end)
 
     nodes.handlers.cleanuppage = function(head)
      -- local count    = 0
@@ -83,8 +86,14 @@ end
 -- interface
 
 implement {
-    name      = "finalizebox",
-    arguments = "integer",
+    name      = "finalizeshipoutbox",
+    arguments = { "integer", true },
+    actions   = handlers.finalizebox,
+}
+
+implement {
+    name      = "finalizeobjectbox",
+    arguments = { "integer", false },
     actions   = handlers.finalizebox,
 }
 
@@ -140,14 +149,14 @@ trackers.register("nodes.frequencies",function(v)
     if type(v) == "string" then
         frequencies.filename = v
     end
-    handlers.frequencies_shipouts_before   = register("shipouts",   "begin")
-    handlers.frequencies_shipouts_after    = register("shipouts",   "end")
-    handlers.frequencies_processors_before = register("processors", "begin")
-    handlers.frequencies_processors_after  = register("processors", "end")
-    tasks.prependaction("shipouts",   "before", "nodes.handlers.frequencies_shipouts_before")
-    tasks.appendaction ("shipouts",   "after",  "nodes.handlers.frequencies_shipouts_after")
-    tasks.prependaction("processors", "before", "nodes.handlers.frequencies_processors_before")
-    tasks.appendaction ("processors", "after",  "nodes.handlers.frequencies_processors_after")
+    tracers.frequencies_shipouts_before   = register("shipouts",   "begin")
+    tracers.frequencies_shipouts_after    = register("shipouts",   "end")
+    tracers.frequencies_processors_before = register("processors", "begin")
+    tracers.frequencies_processors_after  = register("processors", "end")
+    tasks.prependaction("shipouts",   "before", "nodes.tracers.frequencies_shipouts_before")
+    tasks.appendaction ("shipouts",   "after",  "nodes.tracers.frequencies_shipouts_after")
+    tasks.prependaction("processors", "before", "nodes.tracers.frequencies_processors_before")
+    tasks.appendaction ("processors", "after",  "nodes.tracers.frequencies_processors_after")
 end)
 
 statistics.register("node frequencies", function()
@@ -161,7 +170,8 @@ end)
 do -- for the moment:
 
     local whatsitcodes = nodes.whatsitcodes
-    local whatsit_code = nodecodes.whatsit
+
+    local whatsit_code <const> = nodecodes.whatsit
 
     local removables   = {
         [whatsitcodes.open]    = true,

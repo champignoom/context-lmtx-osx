@@ -28,8 +28,7 @@
    \c!alternative=\v!normal]
 
 \appendtoks
-    \edef\p_method{\effectparameter\c!method}%
-    \ifx\p_method\v!command
+    \ifcstok{\effectparameter\c!method}\v!command
         \frozen\protected\xdefcsname\e!start\currenteffect\endcsname{\starteffect[#1]}%
         \frozen\protected\xdefcsname\e!stop \currenteffect\endcsname{\stopeffect}%
     \fi
@@ -38,7 +37,7 @@
 \permanent\protected\def\starteffect[#1]%
   {\clf_seteffect
      alternative   {\namedeffectparameter{#1}\c!alternative}
-     stretch       \numexpr\namedeffectparameter{#1}\c!stretch\relax
+     stretch       \numexpr\namedeffectparameter{#1}\c!stretch\relax           % no longer needed
      rulethickness \dimexpr\namedeffectparameter{#1}\c!rulethickness\relax
    \relax}
 
@@ -55,6 +54,7 @@
 \defineeffect [\v!both]    [\c!alternative=\v!both, \c!rulethickness=.25pt]
 \defineeffect [\v!normal]  [\c!alternative=\v!normal]
 \defineeffect [\v!hidden]  [\c!alternative=\v!hidden]
+\defineeffect [\v!clip]    [\c!alternative=\v!clip]
 \defineeffect [\v!stretch] [\c!alternative=\v!stretch,\c!stretch=1]
 
 \protect \endinput

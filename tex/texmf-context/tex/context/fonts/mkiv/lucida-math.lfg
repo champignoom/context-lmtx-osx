@@ -16,14 +16,34 @@ return {
             FractionRuleThickness             =  55,
          -- AccentBaseDepth                   = 250,
             FlattenedAccentBaseHeight         = 710,-- slightly too large in the font
-            DelimiterPercent                  =  90,
+            DelimiterPercent                  =  85,
             DelimiterShortfall                = 400,
+            DelimiterDisplayPercent           =  90, -- MS
+            DelimiterDisplayShortfall         = 400,
             SuperscriptBottomMaxWithSubscript = 325,
-            PrimeShiftUp                      = "1.4*SuperscriptShiftUp",
-            PrimeShiftUpCramped               = "1.4*SuperscriptShiftUp",
+            PrimeShiftUp                      = "1.3*SuperscriptShiftUp",
+            PrimeShiftUpCramped               = "1.3*SuperscriptShiftUp",
             PrimeBaselineDropMax              = "0.5*SuperscriptBaselineDropMax",
+            RadicalDisplayStyleVerticalGap    = "RadicalVerticalGap", --172, 50
+        },
+        scales = {
+            scriptxscale       = 1025,
+            scriptyscale       =  975,
+            scriptscriptxscale = 1050,
+            scriptscriptyscale =  950,
+            scriptweight       =   20,
+            scriptscriptweight =   40,
         },
         tweaks = {
+         -- beforepassing = {
+         --     {
+         --         tweak              = "scales",
+         --         scriptxscale       = 1100,
+         --         scriptyscale       =  900,
+         --         scriptscriptxscale = 1100,
+         --         scriptscriptyscale =  900,
+         --     },
+         -- },
             aftercopying = {
                 {
                     tweak    = "version",
@@ -101,8 +121,8 @@ return {
                     version = "Version 1.802",
                     list    = {
                         -- The < and > are slightly too small. We scale them by 867/795
-                        ["0x003C"]      = { scale = 1.09057, width = 1.09057, height = 1.09057 },
-                        ["0x003E"]      = { scale = 1.09057, width = 1.09057, height = 1.09057 },
+                        ["0x003C"] = { scale = 1.09057, width = 1.09057, height = 1.09057 },
+                        ["0x003E"] = { scale = 1.09057, width = 1.09057, height = 1.09057 },
                     },
                 },
                 {
@@ -209,12 +229,19 @@ return {
                         height  = .2,
                         yoffset = .825,
                     },
-                    radical  = {
-                        height      = .13,
-                        yoffset     = .825,
-                        leftoffset  = .124,
-                        rightoffset = .124,
-                        yscale      = .940,
+--                     radical  = {
+--                         height      = .13,
+--                         yoffset     = .825,
+--                         leftoffset  = .124,
+--                         rightoffset = .124,
+--                         yscale      = .940,
+--                     },
+                    radical  = { -- updated 240521
+                         height      = .140,
+                         yoffset     = .615,
+                         yscale      = .730,
+                         leftoffset  = .124,
+                         rightoffset = .124,
                     },
                     stacker  = {
                         height  = .2,
@@ -225,11 +252,11 @@ return {
                     tweak = "addactuarian",
                 },
                 {
-                    tweak = "addfourier",
+                    tweak   = "addfourier",
                     variant = 1,
                 },
                 {
-                    tweak   = "addprimed",
+                    tweak = "addprimed",
                 },
                 {
                     tweak = "addarrows",

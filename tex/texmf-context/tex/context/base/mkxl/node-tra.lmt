@@ -51,7 +51,6 @@ local getdirection    = nuts.getdirection
 local getwidth        = nuts.getwidth
 
 local count_nodes     = nuts.countall
-local used_nodes      = nuts.usedlist
 
 local nextnode        = nuts.traversers.node
 local nextglyph       = nuts.traversers.glyph
@@ -69,16 +68,16 @@ local fillcodes       = tex.fillcodes
 
 local subtypes        = nodes.subtypes
 
-local glyph_code      = nodecodes.glyph
-local hlist_code      = nodecodes.hlist
-local vlist_code      = nodecodes.vlist
-local disc_code       = nodecodes.disc
-local glue_code       = nodecodes.glue
-local kern_code       = nodecodes.kern
-local rule_code       = nodecodes.rule
-local dir_code        = nodecodes.dir
-local par_code        = nodecodes.par
-local whatsit_code    = nodecodes.whatsit
+local glyph_code      <const> = nodecodes.glyph
+local hlist_code      <const> = nodecodes.hlist
+local vlist_code      <const> = nodecodes.vlist
+local disc_code       <const> = nodecodes.disc
+local glue_code       <const> = nodecodes.glue
+local kern_code       <const> = nodecodes.kern
+local rule_code       <const> = nodecodes.rule
+local dir_code        <const> = nodecodes.dir
+local par_code        <const> = nodecodes.par
+local whatsit_code    <const> = nodecodes.whatsit
 
 local dimenfactors    = number.dimenfactors
 local formatters      = string.formatters
@@ -306,6 +305,7 @@ nodes.showsimplelist = function(h,depth) showsimplelist(h,depth,0) end
 
 local function listtoutf(h,joiner,textonly,last,nodisc)
     if h then
+local chardata = fonts.hashes.characters -- not yet defined
         local w = { }
         local n = 0
         local g = formatters["<%i>"]
@@ -313,7 +313,26 @@ local function listtoutf(h,joiner,textonly,last,nodisc)
         while h do
             local c, id = isglyph(h)
             if c then
-                n = n + 1 ; w[n] = c >= 0 and utfchar(c) or g(c)
+                if c >= 0 then
+                    local d = chardata[id]
+                    if d then
+                        d = d[c]
+                        if d then
+                            local u = d.unicode
+                            if type(u) == "table" then
+                                for i=1,#u do
+                                    n = n + 1 ; w[n] = utfchar(u[i])
+                                end
+                                goto DONE
+                            elseif u then
+                                n = n + 1 ; w[n] = utfchar(u)
+                                goto DONE
+                            end
+                        end
+                    end
+                end
+                n = n + 1 ; w[n] = g(c)
+              ::DONE::
                 if joiner then
                     n = n + 1 ; w[n] = joiner
                 end
@@ -383,9 +402,10 @@ end
 
 nodes.showboxes = showboxes
 
-local ptfactor = dimenfactors.pt
-local bpfactor = dimenfactors.bp
-local stripper = lpeg.patterns.stripzeros
+local stripper  = lpeg.patterns.stripzeros
+
+local ptfactor <const> = dimenfactors.pt
+local bpfactor <const> = dimenfactors.bp
 
 local f_f_f = formatters["%0.5Fpt plus %0.5F%s minus %0.5F%s"]
 local f_f_m = formatters["%0.5Fpt plus %0.5F%s minus %0.5Fpt"]
@@ -560,10 +580,11 @@ nodes.nopts        = function(n) return format("%.5f",n*ptfactor) end
 local colors       = { }
 tracers.colors     = colors
 
-local unsetvalue   = attributes.unsetvalue
+local unsetvalue   <const> = attributes.unsetvalue
 
-local a_color      = attributes.private('color')
-local a_colormodel = attributes.private('colormodel')
+local a_color      <const> = attributes.private('color')
+local a_colormodel <const> = attributes.private('colormodel')
+
 local m_color      = attributes.list[a_color] or { }
 
 function colors.set(n,c,s,t) -- also unsets !
@@ -588,13 +609,15 @@ end
 
 function colors.setlist(n,c,s,t)
     local nn = tonut(n)
-    local mc = m_color[c] or unsetvalue
+    local mc = type(c) == "number" and c or m_color[c] or unsetvalue
     local mm = s or texgetattribute(a_colormodel)
     if mm <= 0 then
         mm = 1
     end
     if t then
-        t = m_transparency[t] or unsetvalue
+        if type(t) == "string" then
+            t = m_transparency[t] or unsetvalue
+        end
         while nn do
             setattrs(nn,a_colormodel,mm,a_color,mc,a_transparency,t)
             nn = getnext(nn)
@@ -618,7 +641,7 @@ end
 local transparencies   = { }
 tracers.transparencies = transparencies
 
-local a_transparency   = attributes.private('transparency')
+local a_transparency   <const> = attributes.private('transparency')
 local m_transparency   = attributes.list[a_transparency] or { }
 
 function transparencies.set(n,t)

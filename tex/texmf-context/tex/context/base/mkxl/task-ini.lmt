@@ -65,6 +65,7 @@ appendaction("processors",   "lists",       "typesetters.spacings.handler",     
 appendaction("processors",   "lists",       "typesetters.kerns.handler",                        nil, "nut",    "disabled"  )
 appendaction("processors",   "lists",       "typesetters.tighten.handler",                      nil, "nut",    "disabled"  )
 appendaction("processors",   "lists",       "typesetters.digits.handler",                       nil, "nut",    "disabled"  )
+appendaction("processors",   "lists",       "typesetters.corrections.handler",                  nil, "nut",    "disabled"  )
 appendaction("processors",   "lists",       "typesetters.italics.handler",                      nil, "nut",    "disabled"  )
 appendaction("processors",   "lists",       "languages.visualizediscretionaries",               nil, "nut",    "disabled"  )
 
@@ -72,6 +73,7 @@ appendaction("processors",   "after",       "typesetters.marksuspects",         
 
 appendaction("shipouts",     "normalizers", "nodes.handlers.cleanuppage",                       nil, "nut",    "production")
 appendaction("shipouts",     "normalizers", "typesetters.showsuspects",                         nil, "nut",    "disabled"  )
+appendaction("shipouts",     "normalizers", "typesetters.showinvisibles",                       nil, "nut",    "disabled"  )
 appendaction("shipouts",     "normalizers", "typesetters.margins.finalhandler",                 nil, "nut",    "disabled"  )
 appendaction("shipouts",     "normalizers", "builders.paragraphs.expansion.trace",              nil, "nut",    "disabled"  )
 appendaction("shipouts",     "normalizers", "typesetters.alignments.handler",                   nil, "nut",    "disabled"  )
@@ -79,8 +81,9 @@ appendaction("shipouts",     "normalizers", "nodes.references.handler",         
 appendaction("shipouts",     "normalizers", "nodes.destinations.handler",                       nil, "nut",    "production")
 appendaction("shipouts",     "normalizers", "nodes.rules.handler",                              nil, "nut",    "disabled"  )
 appendaction("shipouts",     "normalizers", "nodes.shifts.handler",                             nil, "nut",    "disabled"  )
-appendaction("shipouts",     "normalizers", "structures.tags.handler",                          nil, "nut",    "disabled"  )
-appendaction("shipouts",     "normalizers", "nodes.handlers.accessibility",                     nil, "nut",    "disabled"  )
+appendaction("shipouts",     "normalizers", "nodes.shadows.handler",                            nil, "nut",    "disabled"  )
+------------("shipouts",     "normalizers", "structures.tags.handler",                          nil, "nut",    "disabled"  ) -- moved down
+------------("shipouts",     "normalizers", "nodes.handlers.accessibility",                     nil, "nut",    "disabled"  )
 appendaction("shipouts",     "normalizers", "nodes.handlers.backgrounds",                       nil, "nut",    "disabled"  )
 appendaction("shipouts",     "normalizers", "typesetters.rubies.attach",                        nil, "nut",    "disabled"  )
 ------------("shipouts",     "normalizers", "nodes.properties.delayed",                         nil, "nut",    "production")
@@ -94,6 +97,8 @@ appendaction("shipouts",     "finishers",   "attributes.negatives.handler",     
 appendaction("shipouts",     "finishers",   "attributes.effects.handler",                       nil, "nut",    "disabled"  )
 appendaction("shipouts",     "finishers",   "attributes.alternates.handler",                    nil, "nut",    "disabled"  )
 appendaction("shipouts",     "finishers",   "attributes.viewerlayers.handler",                  nil, "nut",    "disabled"  )
+
+appendaction("shipouts",     "wrapup",      "structures.tags.handler",                          nil, "nut",    "disabled"  )
 
 appendaction("shipouts",     "wrapup",      "nodes.handlers.export",                            nil, "nut",    "disabled"  )  -- always last
 appendaction("shipouts",     "wrapup",      "luatex.synctex.collect",                           nil, "nut",    "disabled"  )
@@ -113,9 +118,11 @@ appendaction("math",         "normalizers", "noads.handlers.collapse",          
 appendaction("math",         "normalizers", "noads.handlers.fixscripts",                        nil, "nonut",  "enabled"   )
 ------------("math",         "normalizers", "noads.handlers.domains",                           nil, "nonut",  "disabled"  )
 appendaction("math",         "normalizers", "noads.handlers.autofences",                        nil, "nonut",  "disabled"  )
-appendaction("math",         "normalizers", "noads.handlers.resize",                            nil, "nonut",  "enabled"   )
+------------("math",         "normalizers", "noads.handlers.resize",                            nil, "nonut",  "enabled"   )
 ------------("math",         "normalizers", "noads.handlers.respace",                           nil, "nonut",  "enabled"   )
 appendaction("math",         "normalizers", "noads.handlers.alternates",                        nil, "nonut",  "enabled"   )
+-- shouldn't tags move down to after classes and dictionaries
+appendaction("math",         "normalizers", "noads.handlers.intervals",                         nil, "nonut",  "enabled"   )
 appendaction("math",         "normalizers", "noads.handlers.tags",                              nil, "nonut",  "disabled"  )
 ------------("math",         "normalizers", "noads.handlers.italics",                           nil, "nonut",  "disabled"  )  -- replaced
 appendaction("math",         "normalizers", "noads.handlers.kernpairs",                         nil, "nonut",  "disabled"  )
@@ -146,7 +153,7 @@ appendaction("contributers", "normalizers", "nodes.handlers.wipe",              
 
 appendaction("adjusters",    "normalizers", "nodes.handlers.adjusters",                         nil, "nut",    "enabled"   )
 
-appendaction("vboxbuilders", "normalizers", "nodes.adaptive.handlehorizontal",                  nil, "nut",    "disabled"  )
+------------("vboxbuilders", "normalizers", "nodes.adaptive.handlehorizontal",                  nil, "nut",    "disabled"  )
 appendaction("vboxbuilders", "normalizers", "nodes.handlers.backgroundsvbox",                   nil, "nut",    "disabled"  )
 ------------("vboxbuilders", "normalizers", "typesetters.margins.localhandler",                 nil, "nut",    "disabled"  )
 appendaction("vboxbuilders", "normalizers", "builders.vspacing.vboxhandler",                    nil, "nut",    "enabled"   )
@@ -164,13 +171,13 @@ appendaction("mvlbuilders",  "normalizers", "builders.profiling.pagelinehandler"
 appendaction("mvlbuilders",  "normalizers", "typesetters.checkers.handler",                     nil, "nut",    "disabled"  )
 appendaction("mvlbuilders",  "normalizers", "typesetters.synchronize.handler",                  nil, "nut",    "disabled"  )
 
-appendaction("vboxhandlers", "normalizers", "nodes.adaptive.handlevertical",                    nil, "nut",    "disabled"  )
+------------("vboxhandlers", "normalizers", "nodes.adaptive.handlevertical",                    nil, "nut",    "disabled"  )
 
 appendaction("everypar",     "normalizers", "nodes.handlers.checkparcounter",                   nil, "nut",    "disabled"  )
 
 appendaction("alignments",   "normalizers", "nodes.handlers.showpreamble",                      nil, "nut",    "enabled"   )
 appendaction("alignments",   "normalizers", "nodes.handlers.aligncharacter",                    nil, "nut",    "disabled"  )
-appendaction("alignments",   "normalizers", "nodes.handlers.fixmathalign",                      nil, "nut",    "disabled"  )
+appendaction("alignments",   "normalizers", "nodes.handlers.mathalignrelocate",                 nil, "nut",    "disabled"  )
 appendaction("alignments",   "normalizers", "nodes.handlers.mathmatrixornaments",               nil, "nut",    "disabled"  )
 appendaction("alignments",   "normalizers", "nodes.handlers.mathmatrixrules",                   nil, "nut",    "disabled"  )
 

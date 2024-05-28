@@ -54,7 +54,7 @@
 \registerctxluafile{font-otl}{autosuffix}
 \registerctxluafile{font-oto}{autosuffix}
 \registerctxluafile{font-otj}{autosuffix}
-\registerctxluafile{font-oup}{}
+\registerctxluafile{font-oup}{autosuffix}
 \registerctxluafile{font-ota}{autosuffix}
 \registerctxluafile{font-ots}{autosuffix}
 \registerctxluafile{font-otd}{autosuffix}
@@ -88,7 +88,7 @@
 
 % shapes
 
-\registerctxluafile{font-shp}{}
+\registerctxluafile{font-shp}{autosuffix}
 
 % so far
 
@@ -121,7 +121,7 @@
 \registerctxluafile{font-imp-notused}{}
 \registerctxluafile{font-imp-effects}{autosuffix}
 \registerctxluafile{font-imp-quality}{autosuffix}
-\registerctxluafile{font-imp-italics}{}
+\registerctxluafile{font-imp-italics}{autosuffix}
 \registerctxluafile{font-imp-dimensions}{}
 \registerctxluafile{font-imp-spacekerns}{}
 \registerctxluafile{font-imp-tweaks}{}

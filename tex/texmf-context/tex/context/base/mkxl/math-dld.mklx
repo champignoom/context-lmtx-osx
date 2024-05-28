@@ -51,9 +51,9 @@
 
 \mutable\lettonothing\currentmathdelimited
 
-\tolerant\protected\def\math_delimited_handle#tag#*[#settings]#:#body%
+\tolerant\protected\def\math_delimited_handle#tag#*[#S#settings]#:#body%
   {\begingroup
-   \edef\currentmathdelimited{#tag}%
+   \cdef\currentmathdelimited{#tag}%
    \setupcurrentmathdelimited[#settings]%
    \math_delimited_alternative{%
      \begincsname\??mathwhateverstrut\mathdelimitedparameter\c!strut\endcsname

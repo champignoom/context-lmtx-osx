@@ -28,8 +28,8 @@ local new_latelua       = nodes.pool.latelua
 local implement         = interfaces.implement
 local getnamespace      = interfaces.getnamespace
 
-local c_realpageno      = tex.iscount("realpageno")
-local c_realpagestateno = tex.iscount("realpagestateno")
+local c_realpageno      <const> = tex.iscount("realpageno")
+local c_realpagestateno <const> = tex.iscount("realpagestateno")
 
 local collected = allocate()
 local tobesaved = allocate()
@@ -120,7 +120,7 @@ end
 local function setpagestate(settings)
     local name, tag = setstate(settings)
  -- context(new_latelua(function() extend(name,tag) end))
-    ctx_latelua(function() extend(name,tag) end)
+    ctx_latelua(function() extend(name,tag) end) -- better a table and kind
 end
 
 local function setpagestaterealpageno(name,tag)

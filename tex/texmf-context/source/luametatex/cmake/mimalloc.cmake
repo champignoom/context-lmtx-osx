@@ -8,6 +8,7 @@ set(mimalloc_sources
     source/libraries/mimalloc/src/bitmap.c
     source/libraries/mimalloc/src/heap.c
     source/libraries/mimalloc/src/init.c
+    source/libraries/mimalloc/src/libc.c
     source/libraries/mimalloc/src/options.c
     source/libraries/mimalloc/src/os.c
     source/libraries/mimalloc/src/page.c
@@ -37,6 +38,7 @@ target_compile_definitions(mimalloc PRIVATE
     MIMALLOC_LARGE_OS_PAGES=1
     MI_DEBUG=0
     MI_SECURE=0
+    NDEBUG=0
 )
 
 if (NOT MSVC)

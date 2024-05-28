@@ -1184,24 +1184,26 @@ readers.hmtx = function(f,fontdata,specification)
             local glyph     = glyphs[i]
             width           = readshort(f) -- readushort
             leftsidebearing = readshort(f)
-            if width ~= 0 then
-                glyph.width = width
-            end
-         -- if leftsidebearing ~= 0 then
-         --     glyph.lsb = leftsidebearing
-         -- end
--- if leftsidebearing ~= 0 then
---     glyph.lsb = leftsidebearing
--- end
+            glyph.width     = width        -- zero is okay
+         -- glyph.lsb       = leftsidebearing
         end
         -- The next can happen in for instance a monospace font or in a cjk font
         -- with fixed widths.
-        for i=nofmetrics,nofglyphs-1 do
+--         for i=nofmetrics,nofglyphs-1 do
+--             local glyph = glyphs[i]
+--             if width ~= 0 then
+--                 glyph.width = width
+--             end
+--          -- if leftsidebearing ~= 0 then
+--          --     glyph.lsb = leftsidebearing
+--          -- end
+--         end
+        for i=0,nofglyphs-1 do
             local glyph = glyphs[i]
-            if width ~= 0 then
+            if not glyph.width then
                 glyph.width = width
             end
-         -- if leftsidebearing ~= 0 then
+         -- if not glyph.lsb and leftsidebearing ~= 0 then
          --     glyph.lsb = leftsidebearing
          -- end
         end
@@ -1982,11 +1984,14 @@ local function getinfo(maindata,sub,platformnames,rawfamilynames,metricstoo,inst
             capheight      = metrics.capheight or fontdata.maxy, -- can be missing
             ascender       = metrics.typoascender,
             descender      = metrics.typodescender,
+            ascent         = metrics.winascent,  -- these might be more reliable
+            descent        = metrics.windescent, -- these might be more reliable
             platformnames  = platformnames or nil,
             instancenames  = instancenames or nil,
             tableoffsets   = fontdata.tableoffsets,
             defaultvheight = (verticalheader.ascender or 0) - (verticalheader.descender or 0)
         }
+      -- print(fontname,fontheader.macstyle) : maybe for italic
         if metricstoo then
             local keys = {
                 "version",
@@ -2234,6 +2239,7 @@ local function readdata(f,offset,specification)
             rangeshift    = fontdata.rangeshift,
         })
     end
+
     return fontdata
 end
 

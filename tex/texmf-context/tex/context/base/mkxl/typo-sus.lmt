@@ -31,13 +31,13 @@ local categories      = characters.categories
 
 local nodecodes       = nodes.nodecodes
 
-local glyph_code      = nodecodes.glyph
-local kern_code       = nodecodes.kern
-local penalty_code    = nodecodes.penalty
-local glue_code       = nodecodes.glue
-local math_code       = nodecodes.math
-local hlist_code      = nodecodes.hlist
-local vlist_code      = nodecodes.vlist
+local glyph_code      <const> = nodecodes.glyph
+local kern_code       <const> = nodecodes.kern
+local penalty_code    <const> = nodecodes.penalty
+local glue_code       <const> = nodecodes.glue
+local math_code       <const> = nodecodes.math
+local hlist_code      <const> = nodecodes.hlist
+local vlist_code      <const> = nodecodes.vlist
 
 local nuts            = nodes.nuts
 
@@ -48,6 +48,7 @@ local getprev         = nuts.getprev
 local getnext         = nuts.getnext
 local getattr         = nuts.getattr
 local getfont         = nuts.getfont
+local getchar         = nuts.getchar
 local getlist         = nuts.getlist
 local getkern         = nuts.getkern
 local getpenalty      = nuts.getpenalty
@@ -70,11 +71,14 @@ local new_kern        = nodepool.kern
 local new_hlist       = nodepool.hlist
 ----- new_penalty     = nodepool.penalty
 
-local a_characters    = attributes.private("characters")
-local a_suspecting    = attributes.private('suspecting')
-local a_suspect       = attributes.private('suspect')
+local a_characters    <const> = attributes.private("characters")
+local a_suspecting    <const> = attributes.private('suspecting')
+local a_suspect       <const> = attributes.private('suspect')
+local a_invisibles    <const> = attributes.private('invisibles')
+
+local unsetvalue      <const> = attributes.unsetvalue
+
 local texsetattribute = tex.setattribute
-local unsetvalue      = attributes.unsetvalue
 local enabled         = false
 
 local enableaction    = nodes.tasks.enableaction
@@ -261,19 +265,25 @@ end
 
 local function showsuspects(head)
     -- we inject before so we're okay with a loop
+    local pickup = false
     for current, id, subtype in nextnode, head do
-        if id == glyph_code then
+        if current == pickup then
+            pickup = false
+        elseif id == glyph_code then
             local a = getattr(current,a_suspect)
             if a then
-                head, current = mark(head,current,id,colors[a])
+                head = mark(head,current,id,colors[a])
             end
         elseif id == glue_code then
             local a = getattr(current,a_suspect)
             if a then
-                head, current = mark(head,current,id,colors[a])
+                head = mark(head,current,id,colors[a])
             end
         elseif id == math_code then
-            current = endofmath(current)
+            pickup = endofmath(current)
+            if pickup == current then
+                pickup = false
+            end
         elseif id == hlist_code or id == vlist_code then
             local list = getlist(current)
             if list then
@@ -306,3 +316,57 @@ trackers.register("typesetters.suspects",function(v)
     end
 end)
 
+local enabled    = false
+local invisibles = false
+
+local invisible = {
+    [0x200B] = "zwsp",
+    [0x200C] = "zwnj",
+    [0x200D] = "zwj",
+    [0x2061] = "apply",
+    [0x2062] = "times",
+    [0x2063] = "separator",
+    [0x2064] = "plus",
+}
+
+local function showinvisibles(head)
+    -- we inject before so we're okay with a loop
+    for current, id, subtype in nextnode, head do
+        -- get...
+        if id == glyph_code then
+--            local a = getattr(current,a_suspect)
+--            if a then
+                local c = getchar(current)
+                local i = invisible[c]
+                if i then
+                    if not invisibles then
+                        invisibles = nodes.visualizers.register("invisible")
+                    end
+                    local info = invisibles(i)
+                    head = insertbefore(head,current,info)
+                end
+--            end
+        elseif id == hlist_code or id == vlist_code then
+            local list = getlist(current)
+            if list then
+                local l = showinvisibles(list)
+                if l ~= list then
+                    setlist(current,l)
+                end
+            end
+        end
+    end
+    return head
+end
+
+function typesetters.showinvisibles(head)
+    return showinvisibles(head)
+end
+
+trackers.register("typesetters.invisibles",function(v)
+--     texsetattribute(a_invisibles,v and 1 or unsetvalue)
+    if v and not enabled then
+        enableaction("shipouts","typesetters.showinvisibles")
+        enabled = true
+    end
+end)

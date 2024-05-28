@@ -26,7 +26,7 @@ fonts.metapost      = metapost
 local f_moveto      = formatters["(%N,%N)"]
 local f_lineto      = formatters["--(%N,%N)"]
 local f_curveto     = formatters["..controls(%N,%N)and(%N,%N)..(%N,%N)"]
-local s_cycle       = "--cycle"
+local s_cycle       <const> = "--cycle"
 
 local f_nofill      = formatters["nofill %s;"]
 local f_dofill      = formatters["fill %s;"]
@@ -73,6 +73,7 @@ function metapost.zeroline(d,factor)
 end
 
 function metapost.paths(d,xfactor,yfactor)
+    -- todo: add tracer that shows d
     local sequence = d.sequence
     local segments = d.segments
     local list     = { }
@@ -83,6 +84,9 @@ function metapost.paths(d,xfactor,yfactor)
     if sequence then
         local i = 1
         local n = #sequence
+        if sequence[1] ~= "m" then
+            report()
+        end
         while i < n do
             local operator = sequence[i]
             if operator == "m" then -- "moveto"
@@ -127,7 +131,6 @@ function metapost.paths(d,xfactor,yfactor)
             end
         end
     elseif segments then
--- inspect(segments)
         for i=1,#segments do
             local segment  = segments[i]
             local operator = segment[#segment]
@@ -164,6 +167,11 @@ function metapost.paths(d,xfactor,yfactor)
                     r_y + 2/3 * (m_y-r_y),
                     r_x, r_y
                 )
+            elseif operator == "close" then -- second argument is diagnostic
+                size = size + 1
+                path[size] = s_cycle
+                list[#list+1] = concat(path,"",1,size)
+                size = 0
             else
                 -- weird
             end
@@ -265,12 +273,12 @@ local texgetbox          = tex.getbox
 local nodecodes          = nodes.nodecodes -- no nuts yet
 local rulecodes          = nodes.rulecodes
 
-local rule_code          = nodecodes.rule
+local rule_code          <const> = nodecodes.rule
 
-local normalrule_code    = rulecodes.normal
-local outlinerule_code   = rulecodes.outline
-local userrule_code      = rulecodes.user
-local emptyrule_code     = rulecodes.empty
+local normalrule_code    <const> = rulecodes.normal
+local outlinerule_code   <const> = rulecodes.outline
+local userrule_code      <const> = rulecodes.user
+local emptyrule_code     <const> = rulecodes.empty
 
 local nuts               = nodes.nuts
 ----- getwhd             = nuts.getwhd
@@ -364,46 +372,48 @@ local function flushcharacter(current, pos_h, pos_v, pod_r, font, char)
             buffer[b] = code
         end
     else
-        logs.report("mlib-fnt","check 'flushcharacter', no current")
+        logs.report("mlib-fnt","check 'flushcharacter', no current, font %i, char %i", font or 0, char or 0)
     end
 end
 
 -- Messy ... todo:
 
--- local function flushcharacter(current,pos_h,pos_v,pos_r,font,char,data,csx,csy,factor,ssx,ssy)
---     local width, height, depth, sx, sy
---     if current then
---         char, font = isglyph(current)
---         width, height, depth, factor, sx, sy = getglyphdimensions(current)
---     else
---         if not data then
---             data = fontcharacters[font][char] or { }
---         end
---         width  = data.width or 0
---         height = data.height or 0
---         depth  = data.depth or 0
---         sx = 1
---         sy = 1
---     end
---     if csx then
---         sx = sx * csx
---     end
---     if csy then
---         sy = sy * csy
---     end
---     if ssx then
---         sx = sx * ssx
---     end
---     if ssy then
---         sy = sy * ssy
---     end
---     local code = glyph(kind,font,char,pos_h*fc,pos_v*fc,factor,s,sx,sy)
---     if code then
---         b = b + 1
---         buffer[b] = code
---     end
---     return width, height, depth
--- end
+local function flushcharacter(current,pos_h,pos_v,pos_r,font,char,data,csx,csy,factor,ssx,ssy)
+    if current then
+        local char, font = isglyph(current)
+        local s, sx, sy = getscales(current)
+        local code = glyph(kind,font,char,pos_h*fc,pos_v*fc,getexpansion(current),s,sx,sy)
+        if code then
+            b = b + 1
+            buffer[b] = code
+        end
+    elseif font and char then
+        if not data then
+            data = fontcharacters[font][char] or { }
+        end
+        if data then
+            local width  = data.width or 0
+            local height = data.height or 0
+            local depth  = data.depth or 0
+            local sx = 1
+            local sy = 1
+            if csx then sx = sx * csx end
+            if csy then sy = sy * csy end
+            if ssx then sx = sx * ssx end
+            if ssy then sy = sy * ssy end
+            local code = glyph(kind,font,char,pos_h*fc,pos_v*fc,factor,s,sx,sy)
+            if code then
+                b = b + 1
+                buffer[b] = code
+            end
+        else
+            logs.report("mlib-fnt","no font %i with char %i", font, char)
+        end
+     -- return width, height, depth
+    else
+        logs.report("mlib-fnt","no current, font, and/or char")
+    end
+end
 
 local function flushrule(current,pos_h,pos_v,pos_r,size_h,size_v,subtype)
     if subtype == normalrule_code then
@@ -462,7 +472,7 @@ drivers.install {
 
 function metapost.boxtomp(n,k)
     kind = k
-    nodes.handlers.finalizebox(n)
+    nodes.handlers.finalizebox(n,false)
     drivers.converters.lmtx(drivers.instances.mpo,texgetbox(n),"box",1)
     local result = concat(buffer,";")
     reset()
@@ -514,6 +524,7 @@ function mp.lmt_glyphshape_start(id,character)
                     local width  = (descdata.width or 0)  * factor
                     local height = descdata.boundingbox[4] * factor
                     local depth  = descdata.boundingbox[2] * factor
+                    local llx    = descdata.boundingbox[1] * factor
                     local math   = descdata.math
                     local italic = (math and math.italic or 0) * factor
                     local accent = (math and math.accent or 0) * factor
@@ -526,8 +537,9 @@ function mp.lmt_glyphshape_start(id,character)
                         depth       = depth,
                         italic      = italic,
                         accent      = accent,
-                        usedbox     = f_rectangle(0,depth,width,depth,width,height,0,height),
-                        usedline    = f_line(0,0,width,0),
+                        llx         = llx,
+                        usedbox     = f_rectangle(llx,depth,llx+width,depth,llx+width,height,llx,height),
+                        usedline    = f_line(llx,0,llx+width,0),
                     }
                     glyph.mpdata = mpdata
                 else
@@ -600,3 +612,4 @@ function mp.lmt_glyphshape_depth () injectnumeric(mpdata and mpdata.depth  or 0)
 function mp.lmt_glyphshape_height() injectnumeric(mpdata and mpdata.height or 0) end
 function mp.lmt_glyphshape_italic() injectnumeric(mpdata and mpdata.italic or 0) end
 function mp.lmt_glyphshape_accent() injectnumeric(mpdata and mpdata.accent or 0) end
+function mp.lmt_glyphshape_llx   () injectnumeric(mpdata and mpdata.llx    or 0) end

@@ -121,8 +121,18 @@ typedef struct scaledwhd {
     scaled wd;
     scaled ht;
     scaled dp;
-    scaled ic; /* padding anyway */
+    union { 
+        scaled ic; /* padding anyway */
+        scaled ns; /* natural size */
+    };
 } scaledwhd;
+
+typedef struct scaledkrn {
+    scaled bl;
+    scaled br;
+    scaled tl;
+    scaled tr;
+} scaledkrn;
 
 extern halfword tex_badness(
     scaled t,
@@ -149,8 +159,10 @@ extern halfword tex_badness(
 # define min_integer                      -0x7FFFFFFF /*tex aka |min_infinity| */
 # define max_posit                       max_cardinal 
 # define min_posit                       min_cardinal 
-# define max_dimen                         0x3FFFFFFF
-# define min_dimen                        -0x3FFFFFFF
+# define max_dimension                     0x3FFFFFFF
+# define min_dimension                    -0x3FFFFFFF
+# define max_dimen                      max_dimension
+# define min_dimen                      min_dimension
 # define min_data_value                             0
 # define max_data_value                 cs_offset_max
 # define max_half_value                         32767 /*tex For instance sf codes.*/
@@ -159,17 +171,19 @@ extern halfword tex_badness(
 
 # define max_infinity                      0x7FFFFFFF /*tex the largest positive value that \TEX\ knows */
 # define min_infinity                     -0x7FFFFFFF
-# define awful_bad                        07777777777 /*tex more than a billion demerits |0x3FFFFFFF| */ 
+# define awful_bad                         0x3FFFFFFF /*tex more than a billion demerits |07777777777| */ 
 # define infinite_bad                           10000 /*tex infinitely bad value */
 # define infinite_penalty                infinite_bad /*tex infinite penalty value */
 # define eject_penalty              -infinite_penalty /*tex negatively infinite penalty value */
+# define final_penalty                    -0x40000000 /*tex in the output routine */
 # define deplorable                            100000 /*tex more than |inf_bad|, but less than |awful_bad| */
+# define extremely_deplorable               100000000
 # define large_width_excess                   7230584
 # define small_stretchability                 1663497
-# define loose_criterium                           99 
-# define semi_loose_criterium                      12 /* same as |decent_criterium| */
-# define decent_criterium                          12 
-# define semi_tight_criterium                      12 /* same as |decent_criterium| */
+# define loose_criterion                           99 
+# define decent_criterion                          12 
+# define tight_criterion                           12 /* same as |decent_criterion| */
+# define max_calculated_badness                  8189
 
 # define default_rule                           26214 /*tex 0.4pt */
 # define ignore_depth                       -65536000 /*tex The magic dimension value to mean \quote {ignore me}: -1000pt */
@@ -182,8 +196,8 @@ extern halfword tex_badness(
 
 # define null_flag                        -0x40000000
 # define zero_glue                                  0
-# define unity                                0200000 /*tex $2^{16}$, represents 1.00000 */
-# define two                                  0400000 /*tex $2^{17}$, represents 2.00000 */
+# define unity                                0x10000 /*tex |0200000| or $2^{16}$, represents 1.00000 */
+# define two                                  0x20000 /*tex |0400000| or $2^{17}$, represents 2.00000 */
 # define null                                       0
 # define null_font                                  0
 
@@ -195,12 +209,14 @@ extern halfword tex_badness(
 # define unused_math_style                       0xFF
 # define unused_math_family                      0xFF
 
-# define preset_rule_thickness           010000000000 /*tex denotes |unset_rule_thickness|: |0x40000000|. */
+# define preset_rule_thickness             0x40000000 /*tex denotes |unset_rule_thickness|: |010000000000|. */
 
-# define max_char_code                             15 /*tex largest catcode for individual characters */
 # define min_space_factor                           0 /*tex watch out: |\spacefactor| cannot be zero but the sf code can!*/
-# define max_space_factor                      077777
+# define max_space_factor                      0x7FFF /*tex |077777| */
+# define min_scale_factor                           0 
+# define max_scale_factor                      100000 /*tex for now */
 # define default_space_factor                    1000
+# define space_factor_threshold                  2000
 # define default_tolerance                      10000
 # define default_hangafter                          1
 # define default_deadcycles                        25
@@ -208,6 +224,23 @@ extern halfword tex_badness(
 # define default_eqno_gap_step                   1000
 
 # define default_output_box                       255
+
+# define scaling_factor                          1000
+# define scaling_factor_squared               1000000
+# define scaling_factor_double                   1000.0
+//define scaling_multiplier_double               0.001
+
+# define max_math_scaling_factor                 5000
+
+# define max_font_adjust_step                     100
+# define max_font_adjust_stretch_factor          1000
+# define max_font_adjust_shrink_factor            500
+
+# define math_default_penalty    (infinite_penalty+1)
+
+# define initial_alignment_state             -1000000
+# define busy_alignment_state                 1000000
+# define interwoven_alignment_threshold        500000
 
 /*tex
 
@@ -234,36 +267,40 @@ extern halfword tex_badness(
 */
 
 # if 1
+
     # define max_toks_register_index      0xFFFF /* 0xFFFF 0xFFFF 0x7FFF */ /* 64 64 32 */
     # define max_box_register_index       0xFFFF /* 0xFFFF 0xFFFF 0x7FFF */ /* 64 64 32 */
-    # define max_int_register_index       0xFFFF /* 0xFFFF 0xFFFF 0x3FFF */ /* 64 64 16 */
-    # define max_dimen_register_index     0xFFFF /* 0xFFFF 0xFFFF 0x3FFF */ /* 64 64 16 */
+    # define max_integer_register_index   0xFFFF /* 0xFFFF 0xFFFF 0x3FFF */ /* 64 64 16 */
+    # define max_dimension_register_index 0xFFFF /* 0xFFFF 0xFFFF 0x3FFF */ /* 64 64 16 */
     # define max_posit_register_index     0xFFFF /* 0xFFFF 0x7FFF 0x1FFF */ /* 64 32  8 */
     # define max_attribute_register_index 0xFFFF /* 0xFFFF 0x7FFF 0x1FFF */ /* 64 32  8 */
     # define max_glue_register_index      0xFFFF /* 0xFFFF 0x7FFF 0x1FFF */ /* 64 32  8 */
-    # define max_mu_glue_register_index   0xFFFF /* 0xFFFF 0x3FFF 0x1FFF */ /* 64 16  8 */
+    # define max_muglue_register_index    0xFFFF /* 0xFFFF 0x3FFF 0x1FFF */ /* 64 16  8 */
 
 # else
 
-    # define max_toks_register_index      0x3FFF
-    # define max_box_register_index       0x7FFF
-    # define max_int_register_index       0x1FFF
-    # define max_dimen_register_index     0x1FFF
-    # define max_posit_register_index     0x1FFF
-    # define max_attribute_register_index 0x1FFF
-    # define max_glue_register_index      0x1FFF
-    # define max_mu_glue_register_index   0x1FFF
+    # define max_toks_register_index      0x1FFF //  8K
+    # define max_box_register_index       0x7FFF // 32K
+    # define max_integer_register_index   0x1FFF //  8k
+    # define max_dimension_register_index 0x1FFF //  8k  
+    # define max_posit_register_index     0x1FFF //  8k 
+    # define max_attribute_register_index 0x1FFF //  8k 
+    # define max_glue_register_index      0x0FFF //  4k 
+    # define max_muglue_register_index    0x0FFF //  4k 
 
 # endif
 
+# define max_unit_register_index       26*26
+
 # define max_n_of_toks_registers      (max_toks_register_index      + 1)
 # define max_n_of_box_registers       (max_box_register_index       + 1)
-# define max_n_of_int_registers       (max_int_register_index       + 1)
-# define max_n_of_dimen_registers     (max_dimen_register_index     + 1)
+# define max_n_of_integer_registers   (max_integer_register_index   + 1)
+# define max_n_of_dimension_registers (max_dimension_register_index + 1)
 # define max_n_of_attribute_registers (max_attribute_register_index + 1)
 # define max_n_of_posit_registers     (max_posit_register_index     + 1)
 # define max_n_of_glue_registers      (max_glue_register_index      + 1)
-# define max_n_of_mu_glue_registers   (max_mu_glue_register_index   + 1)
+# define max_n_of_muglue_registers    (max_muglue_register_index    + 1)
+# define max_n_of_unit_registers      (max_unit_register_index      + 1)
 
 # define max_n_of_bytecodes                   65536 /* dynamic */
 # define max_n_of_math_families                  64
@@ -278,11 +315,15 @@ extern halfword tex_badness(
 # define min_iterator_value                -0xFFFFF /* When we decide to generalize it might become 0xFFFF0 with */
 # define max_iterator_value                 0xFFFFF /* 0x0000F being a classifier so that we save cmd's          */
 # define max_category_code                       15
-# define max_newline_character                  127  /*tex Th is is an old constraint but there is no reason to change it. */
+# define max_newline_character                  127 /*tex This is an old constraint but there is no reason to change it. */
+# define max_endline_character                  127 /*tex To keep it simple we stick to the maximum single UTF character. */
 # define max_box_axis                           255
-# define max_size_of_word                      1024  /*tex More than enough (esp. since this can end up on the stack. */
-# define min_limited_scale                        0  /*tex Zero is a signal too. */
+# define max_size_of_word                      1024 /*tex More than enough (esp. since this can end up on the stack. */
+# define min_limited_scale                        0 /*tex Zero is a signal too. */
 # define max_limited_scale                     1000
+# define min_math_style_scale                     0 /*tex Zero is a signal too. */
+# define max_math_style_scale                  2000
+# define max_parameter_index                     15
 
 # define max_mark_index         (max_n_of_marks         - 1)
 # define max_insert_index       (max_n_of_inserts       - 1)
@@ -524,19 +565,18 @@ typedef union tokenword {
 # define stp_body_size         1000000
 
 # define max_node_size       100000000    /* Currently these are the memory words! */
-//define siz_node_size         5000000
-# define siz_node_size        25000000
 # define min_node_size         2000000    /* Currently these are the memory words! */
+# define siz_node_size        25000000
 # define stp_node_size          500000    /* Currently these are the memory words! */
 
 # define max_token_size       10000000    /* If needed we can go much larger. */
-# define siz_token_size       10000000
 # define min_token_size        1000000    /* The original 10000 is a bit cheap. */
+# define siz_token_size       10000000
 # define stp_token_size         250000
 
 # define max_buffer_size     100000000    /* Let's be generous */
-# define siz_buffer_size      10000000
 # define min_buffer_size       1000000    /* We often need quite a bit. */
+# define siz_buffer_size      10000000
 # define stp_buffer_size       1000000    /* We use this step when we increase the table. */
 
 # define max_nest_size           10000    /* The table will grow dynamically but the file system might have limitations. */
@@ -709,16 +749,19 @@ typedef struct line_break_properties {
     halfword initial_par;
     halfword display_math;
     halfword tracing_paragraphs;
+    halfword tracing_fitness;
+    halfword tracing_passes;
     halfword paragraph_dir;
     halfword parfill_left_skip;
     halfword parfill_right_skip;
     halfword parinit_left_skip;
     halfword parinit_right_skip;
-    halfword par_left_skip;
-    halfword par_right_skip;
+    halfword emergency_left_skip;
+    halfword emergency_right_skip;
     halfword pretolerance;
     halfword tolerance;
     halfword emergency_stretch;
+    halfword emergency_extra_stretch;
     halfword looseness;
     halfword adjust_spacing;
     halfword protrude_chars;
@@ -743,7 +786,10 @@ typedef struct line_break_properties {
     halfword display_widow_penalties;
     halfword orphan_penalty;
     halfword orphan_penalties;
+    halfword toddler_penalty;
+    halfword fitness_demerits;
     halfword broken_penalty;
+    halfword broken_penalties;
     halfword baseline_skip;
     halfword line_skip;
     halfword line_skip_limit;
@@ -753,8 +799,181 @@ typedef struct line_break_properties {
     halfword hyphenation_mode;
     halfword shaping_penalties_mode;
     halfword shaping_penalty;
-    halfword padding;
+    halfword par_passes;
+    halfword extra_hyphen_penalty; 
+    halfword line_break_optional;
+    halfword optional_found;
+    halfword math_found;
+    halfword single_line_penalty;
+    halfword hyphen_penalty;
+    halfword ex_hyphen_penalty;
+    halfword group_context;
+    halfword par_context;
 } line_break_properties;
+
+typedef enum sparse_identifiers {
+    unknown_sparse_identifier,
+    catcode_sparse_identifier,
+    lccode_sparse_identifier,
+    uccode_sparse_identifier,
+    sfcode_sparse_identifier,
+    hjcode_sparse_identifier,
+    hmcode_sparse_identifier,
+    hccode_sparse_identifier,
+    amcode_sparse_identifier,
+    fontchar_sparse_identifier,
+    mathcode_sparse_identifier,
+    delcode_sparse_identifier,
+    mathfont_sparse_identifier, 
+    mathparam_sparse_identifier, 
+    user_sparse_identifier,
+} sparse_identifiers;
+
+/*tex
+
+    Here are the group codes that are used to discriminate between different kinds of groups. They
+    allow \TEX\ to decide what special actions, if any, should be performed when a group ends.
+
+    Some groups are not supposed to be ended by right braces. For example, the |$| that begins a
+    math formula causes a |math_shift_group| to be started, and this should be terminated by a
+    matching |$|. Similarly, a group that starts with |\left| should end with |\right|, and one
+    that starts with |\begingroup| should end with |\endgroup|.
+
+*/
+
+typedef enum tex_group_codes {
+    bottom_level_group,  /*tex group code for the outside world */
+    simple_group,        /*tex group code for local structure only */
+    hbox_group,          /*tex code for |\hbox| */
+    adjusted_hbox_group, /*tex code for |\hbox| in vertical mode */
+    vbox_group,          /*tex code for |\vbox| */
+    vtop_group,          /*tex code for |\vtop| */
+    dbox_group,          /*tex code for |\dbox| */
+    align_group,         /*tex code for |\halign|, |\valign| */
+    no_align_group,      /*tex code for |\noalign| */
+    output_group,        /*tex code for output routine */
+    math_group,          /*tex code for, e.g., |\char'136| */
+    math_stack_group,
+    math_component_group,
+    discretionary_group, /*tex code for |\discretionary|' */
+    insert_group,        /*tex code for |\insert| */
+    vadjust_group,       /*tex code for |\vadjust| */
+    vcenter_group,       /*tex code for |\vcenter| */
+    math_fraction_group, /*tex code for |\over| and friends */
+    math_operator_group,
+    math_radical_group,
+    math_choice_group,   /*tex code for |\mathchoice| */
+    also_simple_group,   /*tex code for |\begingroup|\unknown|\egroup| */
+    semi_simple_group,   /*tex code for |\begingroup|\unknown|\endgroup| */
+    math_simple_group,   /*tex code for |\beginmathgroup|\unknown|\endmathgroup| */
+    math_fence_group,    /*tex code for fences |\left|\unknown|\right| */
+    math_inline_group,   
+    math_display_group,  
+    math_number_group,     
+    local_box_group,     /*tex code for |\localleftbox|\unknown|localrightbox| */
+    split_off_group,     /*tex box code for the top part of a |\vsplit| */
+    split_keep_group,    /*tex box code for the bottom part of a |\vsplit| */
+    preamble_group,      /*tex box code for the preamble processing  in an alignment */
+    align_set_group,     /*tex box code for the final item pass in an alignment */
+    finish_row_group,    /*tex box code for a provisory line in an alignment */
+    lua_group,
+} tex_group_codes;
+
+/*
+    In the end I decided to split them into context and begin, but maybe some day
+    they all merge into one (easier on tracing and reporting in shared helpers).
+*/
+
+typedef enum tex_par_context_codes {
+    normal_par_context,
+    vmode_par_context,
+    vbox_par_context,
+    vtop_par_context,
+    dbox_par_context,
+    vcenter_par_context,
+    vadjust_par_context,
+    insert_par_context,
+    output_par_context,
+    align_par_context,
+    no_align_par_context,
+    span_par_context,
+    math_par_context,
+    lua_par_context,
+    reset_par_context,
+    n_of_par_context_codes,
+} tex_par_context_codes;
+
+typedef enum tex_alignment_context_codes {
+    preamble_pass_alignment_context,
+    preroll_pass_alignment_context,
+    package_pass_alignment_context,
+    wrapup_pass_alignment_context,
+} tex_alignment_context_codes;
+
+typedef enum tex_breaks_context_codes {
+    initialize_show_breaks_context,
+    start_show_breaks_context,
+    list_show_breaks_context,
+    stop_show_breaks_context,
+    collect_show_breaks_context,
+    line_show_breaks_context,
+    delete_show_breaks_context,
+    report_show_breaks_context,
+    wrapup_show_breaks_context,
+} tex_breaks_context_codes;
+
+typedef enum tex_build_context_codes {
+    initialize_show_build_context,
+    step_show_build_context,
+    check_show_build_context,
+    skip_show_build_context,
+    move_show_build_context,
+    fireup_show_build_context,
+    wrapup_show_build_context,
+} tex_build_context_codes;
+
+typedef enum tex_page_context_codes {
+    box_page_context,
+    end_page_context,
+    vadjust_page_context,
+    penalty_page_context,
+    boundary_page_context,
+    insert_page_context,
+    hmode_par_page_context,
+    vmode_par_page_context,
+    begin_paragraph_page_context,
+    before_display_page_context,
+    after_display_page_context,
+    after_output_page_context,
+    alignment_page_context,
+    triggered_page_context
+} tex_page_context_codes;
+
+typedef enum tex_append_line_context_codes {
+    box_append_line_context,
+    pre_box_append_line_context,
+    pre_adjust_append_line_context,
+    post_adjust_append_line_context,
+    pre_migrate_append_line_context,
+    post_migrate_append_line_context,
+} tex_append_line_context_codes;
+
+typedef enum tex_par_trigger_codes {
+    normal_par_trigger,
+    force_par_trigger,
+    indent_par_trigger,
+    no_indent_par_trigger,
+    math_char_par_trigger,
+    char_par_trigger,
+    boundary_par_trigger,
+    space_par_trigger,
+    math_par_trigger,
+    kern_par_trigger,
+    hskip_par_trigger,
+    un_hbox_char_par_trigger,
+    valign_char_par_trigger,
+    vrule_char_par_trigger,
+} tex_par_trigger_codes;
 
 # endif
 

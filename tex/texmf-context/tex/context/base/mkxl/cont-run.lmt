@@ -223,17 +223,24 @@ local function processjob()
     -- silent
     -- batchmode
 
-if arguments.directives then
-    directives.enable(arguments.directives)
-end
+    if arguments.directives then
+        directives.enable(arguments.directives)
+    end
+    if arguments.experiments then
+        experiments.enable(arguments.experiments)
+    end
 
     if arguments.nosynctex then
         luatex.synctex.setup {
             state  = interfaces.variables.never,
         }
     elseif arguments.synctex then
+        local state = arguments.synctex
+        if state == true then
+            state = interfaces.variables.start
+        end
         luatex.synctex.setup {
-            state  = interfaces.variables.start,
+            state  = state,
             method = interfaces.variables.max,
         }
     end
@@ -320,6 +327,9 @@ end
         -- We have a regular tex file so no \starttext yet as we can
         -- load fonts.
      -- context.enabletrackers { "resolvers.*" }
+        if type(arguments.forceinput) == "string" then
+            filename = arguments.forceinput or filename
+        end
         context.input(filename)
      -- context.disabletrackers { "resolvers.*" }
 

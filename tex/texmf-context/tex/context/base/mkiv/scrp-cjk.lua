@@ -542,6 +542,7 @@ function scripts.decomposehangul(head)
     for current, char in nextglyph, head do
         local lead_consonant, medial_vowel, tail_consonant = decomposed(char)
         if lead_consonant then
+            local current = current -- 5.5 constant
             setchar(current,lead_consonant)
             local m = copy_node(current)
             setchar(m,medial_vowel)
@@ -827,7 +828,7 @@ local japanese_2 = {
     katakana         = stretch_break,
     half_width_open  = nobreak_stretch_break_autoshrink,
     half_width_close = nobreak_stretch,
-    full_width_open  = nobreak_stretch_break_shrink,
+    full_width_open  = stretch_break, -- WS, was: nobreak_stretch_break_shrink,
     full_width_close = nobreak_stretch,
     full_width_punct = japanese_before_full_width_punct, -- nobreak_stretch,
     hyphen           = nobreak_stretch,

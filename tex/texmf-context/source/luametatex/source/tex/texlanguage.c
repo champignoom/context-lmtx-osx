@@ -36,6 +36,11 @@ language_state_info lmt_language_state = {
     },
     .handler_table_id = 0,
     .handler_count    = 0,
+    .list_count       = 0, 
+    .checked_count    = 0,
+    .exceptions_count = 0,
+    .hyphenated_count = 0,
+    .nothing_count    = 0,
 };
 
 /*tex
@@ -364,7 +369,8 @@ void tex_clear_patterns(struct tex_language *lang)
 
 void tex_load_tex_patterns(halfword curlang, halfword head)
 {
-    char *s = tex_tokenlist_to_tstring(head, 1, NULL, 0, 0, 0, 0);
+    /*tex We might want single hashes. */
+    char *s = tex_tokenlist_to_tstring(head, 1, NULL, 0, 0, 0, 0, 1); /* single hashes */
     if (s) {
         tex_load_patterns(tex_get_language(curlang), (unsigned char *) s);
     }
@@ -540,7 +546,7 @@ void tex_clear_hyphenation(struct tex_language *lang)
 
 void tex_load_tex_hyphenation(halfword curlang, halfword head)
 {
-    char *s = tex_tokenlist_to_tstring(head, 1, NULL, 0, 0, 0, 0);
+    char *s = tex_tokenlist_to_tstring(head, 1, NULL, 0, 0, 0, 0, 1); /* single hashes */
     if (s) {
         tex_load_hyphenation(tex_get_language(curlang), (unsigned char *) s);
     }
@@ -829,8 +835,10 @@ static void tex_aux_do_exception(halfword wordstart, halfword r, char *replaceme
                             } else {
                                 penalty = (uword[i] - '0') * exception_penalty_par ;
                             }
-                        } else {
+                        } else if (exception_penalty_par < 0) {
                             penalty = hyphen_penalty_par;
+                        } else { 
+                            penalty = (uword[i] - '0') * hyphen_penalty_par ;
                         }
                         ++i;
                         while (uword[i] && uword[i] != ']') {
@@ -965,7 +973,7 @@ inline static halfword tex_aux_is_hyphen_char(halfword chr)
     if (tex_get_hc_code(chr)) {
         return tex_get_hc_code(chr);
     } else if (chr == ex_hyphen_char_par) {
-        return ex_hyphen_char_par;
+        return chr;
     } else {
         return null;
     }
@@ -1191,6 +1199,7 @@ static int tex_aux_hnj_hyphen_hyphenate(
         int state = 0;
         int char_num = 0;
         int done = 0;
+        ++lmt_language_state.word_count;
         /*tex Add a '.' to beginning and end to facilitate matching. */
         node_next(begin_period) = first;
         node_next(end_period) = node_next(last);
@@ -1389,6 +1398,8 @@ void tex_hyphenate_list(halfword head, halfword tail)
         halfword first_language = first_valid_language_par; /* combine with check below */
         halfword trace = tracing_hyphenation_par;
         halfword r = head;
+        halfword nothing = 1;
+        ++lmt_language_state.list_count;
         /*tex
             This first movement assures two things:
 
@@ -1408,6 +1419,17 @@ void tex_hyphenate_list(halfword head, halfword tail)
             r = node_next(r);
         }
         if (r) {
+            /* maybe pass used_hyphen_penalty_par and used_ex_hyphen_penalty_par */
+            halfword saved_hyphen_penalty_par = hyphen_penalty_par;
+            halfword saved_ex_hyphen_penalty_par = ex_hyphen_penalty_par;
+            halfword p = tex_find_par_par(head);
+            int penalties_pushed = node_type(p) == par_node; /* maybe check for h|v subtype */
+            ++lmt_language_state.checked_count;
+            if (penalties_pushed) {
+                hyphen_penalty_par = tex_get_par_par(p, par_hyphen_penalty_code); 
+                ex_hyphen_penalty_par = tex_get_par_par(p, par_ex_hyphen_penalty_code); 
+            }
+            /* */
             r = tex_aux_find_next_wordstart(r, first_language);
             if (r) {
                 lang_variables langdata;
@@ -1641,6 +1663,8 @@ void tex_hyphenate_list(halfword head, halfword tail)
                                         /*tex handle the exception and go on to the next word */
                                         halfword start = explicit_start ? explicit_start : word_start;
                                         halfword beg = node_prev(start);
+                                        ++lmt_language_state.exceptions_count;
+                                        nothing = 0;
                                         tex_aux_do_exception(start, r, replacement); // r == next_node(word_end)
                                         if (trace > 1) {
                                             tex_begin_diagnostic();
@@ -1653,7 +1677,7 @@ void tex_hyphenate_list(halfword head, halfword tail)
                                         lmt_memory_free(replacement);
                                         goto PICKUP;
                                     }
-                                    PATTERNS:
+                                  PATTERNS:
                                     if (lang->patterns) {
                                         if (explicit_start) {
                                             /*tex We're done already */
@@ -1675,6 +1699,10 @@ void tex_hyphenate_list(halfword head, halfword tail)
                                                     }
                                                 }
                                                 done = tex_aux_hnj_hyphen_hyphenate(lang->patterns, word_start, word_end, word_length, left, right, &langdata);
+                                                if (done) { 
+                                                    ++lmt_language_state.hyphenated_count;
+                                                    nothing = 0;
+                                                }
                                                 if (trace > 1) {
                                                     tex_begin_diagnostic();
                                                     if (done) {
@@ -1710,6 +1738,15 @@ void tex_hyphenate_list(halfword head, halfword tail)
                 tex_flush_node(node_next(tail));
                 node_next(tail) = saved_tail;
             }
+            /* */
+            if (penalties_pushed) {
+                hyphen_penalty_par = saved_hyphen_penalty_par;
+                ex_hyphen_penalty_par = saved_ex_hyphen_penalty_par;
+            }
+            /* */
+        }
+        if (nothing) {
+            ++lmt_language_state.nothing_count;
         }
     }
 }

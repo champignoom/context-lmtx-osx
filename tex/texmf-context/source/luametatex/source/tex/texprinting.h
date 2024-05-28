@@ -82,7 +82,7 @@ extern void        tex_print_font_specifier   (halfword e);                    /
 extern void        tex_print_font             (halfword f);
 extern void        tex_print_char_identifier  (halfword c);
 extern void        tex_print_token_list       (const char *s, halfword p);     /*tex prints token list data in braces */
-extern void        tex_print_rule_dimen       (scaled d);                      /*tex prints dimension in rule node */
+extern void        tex_print_rule_dimension   (scaled d);                      /*tex prints dimension in rule node */
 extern void        tex_print_group            (int e);
 extern void        tex_print_format           (const char *format, ...);       /*tex similar to the one we use for errors */
 extern const char *tex_print_format_args      (const char *format, va_list args);
@@ -93,7 +93,7 @@ extern void        tex_show_box               (halfword p);
 extern void        tex_short_display          (halfword p);                    /*tex prints highlights of list |p| */                                            
 extern void        tex_print_message          (const char *s);
 
-inline static int tex_single_letter(strnumber s)
+static inline int tex_single_letter(strnumber s)
 {
     return (
           (str_length(s) == 1)
@@ -103,13 +103,20 @@ inline static int tex_single_letter(strnumber s)
     );
 }
 
-inline static int tex_is_active_cs(strnumber s)
+static inline int tex_is_active_cs(strnumber s)
 {
     if (s && str_length(s) > 3) {
         const unsigned char *ss = str_string(s); // or signed and active_character ... 
         return (ss[0] == active_first) && (ss[1] == active_second) && (ss[2] == active_third);
     } else {
         return 0;
+    }
+}
+
+inline static void tex_aux_show_group_count(int n)
+{
+    for (int i = 1; i <= n; i++) {
+        tex_print_str("{}");
     }
 }
 

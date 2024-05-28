@@ -24,4 +24,14 @@ extern halfword tex_get_rule_family           (halfword n);
 extern void     tex_set_rule_font             (halfword n, halfword fnt);
 extern void     tex_set_rule_family           (halfword n, halfword fam);
 
+extern halfword tex_get_rule_left             (halfword n);
+extern halfword tex_get_rule_right            (halfword n);
+extern void     tex_set_rule_left             (halfword n, halfword value);
+extern void     tex_set_rule_right            (halfword n, halfword value);
+
+extern halfword tex_get_rule_on               (halfword n);
+extern halfword tex_get_rule_off              (halfword n);
+extern void     tex_set_rule_on               (halfword n, halfword value);
+extern void     tex_set_rule_off              (halfword n, halfword value);
+
 # endif

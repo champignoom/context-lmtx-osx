@@ -26,6 +26,9 @@
 
 % \protect
 
+\permanent\def\btx{} % begin (textext) string
+\permanent\def\etx{} % end   (textext) string
+
 \registerctxluafile{mlib-fio}{autosuffix}
 \registerctxluafile{mlib-run}{autosuffix}
 \registerctxluafile{mlib-ctx}{autosuffix}
@@ -41,7 +44,15 @@
 \registerctxluafile{mlib-cnt}{autosuffix}
 \registerctxluafile{mlib-svg}{autosuffix}
 \registerctxluafile{mlib-fnt}{autosuffix} % outline fun
+\registerctxluafile{mlib-ptr}{autosuffix}
 
 \unprotect
+
+\defineframed
+  [potracebitmap]
+  [\c!foregroundstyle=\tttf,
+   \c!offset=\v!overlay,%
+   \c!align=\v!normal,%
+   \c!frame=\v!off]%
 
 \protect \endinput

@@ -102,15 +102,18 @@ typedef struct mathinfo {
     /*tex 
         A set of pointers to variable size arrays which is why we also have the number of slots 
         stored. 
+
+        These four might go away because in practice they are incomplete or even in accurate and
+        we (need and therefore) have an alternative and more generic approach anyway.
     */
     int       top_left_math_kerns;        
     int       top_right_math_kerns;       
     int       bottom_right_math_kerns;    
     int       bottom_left_math_kerns;     
-    scaled   *top_left_math_kern_array;    
-    scaled   *top_right_math_kern_array;
-    scaled   *bottom_right_math_kern_array;
-    scaled   *bottom_left_math_kern_array;
+    scaled   *top_left_math_kern_array;       
+    scaled   *top_right_math_kern_array;      
+    scaled   *bottom_right_math_kern_array;   
+    scaled   *bottom_left_math_kern_array;    
     /*tex 
         Here come the extensible recipes. Because we haven't seen both in one glyph we can share 
         the pointer and put a h/v flag in the tag field. For the moment we keep them both because
@@ -235,8 +238,6 @@ typedef struct texfont {
     int         design_size;
     char       *name;
     char       *original;
-    /*tex for experimental new thingies */
-    int         compactmath;
     /*tex this controls the engine */
     int         mathcontrol;
     int         textcontrol;
@@ -244,9 +245,10 @@ typedef struct texfont {
     int         max_shrink;
     int         max_stretch;
     int         step;
-    /*tex special characters, see \TEX book */
-    int         hyphen_char;
-    int         skew_char;
+    /*tex for experimental new thingies */
+    int         compactmath;  /* This can go away, just always test. */ 
+    /*tex saves calculations */
+    double      weight; 
     /*tex all parameters, although only some are used */
     int         parameter_count;
     scaled     *parameter_base;
@@ -258,6 +260,12 @@ typedef struct texfont {
     int         math_parameter_count;
     /* zero is alignment */
     int         mathscales[3];
+    int         mathxscales[3];
+    int         mathyscales[3];
+    int         mathweights[3];
+    /*tex special characters, see \TEX book */
+    int         hyphen_char;
+    int         skew_char;
 } texfont;
 
 /*tex
@@ -293,6 +301,8 @@ extern font_state_info lmt_font_state;
 # define font_max_stretch(a)            (lmt_font_state.adjust_step > 0 ? lmt_font_state.adjust_stretch : lmt_font_state.fonts[a]->max_stretch)
 # define font_step(a)                   (lmt_font_state.adjust_step > 0 ? lmt_font_state.adjust_step    : lmt_font_state.fonts[a]->step)
 # define font_mathscale(a,b)            lmt_font_state.fonts[a]->mathscales[b]
+# define font_mathxscale(a,b)           lmt_font_state.fonts[a]->mathxscales[b]
+# define font_mathyscale(a,b)           lmt_font_state.fonts[a]->mathyscales[b]
 
 # define set_font_size(a,b)             lmt_font_state.fonts[a]->size = b
 # define set_font_name(a,b)             lmt_font_state.fonts[a]->name = b
@@ -313,6 +323,18 @@ extern font_state_info lmt_font_state;
 # define set_font_scriptsize(a,b)       lmt_font_state.fonts[a]->mathscales[1] = b
 # define set_font_scriptscriptsize(a,b) lmt_font_state.fonts[a]->mathscales[2] = b
 
+# define set_font_x_textsize(a,b)         lmt_font_state.fonts[a]->mathxscales[0] = b
+# define set_font_x_scriptsize(a,b)       lmt_font_state.fonts[a]->mathxscales[1] = b
+# define set_font_x_scriptscriptsize(a,b) lmt_font_state.fonts[a]->mathxscales[2] = b
+
+# define set_font_y_textsize(a,b)         lmt_font_state.fonts[a]->mathyscales[0] = b
+# define set_font_y_scriptsize(a,b)       lmt_font_state.fonts[a]->mathyscales[1] = b
+# define set_font_y_scriptscriptsize(a,b) lmt_font_state.fonts[a]->mathyscales[2] = b
+ 
+# define set_font_textweight(a,b)         lmt_font_state.fonts[a]->mathweights[0] = b
+# define set_font_scriptweight(a,b)       lmt_font_state.fonts[a]->mathweights[1] = b
+# define set_font_scriptscriptweight(a,b) lmt_font_state.fonts[a]->mathweights[2] = b
+
 /*tex
     These are bound to a font. There might be a few more in the future. An example is collapsing
     hyphens. One can do that using (in context speak) tlig feature but actually it is some very
@@ -323,13 +345,21 @@ extern font_state_info lmt_font_state;
 */
 
 typedef enum text_control_codes {
-    text_control_collapse_hyphens = 0x00001,
-    text_control_base_ligaturing  = 0x00002,
-    text_control_base_kerning     = 0x00004,
-    text_control_none_protected   = 0x00008,
+    text_control_collapse_hyphens = 0x0001,
+    text_control_base_ligaturing  = 0x0002,
+    text_control_base_kerning     = 0x0004,
+    text_control_none_protected   = 0x0008,
+    text_control_has_italics      = 0x0010,
+    text_control_auto_italics     = 0x0020,
+    /* these are private */
+    text_control_quality_set      = 0x0100,
+    text_control_expansion        = 0x0200,
+    text_control_left_protrusion  = 0x0400,
+    text_control_right_protrusion = 0x0800,
 } text_control_codes;
 
 # define has_font_text_control(f,c)  ((font_textcontrol(f) & c) == c)
+# define set_font_text_control(f,c)  font_textcontrol(f) |= (c)
 
 /*tex
     These are special codes that are used in the traditional ligature builder. In \OPENTYPE\
@@ -451,7 +481,7 @@ extern charinfo *tex_get_charinfo     (halfword f, int c);
 extern int       tex_char_exists      (halfword f, int c);
 extern void      tex_char_process     (halfword f, int c);
 extern int       tex_math_char_exists (halfword f, int c, int size);
-extern int       tex_get_math_char    (halfword f, int c, int size, scaled *scale, int direction);
+extern int       tex_get_math_char    (halfword f, int c, int size, scaled *scale, scaled *xscale, scaled *ysale, scaled *weight, int direction);
 
 /*tex 
     These used to be small integers, bit 22 upto 31, but now we have a 32 bit set. We actually don't 
@@ -462,27 +492,41 @@ extern int       tex_get_math_char    (halfword f, int c, int size, scaled *scal
     Not all are needed but at least we now can keep some state. We can actually use them to something
     if we really want to (like when we runt tests). However, that is a rather drastic measure for 
     shared fonts. Tracing is another application and at some point it will be used for this. 
+
+    Todo, a compact mode only feature: 
+
+      expansion_checked_tag   = 0x40000, 
+      protrusion_checked_tag  = 0x80000, 
+
+    when not yet checked, we call out to lua and get the values. That way we don't need to initialize 
+    the fonts at load time. 
+
 */
 
 typedef enum char_tag_codes {
-    no_tag           = 0x00000, /*tex vanilla character */
-    ligatures_tag    = 0x00001, /*tex character has a ligature program, not used */ 
-    kerns_tag        = 0x00002, /*tex character has a kerning program, not used */ 
-    list_tag         = 0x00004, /*tex character has a successor in a charlist */  
-    callback_tag     = 0x00010,
-    extensible_tag   = 0x00020, /*tex character is extensible, we can unset it in order to block */
-    horizontal_tag   = 0x00040, /*tex horizontal extensible */
-    vertical_tag     = 0x00080, /*tex vertical extensible */
-    inner_left_tag   = 0x00100, /*tex anchoring */
-    inner_right_tag  = 0x00200, /*tex anchoring */
-    inner_top_tag    = 0x00400, /*tex anchoring */ 
-    inner_bottom_tag = 0x00800, /*tex anchoring */ 
-    extend_last_tag  = 0x01000, /*tex auto scale last variant */
-    italic_tag       = 0x02000, 
-    n_ary_tag        = 0x04000, 
-    radical_tag      = 0x08000, 
-    punctuation_tag  = 0x10000, 
-    keep_base_tag    = 0x20000, 
+    no_tag               = 0x0000000, /*tex vanilla character */
+    ligatures_tag        = 0x0000001, /*tex character has a ligature program, not used */ 
+    kerns_tag            = 0x0000002, /*tex character has a kerning program, not used */ 
+    list_tag             = 0x0000004, /*tex character has a successor in a charlist */  
+    callback_tag         = 0x0000010,
+    extensible_tag       = 0x0000020, /*tex character is extensible, we can unset it in order to block */
+    horizontal_tag       = 0x0000040, /*tex horizontal extensible */
+    vertical_tag         = 0x0000080, /*tex vertical extensible */
+    inner_left_tag       = 0x0000100, /*tex anchoring */
+    inner_right_tag      = 0x0000200, /*tex anchoring */
+    inner_top_tag        = 0x0000400, /*tex anchoring */ 
+    inner_bottom_tag     = 0x0000800, /*tex anchoring */ 
+    extend_last_tag      = 0x0001000, /*tex auto scale last variant */
+    italic_tag           = 0x0002000, 
+    n_ary_tag            = 0x0004000, 
+    radical_tag          = 0x0008000, 
+    punctuation_tag      = 0x0010000, 
+    keep_base_tag        = 0x0020000, 
+    expansion_tag        = 0x0040000,
+    protrusion_tag       = 0x0080000,
+    above_baseline_tag   = 0x0100000,
+    below_baseline_tag   = 0x0200000,
+    force_extensible_tag = 0x0400000,
 } char_tag_codes;
 
 /*tex
@@ -502,7 +546,7 @@ typedef enum char_tag_codes {
 # define set_charinfo_tag(ci,val)                          ci->tag |= val;
 # define set_charinfo_next(ci,val)                         if (ci->math) { ci->math->next = val; }
 
-# define has_charinfo_tag(ci,p)                            (ci->tag) & (p) == (p)) 
+# define has_charinfo_tag(ci,p)                            (((ci->tag) & (p)) == (p)) 
 # define get_charinfo_tag(ci)                              ci->tag
 
 # define set_charinfo_ligatures(ci,val)                    { lmt_memory_free(ci->ligatures); ci->ligatures = val; }
@@ -613,6 +657,9 @@ extern scaled    tex_char_total_from_glyph              (halfword g); /* x/y sca
 extern scaled    tex_char_italic_from_glyph             (halfword g); /* x/y scaled */
 extern scaled    tex_char_width_italic_from_glyph       (halfword g); /* x/y scaled */
 extern scaledwhd tex_char_whd_from_glyph                (halfword g); /* x/y scaled */
+extern scaled    tex_char_left_protrusion_from_glyph    (halfword g); /* x/y scaled */
+extern scaled    tex_char_right_protrusion_from_glyph   (halfword g); /* x/y scaled */
+extern scaledkrn tex_char_corner_kerns_from_glyph       (halfword g); /* x/y scaled */
                                                        
 extern int       tex_valid_kern                         (halfword left, halfword right);            /* returns kern */
 extern int       tex_valid_ligature                     (halfword left, halfword right, int *slot); /* returns type */
@@ -661,9 +708,9 @@ typedef enum math_extension_modes {
 
 typedef enum adjust_spacing_modes {
     adjust_spacing_off,
-    adjust_spacing_unused,
-    adjust_spacing_full,
-    adjust_spacing_font,
+    adjust_spacing_unused, 
+    adjust_spacing_full,   /* glyphs and kerns */
+    adjust_spacing_font,   /* glyphs */
 } adjust_spacing_modes;
 
 typedef enum protrude_chars_modes {
@@ -713,6 +760,15 @@ extern void          tex_set_font_name         (halfword f, const char *s);
 extern void          tex_set_font_original     (halfword f, const char *s);
 
 extern scaled        tex_get_math_font_scale   (halfword f, halfword size);
+extern scaled        tex_get_math_font_x_scale (halfword f, halfword size);
+extern scaled        tex_get_math_font_y_scale (halfword f, halfword size);
+extern scaled        tex_get_math_font_weight  (halfword f, halfword size);
+
+//     scaled        tex_raw_math_font_scale   (halfword f, halfword size);
+//     scaled        tex_raw_math_font_x_scale (halfword f, halfword size);
+//     scaled        tex_raw_math_font_y_scale (halfword f, halfword size);
+
+extern scaled        tex_get_math_font_factor  (halfword size);
 
 extern void          tex_run_font_spec         (void);
 

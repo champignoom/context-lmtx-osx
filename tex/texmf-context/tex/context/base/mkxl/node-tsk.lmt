@@ -278,10 +278,65 @@ function tasks.table(name) --maybe move this to task-deb.lua
     end
 end
 
--- -- shipouts everypar -- --
+-- -- shipouts -- --
 
 -- the shipout handlers acts on boxes so we don't need to return something
 -- and also don't need to keep the state (done)
+
+local templates = {
+
+default = [[
+return function(head,ispage)
+    return head
+end
+]],
+
+process = [[
+local tonut  = nodes.tonut
+local tonode = nodes.nuts.tonode
+
+%localize%
+
+return function(head,ispage)
+    local nuthead = tonut(head)
+
+%actions%
+    return tonode(nuthead)
+end
+]],
+
+step = [[
+    nuthead = tonut((%action%(tonode(nuthead)),ispage))
+]],
+
+nut  = [[
+    nuthead = %action%(nuthead,ispage)
+]],
+
+nohead = [[
+    %action%(tonode(nuthead,ispage))
+]],
+
+nonut = [[
+    %action%(nuthead,ispage)
+]],
+
+}
+
+tasks.new {
+    name      = "shipouts",
+    processor = nodeprocessor,
+    sequence  = {
+        "before",      -- users
+        "normalizers", -- system
+        "finishers",   -- system
+        "after",       -- users
+        "wrapup",      -- system
+    },
+    templates = templates
+}
+
+-- -- everypar -- --
 
 local templates = {
 
@@ -324,19 +379,6 @@ nonut = [[
 }
 
 tasks.new {
-    name      = "shipouts",
-    processor = nodeprocessor,
-    sequence  = {
-        "before",      -- users
-        "normalizers", -- system
-        "finishers",   -- system
-        "after",       -- users
-        "wrapup",      -- system
-    },
-    templates = templates
-}
-
-tasks.new {
     name      = "everypar",
     processor = nodeprocessor,
     sequence  = {
@@ -370,7 +412,7 @@ local tonode = nodes.nuts.tonode
 
 %localize%
 
-return function(head,where,attr,preamble)
+return function(head,where,callback,attr,preamble)
     local nuthead     = tonut(head)
     local nutattr     = tonut(attr)
     local nutpreamble = tonut(preamble)
@@ -380,19 +422,19 @@ end
 ]],
 
 step = [[
-    %action%(head,where,attr,preamble)
+    %action%(head,where,callback,attr,preamble)
 ]],
 
 nut  = [[
-    %action%(nuthead,where,nutattr,nutpreamble)
+    %action%(nuthead,where,callback,nutattr,nutpreamble)
 ]],
 
 nohead = [[
-    %action%(head,where,attr,preamble)
+    %action%(head,where,callback,attr,preamble)
 ]],
 
 nonut = [[
-    %action%(nuthead,where,nutattr,nutpreamble)
+    %action%(nuthead,where,callback,nutattr,nutpreamble)
 ]],
 
     }

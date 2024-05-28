@@ -30,7 +30,7 @@ local shipout           = tex.shipout
 local texgetbox         = tex.getbox
 local texgetcount       = tex.getcount
 
-local c_realpageno      = tex.iscount("realpageno")
+local c_realpageno      <const> = tex.iscount("realpageno")
 
 function converters.engine(driver,boxnumber,mode,number,specification)
     return shipout(boxnumber)
@@ -65,6 +65,8 @@ local defaulthandlers = {
 
 local installwhatsits  do
 
+    local round       = math.round
+
     local leaderlevel = 0
     local backends    = backends
     local trace       = true
@@ -74,7 +76,7 @@ local installwhatsits  do
     local openout     = backends.openout
     local closeout    = backends.closeout
 
-    trackers.register("backends.whatsits",function(v) trace = v end)
+    trackers.register("backend.whatsits",function(v) trace = v end)
 
     local function pushleaderlevel()
         leaderlevel = leaderlevel + 1
@@ -110,8 +112,8 @@ local installwhatsits  do
 
     local function flushsavepos(current,pos_h,pos_v)
         local jp = job.positions
-        jp.lastx = pos_h
-        jp.lasty = pos_v
+        jp.lastx = round(pos_h)
+        jp.lasty = round(pos_v)
     end
 
     local function flushuserdefined()

@@ -73,8 +73,8 @@ halfword tex_get_local_boxes(halfword location)
 void tex_set_local_boxes(halfword b, halfword location)
 {
     switch (location) {
-        case local_left_box_code  : tex_flush_node_list(local_left_box_par);   local_left_box_par   = b; break;
-        case local_right_box_code : tex_flush_node_list(local_right_box_par);  local_right_box_par  = b; break;
+        case local_left_box_code  : tex_flush_node_list(local_left_box_par  ); local_left_box_par   = b; break;
+        case local_right_box_code : tex_flush_node_list(local_right_box_par ); local_right_box_par  = b; break;
         case local_middle_box_code: tex_flush_node_list(local_middle_box_par); local_middle_box_par = b; break;
     }
 }
@@ -114,6 +114,18 @@ void tex_reset_local_boxes(halfword index, halfword location)
         case local_left_box_code  : local_left_box_par  = tex_aux_reset_boxes(local_left_box_par,   index); break;
         case local_right_box_code : local_right_box_par = tex_aux_reset_boxes(local_right_box_par,  index); break;
         case local_middle_box_code: local_right_box_par = tex_aux_reset_boxes(local_middle_box_par, index); break;
+    }
+} 
+
+void tex_reset_local_box(halfword location)
+{
+    switch (location) {
+        case local_left_box_code   : update_tex_local_left_box  (null); break;
+        case local_right_box_code  : update_tex_local_right_box (null); break;
+        case local_middle_box_code : update_tex_local_middle_box(null); break;
+        case local_reset_boxes_code: update_tex_local_left_box  (null);  /* It could be a loop if we have  */
+                                     update_tex_local_right_box (null);  /* more but this will do for now. */
+                                     update_tex_local_middle_box(null); break;
     }
 }
 
@@ -222,7 +234,7 @@ void tex_replace_local_boxes(halfword par, halfword b, halfword index, halfword 
 halfword tex_use_local_boxes(halfword p, halfword location)
 {
     if (p) {
-        p = tex_hpack(tex_copy_node_list(p, null), 0, packing_additional, direction_unknown, holding_none_option);
+        p = tex_hpack(tex_copy_node_list(p, null), 0, packing_additional, direction_unknown, holding_none_option, box_limit_none);
         switch (location) {
             case local_left_box_code  : node_subtype(p) = local_left_list  ; break;
             case local_right_box_code : node_subtype(p) = local_right_list ; break;
@@ -271,43 +283,134 @@ halfword tex_valid_box_index(halfword n)
     return box_index_in_range(n);
 }
 
+scaled   tex_get_local_left_width        (halfword p) { return par_box_left_width(p); }
+scaled   tex_get_local_right_width       (halfword p) { return par_box_right_width(p); }
+halfword tex_get_local_interline_penalty (halfword p) { return par_local_inter_line_penalty(p); }
+halfword tex_get_local_broken_penalty    (halfword p) { return par_local_broken_penalty(p); }
+halfword tex_get_local_tolerance         (halfword p) { return par_tolerance(p); }
+halfword tex_get_local_pre_tolerance     (halfword p) { return par_pre_tolerance(p); }
 
-scaled tex_get_local_left_width(halfword p)
+void     tex_set_local_left_width        (halfword p, scaled   width    ) { par_box_left_width(p) = width; }
+void     tex_set_local_right_width       (halfword p, scaled   width    ) { par_box_right_width(p) = width; }
+void     tex_set_local_interline_penalty (halfword p, halfword penalty  ) { par_local_inter_line_penalty(p) = penalty; }
+void     tex_set_local_broken_penalty    (halfword p, halfword penalty  ) { par_local_broken_penalty(p) = penalty; }
+void     tex_set_local_tolerance         (halfword p, halfword tolerance) { par_tolerance(p) = tolerance; }
+void     tex_set_local_pre_tolerance     (halfword p, halfword tolerance) { par_pre_tolerance(p) = tolerance; }
+
+typedef enum saved_localbox_entries {
+    saved_localbox_location_entry = 0,
+    saved_localbox_index_entry    = 0,
+    saved_localbox_options_entry  = 0,
+    saved_localbox_n_of_records   = 1,
+} saved_localbox_entries;
+
+inline static void saved_localbox_initialize(void)
 {
-    return par_box_left_width(p);
+    saved_type(0) = saved_record_0;
+    saved_record(0) = local_box_save_type;
 }
 
-scaled tex_get_local_right_width(halfword p)
+inline static int saved_localbox_okay(void)
 {
-    return par_box_right_width(p);
+    return saved_type(0) == saved_record_0 && saved_record(0) == local_box_save_type;
 }
 
-void tex_set_local_left_width(halfword p, scaled width)
+# define saved_localbox_location saved_value_1(saved_localbox_location_entry)
+# define saved_localbox_index    saved_value_2(saved_localbox_index_entry)
+# define saved_localbox_options  saved_value_3(saved_localbox_options_entry)
+
+int tex_show_localbox_record(void)
 {
-    par_box_left_width(p) = width;
+    tex_print_str("localbox ");
+    switch (saved_type(0)) { 
+       case saved_record_0:
+            tex_print_format("location %i, index %i, options %i", saved_value_1(0), saved_value_2(0), saved_value_3(0));
+            break;
+        default: 
+            return 0;
+    }
+    return 1;
 }
 
-void tex_set_local_right_width(halfword p, scaled width)
-{
-    par_box_right_width(p) = width;
+void tex_aux_scan_local_box(int code) {
+    quarterword options = 0;
+    halfword index = 0;
+    tex_scan_local_boxes_keys(&options, &index);
+    saved_localbox_initialize();
+    saved_localbox_location = code;
+    saved_localbox_index = index;
+    saved_localbox_options = options;
+    lmt_save_state.save_stack_data.ptr += saved_localbox_n_of_records;
+    tex_new_save_level(local_box_group);
+    tex_scan_left_brace();
+    tex_push_nest();
+    cur_list.mode = restricted_hmode;
+    cur_list.space_factor = default_space_factor;
 }
 
-halfword tex_get_local_interline_penalty(halfword p)
+void tex_aux_finish_local_box(void)
 {
-    return par_penalty_interline(p);
-}
-
-halfword tex_get_local_broken_penalty(halfword p)
-{
-    return par_penalty_broken(p);
-}
-
-void tex_set_local_interline_penalty(halfword p, halfword penalty)
-{
-    par_penalty_interline(p) = penalty;
-}
-
-void tex_set_local_broken_penalty(halfword p, halfword penalty)
-{
-    par_penalty_broken(p) = penalty;
+    tex_unsave();
+    lmt_save_state.save_stack_data.ptr -= saved_localbox_n_of_records;
+    if (saved_localbox_okay()) {
+        /* here we could just decrement ptr and then access */
+        halfword location = saved_localbox_location;
+        quarterword options = (quarterword) saved_localbox_options;
+        halfword index = saved_localbox_index;
+        int islocal = (options & local_box_local_option) == local_box_local_option;
+        int keep = (options & local_box_keep_option) == local_box_keep_option;
+        int atpar = (options & local_box_par_option) == local_box_par_option;
+        halfword p = node_next(cur_list.head);
+        tex_pop_nest();
+        if (p) {
+            /*tex Somehow |filtered_hpack| goes beyond the first node so we loose it. */
+            node_prev(p) = null;
+            if (tex_list_has_glyph(p)) {
+                tex_handle_hyphenation(p, null);
+                p = tex_handle_glyphrun(p, local_box_group, text_direction_par);
+            }
+            if (p) {
+                p = lmt_hpack_filter_callback(p, 0, packing_additional, local_box_group, direction_unknown, null);
+            }
+            /*tex
+                We really need something packed so we play safe! This feature is inherited but could
+                have been delegated to a callback anyway.
+            */
+            p = tex_hpack(p, 0, packing_additional, direction_unknown, holding_none_option, box_limit_none);
+            node_subtype(p) = local_list;
+            box_index(p) = index;
+         // attach_current_attribute_list(p); // leaks
+        } else { 
+            /* well */
+        }
+        // what to do with reset
+        if (islocal) {
+            /*tex There no copy needed either! */
+        } else {
+            tex_update_local_boxes(p, index, location);
+        }
+        if (cur_mode == hmode || cur_mode == mmode) {
+            if (atpar) {
+                halfword par = tex_find_par_par(cur_list.head);
+                if (par) {
+                    if (p && ! islocal) {
+                        p = tex_copy_node(p);
+                    }
+                    tex_replace_local_boxes(par, p, index, location);
+                }
+            } else {
+                /*tex
+                    We had a null check here but we also want to be able to reset these boxes so we
+                    no longer check.
+                */
+                tex_tail_append(tex_new_par_node(local_box_par_subtype));
+                if (! keep) {
+                    /*tex So we can group and keep it. */
+                    update_tex_internal_par_state(internal_par_state_par + 1);
+                }
+            }
+        }
+    } else {
+        tex_confusion("build local box");
+    }
 }
